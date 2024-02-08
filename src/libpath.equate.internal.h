@@ -1,11 +1,12 @@
 
 /*
- * Created: 
- * Updated: 20th November 2016
+ * Created:
+ * Updated: 7th February 2024
  */
 
 #include <libpath/equate/types.h>
 #include <libpath/parse/types.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal API functions
@@ -90,4 +91,6 @@ libpath_Internal_get_root_level(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath.equate.api.c
+ * File:    libpath.equate.api.c
  *
- * Purpose:     Main implementation file for libpath library's Equating API.
+ * Purpose: Main implementation file for libpath library's Equating API.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
+ * Created: 9th November 2012
+ * Updated: 8th February 2024
  *
- * Home:        http://synesis.com.au/software/
+ * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2012-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +21,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -53,6 +54,7 @@
 #include "libpath.quality.contract.h"
 
 #include <string.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
@@ -109,9 +111,9 @@ libpath_Internal_PathEquals_impl_(
 ,   libpath_truthy_t*               result
 );
 
-/** 
+/**
  *
- * \note An invalid path will never be compared as equivalent: if
+ * @note An invalid path will never be compared as equivalent: if
  *   either or both paths are invalid, the result will be false, even
  *   in the case where both parameters refer to the empty string
  *
@@ -188,7 +190,7 @@ libpath_Internal_PathEquals_impl_(
 
     LIBPATH_SUPPRESS_UNUSED(mem);
 
-    if( libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(lhs, flags, &lresult, 0, NULL) ||
+    if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(lhs, flags, &lresult, 0, NULL) ||
         libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(rhs, flags, &rresult, 0, NULL))
     {
         *result = LIBPATH_V_FALSEY;
@@ -206,7 +208,7 @@ libpath_Internal_PathEquals_impl_(
         // 5. If different "level" of root and cwd, then get cwd and three-way compare of directories
 
         // entry first
-        if(!libpath_Internal_directory_part_equal(&lresult.entryPart, &rresult.entryPart))
+        if (!libpath_Internal_directory_part_equal(&lresult.entryPart, &rresult.entryPart))
         {
             *result = LIBPATH_V_FALSEY;
 
@@ -214,7 +216,7 @@ libpath_Internal_PathEquals_impl_(
         }
         else
         {
-            if( 0 == lresult.locationPart.len &&
+            if (0 == lresult.locationPart.len &&
                 0 == rresult.locationPart.len)
             {
                 *result = LIBPATH_V_TRUEY;
@@ -265,14 +267,14 @@ libpath_Internal_PathEquals_impl_2_(
     int const   rhsRootLevel    =   libpath_Internal_get_root_level(rresult);
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    if( 0 != lhsRootLevel &&
+    if (0 != lhsRootLevel &&
         0 != rhsRootLevel)
     {
         // Compare volume parts if level is 2 or 3
-        if( (0x00000002 ^ lhsRootLevel) < 2 &&
+        if ((0x00000002 ^ lhsRootLevel) < 2 &&
             (0x00000002 ^ rhsRootLevel) < 2)
         {
-            if(libpath_Internal_volumes_definitely_different(&lresult->volumePart, &rresult->volumePart))
+            if (libpath_Internal_volumes_definitely_different(&lresult->volumePart, &rresult->volumePart))
             {
                 *result = LIBPATH_V_FALSEY;
 
@@ -280,7 +282,7 @@ libpath_Internal_PathEquals_impl_2_(
             }
         }
 
-        if(libpath_Internal_roots_definitely_different(&lresult->rootPart, &rresult->rootPart))
+        if (libpath_Internal_roots_definitely_different(&lresult->rootPart, &rresult->rootPart))
         {
             *result = LIBPATH_V_FALSEY;
 
@@ -289,7 +291,7 @@ libpath_Internal_PathEquals_impl_2_(
     }
 #endif
 
-    if(lhsRootLevel == rhsRootLevel)
+    if (lhsRootLevel == rhsRootLevel)
     {
         // either both relative or both absolute, so we just have to compare
         //
@@ -297,7 +299,7 @@ libpath_Internal_PathEquals_impl_2_(
         // - directories (canonicalised, if either contain dots)
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-        if( lhsRootLevel > 3 &&
+        if (lhsRootLevel > 3 &&
             !libpath_Internal_roots_equal(&lresult->rootPart, &rresult->rootPart))
         {
             *result = LIBPATH_V_FALSEY;
@@ -306,7 +308,7 @@ libpath_Internal_PathEquals_impl_2_(
         }
 #endif
 
-        if( 0 == lresult->numDotsDirectoryParts &&
+        if (0 == lresult->numDotsDirectoryParts &&
             0 == rresult->numDotsDirectoryParts)
         {
             // can just do informed-comparison of directory strings
@@ -322,27 +324,27 @@ libpath_Internal_PathEquals_impl_2_(
 
             LIBPATH_RC rc = LIBPATH_RESULTCODE(Success);
 
-            if(LIBPATH_SUCCESS(rc))
+            if (LIBPATH_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(lresult->numDirectoryParts, ldirparts);
             }
 
-            if(LIBPATH_SUCCESS(rc))
+            if (LIBPATH_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(rresult->numDirectoryParts, rdirparts);
             }
 
-            if(LIBPATH_SUCCESS(rc))
+            if (LIBPATH_SUCCESS(rc))
             {
                 rc = libpath_Parse_ParsePathFromStringSlice(lhs, flags, lresult, lresult->numDirectoryParts, *ldirparts);
             }
 
-            if(LIBPATH_SUCCESS(rc))
+            if (LIBPATH_SUCCESS(rc))
             {
                 rc = libpath_Parse_ParsePathFromStringSlice(rhs, flags, rresult, rresult->numDirectoryParts, *rdirparts);
             }
 
-            if(LIBPATH_FAILURE(rc))
+            if (LIBPATH_FAILURE(rc))
             {
                 return rc;
             }
@@ -359,7 +361,7 @@ libpath_Internal_PathEquals_impl_2_(
     }
     else
     {
-        if( NULL == cwd ||
+        if (NULL == cwd ||
             '\0' == cwd->len)
         {
             *result = LIBPATH_V_FALSEY;
@@ -378,13 +380,13 @@ libpath_Internal_PathEquals_impl_2_(
             libpath_ParseResult_t*     rel_result  =   (0 != lhsRootLevel) ? rresult : lresult;
             libpath_ParseResult_t      cwd_result;
 
-            if(libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, NULL))
+            if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, NULL))
             {
-#ifdef _DEBUG
-#else /* ? _DEBUG */
+#ifdef NDEBUG
 # error This needs to return a result code that indicates that it's the cwd
 # error Also: need to ensure that cwd is absolute
-#endif /* _DEBUG */
+#else /* ? NDEBUG */
+#endif /* NDEBUG */
 
                 *result = LIBPATH_V_FALSEY;
 
@@ -392,7 +394,7 @@ libpath_Internal_PathEquals_impl_2_(
             }
             else
             {
-                if(libpath_Internal_roots_definitely_different(&abs_result->rootPart, &cwd_result.rootPart))
+                if (libpath_Internal_roots_definitely_different(&abs_result->rootPart, &cwd_result.rootPart))
                 {
                     *result = LIBPATH_V_FALSEY;
 
@@ -400,7 +402,7 @@ libpath_Internal_PathEquals_impl_2_(
                 }
                 else
                 {
-                    if( 0 == abs_result->numDotsDirectoryParts &&
+                    if (0 == abs_result->numDotsDirectoryParts &&
                         0 == rel_result->numDotsDirectoryParts &&
                         0 == cwd_result.numDotsDirectoryParts)
                     {
@@ -417,37 +419,37 @@ libpath_Internal_PathEquals_impl_2_(
 
                         LIBPATH_RC rc = LIBPATH_RESULTCODE(Success);
 
-                        if(LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_SUCCESS(rc))
                         {
                             rc = libpath_Util_AllocateSliceArray(abs_result->numDirectoryParts, abs_dirparts);
                         }
 
-                        if(LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_SUCCESS(rc))
                         {
                             rc = libpath_Util_AllocateSliceArray(rel_result->numDirectoryParts, rel_dirparts);
                         }
 
-                        if(LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_SUCCESS(rc))
                         {
                             rc = libpath_Util_AllocateSliceArray(cwd_result.numDirectoryParts, cwd_dirparts);
                         }
 
-                        if(LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_SUCCESS(rc))
                         {
                             rc = libpath_Parse_ParsePathFromStringSlice( abs,     flags, abs_result, abs_result->numDirectoryParts, *abs_dirparts);
                         }
 
-                        if(LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_SUCCESS(rc))
                         {
                             rc = libpath_Parse_ParsePathFromStringSlice( rel,     flags, rel_result, rel_result->numDirectoryParts, *rel_dirparts);
                         }
 
-                        if(LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_SUCCESS(rc))
                         {
                             rc = libpath_Parse_ParsePathFromStringSlice( cwd, cwd_flags, &cwd_result, cwd_result.numDirectoryParts, *cwd_dirparts);
                         }
 
-                        if(LIBPATH_FAILURE(rc))
+                        if (LIBPATH_FAILURE(rc))
                         {
                             return rc;
                         }
@@ -474,7 +476,7 @@ libpath_Internal_PathEquals_impl_2_(
                                 libpath_StringSlice_t const*    rel_first_part  =   &(*rel_dirparts)[0];
                                 libpath_StringSlice_t const*    cwd_last_part   =   &(*cwd_dirparts)[ncwd - 1];
 
-                                if( 2 == libpath_Internal_count_dots(rel_first_part) &&
+                                if (2 == libpath_Internal_count_dots(rel_first_part) &&
                                     0 == libpath_Internal_count_dots(cwd_last_part))
                                 {
                                     // need to move down the relative parts
@@ -495,7 +497,7 @@ libpath_Internal_PathEquals_impl_2_(
                                 libpath_StringSlice_t const*    abs_part    =   &(*abs_dirparts)[nabs - 1];
                                 libpath_StringSlice_t const*    rel_part    =   &(*rel_dirparts)[nrel - 1];
 
-                                if(!libpath_Internal_directory_part_equal(abs_part, rel_part))
+                                if (!libpath_Internal_directory_part_equal(abs_part, rel_part))
                                 {
                                     *result = LIBPATH_V_FALSEY;
 
@@ -510,7 +512,7 @@ libpath_Internal_PathEquals_impl_2_(
                                 libpath_StringSlice_t const*    abs_part    =   &(*abs_dirparts)[nabs - 1];
                                 libpath_StringSlice_t const*    cwd_part    =   &(*cwd_dirparts)[ncwd - 1];
 
-                                if(!libpath_Internal_directory_part_equal(abs_part, cwd_part))
+                                if (!libpath_Internal_directory_part_equal(abs_part, cwd_part))
                                 {
                                     *result = LIBPATH_V_FALSEY;
 
@@ -518,7 +520,7 @@ libpath_Internal_PathEquals_impl_2_(
                                 }
                             }
 
-                            if( 0 == nabs &&
+                            if (0 == nabs &&
                                 0 == nrel &&
                                 0 == ncwd)
                             {
@@ -561,34 +563,34 @@ libpath_Equate_EquatePathsAsStringSlices(
 
     LIBPATH_SUPPRESS_UNUSED(flags);
 
-    if(NULL != reserved)
+    if (NULL != reserved)
     {
         return LIBPATH_RESULTCODE(ParameterIsReservedAndMustBeZero);
     }
 
-    if(NULL != ctxt)
+    if (NULL != ctxt)
     {
-        switch(ctxt->mechanism)
+        switch (ctxt->mechanism)
         {
-            case    libpath_WorkingDirectoryContextMechanism_NoneSpecified:
-                break;
-            case    libpath_WorkingDirectoryContextMechanism_CStyleString:
-                if(NULL != ctxt->details.cwd_css)
-                {
-                    cwd_ = libpath_Util_SliceFromCStyleString(ctxt->details.cwd_css);
-                    cwd = &cwd_;
-                }
-                break;
-            case    libpath_WorkingDirectoryContextMechanism_StringSlice:
-                cwd = &ctxt->details.cwd_slice;
-                break;
-            default:
-                LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
+        case    libpath_WorkingDirectoryContextMechanism_NoneSpecified:
+            break;
+        case    libpath_WorkingDirectoryContextMechanism_CStyleString:
+            if (NULL != ctxt->details.cwd_css)
+            {
+                cwd_ = libpath_Util_SliceFromCStyleString(ctxt->details.cwd_css);
+                cwd = &cwd_;
+            }
+            break;
+        case    libpath_WorkingDirectoryContextMechanism_StringSlice:
+            cwd = &ctxt->details.cwd_slice;
+            break;
+        default:
+            LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
 #ifdef LIBPATH_OS_IS_WINDOWS
-            case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
+        case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
 #endif
-            case    libpath_WorkingDirectoryContextMechanism_getcwd:
-                return LIBPATH_RESULTCODE(OptionNotSupported);
+        case    libpath_WorkingDirectoryContextMechanism_getcwd:
+            return LIBPATH_RESULTCODE(OptionNotSupported);
         }
     }
 
@@ -673,4 +675,6 @@ libpath_Equate_EquatePathsAsCStyleStrings_UNCHECKED_(
     return libpath_Equate_EquatePathsAsStringSlices(&lhs_sl, &rhs_sl, flags, ctxt, reserved, result);
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

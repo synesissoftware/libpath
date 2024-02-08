@@ -11,7 +11,7 @@
  */
 
 /** This enumeration defines flags that may be used, in combination,
- * as flags that moderate the behaviour of 
+ * as flags that moderate the behaviour of
  * libpath_Parse_ParsePathFromStringSlice(),
  * libpath_Parse_ParsePathFromCStyleString(), and
  * libpath_Parse_ParsePathFromStringPtrAndLen():

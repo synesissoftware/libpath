@@ -1,12 +1,21 @@
 
 /*
  *
- * Updated: 20th November 2016
+ * Updated: 8th February 2024
  *
  */
 
 #include <libpath/compare.h>
 #include <libpath/common/types.hpp>
+
+#ifdef LIBPATH_CXX_VER_2011_plus
+# include <cstdlib>
+# include <cstring>
+#else
+# include <stdlib.h>
+# include <string.h>
+#endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * preprocessor feature control
@@ -20,6 +29,7 @@
 namespace libpath {
 namespace comparing {
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helpers
  */
@@ -30,11 +40,11 @@ namespace ximpl_compare {
 
 struct yes_type
 {
-  char ar[32];
+    char ar[32];
 };
 struct no_type
 {
-  char ar[1];
+    char ar[1];
 };
 
 template <int B>
@@ -42,14 +52,14 @@ struct value_to_yesno_type
 {
     enum { value = 1 };
 
-    typedef yes_type    type;
+    typedef yes_type                                        type;
 };
 template <>
 struct value_to_yesno_type<0>
 {
     enum { value = 0 };
 
-    typedef no_type type;
+    typedef no_type                                         type;
 };
 
 
@@ -58,98 +68,101 @@ struct value_to_yesno_type<0>
 template <typename P>
 int
 handle_compare_result_(
-  LIBPATH_RC  rc
-, char const* lhs
-, char const* rhs
-, char const* cwd
-, int         result
-, yes_type
-, ...
+    LIBPATH_RC      rc
+,   char const*     lhs
+,   char const*     rhs
+,   char const*     cwd
+,   int             result
+,   yes_type
+,   ...
 )
 {
-  return 0;
+    return 0;
 }
 
 template <typename P>
 int
 handle_compare_result_(
-  LIBPATH_RC  rc
-, char const* lhs
-, char const* rhs
-, char const* cwd
-, int         result
-, no_type
-, yes_type
-, ...
+    LIBPATH_RC      rc
+,   char const*     lhs
+,   char const*     rhs
+,   char const*     cwd
+,   int             result
+,   no_type
+,   yes_type
+,   ...
 )
 {
-  return -1;
+    return -1;
 }
 
 template <typename P>
 int
 handle_compare_result_(
-  LIBPATH_RC  rc
-, char const* lhs
-, char const* rhs
-, char const* cwd
-, int         result
-, no_type
-, no_type
-, yes_type
-, ...
+    LIBPATH_RC      rc
+,   char const*     lhs
+,   char const*     rhs
+,   char const*     cwd
+,   int             result
+,   no_type
+,   no_type
+,   yes_type
+,   ...
 )
 {
-  char const* p = NULL;
+    char const* p = NULL;
 
-  switch(rc)
-  {
+    switch (rc)
+    {
     case  libpath_ResultCode_FirstPathInvalid:            p = lhs; break;
     case  libpath_ResultCode_SecondPathInvalid:           p = rhs; break;
     case  libpath_ResultCode_WorkingDirectoryPathInvalid: p = cwd; break;
-  }
 
-  if(NULL != p)
-  {
-    libpath_StringSlice_t path = { ::strlen(p), p };
+    default:
+        break;
+    }
 
-    P::respond(rc, &path);
-  }
-  else
-  {
-    P::respond(rc, NULL);
-  }
+    if (NULL != p)
+    {
+        libpath_StringSlice_t path = { std::strlen(p), p };
 
-  return 0;
+        P::respond(rc, &path);
+    }
+    else
+    {
+        P::respond(rc, NULL);
+    }
+
+    return 0;
 }
 
 template <typename P>
 int
 handle_compare_result_(
-  LIBPATH_RC  rc
-, char const* lhs
-, char const* rhs
-, char const* cwd
-, int         result
-, no_type
-, no_type
-, no_type
-, yes_type
+    LIBPATH_RC      rc
+,   char const*     lhs
+,   char const*     rhs
+,   char const*     cwd
+,   int             result
+,   no_type
+,   no_type
+,   no_type
+,   yes_type
 )
 {
-  abort();
+    std::abort();
 
-  return 0;
+    return 0;
 }
 
 template <typename P>
 int
 handle_compare_result_(
-  LIBPATH_RC  rc
-, char const* lhs
-, char const* rhs
-, char const* cwd
-, int         result
+    LIBPATH_RC      rc
+,   char const*     lhs
+,   char const*     rhs
+,   char const*     cwd
+,   int             result
 )
 {
   typedef typename value_to_yesno_type<P::return_0>::type        return_0_type;
@@ -157,16 +170,26 @@ handle_compare_result_(
   typedef typename value_to_yesno_type<P::throw_exception>::type throw_exception_type;
   typedef typename value_to_yesno_type<P::invoke_abend>::type    invoke_abend_type;
 
-  return handle_compare_result_<P>(rc, lhs, rhs, cwd, result, return_0_type(), return_minus1_type(), throw_exception_type(), invoke_abend_type());
+  return handle_compare_result_<P>(
+        rc
+    ,   lhs
+    ,   rhs
+    ,   cwd
+    ,   result
+    ,   return_0_type()
+    ,   return_minus1_type()
+    ,   throw_exception_type()
+    ,   invoke_abend_type()
+    );
 }
 
 template <typename P>
 int
 compare_paths_and_(
-    char const* lhs
-,   char const* rhs
-,   char const* cwd = NULL
-,   char const* /* mem */ = NULL
+    char const*     lhs
+,   char const*     rhs
+,   char const*     cwd = NULL
+,   char const*  /* mem */ = NULL
 )
 {
   libpath_sint32_t                  flags   =   0;
@@ -177,17 +200,17 @@ compare_paths_and_(
   ctxt.details.cwd_css  = cwd;
 
   LIBPATH_RC rc = libpath_Compare_ComparePathsAsCStyleStrings(
-    lhs
-  , rhs
-  , flags
-  , &ctxt
-  , NULL
-  , &result
-  );
+            lhs
+        ,   rhs
+        ,   flags
+        ,   &ctxt
+        ,   NULL
+        ,   &result
+        );
 
-  if(LIBPATH_RESULTCODE(Success) != rc)
+  if (LIBPATH_RESULTCODE(Success) != rc)
   {
-    return handle_compare_result_<P>(rc, lhs, rhs, cwd, result);
+        return handle_compare_result_<P>(rc, lhs, rhs, cwd, result);
   }
 
   return result;
@@ -201,10 +224,10 @@ compare_paths_and_(
 template <typename P>
 int
 compare_paths_and_(
-    char const* lhs
-,   char const* rhs
-,   char const* cwd = NULL
-,   char const* mem = NULL
+    char const*     lhs
+,   char const*     rhs
+,   char const*     cwd = NULL
+,   char const*     mem = NULL
 )
 {
   return ximpl_compare::compare_paths_and_<P>(lhs, rhs, cwd, mem);
@@ -214,11 +237,12 @@ compare_paths_and_(
 inline
 int
 compare_paths(
-    char const* lhs
-,   char const* rhs
-,   char const* cwd = NULL
-,   char const* mem = NULL
+    char const*     lhs
+,   char const*     rhs
+,   char const*     cwd = NULL
+,   char const*     mem = NULL
 );
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
@@ -227,4 +251,6 @@ compare_paths(
 } /* namespace comparing */
 } /* namespace libpath */
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

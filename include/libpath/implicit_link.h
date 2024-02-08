@@ -4,11 +4,12 @@
  * Purpose: Implicit linking for the libpath library
  *
  * Created: 13th February 2013
- * Updated: 20th November 2016
+ * Updated: 8th February 2024
  *
  * Home:    http://libpath.org/
  *
- * Copyright (c) 2013-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +21,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -39,7 +40,7 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-/** \file libpath/implicit_link.h
+/** @file libpath/implicit_link.h
  *
  * [C, C++] Implicit linking for the libpath library.
  *
@@ -47,36 +48,25 @@
  * given link unit to implicitly link in the appropriate <b>libpath</b>
  * archive (library).
  *
- * \note For compilers that do not support implicit linking, inclusion of
+ * @note For compilers that do not support implicit linking, inclusion of
  *  the file has no effect.
  */
 
 #ifndef LIBPATH_INCL_LIBPATH_H_IMPLICIT_LINK
 #define LIBPATH_INCL_LIBPATH_H_IMPLICIT_LINK
 
-/* /////////////////////////////////////////////////////////////////////////
- * Version information
- */
-
-#ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
-# define LIBPATH_VER_LIBPATH_H_IMPLICIT_LINK_MAJOR      1
-# define LIBPATH_VER_LIBPATH_H_IMPLICIT_LINK_MINOR      1
-# define LIBPATH_VER_LIBPATH_H_IMPLICIT_LINK_REVISION   1
-# define LIBPATH_VER_LIBPATH_H_IMPLICIT_LINK_EDIT       2
-#endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
 
-#ifndef LIBPATH_INCL_LIBPATH_H_LIBPATH
-# include <libpath/libpath.h>
-#endif /* !LIBPATH_INCL_LIBPATH_H_LIBPATH */
+#include <libpath/common/portability.h>
 
 #include <platformstl/platformstl.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * Implicit linking
+ * implicit linking
  */
 
 #if defined(_WIN32) || \
@@ -209,7 +199,7 @@
       defined(PLATFORMSTL_OS_IS_UNIX) && \
       defined(_WIN32)
 #   define LIBPATH_IMPL_LINK_OS_TAG             ".unix"
-#  endif /* pseudo UNIX */
+#  endif /* pseudo Unix */
 
 #  if !defined(LIBPATH_IMPL_LINK_OS_TAG)
 #   define LIBPATH_IMPL_LINK_OS_TAG             ""
@@ -297,7 +287,7 @@
                                                 LIBPATH_IMPL_LINK_NOX_TAG \
                                                 LIBPATH_IMPL_LINK_DEBUG_TAG \
                                                 LIBPATH_IMPL_LINK_SUFFIX
-                                                        
+
 
 #  pragma message("lib: " LIBPATH_IMPL_LINK_LIBRARY_NAME)
 
@@ -307,8 +297,14 @@
 
 #endif /* Win-32 || Win-64 */
 
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !LIBPATH_INCL_LIBPATH_H_IMPLICIT_LINK */
 
-/* ////////////////////////////////////////////////////////////////////// */
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
+/* ///////////////////////////// end of file //////////////////////////// */
+

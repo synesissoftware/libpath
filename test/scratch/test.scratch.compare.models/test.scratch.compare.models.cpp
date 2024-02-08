@@ -1,19 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.scratch.compare.models.cpp
+ * File:    test.scratch.compare.models.cpp
  *
- * Purpose:     Implementation file for the test.scratch.compare.models project.
+ * Purpose: Implementation file for the test.scratch.compare.models project.
  *
- * Created:     29th March 2013
- * Updated:     20th November 2016
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2013-2016, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Created: 29th March 2013
+ * Updated: 8th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -36,22 +27,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* /////////////////////////////////////////////////////////////////////////
- * globals
- */
-
-/* /////////////////////////////////////////////////////////////////////////
- * types
- */
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
  */
 
-static void test_return_0();
-static void test_return_minus1();
-static void test_throw();
-static void test_abend();
 
 /* /////////////////////////////////////////////////////////////////////////
  * main()
@@ -125,4 +105,6 @@ int main(int argc, char** argv)
     return EXIT_FAILURE;
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+
