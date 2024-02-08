@@ -48,18 +48,64 @@
  * includes
  */
 
-#define LIBPATH_VER_MAJOR       0
-#define LIBPATH_VER_MINOR       1
-#define LIBPATH_VER_REVISION    4
-#define LIBPATH_VER_ALPHABETA   0
+/** @def LIBPATH_MAJOR
+ * The major version number of libpath
+ *
+ * A change to the major version component implies that a dramatic change
+ * has occurred in the library, such that considerable changes to source
+ * dependent on previous version(s) will need to be effected.
+ */
 
-#define LIBPATH_VER             (\
-                                (   (LIBPATH_VER_MAJOR)     << 24   )   |\
-                                (   (LIBPATH_VER_MINOR)     << 16   )   |\
-                                (   (LIBPATH_VER_REVISION)  << 24   )   |\
-                                (   (LIBPATH_VER_ALPHABETA) << 0    )   |\
-                                0)
+/** @def LIBPATH_MINOR
+ * The minor version number of libpath
+ *
+ * A change to the minor version component implies that a significant
+ * addition has been added to the library, such that recompilation will be
+ * necessitated, and code changes might be desired (to take advantage of the
+ * new functionality).
+ */
 
+/** @def LIBPATH_VER_PATCH
+ * The patch version number of libpath
+ *
+ * A change to the patch version component implies that a defect has been
+ * fixed. Dependent code should be recompiled in order to pick up the
+ * changes.
+ */
+
+/** @def LIBPATH_VER_ALPHABETA
+ * The alpha-beta number of libpath
+ *
+ * This number indicates the alpha/beta/release-candidate nature of the
+ * released version of the library.
+ */
+
+/** @def LIBPATH
+ * The current composite version number of libpath
+ *
+ * In addition to the individual version symbols - LIBPATH_MAJOR,
+ * LIBPATH_MINOR and LIBPATH_PATCH - a composite symbol
+ * LIBPATH is defined, where:
+ *  - bits 24-31: the major version
+ *  - bits 16-23: the minor version
+ *  - bits 8-15: the patch version
+ *  - bits 0-7: the alpha-beta number; if not a beta, it is 0xFF
+ */
+
+#define LIBPATH_VER_MAJOR               0
+#define LIBPATH_VER_MINOR               1
+#define LIBPATH_VER_PATCH               4
+#define LIBPATH_VER_ALPHABETA           22
+
+#define LIBPATH_VER \
+    (0\
+        |   (   LIBPATH_VER_MAJOR       << 24   ) \
+        |   (   LIBPATH_VER_MINOR       << 16   ) \
+        |   (   LIBPATH_VER_PATCH       <<  8   ) \
+        |   (   LIBPATH_VER_ALPHABETA   <<  0   ) \
+    )
+
+#define LIBPATH_VER_REVISION            LIBPATH_VER_PATCH
 
 /* ////////////////////////////////////////////////////////////////////// */
 
