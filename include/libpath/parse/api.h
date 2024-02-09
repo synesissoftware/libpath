@@ -199,6 +199,20 @@ libpath_ParseResult_IsPathRooted(
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+namespace parsing {
+
+} /* namespace parsing */
+} /* namespace libpath */
+#endif /* __cplusplus */
+
+
+/* /////////////////////////////////////////////////////////////////////////
  * includes - 2
  */
 

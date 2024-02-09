@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 8th February 2024
+ * Updated: 9th February 2024
  *
  */
 
@@ -165,22 +165,22 @@ handle_compare_result_(
 ,   int             result
 )
 {
-  typedef typename value_to_yesno_type<P::return_0>::type        return_0_type;
-  typedef typename value_to_yesno_type<P::return_minus1>::type   return_minus1_type;
-  typedef typename value_to_yesno_type<P::throw_exception>::type throw_exception_type;
-  typedef typename value_to_yesno_type<P::invoke_abend>::type    invoke_abend_type;
+    typedef typename value_to_yesno_type<P::return_0>::type         return_0_type;
+    typedef typename value_to_yesno_type<P::return_minus1>::type    return_minus1_type;
+    typedef typename value_to_yesno_type<P::throw_exception>::type  throw_exception_type;
+    typedef typename value_to_yesno_type<P::invoke_abend>::type     invoke_abend_type;
 
-  return handle_compare_result_<P>(
-        rc
-    ,   lhs
-    ,   rhs
-    ,   cwd
-    ,   result
-    ,   return_0_type()
-    ,   return_minus1_type()
-    ,   throw_exception_type()
-    ,   invoke_abend_type()
-    );
+    return handle_compare_result_<P>(
+            rc
+        ,   lhs
+        ,   rhs
+        ,   cwd
+        ,   result
+        ,   return_0_type()
+        ,   return_minus1_type()
+        ,   throw_exception_type()
+        ,   invoke_abend_type()
+        );
 }
 
 template <typename P>
@@ -192,14 +192,14 @@ compare_paths_and_(
 ,   char const*  /* mem */ = NULL
 )
 {
-  libpath_sint32_t                  flags   =   0;
-  libpath_WorkingDirectoryContext_t ctxt;
-  int                               result;
+    libpath_sint32_t                    flags   =   0;
+    libpath_WorkingDirectoryContext_t   ctxt;
+    int                                 result;
 
-  ctxt.mechanism        = libpath_WorkingDirectoryContextMechanism_CStyleString;
-  ctxt.details.cwd_css  = cwd;
+    ctxt.mechanism          =   libpath_WorkingDirectoryContextMechanism_CStyleString;
+    ctxt.details.cwd_css    =   cwd;
 
-  LIBPATH_RC rc = libpath_Compare_ComparePathsAsCStyleStrings(
+    LIBPATH_RC rc = libpath_Compare_ComparePathsAsCStyleStrings(
             lhs
         ,   rhs
         ,   flags
@@ -208,12 +208,12 @@ compare_paths_and_(
         ,   &result
         );
 
-  if (LIBPATH_RESULTCODE(Success) != rc)
-  {
+    if (LIBPATH_RESULTCODE(Success) != rc)
+    {
         return handle_compare_result_<P>(rc, lhs, rhs, cwd, result);
-  }
+    }
 
-  return result;
+    return result;
 }
 
 } /* namespace ximpl_compare */
@@ -230,7 +230,7 @@ compare_paths_and_(
 ,   char const*     mem = NULL
 )
 {
-  return ximpl_compare::compare_paths_and_<P>(lhs, rhs, cwd, mem);
+    return ximpl_compare::compare_paths_and_<P>(lhs, rhs, cwd, mem);
 }
 
 

@@ -98,14 +98,14 @@ libpath_Util_SliceFromCStyleString(
     libpath_char_t const* s
 )
 {
-    libpath_StringSlice_t r;
+    libpath_StringSlice_t slice;
 
     LIBPATH_ASSERT(NULL != s);
 
-    r.len   =   libpath_Internal_standard_string_strlen(s);
-    r.ptr   =   s;
+    slice.len   =   libpath_Internal_standard_string_strlen(s);
+    slice.ptr   =   s;
 
-    return r;
+    return slice;
 }
 
 libpath_StringSlice_t

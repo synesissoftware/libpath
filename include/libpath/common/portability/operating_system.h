@@ -77,20 +77,26 @@
     defined(__unix) || \
     defined(__unix__) || \
     0
+
 # define LIBPATH_OS_IS_UNIX
 #endif
 
 /* if Unix not found, then detect Windows */
 #ifndef LIBPATH_OS_IS_UNIX
+
 # if 0
 # elif defined(LIBPATH_OS_REQUIRE_WINxx_FOR__WINxx)
+
 #  if defined(WIN32) || \
       defined(WIN64)
+
 #   define LIBPATH_OS_IS_WINDOWS
 #  endif /* WIN32 || WIN64 */
 # elif !defined(LIBPATH_SUPPRESS_WINDOWS)
+
 #  if defined(_WIN32) || \
       defined(_WIN64)
+
 #   define LIBPATH_OS_IS_WINDOWS
 #  endif /* _WIN32 || _WIN64 */
 # endif
@@ -106,11 +112,26 @@
 
 #if 0
 #elif defined(LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX) && defined(LIBPATH_OS_SIMULATE_UNIX_ON_WINDOWS)
+
 # error can define at most one of LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX and LIBPATH_OS_SIMULATE_UNIX_ON_WINDOWS
 #elif defined(LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX) && !defined(LIBPATH_OS_IS_UNIX)
+
 # error cannot define LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX unless on Unix
 #elif defined(LIBPATH_OS_SIMULATE_UNIX_ON_WINDOWS) && !defined(LIBPATH_OS_IS_WINDOWS)
+
 # error cannot define LIBPATH_OS_SIMULATE_UNIX_ON_WINDOWS unless on Windows
+#endif
+
+#ifdef LIBPATH_OS_SIMULATE_UNIX_ON_WINDOWS
+
+# define LIBPATH_OS_IS_UNIX
+# undef LIBPATH_OS_IS_WINDOWS
+#endif
+
+#ifdef LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX
+
+# define LIBPATH_OS_IS_WINDOWS
+# undef LIBPATH_OS_IS_UNIX
 #endif
 
 

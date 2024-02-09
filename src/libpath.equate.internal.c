@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 7th February 2024
+ * Updated: 8th February 2024
  */
 
 #include "libpath.equate.internal.h"
@@ -13,6 +13,53 @@
 #include <ctype.h>
 #include <string.h>
 
+
+/* /////////////////////////////////////////////////////////////////////////
+ * helper functions
+ */
+
+int
+strncasecmp_(
+    char const* s1
+,   char const* s2
+,   size_t      n
+)
+{
+#ifdef LIBPATH_OS_IS_UNIX
+
+    return strncmp(s1, s2, n);
+#endif /* LIBPATH_OS_IS_UNIX */
+#ifdef LIBPATH_OS_IS_WINDOWS
+
+# if 0
+# elif defined(_MSC_VER)
+
+    return _strncmp(s1, s2, n);
+# else
+
+    { size_t i; for (i = 0; i != n; ++i, ++s1, ++s2)
+    {
+        if (*s1 != *s2)
+        {
+            int const i1 = toupper((int)(unsigned char)*s1);
+            int const i2 = toupper((int)(unsigned char)*s2);
+
+            if (i1 != i2)
+            {
+                return i1 - i2;
+            }
+        }
+
+        if ('\0' == *s1)
+        {
+            break;
+        }
+    }}
+
+    return 0;
+# endif
+#endif /* LIBPATH_OS_IS_WINDOWS */
+}
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal functions
@@ -29,11 +76,7 @@ libpath_Internal_part_equal(
         return LIBPATH_V_FALSEY;
     }
 
-#ifdef LIBPATH_OS_IS_WINDOWS
-    if (0 != _strnicmp(lhs->ptr, rhs->ptr, lhs->len))
-#else
-    if (0 != strncmp(lhs->ptr, rhs->ptr, lhs->len))
-#endif
+    if (0 != strncasecmp_(lhs->ptr, rhs->ptr, lhs->len))
     {
         return LIBPATH_V_FALSEY;
     }

@@ -4,7 +4,7 @@
  * Purpose: Definition of slice types for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 9th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -64,17 +64,33 @@
  */
 struct libpath_StringSlice_t
 {
+    /** @brief Number of characters available at @c ptr */
 #ifdef LIBPATH_CXX_VER_2011_plus
     std::size_t             len;
 #else
     size_t                  len;
 #endif
+    /** @brief Pointer to first of @c len character(s) available */
     libpath_char_t const*   ptr;
 };
 #ifdef __cplusplus
-typedef libpath_StringSlice_t                               StringSlice_t;
 #else /* ? __cplusplus */
 typedef struct libpath_StringSlice_t                        libpath_StringSlice_t;
+#endif /* __cplusplus */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+
+
+typedef libpath_StringSlice_t                               StringSlice_t;
+
+} /* namespace libpath */
 #endif /* __cplusplus */
 
 

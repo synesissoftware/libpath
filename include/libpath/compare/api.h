@@ -94,6 +94,20 @@ libpath_Compare_ComparePathsAsCStyleStrings(
 );
 
 
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+namespace comparing {
+
+} /* namespace comparing */
+} /* namespace libpath */
+#endif /* __cplusplus */
+
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_compare_H_api */

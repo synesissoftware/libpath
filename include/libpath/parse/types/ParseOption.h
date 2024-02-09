@@ -4,7 +4,8 @@
  * macros
  */
 
-#define LIBPATH_PARSEOPTION(po)     libpath_ParseOption_##po
+#define LIBPATH_PARSEOPTION(po)                             libpath_ParseOption_##po
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * types
@@ -24,9 +25,26 @@ enum libpath_ParseOption_t
 #endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
 };
 #ifdef __cplusplus
-typedef libpath_ParseOption_t           ParseOption_t;
 #else /* ? __cplusplus */
-typedef enum libpath_ParseOption_t      libpath_ParseOption_t;
+typedef enum libpath_ParseOption_t                          libpath_ParseOption_t;
 #endif /* __cplusplus */
 
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+namespace parsing {
+
+typedef libpath_ParseOption_t                               ParseOption_t;
+
+} /* namespace parsing */
+} /* namespace libpath */
+#endif /* __cplusplus */
+
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

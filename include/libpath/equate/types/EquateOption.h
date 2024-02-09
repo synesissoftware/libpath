@@ -4,7 +4,7 @@
  * macros
  */
 
-#define LIBPATH_EQUATEOPTION(eo)     libpath_EquateOption_##eo
+#define LIBPATH_EQUATEOPTION(eo)                            libpath_EquateOption_##eo
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -25,9 +25,24 @@ enum libpath_EquateOption_t
 #endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
 };
 #ifdef __cplusplus
-typedef libpath_EquateOption_t          EquateOption_t;
 #else /* ? __cplusplus */
-typedef enum libpath_EquateOption_t     libpath_EquateOption_t;
+typedef enum libpath_EquateOption_t                         libpath_EquateOption_t;
+#endif /* __cplusplus */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+namespace parsing {
+
+typedef libpath_EquateOption_t                              EquateOption_t;
+
+} /* namespace parsing */
+} /* namespace libpath */
 #endif /* __cplusplus */
 
 

@@ -597,10 +597,10 @@ static void test_1_11(void)
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/"));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/"));
 
-#ifdef _DEBUG
-#else /* ? _DEBUG */
+#ifdef NDEBUG
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/"));
-#endif /* _DEBUG */
+#else /* ? NDEBUG */
+#endif /* NDEBUG */
 
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
 

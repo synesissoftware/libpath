@@ -991,14 +991,6 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
     if (NULL != cwd)
     {
-#ifdef LIBPATH_OS_IS_WINDOWS
-# ifdef _DEBUG
-# else /* ? _DEBUG */
-#  error
-# endif /* _DEBUG */
-#else
-#endif
-
         if (libpath_ParseResult_get_relativity_level_(&lresult) != libpath_ParseResult_get_relativity_level_(&rresult))
         {
             shouldParseCwd = LIBPATH_V_TRUEY;

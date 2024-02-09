@@ -100,6 +100,20 @@ libpath_Equate_EquatePathsAsCStyleStrings(
 );
 
 
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+namespace equating {
+
+} /* namespace equating */
+} /* namespace libpath */
+#endif /* __cplusplus */
+
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_equate_H_api */

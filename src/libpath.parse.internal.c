@@ -27,14 +27,14 @@ libpath_Internal_path_character_is_bad(
 {
     LIBPATH_SUPPRESS_UNUSED(flags);
 
-#ifndef _WIN32
+#ifndef LIBPATH_OS_IS_WINDOWS
     ((void)&path);
     ((void)&offset);
 #endif
 
     switch (ch)
     {
-#ifdef _WIN32
+#ifdef LIBPATH_OS_IS_WINDOWS
     case    ':':
 
         if (1u == offset &&
@@ -53,9 +53,10 @@ libpath_Internal_path_character_is_bad(
     case    '>':
     case    '?':
     case    '*':
-#ifdef _WIN32
+#ifdef LIBPATH_OS_IS_WINDOWS
     case    ';':
-#else
+#endif
+#ifdef LIBPATH_OS_IS_UNIX
     case    ':':
 #endif
 

@@ -4,7 +4,7 @@
  * Purpose: Definition of shared types for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 9th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -84,7 +84,7 @@ struct libpath_WorkingDirectoryContext_t
     {
         libpath_char_t const*           cwd_css;
         libpath_char_t*               (*getcwd)(libpath_char_t*, size_t);
-#ifdef LIBPATH_OS_IS_WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
         unsigned long       (__stdcall *GetCurrentDirectory)(unsigned long, libpath_char_t*);
 #endif
         libpath_StringSlice_t           cwd_slice;
@@ -93,6 +93,21 @@ struct libpath_WorkingDirectoryContext_t
 };
 #ifndef __cplusplus
 typedef struct libpath_WorkingDirectoryContext_t            libpath_WorkingDirectoryContext_t;
+#endif /* __cplusplus */
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace libpath {
+
+
+typedef libpath_WorkingDirectoryContext_t                   WorkingDirectoryContext_t;
+
+} /* namespace libpath */
 #endif /* __cplusplus */
 
 

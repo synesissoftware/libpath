@@ -292,7 +292,7 @@ compare_paths(
 
     if (LIBPATH_RESULTCODE(Success) != rc)
     {
-        XTESTS_TEST_FAIL_WITH_QUALIFIER("call to `libpath_Compare_ComparePathsAsCStyleStrings()` failed");
+        XTESTS_TEST_FAIL_WITH_QUALIFIER("call to `libpath_Compare_ComparePathsAsCStyleStrings()` failed", "");
     }
 
     return result;
@@ -572,10 +572,10 @@ static void test_1_11(void)
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/", NULL));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/", NULL));
 
-#ifdef _DEBUG
-#else /* ? _DEBUG */
+#ifdef NDEBUG
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/", NULL));
-#endif /* _DEBUG */
+#else /* ? NDEBUG */
+#endif /* NDEBUG */
 
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/", NULL));
 

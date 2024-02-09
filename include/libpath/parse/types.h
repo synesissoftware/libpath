@@ -4,7 +4,7 @@
  * Purpose: Main include for libpath library's Parsing API's types.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 9th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -102,7 +102,7 @@ struct libpath_ParseResult_t
 };
 
 #ifndef __cplusplus
-typedef struct libpath_ParseResult_t    libpath_ParseResult_t;
+typedef struct libpath_ParseResult_t                        libpath_ParseResult_t;
 #endif /* __cplusplus */
 
 
