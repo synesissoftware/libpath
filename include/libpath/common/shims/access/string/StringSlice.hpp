@@ -4,7 +4,7 @@
  * Purpose: Definition of String Access Shims for libpath StringSlice.
  *
  * Created: 13th February 2013
- * Updated: 9th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -88,6 +88,12 @@ c_str_len_a(
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_shims_access_string_HPP_StringSlice */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
+/* ////////////////////////////////////////////////////////////////////// */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once

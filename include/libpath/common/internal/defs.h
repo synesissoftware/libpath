@@ -4,7 +4,7 @@
  * Purpose: Operating-system discrimination for libpath library.
  *
  * Created: 2nd February 2013
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -65,6 +65,12 @@
  */
 #define LIBPATH_NOTHING
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

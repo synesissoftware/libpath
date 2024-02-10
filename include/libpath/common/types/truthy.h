@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/basic_types.h
+ * File:    libpath/common/types/truthy.h
  *
  * Purpose: Basic types defined for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 7th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -40,8 +40,8 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_basic_types
-#define SYNSOFT_LIBPATH_INCL_libpath_common_H_basic_types
+#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_types_H_truthy
+#define SYNSOFT_LIBPATH_INCL_libpath_common_types_H_truthy
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -95,7 +95,7 @@ typedef libpath_truthy_t                                    truthy_t;
 
 /* ////////////////////////////////////////////////////////////////////// */
 
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_basic_types */
+#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_types_H_truthy */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once

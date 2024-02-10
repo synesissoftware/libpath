@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath/common/result_codes/enumerations/rcx.h
+ * File:    libpath/common/result_codes/enumerations/rcx.h
  *
- * Purpose:     Extended result codes defined for libpath library.
+ * Purpose: Extended result codes defined for libpath library.
  *
- * Created:     9th November 2012
- * Updated: 8th February 2024
+ * Created: 9th November 2012
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -39,4 +39,8 @@
  *
  * ////////////////////////////////////////////////////////////////////// */
 
+
+
+
+/* ///////////////////////////// end of file //////////////////////////// */
 

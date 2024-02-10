@@ -4,7 +4,7 @@
  * Purpose: Definition of result code types.
  *
  * Created: 13th February 2013
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -102,6 +102,12 @@ enum libpath_rcx_t
 };
 typedef enum libpath_rcx_t                                  LIBPATH_RCX;
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

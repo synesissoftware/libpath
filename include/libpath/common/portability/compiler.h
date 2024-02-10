@@ -4,7 +4,7 @@
  * Purpose: Compiler discrimination for libpath library.
  *
  * Created: 7th February 2024
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -108,6 +108,12 @@
 # endif /* compiler */
 #endif
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

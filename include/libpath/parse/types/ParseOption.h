@@ -46,5 +46,11 @@ typedef libpath_ParseOption_t                               ParseOption_t;
 #endif /* __cplusplus */
 
 
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
 

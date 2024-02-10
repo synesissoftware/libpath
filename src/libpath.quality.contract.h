@@ -5,7 +5,7 @@
  *          implementation of libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -66,6 +66,12 @@
 # define LIBPATH_MESSAGE_ASSERT(expr, msg)                  LIBPATH_ASSERT((msg) && (expr))
 #endif /* 0 */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

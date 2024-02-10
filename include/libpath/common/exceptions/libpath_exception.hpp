@@ -4,7 +4,7 @@
  * Purpose: Definition of libpath::exceptions::libpath_exception.
  *
  * Created: 5th April 2013
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *

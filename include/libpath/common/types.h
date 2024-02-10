@@ -4,7 +4,7 @@
  * Purpose: Main include for common types defined for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -49,12 +49,12 @@
  */
 
 #include <libpath/common/internal/defs.h>
-#include <libpath/common/basic_types.h>
 #include <libpath/common/macros.h>
 #include <libpath/common/namespace.h>
 #include <libpath/common/portability.h>
 #include <libpath/common/types/fundamental.h>
 #include <libpath/common/types/slices.h>
+#include <libpath/common/types/truthy.h>
 #include <libpath/common/result_codes/result_codes.h>
 
 

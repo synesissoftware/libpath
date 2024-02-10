@@ -1,7 +1,7 @@
 
 /*
  * Created:
- * Updated: 7th February 2024
+ * Updated: 10th February 2024
  */
 
 #include <libpath/parse/types.h>
@@ -94,6 +94,12 @@ libpath_Internal_find_UNC_root_slice(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

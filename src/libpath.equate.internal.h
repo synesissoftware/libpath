@@ -1,7 +1,7 @@
 
 /*
  * Created:
- * Updated: 7th February 2024
+ * Updated: 10th February 2024
  */
 
 #include <libpath/equate/types.h>
@@ -91,6 +91,12 @@ libpath_Internal_get_root_level(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath library's Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *

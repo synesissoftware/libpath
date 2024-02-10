@@ -1,7 +1,7 @@
 
 /*
  * Created:
- * Updated: 7th February 2024
+ * Updated: 10th February 2024
  */
 
 #include <libpath/equate/types.h>
@@ -35,6 +35,12 @@ libpath_Internal_compare_path_fragment(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

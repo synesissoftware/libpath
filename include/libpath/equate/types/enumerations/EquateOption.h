@@ -4,7 +4,7 @@
  * Purpose: Equate options defined for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -55,3 +55,7 @@
 //LIBPATH_DEFINE_EquateOption_(AssumeDirectory, = 0x0001, AssumeDirectory, causes the full path to be assumed to be a directory as if it had a trailing slash)
 
 #undef LIBPATH_DEFINE_EquateOption_
+
+
+/* ///////////////////////////// end of file //////////////////////////// */
+

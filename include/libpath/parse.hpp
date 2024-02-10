@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath library's Parsing API.
  *
  * Created: 29th March 2013
- * Updated: 8th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -44,12 +44,14 @@
 #include <libpath/parse.h>
 #include <libpath/common/types.hpp>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
 namespace libpath {
 namespace parsing {
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * types
@@ -88,6 +90,7 @@ private:
 private:
     StringSlice_t   m_slices[10];
 };
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -166,6 +169,7 @@ is_rooted(
     return 0 != libpath_ParseResult_IsPathRooted(result);
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
@@ -173,4 +177,12 @@ is_rooted(
 } /* namespace parsing */
 } /* namespace libpath */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

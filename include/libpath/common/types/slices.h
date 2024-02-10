@@ -4,7 +4,7 @@
  * Purpose: Definition of slice types for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 9th February 2024
+ * Updated: 10th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -93,6 +93,12 @@ typedef libpath_StringSlice_t                               StringSlice_t;
 } /* namespace libpath */
 #endif /* __cplusplus */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

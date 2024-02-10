@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
-* File:        libpath/common/exceptions/invalid_path_exception.hpp
-*
-* Purpose:     Definition of libpath::exceptions::invalid_path_exception.
-*
-* Created:     5th April 2013
-* Updated:     20th November 2016
-*
-* Home:        https://github.com/synesissoftware/libpath
-*
-* Copyright (c) 2013, Matthew Wilson and Synesis Software
+ * File:    libpath/common/exceptions/invalid_path_exception.hpp
+ *
+ * Purpose: Definition of libpath::exceptions::invalid_path_exception.
+ *
+ * Created: 5th April 2013
+ * Updated: 10th February 2024
+ *
+ * Home:    https://github.com/synesissoftware/libpath
+ *
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

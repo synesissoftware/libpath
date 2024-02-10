@@ -671,7 +671,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\libpath\common\basic_types.h" />
     <ClInclude Include="..\..\..\include\libpath\common\internal\defs.h" />
     <ClInclude Include="..\..\..\include\libpath\common\macros.h" />
     <ClInclude Include="..\..\..\include\libpath\common\namespace.h" />
@@ -684,6 +683,7 @@
     <ClInclude Include="..\..\..\include\libpath\common\types.hpp" />
     <ClInclude Include="..\..\..\include\libpath\common\types\fundamental.h" />
     <ClInclude Include="..\..\..\include\libpath\common\types\slices.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\types\truthy.h" />
     <ClInclude Include="..\..\..\include\libpath\common\version.h" />
     <ClInclude Include="..\..\..\include\libpath\compare.h" />
     <ClInclude Include="..\..\..\include\libpath\compare.hpp" />

@@ -137,9 +137,6 @@
     <ClInclude Include="..\..\..\include\libpath\common\version.h">
       <Filter>Header Files\include\libpath\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\basic_types.h">
-      <Filter>Header Files\include\libpath\common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\macros.h">
       <Filter>Header Files\include\libpath\common</Filter>
     </ClInclude>
@@ -211,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\types\slices.h">
       <Filter>Header Files\include\libpath\common\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libpath\common\types\truthy.h">
+      <Filter>Header Files\include\libpath\common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\shims\access\string\StringSlice.hpp">
       <Filter>Header Files\include\libpath\common\shims\access\string</Filter>
