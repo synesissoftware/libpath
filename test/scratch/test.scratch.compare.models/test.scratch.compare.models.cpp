@@ -48,11 +48,11 @@ static int main_(int /* argc */, char** /*argv*/)
     {
         int r2 = ::libpath::comparing::compare_paths_and_<libpath::throw_on_invalid_path_policy>("/abc", "../def/abc");
     }
-    catch(std::bad_alloc&)
+    catch (std::bad_alloc&)
     {
         throw;
     }
-    catch(std::exception& x)
+    catch (std::exception& x)
     {
         fprintf(stdout, "exception (%s): %s\n", typeid(x).name(), x.what());
     }
@@ -61,11 +61,11 @@ static int main_(int /* argc */, char** /*argv*/)
     {
         int r3 = ::libpath::comparing::compare_paths_and_<libpath::throw_on_invalid_path_policy>("/abc", ".|./def/abc");
     }
-    catch(std::bad_alloc&)
+    catch (std::bad_alloc&)
     {
         throw;
     }
-    catch(std::exception& x)
+    catch (std::exception& x)
     {
         fprintf(stdout, "exception (%s): %s\n", typeid(x).name(), x.what());
     }
@@ -88,16 +88,16 @@ int main(int argc, char** argv)
 
         return main_(argc, argv);
     }
-    catch(std::bad_alloc&)
+    catch (std::bad_alloc&)
     {
         fputs("out of memory\n", stderr);
     }
-    catch(std::exception& x)
+    catch (std::exception& x)
     {
         fprintf(stderr, "exception: %s\n", x.what());
     }
 #if 0
-    catch(...)
+    catch (...)
     {
     }
 #endif /* 0 */
