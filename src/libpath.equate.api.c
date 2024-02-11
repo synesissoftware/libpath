@@ -195,7 +195,7 @@ libpath_Internal_PathEquals_impl_(
     {
         *result = LIBPATH_V_FALSEY;
 
-        return LIBPATH_RESULTCODE(Success);
+        return LIBPATH_RC_OF(Success);
     }
     else
     {
@@ -212,7 +212,7 @@ libpath_Internal_PathEquals_impl_(
         {
             *result = LIBPATH_V_FALSEY;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
         else
         {
@@ -221,7 +221,7 @@ libpath_Internal_PathEquals_impl_(
             {
                 *result = LIBPATH_V_TRUEY;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
         }
 
@@ -278,7 +278,7 @@ libpath_Internal_PathEquals_impl_2_(
             {
                 *result = LIBPATH_V_FALSEY;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
         }
 
@@ -286,7 +286,7 @@ libpath_Internal_PathEquals_impl_2_(
         {
             *result = LIBPATH_V_FALSEY;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
     }
 #endif
@@ -304,7 +304,7 @@ libpath_Internal_PathEquals_impl_2_(
         {
             *result = LIBPATH_V_FALSEY;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
 #endif
 
@@ -315,36 +315,36 @@ libpath_Internal_PathEquals_impl_2_(
 
             *result = libpath_Internal_directory_whole_equal(&lresult->directoryPart, &rresult->directoryPart);
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
         else
         {
             libpath_StringSlice_t** const   ldirparts  =   &(*dpallocs)[0];
             libpath_StringSlice_t** const   rdirparts  =   &(*dpallocs)[1];
 
-            LIBPATH_RC rc = LIBPATH_RESULTCODE(Success);
+            LIBPATH_RC rc = LIBPATH_RC_OF(Success);
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(lresult->numDirectoryParts, ldirparts);
             }
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(rresult->numDirectoryParts, rdirparts);
             }
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Parse_ParsePathFromStringSlice(lhs, flags, lresult, lresult->numDirectoryParts, *ldirparts);
             }
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Parse_ParsePathFromStringSlice(rhs, flags, rresult, rresult->numDirectoryParts, *rdirparts);
             }
 
-            if (LIBPATH_FAILURE(rc))
+            if (LIBPATH_RC_FAILURE(rc))
             {
                 return rc;
             }
@@ -355,7 +355,7 @@ libpath_Internal_PathEquals_impl_2_(
 
                 *result = libpath_Internal_directory_parts_equal(nldirparts, *ldirparts, nrdirparts, *rdirparts);
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
         }
     }
@@ -366,7 +366,7 @@ libpath_Internal_PathEquals_impl_2_(
         {
             *result = LIBPATH_V_FALSEY;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
         else
         {
@@ -390,7 +390,7 @@ libpath_Internal_PathEquals_impl_2_(
 
                 *result = LIBPATH_V_FALSEY;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
             else
             {
@@ -398,7 +398,7 @@ libpath_Internal_PathEquals_impl_2_(
                 {
                     *result = LIBPATH_V_FALSEY;
 
-                    return LIBPATH_RESULTCODE(Success);
+                    return LIBPATH_RC_OF(Success);
                 }
                 else
                 {
@@ -409,7 +409,7 @@ libpath_Internal_PathEquals_impl_2_(
                         // can just do informed-comparison of directory strings
                         *result = libpath_Internal_directory_whole_equal_3(&abs_result->directoryPart, &rel_result->directoryPart, &cwd_result.directoryPart);
 
-                        return LIBPATH_RESULTCODE(Success);
+                        return LIBPATH_RC_OF(Success);
                     }
                     else
                     {
@@ -417,39 +417,39 @@ libpath_Internal_PathEquals_impl_2_(
                         libpath_StringSlice_t** const   rel_dirparts  =   &(*dpallocs)[1];
                         libpath_StringSlice_t** const   cwd_dirparts  =   &(*dpallocs)[2];
 
-                        LIBPATH_RC rc = LIBPATH_RESULTCODE(Success);
+                        LIBPATH_RC rc = LIBPATH_RC_OF(Success);
 
-                        if (LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_RC_SUCCESS(rc))
                         {
                             rc = libpath_Util_AllocateSliceArray(abs_result->numDirectoryParts, abs_dirparts);
                         }
 
-                        if (LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_RC_SUCCESS(rc))
                         {
                             rc = libpath_Util_AllocateSliceArray(rel_result->numDirectoryParts, rel_dirparts);
                         }
 
-                        if (LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_RC_SUCCESS(rc))
                         {
                             rc = libpath_Util_AllocateSliceArray(cwd_result.numDirectoryParts, cwd_dirparts);
                         }
 
-                        if (LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_RC_SUCCESS(rc))
                         {
                             rc = libpath_Parse_ParsePathFromStringSlice( abs,     flags, abs_result, abs_result->numDirectoryParts, *abs_dirparts);
                         }
 
-                        if (LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_RC_SUCCESS(rc))
                         {
                             rc = libpath_Parse_ParsePathFromStringSlice( rel,     flags, rel_result, rel_result->numDirectoryParts, *rel_dirparts);
                         }
 
-                        if (LIBPATH_SUCCESS(rc))
+                        if (LIBPATH_RC_SUCCESS(rc))
                         {
                             rc = libpath_Parse_ParsePathFromStringSlice( cwd, cwd_flags, &cwd_result, cwd_result.numDirectoryParts, *cwd_dirparts);
                         }
 
-                        if (LIBPATH_FAILURE(rc))
+                        if (LIBPATH_RC_FAILURE(rc))
                         {
                             return rc;
                         }
@@ -501,7 +501,7 @@ libpath_Internal_PathEquals_impl_2_(
                                 {
                                     *result = LIBPATH_V_FALSEY;
 
-                                    return LIBPATH_RESULTCODE(Success);
+                                    return LIBPATH_RC_OF(Success);
                                 }
                             }
 
@@ -516,7 +516,7 @@ libpath_Internal_PathEquals_impl_2_(
                                 {
                                     *result = LIBPATH_V_FALSEY;
 
-                                    return LIBPATH_RESULTCODE(Success);
+                                    return LIBPATH_RC_OF(Success);
                                 }
                             }
 
@@ -526,12 +526,12 @@ libpath_Internal_PathEquals_impl_2_(
                             {
                                 *result = LIBPATH_V_TRUEY;
 
-                                return LIBPATH_RESULTCODE(Success);
+                                return LIBPATH_RC_OF(Success);
                             }
 
                             *result = LIBPATH_V_FALSEY;
 
-                            return LIBPATH_RESULTCODE(Success);
+                            return LIBPATH_RC_OF(Success);
                         }
                     }
                 }
@@ -565,7 +565,7 @@ libpath_Equate_EquatePathsAsStringSlices(
 
     if (NULL != reserved)
     {
-        return LIBPATH_RESULTCODE(ParameterIsReservedAndMustBeZero);
+        return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
 
     if (NULL != ctxt)
@@ -590,7 +590,7 @@ libpath_Equate_EquatePathsAsStringSlices(
         case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
 #endif
         case    libpath_WorkingDirectoryContextMechanism_getcwd:
-            return LIBPATH_RESULTCODE(OptionNotSupported);
+            return LIBPATH_RC_OF(OptionNotSupported);
         }
     }
 

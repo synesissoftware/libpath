@@ -75,11 +75,11 @@ libpath_Util_AllocateSliceArray(
 
     if (NULL == *slices)
     {
-        return LIBPATH_RESULTCODE(OutOfMemory);
+        return LIBPATH_RC_OF(OutOfMemory);
     }
     else
     {
-        return LIBPATH_RESULTCODE(Success);
+        return LIBPATH_RC_OF(Success);
     }
 }
 

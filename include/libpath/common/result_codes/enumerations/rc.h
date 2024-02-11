@@ -42,13 +42,12 @@
 
 #if 0
 #elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
-                                                                                /* String form likely used in diagnostics, so use help string */
-# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          INIT_ERR_STR_DECL(libpath_ResultCode_##en, #helpString);
+# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          LOOKUP_STR_DECL_(libpath_ResultCode_##en, #helpString);
 # undef LIBPATH_DEFINING_STRING_VARIABLES
 
 #elif defined(LIBPATH_DEFINING_STRING_ARRAY)
 
-# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          INIT_ERR_STR_ENTRY(libpath_ResultCode_##en),
+# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          LOOKUP_STR_ARRAY_ENTRY_(libpath_ResultCode_##en),
 # undef LIBPATH_DEFINING_STRING_ARRAY
 
 #else
@@ -64,7 +63,9 @@ LIBPATH_DEFINE_ResultCode_(HardLink, LIBPATH_NOTHING, HardLink, Make destination
 LIBPATH_DEFINE_ResultCode_(HardLinkOrFallbackCopy, LIBPATH_NOTHING, HardLinkOrFallbackCopy, Make destination a hard-link to the source or attempt copy if link fails)
 #endif
 
+#if !defined(LIBPATH_DEFINING_STRING_VARIABLES) && !defined(LIBPATH_DEFINING_STRING_ARRAY)
 LIBPATH_DEFINE_ResultCode_(INVALID, =-1000000, INVALID, INVALID)
+#endif
 
 LIBPATH_DEFINE_ResultCode_(UnsupportedOperation, LIBPATH_NOTHING, UnsupportedOperation, operation is not supported)
 LIBPATH_DEFINE_ResultCode_(UnexpectedCondition, LIBPATH_NOTHING, UnexpectedCondition, unexpected condition)
@@ -104,7 +105,7 @@ LIBPATH_DEFINE_ResultCode_(CouldNotReadSourceFile, LIBPATH_NOTHING, CouldNotRead
 LIBPATH_DEFINE_ResultCode_(CouldNotWriteDestinationFile, LIBPATH_NOTHING, CouldNotWriteDestinationFile, could not write to destination file)
 #endif
 
-LIBPATH_DEFINE_ResultCode_(Success, =0, Success, LIBPATH_NOTHING)
+LIBPATH_DEFINE_ResultCode_(Success, =0, Success, operation completed successfully)
 
 #undef LIBPATH_DEFINE_ResultCode_
 

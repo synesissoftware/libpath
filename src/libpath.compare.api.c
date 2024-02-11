@@ -523,7 +523,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         {
             *result = r;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
     }
 #endif
@@ -549,7 +549,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         case    LIBPATH_COMBINE_RLEVELS_(relative, (absolute | rooted)):
             // lhs < rhs
             *result = -1;
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
 
         case    LIBPATH_COMBINE_RLEVELS_((absolute | rooted), relative):
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -558,7 +558,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 #endif
             // lhs > rhs
             *result = +1;
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
     }
 
@@ -576,7 +576,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         {
             *result = r;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
     }
 
@@ -640,7 +640,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 /* 8. */
                 *result = +1 * r_multiplier;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
             else
             {
@@ -667,7 +667,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 {
                     *result = +1 * r_multiplier;
 
-                    return LIBPATH_RESULTCODE(Success);
+                    return LIBPATH_RC_OF(Success);
                 }
             }
             else
@@ -680,7 +680,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 {
                     *result = r * r_multiplier;
 
-                    return LIBPATH_RESULTCODE(Success);
+                    return LIBPATH_RC_OF(Success);
                 }
 
                 LIBPATH_ASSERT(LIBPATH_IS_ABSOLUTE_(absRelativity));
@@ -694,7 +694,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 {
                     *result = +1 * r_multiplier;
 
-                    return LIBPATH_RESULTCODE(Success);
+                    return LIBPATH_RC_OF(Success);
                 }
             }
             else
@@ -703,14 +703,14 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 /* 3. */
                 *result = -1 * r_multiplier;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
             else
             {
                 /* 4. */
                 *result = +1 * r_multiplier;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
         }
 #else
@@ -718,7 +718,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         {
             *result = +1 * r_multiplier;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
 #endif
 
@@ -732,7 +732,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
             {
                 *result = r * r_multiplier;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
         }
 #endif
@@ -742,24 +742,24 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
             libpath_StringSlice_t*  rdirparts   =   NULL;
             libpath_StringSlice_t*  cdirparts   =   NULL;
 
-            LIBPATH_RC rc = LIBPATH_RESULTCODE(Success);
+            LIBPATH_RC rc = LIBPATH_RC_OF(Success);
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(abs->numDirectoryParts, &adirparts);
             }
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(rel->numDirectoryParts, &rdirparts);
             }
 
-            if (LIBPATH_SUCCESS(rc))
+            if (LIBPATH_RC_SUCCESS(rc))
             {
                 rc = libpath_Util_AllocateSliceArray(cwd->numDirectoryParts, &cdirparts);
             }
 
-            if (LIBPATH_FAILURE(rc))
+            if (LIBPATH_RC_FAILURE(rc))
             {
                 libpath_Util_FreeSliceArray(adirparts);
                 libpath_Util_FreeSliceArray(rdirparts);
@@ -810,7 +810,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 {
                     *result = r * r_multiplier;
 
-                    return LIBPATH_RESULTCODE(Success);
+                    return LIBPATH_RC_OF(Success);
                 }
                 }
                 }
@@ -831,7 +831,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
             {
                 *result = r;
 
-                return LIBPATH_RESULTCODE(Success);
+                return LIBPATH_RC_OF(Success);
             }
         }
         else
@@ -855,19 +855,19 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                     libpath_StringSlice_t*  ldirparts   =   NULL;
                     libpath_StringSlice_t*  rdirparts   =   NULL;
 
-                    LIBPATH_RC rc = LIBPATH_RESULTCODE(Success);
+                    LIBPATH_RC rc = LIBPATH_RC_OF(Success);
 
-                    if (LIBPATH_SUCCESS(rc))
+                    if (LIBPATH_RC_SUCCESS(rc))
                     {
                         rc = libpath_Util_AllocateSliceArray(lhs->numDirectoryParts, &ldirparts);
                     }
 
-                    if (LIBPATH_SUCCESS(rc))
+                    if (LIBPATH_RC_SUCCESS(rc))
                     {
                         rc = libpath_Util_AllocateSliceArray(rhs->numDirectoryParts, &rdirparts);
                     }
 
-                    if (LIBPATH_FAILURE(rc))
+                    if (LIBPATH_RC_FAILURE(rc))
                     {
                         libpath_Util_FreeSliceArray(ldirparts);
                         libpath_Util_FreeSliceArray(rdirparts);
@@ -897,7 +897,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                         {
                             *result = r;
 
-                            return LIBPATH_RESULTCODE(Success);
+                            return LIBPATH_RC_OF(Success);
                         }
                         }
                     }
@@ -915,13 +915,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         {
             *result = r;
 
-            return LIBPATH_RESULTCODE(Success);
+            return LIBPATH_RC_OF(Success);
         }
     }
 
     *result = 0;
 
-    return LIBPATH_RESULTCODE(Success);
+    return LIBPATH_RC_OF(Success);
     }
 }
 
@@ -955,13 +955,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
     rc = libpath_Parse_ParsePathFromStringSlice(lhs, lParseFlags, &lresult, 0, NULL);
 
-    if (LIBPATH_RESULTCODE(Success) != rc)
+    if (LIBPATH_RC_OF(Success) != rc)
     {
         switch (rc)
         {
-        case    LIBPATH_RESULTCODE(NoPathSpecified):
-        case    LIBPATH_RESULTCODE(BadPathCharacter):
-            rc = LIBPATH_RESULTCODE(FirstPathInvalid);
+        case    LIBPATH_RC_OF(NoPathSpecified):
+        case    LIBPATH_RC_OF(BadPathCharacter):
+            rc = LIBPATH_RC_OF(FirstPathInvalid);
             break;
 
         default:
@@ -973,13 +973,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
     rc = libpath_Parse_ParsePathFromStringSlice(rhs, rParseFlags, &rresult, 0, NULL);
 
-    if (LIBPATH_RESULTCODE(Success) != rc)
+    if (LIBPATH_RC_OF(Success) != rc)
     {
         switch (rc)
         {
-        case    LIBPATH_RESULTCODE(NoPathSpecified):
-        case    LIBPATH_RESULTCODE(BadPathCharacter):
-            rc = LIBPATH_RESULTCODE(SecondPathInvalid);
+        case    LIBPATH_RC_OF(NoPathSpecified):
+        case    LIBPATH_RC_OF(BadPathCharacter):
+            rc = LIBPATH_RC_OF(SecondPathInvalid);
             break;
 
         default:
@@ -1000,13 +1000,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         {
             rc = libpath_Parse_ParsePathFromStringSlice(cwd, dParseFlags, &dresult, 0, NULL);
 
-            if (LIBPATH_RESULTCODE(Success) != rc)
+            if (LIBPATH_RC_OF(Success) != rc)
             {
                 switch (rc)
                 {
-                case    LIBPATH_RESULTCODE(NoPathSpecified):
-                case    LIBPATH_RESULTCODE(BadPathCharacter):
-                    rc = LIBPATH_RESULTCODE(WorkingDirectoryPathInvalid);
+                case    LIBPATH_RC_OF(NoPathSpecified):
+                case    LIBPATH_RC_OF(BadPathCharacter):
+                    rc = LIBPATH_RC_OF(WorkingDirectoryPathInvalid);
                     break;
 
                 default:
@@ -1044,7 +1044,7 @@ libpath_Compare_ComparePathsAsStringSlices(
 
     if (NULL != reserved)
     {
-        return LIBPATH_RESULTCODE(ParameterIsReservedAndMustBeZero);
+        return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
 #ifndef __cplusplus
 
@@ -1088,7 +1088,7 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
         case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
 #endif
         case    libpath_WorkingDirectoryContextMechanism_getcwd:
-            return LIBPATH_RESULTCODE(OptionNotSupported);
+            return LIBPATH_RC_OF(OptionNotSupported);
         }
     }
 
@@ -1113,7 +1113,7 @@ libpath_Compare_ComparePathsAsStringPtrsAndLens(
 
     if (NULL != reserved)
     {
-        return LIBPATH_RESULTCODE(ParameterIsReservedAndMustBeZero);
+        return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
 #ifndef __cplusplus
 
@@ -1156,7 +1156,7 @@ libpath_Compare_ComparePathsAsCStyleStrings(
 
     if (NULL != reserved)
     {
-        return LIBPATH_RESULTCODE(ParameterIsReservedAndMustBeZero);
+        return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
 #ifndef __cplusplus
 

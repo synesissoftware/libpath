@@ -40,6 +40,29 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
+#if 0
+#elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
+# define LIBPATH_DEFINE_ResultCodeX_(en, value, shimString, helpString)         LOOKUP_STR_DECL_(libpath_ResultCodeX_##en, #helpString);
+# undef LIBPATH_DEFINING_STRING_VARIABLES
+
+#elif defined(LIBPATH_DEFINING_STRING_ARRAY)
+
+# define LIBPATH_DEFINE_ResultCodeX_(en, value, shimString, helpString)         LOOKUP_STR_ARRAY_ENTRY_(libpath_ResultCodeX_##en),
+# undef LIBPATH_DEFINING_STRING_ARRAY
+
+#else
+
+# define LIBPATH_DEFINE_ResultCodeX_(en, value, shimString, helpString)         libpath_ResultCodeX_##en value /*!< helpString */,
+
+#endif
+
+#if !defined(LIBPATH_DEFINING_STRING_VARIABLES) && !defined(LIBPATH_DEFINING_STRING_ARRAY)
+LIBPATH_DEFINE_ResultCodeX_(INVALID, =-1000000, INVALID, INVALID)
+#endif
+
+LIBPATH_DEFINE_ResultCodeX_(Success, =0, Success, operation completed successfully)
+
+#undef LIBPATH_DEFINE_ResultCodeX_
 
 
 /* ///////////////////////////// end of file //////////////////////////// */

@@ -66,11 +66,33 @@
 #endif
 
 
+/** \def LIBPATH_NUM_ELEMENTS(ar)
+ *
+ * @brief Evaluates, at compile time, to the number of elements within the
+ *   given vector entity
+ *
+ * \param ar The array
+ */
+#ifdef STLSOFT_NUM_ELEMENTS
+
+# define LIBPATH_NUM_ELEMENTS(ar)                           STLSOFT_NUM_ELEMENTS(ar)
+#else
+
+# ifdef __DMC__
+
+#  define LIBPATH_NUM_ELEMENTS(ar)                          (sizeof(ar) / sizeof((ar)[0]))
+# else
+
+#  define LIBPATH_NUM_ELEMENTS(ar)                          (sizeof(ar) / sizeof(0[(ar)]))
+# endif
+#endif
+
+
 /** @def LIBPATH_STATIC_CAST(type, expr)
  *
  * A static type cast
  *
- * @param type The type to which \c expr will be cast
+ * @param type The type to which @c expr will be cast
  * @param expr The expression to be cast
  */
 #ifdef __cplusplus
@@ -85,7 +107,7 @@
 /** @def LIBPATH_SUPPRESS_UNUSED(v)
  *
  * Suppresses a warning about non-use of variable/parameter
- * by <em>using</em> the value \c v
+ * by <em>using</em> the value @c v
  *
  * @param v The value - parameter / variable to use <em>used</em>
  */

@@ -305,9 +305,9 @@ namespace
 
         switch (rc)
         {
-        case    LIBPATH_RESULTCODE(FirstPathInvalid):
-        case    LIBPATH_RESULTCODE(SecondPathInvalid):
-        case    LIBPATH_RESULTCODE(WorkingDirectoryPathInvalid):
+        case    LIBPATH_RC_OF(FirstPathInvalid):
+        case    LIBPATH_RC_OF(SecondPathInvalid):
+        case    LIBPATH_RC_OF(WorkingDirectoryPathInvalid):
 
             break;
         default:
@@ -316,7 +316,7 @@ namespace
         }
 
 
-        return (LIBPATH_RESULTCODE(Success) == rc) && (result);
+        return (LIBPATH_RC_OF(Success) == rc) && (result);
     }
 
 

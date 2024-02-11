@@ -19,9 +19,9 @@ extern "C"
 
 /*
  *
- * @retval LIBPATH_V_TRUEY the value held by \c ch is that of a
+ * @retval LIBPATH_V_TRUEY the value held by @c ch is that of a
  *   valid path-name-separator on the executing platform
- * @retval LIBPATH_V_FALSEY the value held by \c ch is not that of a
+ * @retval LIBPATH_V_FALSEY the value held by @c ch is not that of a
  *   valid path-name-separator on the executing platform
  */
 libpath_truthy_t
@@ -79,9 +79,9 @@ libpath_Internal_find_next_directory_part(
 /*
  *
  * @retval empty-slice A full UNC root was not present at the start of the
- *   given \c path
+ *   given @c path
  * @retval non-empty-slice A full UNC root was present at the start of the
- *   given \c path, and the slice designates the UNC root part of the path
+ *   given @c path, and the slice designates the UNC root part of the path
  */
 libpath_StringSlice_t
 libpath_Internal_find_UNC_root_slice(

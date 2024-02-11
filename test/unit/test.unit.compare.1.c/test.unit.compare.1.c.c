@@ -290,7 +290,7 @@ compare_paths(
     ,   &result
     );
 
-    if (LIBPATH_RESULTCODE(Success) != rc)
+    if (LIBPATH_RC_OF(Success) != rc)
     {
         XTESTS_TEST_FAIL_WITH_QUALIFIER("call to `libpath_Compare_ComparePathsAsCStyleStrings()` failed", "");
     }

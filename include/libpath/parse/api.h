@@ -77,10 +77,10 @@
  *   indicating the results of the parsing
  * @retval libpath_ResultCode_Success the path has been parsed correctly
  *   and recognised as valid
- * @retval libpath_ResultCode_BadPathCharacter the \c path parameter
+ * @retval libpath_ResultCode_BadPathCharacter the @c path parameter
  *   specifies a string containing an invalid path character (such as
- *   '|', '<', '>', '?', '*'). If \c result is specified,
- *   the \c firstBadCharOffset will specify the offset of the (bad)
+ *   '|', '<', '>', '?', '*'). If @c result is specified,
+ *   the @c firstBadCharOffset will specify the offset of the (bad)
  *   character that terminated parsing; in all other cases its value is
  *   unspecified (and callers should not rely on any value at all).
  *
@@ -93,7 +93,7 @@
  *   only go to the (slight) expense of an allocation and second call
  *   when necessary.)
  * @note Regardless of whether the function succeeds or fails, if a
- *   \c result parameter is passed, its \c input slice member will be set
+ *   @c result parameter is passed, its @c input slice member will be set
  *   to reflect the characteristics of the input.
  *
  *

@@ -225,7 +225,7 @@ Xyz1(
             {
                 result->firstBadCharOffset = LIBPATH_STATIC_CAST(libpath_size_t, s - begin);
 
-                return LIBPATH_RESULTCODE(BadPathCharacter);
+                return LIBPATH_RC_OF(BadPathCharacter);
             }
             break;
         }
@@ -351,7 +351,7 @@ Xyz3(
     {
         if (invalidRoot)
         {
-            return LIBPATH_RESULTCODE(InvalidRoot);
+            return LIBPATH_RC_OF(InvalidRoot);
         }
 
 #ifdef LIBPATH_OS_IS_WINDOWS

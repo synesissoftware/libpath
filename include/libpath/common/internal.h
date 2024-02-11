@@ -1,15 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/equate/types/enumerations/EquateOption.h
+ * File:    libpath/common/internal.h
  *
- * Purpose: Equate options defined for libpath library.
+ * Purpose: Internal elements defined for libpath library.
  *
- * Created: 9th November 2012
+ * Created: 11th February 2024
  * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
- * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
+ * Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,23 +39,27 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
+#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_internal
+#define SYNSOFT_LIBPATH_INCL_libpath_common_H_internal
 
-#if 0
-#elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
-                                                                            /* String form likely used in diagnostics, so use enumerator name (contraction) */
-# define LIBPATH_DEFINE_EquateOption_(en, value, shimString, helpString)    LOOKUP_STR_DECL_(libpath_EquateOption_##en, #shimString);
-# undef LIBPATH_DEFINING_STRING_VARIABLES
-#elif defined(LIBPATH_DEFINING_STRING_ARRAY)
-# define LIBPATH_DEFINE_EquateOption_(en, value, shimString, helpString)    LOOKUP_STR_ARRAY_ENTRY_(libpath_EquateOption_##en),
-# undef LIBPATH_DEFINING_STRING_ARRAY
-#else
-# define LIBPATH_DEFINE_EquateOption_(en, value, shimString, helpString)    libpath_EquateOption_##en value /*!< helpString */,
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+#define SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal
+#include <libpath/common/internal/namespace_.h>
+#include <libpath/common/internal/nothing_.h>
+#undef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal
+
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_internal */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
 #endif
-
-//LIBPATH_DEFINE_EquateOption_(AssumeDirectory, = 0x0001, AssumeDirectory, causes the full path to be assumed to be a directory as if it had a trailing slash)
-
-#undef LIBPATH_DEFINE_EquateOption_
-
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

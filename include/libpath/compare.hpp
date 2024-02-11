@@ -256,7 +256,7 @@ compare_paths_and_(
         ,   &result
         );
 
-    if (LIBPATH_RESULTCODE(Success) != rc)
+    if (LIBPATH_RC_OF(Success) != rc)
     {
         return handle_compare_result_<P>(rc, lhs, rhs, cwd, result);
     }

@@ -44,10 +44,10 @@
 #if 0
 #elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
                                                                             /* String form likely used in diagnostics, so use enumerator name (contraction) */
-# define LIBPATH_DEFINE_ParseOption_(en, value, shimString, helpString)     INIT_ERR_STR_DECL(libpath_ParseOption_##en, #shimString);
+# define LIBPATH_DEFINE_ParseOption_(en, value, shimString, helpString)     LOOKUP_STR_DECL_(libpath_ParseOption_##en, #shimString);
 # undef LIBPATH_DEFINING_STRING_VARIABLES
 #elif defined(LIBPATH_DEFINING_STRING_ARRAY)
-# define LIBPATH_DEFINE_ParseOption_(en, value, shimString, helpString)     INIT_ERR_STR_ENTRY(libpath_ParseOption_##en),
+# define LIBPATH_DEFINE_ParseOption_(en, value, shimString, helpString)     LOOKUP_STR_ARRAY_ENTRY_(libpath_ParseOption_##en),
 # undef LIBPATH_DEFINING_STRING_ARRAY
 #else
 # define LIBPATH_DEFINE_ParseOption_(en, value, shimString, helpString)     libpath_ParseOption_##en value /*!< helpString */,

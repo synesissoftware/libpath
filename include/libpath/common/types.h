@@ -85,6 +85,97 @@
 #endif /* __cplusplus */
 
 
+/* /////////////////////////////////////////////////////////////////////////
+ * API functions
+ */
+
+LIBPATH_CALL(libpath_char_t const*)
+libpath_rc_getStringPtr(
+    LIBPATH_RC  rc
+);
+
+LIBPATH_CALL(libpath_size_t)
+libpath_rc_getStringLen(
+    LIBPATH_RC  rc
+);
+
+
+LIBPATH_CALL(libpath_char_t const*)
+libpath_rcx_getStringPtr(
+    LIBPATH_RCX rcx
+);
+
+LIBPATH_CALL(libpath_size_t)
+libpath_rcx_getStringLen(
+    LIBPATH_RCX rcx
+);
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * string access shims
+ */
+
+#if 0
+#elif defined(__cplusplus) && \
+      !defined(STLSOFT_NO_NAMESPACE)
+namespace stlsoft {
+
+
+inline
+libpath_char_t const*
+#if 0
+#elif defined(LIBPATH_USE_WIDE_STRINGS)
+c_str_data_w(
+    LIBPATH_RC const&   rc
+)
+#else
+c_str_data_a(
+    LIBPATH_RC const&   rc
+)
+#endif
+{
+    return libpath_rc_getStringPtr(rc);
+}
+
+inline
+libpath_size_t
+#if 0
+#elif defined(LIBPATH_USE_WIDE_STRINGS)
+c_str_len_w(
+    LIBPATH_RC const&   rc
+)
+#else
+c_str_len_a(
+    LIBPATH_RC const&   rc
+)
+#endif
+{
+    return libpath_rc_getStringLen(rc);
+}
+
+inline
+libpath_char_t const*
+c_str_data(
+    LIBPATH_RC const&   rc
+)
+{
+    return libpath_rc_getStringPtr(rc);
+}
+
+inline
+libpath_size_t
+c_str_len(
+    LIBPATH_RC const&   rc
+)
+{
+    return libpath_rc_getStringLen(rc);
+}
+
+
+} /* namespace stlsoft */
+#endif /* C++ && !STLSOFT_NO_NAMESPACE */
+
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */

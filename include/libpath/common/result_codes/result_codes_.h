@@ -49,31 +49,58 @@
  * macros
  */
 
-/** @def LIBPATH_RESULTCODE(detail)
+/** @def LIBPATH_RC_OF(detail)
  *
- * Generates the full name of a libpath ResultCode
+ * Generates the full name of a libpath ResultCode (@c rc)
  *
  * @param detail The detail part of the result code
  *
  * @see libpath_rc_t
  */
-#define LIBPATH_RESULTCODE(detail)                          libpath_ResultCode_##detail
+#define LIBPATH_RC_OF(detail)                               libpath_ResultCode_##detail
 
-/** @def LIBPATH_SUCCESS(rc)
+/** @def LIBPATH_RC_SUCCESS(rc)
  *
- * Evaluates to truey if \c rc represents a success code
+ * Evaluates to truey if @c rc represents a success code
  *
  * @param rc The return code to evaluated
  */
-#define LIBPATH_SUCCESS(rc)                                 (LIBPATH_RESULTCODE(Success) == (rc))
+#define LIBPATH_RC_SUCCESS(rc)                              (LIBPATH_RC_OF(Success) == (rc))
 
-/** @def LIBPATH_FAILURE(rc)
+/** @def LIBPATH_RC_FAILURE(rc)
  *
- * Evaluates to falsey if \c rc represents a failure code
+ * Evaluates to falsey if @c rc represents a failure code
  *
  * @param rc The return code to evaluated
  */
-#define LIBPATH_FAILURE(rc)                                 (LIBPATH_RESULTCODE(Success) != (rc))
+#define LIBPATH_RC_FAILURE(rc)                              (LIBPATH_RC_OF(Success) != (rc))
+
+
+/** @def LIBPATH_RCX_OF(detail)
+ *
+ * Generates the full name of a libpath ResultCode (@c rc)
+ *
+ * @param detail The detail part of the result code
+ *
+ * @see libpath_rc_t
+ */
+#define LIBPATH_RCX_OF(detail)                              libpath_ResultCodeX_##detail
+
+/** @def LIBPATH_RC_SUCCESS(rc)
+ *
+ * Evaluates to truey if @c rc represents a success code
+ *
+ * @param rc The return code to evaluated
+ */
+#define LIBPATH_RCX_SUCCESS(rc)                             (LIBPATH_RCX_OF(Success) == (rc))
+
+/** @def LIBPATH_RC_FAILURE(rc)
+ *
+ * Evaluates to falsey if @c rc represents a failure code
+ *
+ * @param rc The return code to evaluated
+ */
+#define LIBPATH_RCX_FAILURE(rc)                             (LIBPATH_RCX_OF(Success) != (rc))
 
 
 /* /////////////////////////////////////////////////////////////////////////
