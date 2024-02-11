@@ -21,8 +21,8 @@
 
 /* xTests header files */
 #include <xtests/xtests.h>
-#if _XTESTS_VER < 0x001101ff
-# error This code requires xTests 0.17.1, or later
+#if _XTESTS_VER < 0x00150000
+# error This code requires xTests 0.21.0, or later
 #endif
 
 /* STLSoft header files */
