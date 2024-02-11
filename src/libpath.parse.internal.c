@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 15th February 2013
+ * Updated: 11th February 2024
  */
 
 #include "libpath.parse.internal.h"
@@ -12,83 +12,93 @@
 
 #include <ctype.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * Internal functions
+ * internal functions
  */
 
 libpath_truthy_t
-libpath_Internal_path_char_is_bad(
+libpath_Internal_path_character_is_bad(
     libpath_char_t                  ch
 ,   libpath_StringSlice_t const*    path
-,   size_t                          offset
+,   libpath_size_t                  offset
 ,   int                             flags
 )
 {
     LIBPATH_SUPPRESS_UNUSED(flags);
 
-    switch(ch)
-    {
-#ifdef _WIN32
-        case    ':':
-            if( 1u == offset &&
-                isalpha(path->ptr[0]))
-            {
-                return LIBPATH_V_FALSEY;
-            }
-            else
-            {
-                return LIBPATH_V_TRUEY;
-            }
+#ifndef LIBPATH_OS_IS_WINDOWS
+    ((void)&path);
+    ((void)&offset);
 #endif
 
-        case    '|':
-        case    '<':
-        case    '>':
-        case    '?':
-        case    '*':
-#ifdef _WIN32
-        case    ';':
-#else
-        case    ':':
-#endif
-            return LIBPATH_V_TRUEY;
-        default:
+    switch (ch)
+    {
+#ifdef LIBPATH_OS_IS_WINDOWS
+    case    ':':
+
+        if (1u == offset &&
+            isalpha(path->ptr[0]))
+        {
             return LIBPATH_V_FALSEY;
+        }
+        else
+        {
+            return LIBPATH_V_TRUEY;
+        }
+#endif
+
+    case    '|':
+    case    '<':
+    case    '>':
+    case    '?':
+    case    '*':
+#ifdef LIBPATH_OS_IS_WINDOWS
+    case    ';':
+#endif
+#ifdef LIBPATH_OS_IS_UNIX
+    case    ':':
+#endif
+
+        return LIBPATH_V_TRUEY;
+    default:
+
+        return LIBPATH_V_FALSEY;
     }
 }
 
-size_t
+libpath_size_t
 libpath_Internal_count_trailing_dots_directory(
     libpath_StringSlice_t const* path
 )
 {
-    if(0 == path->len)
+    if (0 == path->len)
     {
         return 0;
     }
     else
     {
-        if('.' != path->ptr[path->len - 1])
+        if ('.' != path->ptr[path->len - 1])
         {
             return 0;
         }
         else
         {
-            if( 1 == path->len ||
-                libpath_Internal_character_is_pnsep(path->ptr[path->len - 2]))
+            if (1 == path->len ||
+                libpath_Internal_character_is_pathname_separator(path->ptr[path->len - 2]))
             {
                 return 1;
             }
             else
             {
-                if('.' != path->ptr[path->len - 2])
+                if ('.' != path->ptr[path->len - 2])
                 {
                     return 0;
                 }
                 else
                 {
-                    if( 2 == path->len ||
-                        libpath_Internal_character_is_pnsep(path->ptr[path->len - 3]))
+                    if (2 == path->len ||
+                        libpath_Internal_character_is_pathname_separator(path->ptr[path->len - 3]))
                     {
                         return 2;
                     }
@@ -103,35 +113,37 @@ libpath_Internal_count_trailing_dots_directory(
 }
 
 libpath_truthy_t
-libpath_Internal_character_is_pnsep(
+libpath_Internal_character_is_pathname_separator(
     libpath_char_t ch
 )
 {
-    switch(ch)
+    switch (ch)
     {
-        case    '/':
+    case    '/':
 #ifdef LIBPATH_OS_IS_WINDOWS
-        case    '\\':
+    case    '\\':
 #endif /* LIBPATH_OS_IS_WINDOWS */
-            return LIBPATH_V_TRUEY;
-        default:
-            return LIBPATH_V_FALSEY;
+
+        return LIBPATH_V_TRUEY;
+    default:
+
+        return LIBPATH_V_FALSEY;
     }
 }
 
 
 //
 //
-// \retval LIBPATH_V_TRUEY the path is absolute
-// \retval LIBPATH_V_FALSEY the path is not absolute
+// @retval LIBPATH_V_TRUEY the path is absolute
+// @retval LIBPATH_V_FALSEY the path is not absolute
 //
-// \note On Windows, it is possible to have a path containing a volume
+// @note On Windows, it is possible to have a path containing a volume
 //   that is not absolute, e.g. 'C:abc', in which case the rootLen will
 //   be determined as 2 even though the return value will be LIBPATH_V_FALSEY
 libpath_truthy_t
 libpath_Internal_path_is_absolute(
     libpath_StringSlice_t const*    path
-,   size_t*                         rootLen
+,   libpath_size_t*                 rootLen
 ,   libpath_truthy_t*               invalidRoot
 )
 {
@@ -140,14 +152,14 @@ libpath_Internal_path_is_absolute(
     LIBPATH_ASSERT(NULL != invalidRoot);
     LIBPATH_ASSERT(0 == path->len || NULL != path->ptr);
 
-    if(NULL != rootLen)
+    if (NULL != rootLen)
     {
         *rootLen = 0;
     }
 
     *invalidRoot = LIBPATH_V_FALSEY;
 
-    if(0 == path->len)
+    if (0 == path->len)
     {
         return LIBPATH_V_FALSEY;
     }
@@ -172,109 +184,116 @@ libpath_Internal_path_is_absolute(
     // In addition, it is possible for a path to have a volume and yet
     // still be relative, e.g. "H:file.ext"
 
-    switch(path->ptr[0])
+    switch (path->ptr[0])
     {
-        case    '\0':
-            // #7
-            return LIBPATH_V_FALSEY;
-        case    '/':
-            // #4
+    case    '\0':
+        // #7
 
-            if(NULL != rootLen)
+        return LIBPATH_V_FALSEY;
+    case    '/':
+        // #4
+
+        if (NULL != rootLen)
+        {
+            *rootLen = 1;
+        }
+
+        return LIBPATH_V_TRUEY;
+    case    '\\':
+        // #2 or #3
+
+        if (path->len > 1 &&
+            '\\' == path->ptr[1])
+        {
+            // #2
+
+            if (NULL != rootLen)
+            {
+                libpath_StringSlice_t const root = libpath_Internal_find_UNC_root_slice(path);
+
+                if (NULL != rootLen)
+                {
+                    *rootLen = root.len;
+                }
+
+                if (0 == root.len)
+                {
+                    *invalidRoot = LIBPATH_V_TRUEY;
+
+                    return LIBPATH_V_FALSEY;
+                }
+            }
+
+            return LIBPATH_V_TRUEY;
+        }
+        else
+        {
+            // #3
+
+            if (NULL != rootLen)
             {
                 *rootLen = 1;
             }
 
             return LIBPATH_V_TRUEY;
-        case    '\\':
-            // #2 or #3
-            if( path->len > 1 &&
-                '\\' == path->ptr[1])
+        }
+
+        // fall-through
+    case    '?':
+    case    '*':
+    case    '|':
+    case    '<':
+    case    '>':
+        // #6
+
+        return LIBPATH_V_FALSEY;
+    default:
+        // #1 / #5
+
+        if (isalpha(path->ptr[0]))
+        {
+            if (path->len > 1 &&
+                ':' == path->ptr[1])
             {
-                // #2
-
-                if(NULL != rootLen)
+                if (path->len > 2 &&
+                    libpath_Internal_character_is_pathname_separator(path->ptr[2]))
                 {
-                    libpath_StringSlice_t const root = libpath_Internal_find_UNC_root_slice(path);
+                    // #1
 
-                    if(NULL != rootLen)
+                    if (NULL != rootLen)
                     {
-                        *rootLen = root.len;
+                        *rootLen = 3;
                     }
 
-                    if(0 == root.len)
+                    return LIBPATH_V_TRUEY;
+                }
+                else
+                {
+                    if (NULL != rootLen)
                     {
-                        *invalidRoot = LIBPATH_V_TRUEY;
-
-                        return LIBPATH_V_FALSEY;
+                        *rootLen = 2;
                     }
                 }
-
-                return LIBPATH_V_TRUEY;
             }
-            else
-            {
-                // #3
 
-                if(NULL != rootLen)
-                {
-                    *rootLen = 1;
-                }
-
-                return LIBPATH_V_TRUEY;
-            }
-        case    '?':
-        case    '*':
-        case    '|':
-        case    '<':
-        case    '>':
-            // #6
+            // #5
             return LIBPATH_V_FALSEY;
-        default:
-            // #1 / #5
-            if(isalpha(path->ptr[0]))
-            {
-                if( path->len > 1 &&
-                    ':' == path->ptr[1])
-                {
-                    if( path->len > 2 &&
-                        libpath_Internal_character_is_pnsep(path->ptr[2]))
-                    {
-                        // #1
-
-                        if(NULL != rootLen)
-                        {
-                            *rootLen = 3;
-                        }
-
-                        return LIBPATH_V_TRUEY;
-                    }
-                    else
-                    {
-                        if(NULL != rootLen)
-                        {
-                            *rootLen = 2;
-                        }
-                    }
-                }
-
-                // #5
-                return LIBPATH_V_FALSEY;
-            }
-            else
-            {
-                // #8
-                return LIBPATH_V_FALSEY;
-            }
+        }
+        else
+        {
+            // #8
+            return LIBPATH_V_FALSEY;
+        }
     }
 #else
-    // UNIX options are:
+
+    // Unix options are:
     //
     // 1. first character is a slash
 
-    if('/' == path->ptr[0])
+    if ('/' == path->ptr[0])
     {
-        if(NULL != rootLen)
+        if (NULL != rootLen)
         {
             *rootLen = 1;
         }
@@ -288,14 +307,14 @@ libpath_Internal_path_is_absolute(
 
 libpath_truthy_t
 libpath_Internal_find_next_directory_part(
-    size_t*                         i
+    libpath_size_t*                 i
 ,   libpath_StringSlice_t const*    directoryPart
 ,   int                             flags
 ,   libpath_StringSlice_t*          part
 ,   libpath_truthy_t*               isDots
 )
 {
-    size_t numConsecutiveDots = 0;
+    libpath_size_t numConsecutiveDots = 0;
 
     LIBPATH_ASSERT(NULL != directoryPart);
     LIBPATH_ASSERT(NULL != part);
@@ -308,13 +327,13 @@ libpath_Internal_find_next_directory_part(
 
     for(; *i < directoryPart->len; ++*i)
     {
-        if( libpath_Internal_character_is_pnsep(directoryPart->ptr[*i]) &&
+        if (libpath_Internal_character_is_pathname_separator(directoryPart->ptr[*i]) &&
             (   (*i + 1) == directoryPart->len ||
-                !libpath_Internal_character_is_pnsep(directoryPart->ptr[*i + 1])))
+                !libpath_Internal_character_is_pathname_separator(directoryPart->ptr[*i + 1])))
         {
             part->len = (directoryPart->ptr + ++*i) - part->ptr;
 
-            if(0 != numConsecutiveDots)
+            if (0 != numConsecutiveDots)
             {
                 *isDots = LIBPATH_V_TRUEY;
             }
@@ -322,7 +341,7 @@ libpath_Internal_find_next_directory_part(
             return LIBPATH_V_TRUEY;
         }
         else
-        if('.' == directoryPart->ptr[*i])
+        if ('.' == directoryPart->ptr[*i])
         {
             ++numConsecutiveDots;
         }
@@ -332,19 +351,24 @@ libpath_Internal_find_next_directory_part(
         }
     }
 
-    switch(numConsecutiveDots)
+    switch (numConsecutiveDots)
     {
-        case    1:
-        case    2:
-            part->len = numConsecutiveDots;
-            *isDots = LIBPATH_V_TRUEY;
-            ++*i;
-            return LIBPATH_V_TRUEY;
+    case    1:
+    case    2:
+
+        part->len = numConsecutiveDots;
+        *isDots = LIBPATH_V_TRUEY;
+        ++*i;
+
+        return LIBPATH_V_TRUEY;
+    default:
+
+        break;
     }
 
     // Handling 'assume directory'
-    if( directoryPart->len == *i &&
-        !libpath_Internal_character_is_pnsep(directoryPart->ptr[*i - 1]) &&
+    if (directoryPart->len == *i &&
+        !libpath_Internal_character_is_pathname_separator(directoryPart->ptr[*i - 1]) &&
         libpath_ParseOption_AssumeDirectory == (libpath_ParseOption_AssumeDirectory & flags))
     {
         part->len = (directoryPart->ptr + (*i)++) - part->ptr;
@@ -372,7 +396,7 @@ libpath_Internal_find_UNC_root_slice(
         invalid
     };
 
-    size_t i = 0;
+    libpath_size_t i = 0;
 
     int state = slash2;
 
@@ -385,42 +409,47 @@ libpath_Internal_find_UNC_root_slice(
 
     for(; i != path->len; ++i)
     {
-        if(invalid == state)
+        if (invalid == state)
         {
             continue;
         }
 
-        switch(path->ptr[i])
+        switch (path->ptr[i])
         {
-            case    '/':
-                if(state == share)
+        case    '/':
+
+            if (state == share)
+            {
+        case    '\\':
+
+                switch (state)
                 {
-            case    '\\':
-                switch(state)
-                {
-                    case    slash2:     state = invalid;    break;
-                    case    host:       state = hostSlash;  break;
-                    case    hostSlash:  state = invalid;    break;
-                    case    share:      return libpath_Util_SliceFromStringPtrAndLen(path->ptr, ++i);
-                    default:
-                        LIBPATH_ASSERT(!"unexpected");
-                    case    invalid:    state = invalid;    break;
+                case    slash2:     state = invalid;    break;
+                case    host:       state = hostSlash;  break;
+                case    hostSlash:  state = invalid;    break;
+                case    share:      return libpath_Util_SliceFromStringPtrAndLen(path->ptr, ++i);
+                default:
+
+                    LIBPATH_ASSERT(!"unexpected");
+                case    invalid:    state = invalid;    break;
                 }
-                break;
-                }
-                else // '/' fall through
+            break;
+            }
+            else // '/' fall through
+        default:
+
+            switch (state)
+            {
+            case    slash2:     state = host;       break;
+            case    host:                           break;
+            case    hostSlash:  state = share;      break;
+            case    share:                          break;
             default:
-                switch(state)
-                {
-                    case    slash2:     state = host;       break;
-                    case    host:                           break;
-                    case    hostSlash:  state = share;      break;
-                    case    share:                          break;
-                    default:
-                        LIBPATH_ASSERT(!"unexpected");
-                    case    invalid:    state = invalid;    break;
-                }
-                break;
+
+                LIBPATH_ASSERT(!"unexpected");
+            case    invalid:    state = invalid;    break;
+            }
+            break;
         }
 
     }
@@ -429,4 +458,6 @@ libpath_Internal_find_UNC_root_slice(
 }
 #endif
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

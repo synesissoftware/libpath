@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath/common/internal/defs.h
+ * File:    libpath/equate.hpp
  *
- * Purpose:     Operating-system discrimination for libpath library.
+ * Purpose: C++ include for libpath Equating API.
  *
- * Created:     2nd February 2013
- * Updated:     20th November 2016
+ * Created: 11th February 2024
+ * Updated: 11th February 2024
  *
- * Home:        http://synesis.com.au/software/
+ * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2013-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +20,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -39,28 +39,52 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_types
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_types not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */
 
-/* /////////////////////////////////////////////////////////////////////////
- * feature discrimination
- */
+#ifndef SYNSOFT_LIBPATH_INCL_libpath_HPP_equate
+#define SYNSOFT_LIBPATH_INCL_libpath_HPP_equate
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * internal API functions
+ * includes
+ */
+
+#include <libpath/equate.h>
+#include <libpath/common/types.hpp>
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
+namespace equating {
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * types
  */
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * macros
+ * API functions
  */
 
-/** \def LIBPATH_NOTHING
- *
- * An object-like macro that resolves to nothing
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
  */
-#define LIBPATH_NOTHING
+
+} /* namespace equating */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#endif /* !SYNSOFT_LIBPATH_INCL_libpath_HPP_equate */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
 
 /* ///////////////////////////// end of file //////////////////////////// */
+

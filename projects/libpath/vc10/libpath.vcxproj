@@ -671,19 +671,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\libpath\common\basic_types.h" />
-    <ClInclude Include="..\..\..\include\libpath\common\internal\defs.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\internal\namespace_.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\internal\nothing_.h" />
     <ClInclude Include="..\..\..\include\libpath\common\macros.h" />
-    <ClInclude Include="..\..\..\include\libpath\common\namespace.h" />
     <ClInclude Include="..\..\..\include\libpath\common\portability\operating_system.h" />
     <ClInclude Include="..\..\..\include\libpath\common\result_codes\enumerations\rc.h" />
     <ClInclude Include="..\..\..\include\libpath\common\result_codes\enumerations\rcx.h" />
-    <ClInclude Include="..\..\..\include\libpath\common\result_codes\result_codes.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\result_codes\result_codes_.h" />
     <ClInclude Include="..\..\..\include\libpath\common\shims\access\string\StringSlice.hpp" />
     <ClInclude Include="..\..\..\include\libpath\common\types.h" />
     <ClInclude Include="..\..\..\include\libpath\common\types.hpp" />
-    <ClInclude Include="..\..\..\include\libpath\common\types\fundamental.h" />
-    <ClInclude Include="..\..\..\include\libpath\common\types\slices.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\types\fundamental_.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\types\slices_.h" />
+    <ClInclude Include="..\..\..\include\libpath\common\types\truthy_.h" />
     <ClInclude Include="..\..\..\include\libpath\common\version.h" />
     <ClInclude Include="..\..\..\include\libpath\compare.h" />
     <ClInclude Include="..\..\..\include\libpath\compare.hpp" />

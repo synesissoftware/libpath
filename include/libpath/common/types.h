@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath/common/types.h
+ * File:    libpath/common/types.h
  *
- * Purpose:     Main include for common types defined for libpath library.
+ * Purpose: Common types defined for libpath library.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
+ * Created: 9th November 2012
+ * Updated: 11th February 2024
  *
- * Home:        http://synesis.com.au/software/
+ * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2012-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +21,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -42,32 +43,37 @@
 #ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_types
 #define SYNSOFT_LIBPATH_INCL_libpath_common_H_types
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes - 1
  */
 
-#include <libpath/common/internal/defs.h>
-#include <libpath/common/basic_types.h>
+#include <libpath/common/portability.h>
+#include <libpath/common/internal.h>
 #include <libpath/common/macros.h>
-#include <libpath/common/namespace.h>
-#include <libpath/common/portability/operating_system.h>
-#include <libpath/common/types/fundamental.h>
-#include <libpath/common/types/slices.h>
-#include <libpath/common/result_codes/result_codes.h>
+
+#define SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+#include <libpath/common/types/fundamental_.h>
+#include <libpath/common/types/slices_.h>
+#include <libpath/common/types/truthy_.h>
+#include <libpath/common/result_codes/result_codes_.h>
+#undef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
 
-/** \def LIBPATH_API
+/** @def LIBPATH_API
  *
  * An object-like macro that equates
  * to <code>LIBPATH_CALL(LIBPATH_RC)</code>
  *
- * \see LIBPATH_CALL()
- * \see LIBPATH_RC
+ * @see LIBPATH_CALL()
+ * @see LIBPATH_RC
  */
 #define LIBPATH_API                                         LIBPATH_CALL(LIBPATH_RC)
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes - 2
@@ -78,8 +84,105 @@
 # include <libpath/common/shims/access/string/StringSlice.hpp>
 #endif /* __cplusplus */
 
+
+/* /////////////////////////////////////////////////////////////////////////
+ * API functions
+ */
+
+LIBPATH_CALL(libpath_char_t const*)
+libpath_rc_getStringPtr(
+    LIBPATH_RC  rc
+);
+
+LIBPATH_CALL(libpath_size_t)
+libpath_rc_getStringLen(
+    LIBPATH_RC  rc
+);
+
+
+LIBPATH_CALL(libpath_char_t const*)
+libpath_rcx_getStringPtr(
+    LIBPATH_RCX rcx
+);
+
+LIBPATH_CALL(libpath_size_t)
+libpath_rcx_getStringLen(
+    LIBPATH_RCX rcx
+);
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * string access shims
+ */
+
+#if 0
+#elif defined(__cplusplus) && \
+      !defined(STLSOFT_NO_NAMESPACE)
+namespace stlsoft {
+
+
+inline
+libpath_char_t const*
+#if 0
+#elif defined(LIBPATH_USE_WIDE_STRINGS)
+c_str_data_w(
+    LIBPATH_RC const&   rc
+)
+#else
+c_str_data_a(
+    LIBPATH_RC const&   rc
+)
+#endif
+{
+    return libpath_rc_getStringPtr(rc);
+}
+
+inline
+libpath_size_t
+#if 0
+#elif defined(LIBPATH_USE_WIDE_STRINGS)
+c_str_len_w(
+    LIBPATH_RC const&   rc
+)
+#else
+c_str_len_a(
+    LIBPATH_RC const&   rc
+)
+#endif
+{
+    return libpath_rc_getStringLen(rc);
+}
+
+inline
+libpath_char_t const*
+c_str_data(
+    LIBPATH_RC const&   rc
+)
+{
+    return libpath_rc_getStringPtr(rc);
+}
+
+inline
+libpath_size_t
+c_str_len(
+    LIBPATH_RC const&   rc
+)
+{
+    return libpath_rc_getStringLen(rc);
+}
+
+
+} /* namespace stlsoft */
+#endif /* C++ && !STLSOFT_NO_NAMESPACE */
+
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */
 
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

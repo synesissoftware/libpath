@@ -1,19 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.unit.equal.1.cpp
+ * File:    test.unit.equal.1.cpp
  *
- * Purpose:     Implementation file for the test.unit.equal.1 project.
+ * Purpose: Implementation file for the test.unit.equal.1 project.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2012-2016, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Created: 9th November 2012
+ * Updated: 7th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -23,6 +14,8 @@
  */
 
 #include <libpath/equate.h>
+
+#include <libpath/common/types.hpp>
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -42,6 +35,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -153,6 +147,7 @@ namespace
 
 } // anonymous namespace
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
  */
@@ -164,7 +159,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER("test.unit.equal.1", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.equal.1", verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -308,16 +303,20 @@ namespace
         ,   &result
         );
 
-        switch(rc)
+        switch (rc)
         {
-            case    LIBPATH_RESULTCODE(FirstPathInvalid):
-            case    LIBPATH_RESULTCODE(SecondPathInvalid):
-            case    LIBPATH_RESULTCODE(WorkingDirectoryPathInvalid):
-                break;
+        case    LIBPATH_RC_OF(FirstPathInvalid):
+        case    LIBPATH_RC_OF(SecondPathInvalid):
+        case    LIBPATH_RC_OF(WorkingDirectoryPathInvalid):
+
+            break;
+        default:
+
+            break;
         }
 
 
-        return (LIBPATH_RESULTCODE(Success) == rc) && (result);
+        return (LIBPATH_RC_OF(Success) == rc) && (result);
     }
 
 
@@ -928,4 +927,6 @@ static void test_1_99(void)
 
 } // anonymous namespace
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

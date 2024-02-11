@@ -1,61 +1,74 @@
 
 # directories (by name)
 
-include/b64/
-include/shwild/
-include/xcontract/
-include/xcover/
-include/xtests/
+/.vs/
 
-src/b64/
-src/shwild/
-src/xcontract/
-src/xcover/
-src/xtests/
+/_build/
+/_internal/
+
+/include/b64/
+/include/shwild/
+/include/xcontract/
+/include/xcover/
+/include/xtests/
+
+/src/b64/
+/src/shwild/
+/src/xcontract/
+/src/xcover/
+/src/xtests/
+
+/bin/
+/doc/
+/ideas/
+/lib/
+
+Debug Multithreaded DLL/
+Debug Multithreaded/
+Debug/
+DebugDll/
+Release Multithreaded DLL/
+Release Multithreaded/
+Release/
+ReleaseDll/
+Unicode Debug Multithreaded DLL/
+Unicode Debug Multithreaded/
+Unicode Debug/
+Unicode Release Multithreaded DLL/
+Unicode Release Multithreaded/
+Unicode Release/
 
 vc71/
 vc8/
 vc9/
 
-bin/
+Win32/
+ipch/
+x64/
 
-lib/
-
-ideas/
-
-bin/
-
-lib/
-
-ideas/
-
-Debug/
-DebugDll/
-Debug Multithreaded/
-Debug Multithreaded DLL/
-Unicode Debug/
-Unicode Debug Multithreaded/
-Unicode Debug Multithreaded DLL/
-Release/
-ReleaseDll/
-Release Multithreaded/
-Release Multithreaded DLL/
-Unicode Release/
-Unicode Release Multithreaded/
-Unicode Release Multithreaded DLL/
-
-Win32
-x64
 
 # directories (by pattern)
 
+
 # files (by name)
 
+.DS_Store
+.ruby-version
+.update_deps
+
 list_changes.cmd
+prepare.cmd
+tidydir.cmd
+update_deps.cmd
+
+build/makefile.tmpl
+build/makefile.tools.xml
 
 include/fastformat/internal/dos2unix.has.been.performed
+include/pantheios/internal/dos2unix.has.been.performed
 
 test/tests-plan.txt
+
 
 # files (by pattern)
 
@@ -67,7 +80,9 @@ test/tests-plan.txt
 *.exe
 *.gch
 *.ilk
+*.ipch
 *.lib
+*.log
 *.ncb
 *.o
 *.obj
@@ -77,9 +92,9 @@ test/tests-plan.txt
 *.out
 *.pch
 *.pdb
-*.sdf
 *.sbr
 *.scc
+*.sdf
 *.so
 *.suo
 *.swp

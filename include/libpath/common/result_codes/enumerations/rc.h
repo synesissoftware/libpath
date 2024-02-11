@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath/common/result_codes/enumerations/rc.h
+ * File:    libpath/common/result_codes/enumerations/rc.h
  *
- * Purpose:     Result codes defined for libpath library.
+ * Purpose: Result codes defined for libpath library.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
+ * Created: 9th November 2012
+ * Updated: 10th February 2024
  *
- * Home:        http://synesis.com.au/software/
+ * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2012-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +21,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -39,14 +40,14 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#if defined(LIBPATH_DEFINING_STRING_VARIABLES)
-                                                                                /* String form likely used in diagnostics, so use help string */
-# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          INIT_ERR_STR_DECL(libpath_ResultCode_##en, #helpString);
+#if 0
+#elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
+# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          LOOKUP_STR_DECL_(libpath_ResultCode_##en, #helpString);
 # undef LIBPATH_DEFINING_STRING_VARIABLES
 
 #elif defined(LIBPATH_DEFINING_STRING_ARRAY)
 
-# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          INIT_ERR_STR_ENTRY(libpath_ResultCode_##en),
+# define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          LOOKUP_STR_ARRAY_ENTRY_(libpath_ResultCode_##en),
 # undef LIBPATH_DEFINING_STRING_ARRAY
 
 #else
@@ -62,7 +63,9 @@ LIBPATH_DEFINE_ResultCode_(HardLink, LIBPATH_NOTHING, HardLink, Make destination
 LIBPATH_DEFINE_ResultCode_(HardLinkOrFallbackCopy, LIBPATH_NOTHING, HardLinkOrFallbackCopy, Make destination a hard-link to the source or attempt copy if link fails)
 #endif
 
+#if !defined(LIBPATH_DEFINING_STRING_VARIABLES) && !defined(LIBPATH_DEFINING_STRING_ARRAY)
 LIBPATH_DEFINE_ResultCode_(INVALID, =-1000000, INVALID, INVALID)
+#endif
 
 LIBPATH_DEFINE_ResultCode_(UnsupportedOperation, LIBPATH_NOTHING, UnsupportedOperation, operation is not supported)
 LIBPATH_DEFINE_ResultCode_(UnexpectedCondition, LIBPATH_NOTHING, UnexpectedCondition, unexpected condition)
@@ -102,8 +105,10 @@ LIBPATH_DEFINE_ResultCode_(CouldNotReadSourceFile, LIBPATH_NOTHING, CouldNotRead
 LIBPATH_DEFINE_ResultCode_(CouldNotWriteDestinationFile, LIBPATH_NOTHING, CouldNotWriteDestinationFile, could not write to destination file)
 #endif
 
-LIBPATH_DEFINE_ResultCode_(Success, =0, Success, LIBPATH_NOTHING)
+LIBPATH_DEFINE_ResultCode_(Success, =0, Success, operation completed successfully)
 
 #undef LIBPATH_DEFINE_ResultCode_
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

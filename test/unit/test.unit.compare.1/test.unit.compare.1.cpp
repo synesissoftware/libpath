@@ -1,19 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.unit.compare.1.cpp
+ * File:    test.unit.compare.1.cpp
  *
- * Purpose:     Implementation file for the test.unit.compare.1 project.
+ * Purpose: Implementation file for the test.unit.compare.1 project.
  *
- * Created:     17th February 2013
- * Updated:     20th November 2016
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2013-2016, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Created: 17th February 2013
+ * Updated: 7th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -42,6 +33,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -153,6 +145,7 @@ namespace
 
 } // anonymous namespace
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
  */
@@ -164,7 +157,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER("test.unit.compare.1", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.compare.1", verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -309,15 +302,19 @@ namespace
         ,   &result
         );
 
-        switch(rc)
+        switch (rc)
         {
-            case    LIBPATH_RESULTCODE(FirstPathInvalid):
-            case    LIBPATH_RESULTCODE(SecondPathInvalid):
-            case    LIBPATH_RESULTCODE(WorkingDirectoryPathInvalid):
-                break;
+        case    LIBPATH_RC_OF(FirstPathInvalid):
+        case    LIBPATH_RC_OF(SecondPathInvalid):
+        case    LIBPATH_RC_OF(WorkingDirectoryPathInvalid):
+
+            break;
+        default:
+
+            break;
         }
 
-        if(LIBPATH_FAILURE(rc))
+        if (LIBPATH_RC_FAILURE(rc))
         {
             return INT_MIN;
         }
@@ -600,10 +597,10 @@ static void test_1_11(void)
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/"));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/"));
 
-#ifdef _DEBUG
-#else /* ? _DEBUG */
+#ifdef NDEBUG
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/"));
-#endif /* _DEBUG */
+#else /* ? NDEBUG */
+#endif /* NDEBUG */
 
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
 
@@ -1271,4 +1268,6 @@ static void test_1_99(void)
 
 } // anonymous namespace
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

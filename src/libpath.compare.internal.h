@@ -1,11 +1,12 @@
 
 /*
- * Created: 
- * Updated: 20th November 2016
+ * Created:
+ * Updated: 10th February 2024
  */
 
 #include <libpath/equate/types.h>
 #include <libpath/parse/types.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal API functions
@@ -34,4 +35,12 @@ libpath_Internal_compare_path_fragment(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

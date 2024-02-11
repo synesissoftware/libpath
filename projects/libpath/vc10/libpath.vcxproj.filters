@@ -137,13 +137,7 @@
     <ClInclude Include="..\..\..\include\libpath\common\version.h">
       <Filter>Header Files\include\libpath\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\basic_types.h">
-      <Filter>Header Files\include\libpath\common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\macros.h">
-      <Filter>Header Files\include\libpath\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\namespace.h">
       <Filter>Header Files\include\libpath\common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\types.h">
@@ -191,13 +185,16 @@
     <ClInclude Include="..\..\..\src\libpath.string.tchar.h">
       <Filter>Header Files\src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\internal\defs.h">
+    <ClInclude Include="..\..\..\include\libpath\common\internal\namespace_.h">
+      <Filter>Header Files\include\libpath\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libpath\common\internal\nothing_.h">
       <Filter>Header Files\include\libpath\common\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\portability\operating_system.h">
       <Filter>Header Files\include\libpath\common\portability</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\result_codes\result_codes.h">
+    <ClInclude Include="..\..\..\include\libpath\common\result_codes\result_codes_.h">
       <Filter>Header Files\include\libpath\common\result_codes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\result_codes\enumerations\rc.h">
@@ -206,11 +203,14 @@
     <ClInclude Include="..\..\..\include\libpath\common\result_codes\enumerations\rcx.h">
       <Filter>Header Files\include\libpath\common\result_codes\enumerations</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\types\fundamental.h">
+    <ClInclude Include="..\..\..\include\libpath\common\types\fundamental_.h">
       <Filter>Header Files\include\libpath\common\types</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\libpath\common\types\slices.h">
+    <ClInclude Include="..\..\..\include\libpath\common\types\slices_.h">
       <Filter>Header Files\include\libpath\common\types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\libpath\common\types\truthy_.h">
+      <Filter>Header Files\include\libpath\common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\libpath\common\shims\access\string\StringSlice.hpp">
       <Filter>Header Files\include\libpath\common\shims\access\string</Filter>

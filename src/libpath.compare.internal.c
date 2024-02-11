@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 24th February 2013
+ * Updated: 11th February 2024
  */
 
 #include "libpath.compare.internal.h"
@@ -13,8 +13,9 @@
 #include <ctype.h>
 #include <string.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * Internal functions
+ * internal functions
  */
 
 
@@ -33,18 +34,18 @@ libpath_Internal_compare_roots(
     LIBPATH_SUPPRESS_UNUSED(flags);
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    if( 1 == lhs->len &&
+    if (1 == lhs->len &&
         1 == rhs->len)
 #endif
     {
-        LIBPATH_ASSERT(libpath_Internal_character_is_pnsep(0[lhs->ptr]));
-        LIBPATH_ASSERT(libpath_Internal_character_is_pnsep(0[rhs->ptr]));
+        LIBPATH_ASSERT(libpath_Internal_character_is_pathname_separator(0[lhs->ptr]));
+        LIBPATH_ASSERT(libpath_Internal_character_is_pathname_separator(0[rhs->ptr]));
 
         return 0;
     }
 #ifdef LIBPATH_OS_IS_WINDOWS
     else
-    if( 3 == lhs->len &&
+    if (3 == lhs->len &&
         3 == rhs->len)
     {
         char const  cl  =   (char)toupper(lhs->ptr[0]);
@@ -54,27 +55,27 @@ libpath_Internal_compare_roots(
         LIBPATH_ASSERT(isalpha(0[rhs->ptr]));
         LIBPATH_ASSERT(':' == 1[lhs->ptr]);
         LIBPATH_ASSERT(':' == 1[rhs->ptr]);
-        LIBPATH_ASSERT(libpath_Internal_character_is_pnsep(2[lhs->ptr]));
-        LIBPATH_ASSERT(libpath_Internal_character_is_pnsep(2[rhs->ptr]));
+        LIBPATH_ASSERT(libpath_Internal_character_is_pathname_separator(2[lhs->ptr]));
+        LIBPATH_ASSERT(libpath_Internal_character_is_pathname_separator(2[rhs->ptr]));
 
         return (int)(unsigned char)cl - (int)(unsigned char)cr;    /* C99: 7.21.4(1) */
     }
     else
-    if( 3 == lhs->len &&
+    if (3 == lhs->len &&
         3 < rhs->len)
     {
         return -1;
     }
     else
-    if( 3 < lhs->len &&
+    if (3 < lhs->len &&
         3 == rhs->len)
     {
         return +1;
     }
     else
     {
-        size_t  i;
-        int     r = 0;
+        libpath_size_t  i;
+        int             r = 0;
 
         LIBPATH_MESSAGE_ASSERT(lhs->len >= 5, "must be UNC server+share");
         LIBPATH_MESSAGE_ASSERT(rhs->len >= 5, "must be UNC server+share");
@@ -86,10 +87,10 @@ libpath_Internal_compare_roots(
 
             int const   cd  =   (int)(unsigned char)cl - (int)(unsigned char)cr;    /* C99: 7.21.4(1) */
 
-            if(0 != cd)
+            if (0 != cd)
             {
-                if( !libpath_Internal_character_is_pnsep(cl) ||
-                    !libpath_Internal_character_is_pnsep(cr))
+                if (!libpath_Internal_character_is_pathname_separator(cl) ||
+                    !libpath_Internal_character_is_pathname_separator(cr))
                 {
                     return cd;
                 }
@@ -98,11 +99,11 @@ libpath_Internal_compare_roots(
 
         LIBPATH_ASSERT((lhs->len == i) || (rhs->len == i));
 
-        if(lhs->len != i)
+        if (lhs->len != i)
         {
             return +1;
         }
-        if(rhs->len != i)
+        if (rhs->len != i)
         {
             return -1;
         }
@@ -119,20 +120,20 @@ libpath_Internal_compare_path_fragment(
 ,   int                             flags
 )
 {
-    int     r       =   0;
-    size_t  lhsLen  =   lhs->len;
-    size_t  rhsLen  =   rhs->len;
-    size_t  i;
+    int             r       =   0;
+    libpath_size_t  lhsLen  =   lhs->len;
+    libpath_size_t  rhsLen  =   rhs->len;
+    libpath_size_t  i;
 
     LIBPATH_SUPPRESS_UNUSED(flags);
 
-    if( 0 != lhsLen &&
-        libpath_Internal_character_is_pnsep(lhs->ptr[lhsLen - 1]))
+    if (0 != lhsLen &&
+        libpath_Internal_character_is_pathname_separator(lhs->ptr[lhsLen - 1]))
     {
         --lhsLen;
     }
-    if( 0 != rhsLen &&
-        libpath_Internal_character_is_pnsep(rhs->ptr[rhsLen - 1]))
+    if (0 != rhsLen &&
+        libpath_Internal_character_is_pathname_separator(rhs->ptr[rhsLen - 1]))
     {
         --rhsLen;
     }
@@ -148,10 +149,10 @@ libpath_Internal_compare_path_fragment(
 #endif
         int const   cd  =   (int)(unsigned char)cl - (int)(unsigned char)cr;    /* C99: 7.21.4(1) */
 
-        if(0 != cd)
+        if (0 != cd)
         {
-            if( !libpath_Internal_character_is_pnsep(cl) ||
-                !libpath_Internal_character_is_pnsep(cr))
+            if (!libpath_Internal_character_is_pathname_separator(cl) ||
+                !libpath_Internal_character_is_pathname_separator(cr))
             {
                 return cd;
             }
@@ -160,11 +161,11 @@ libpath_Internal_compare_path_fragment(
 
     LIBPATH_ASSERT((lhsLen == i) || (rhsLen == i));
 
-    if(lhsLen != i)
+    if (lhsLen != i)
     {
         return +1;
     }
-    if(rhsLen != i)
+    if (rhsLen != i)
     {
         return -1;
     }
@@ -172,4 +173,6 @@ libpath_Internal_compare_path_fragment(
     return 0;
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

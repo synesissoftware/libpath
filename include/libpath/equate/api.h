@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath/equate/api.h
+ * File:    libpath/equate/api.h
  *
- * Purpose:     Main include for libpath library's Equating API.
+ * Purpose: libpath Equating API.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
+ * Created: 9th November 2012
+ * Updated: 11th February 2024
  *
- * Home:        http://synesis.com.au/software/
+ * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2012-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +21,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -42,6 +43,7 @@
 #ifndef SYNSOFT_LIBPATH_INCL_libpath_equate_H_api
 #define SYNSOFT_LIBPATH_INCL_libpath_equate_H_api
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -50,6 +52,7 @@
 #include <libpath/common/macros.h>
 #include <libpath/common/version.h>
 #include <libpath/shared/types/WorkingDirectoryContext.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -71,9 +74,9 @@ libpath_Equate_EquatePathsAsStringSlices(
 LIBPATH_API
 libpath_Equate_EquatePathsAsStringPtrsAndLens(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = NULL */
 ,   void*                                       reserved /* = NULL */
@@ -82,9 +85,9 @@ libpath_Equate_EquatePathsAsStringPtrsAndLens(
 
 /*
  *
- * \pre NULL != lhs
- * \pre NULL != rhs
- * \pre NULL != result
+ * @pre NULL != lhs
+ * @pre NULL != rhs
+ * @pre NULL != result
  */
 LIBPATH_API
 libpath_Equate_EquatePathsAsCStyleStrings(
@@ -96,8 +99,28 @@ libpath_Equate_EquatePathsAsCStyleStrings(
 ,   libpath_truthy_t*                           result
 );
 
+
+/* /////////////////////////////////////////////////////////////////////////
+ * namespace
+ */
+
+#ifdef __cplusplus
+
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
+namespace equating {
+
+} /* namespace equating */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+#endif /* __cplusplus */
+
+
 /* ////////////////////////////////////////////////////////////////////// */
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_equate_H_api */
 
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

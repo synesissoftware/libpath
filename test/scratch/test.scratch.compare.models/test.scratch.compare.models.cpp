@@ -1,19 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.scratch.compare.models.cpp
+ * File:    test.scratch.compare.models.cpp
  *
- * Purpose:     Implementation file for the test.scratch.compare.models project.
+ * Purpose: Implementation file for the test.scratch.compare.models project.
  *
- * Created:     29th March 2013
- * Updated:     20th November 2016
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2013-2016, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Created: 29th March 2013
+ * Updated: 11th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -36,22 +27,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* /////////////////////////////////////////////////////////////////////////
- * globals
- */
-
-/* /////////////////////////////////////////////////////////////////////////
- * types
- */
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
  */
 
-static void test_return_0();
-static void test_return_minus1();
-static void test_throw();
-static void test_abend();
 
 /* /////////////////////////////////////////////////////////////////////////
  * main()
@@ -68,11 +48,11 @@ static int main_(int /* argc */, char** /*argv*/)
     {
         int r2 = ::libpath::comparing::compare_paths_and_<libpath::throw_on_invalid_path_policy>("/abc", "../def/abc");
     }
-    catch(std::bad_alloc&)
+    catch (std::bad_alloc&)
     {
         throw;
     }
-    catch(std::exception& x)
+    catch (std::exception& x)
     {
         fprintf(stdout, "exception (%s): %s\n", typeid(x).name(), x.what());
     }
@@ -81,11 +61,11 @@ static int main_(int /* argc */, char** /*argv*/)
     {
         int r3 = ::libpath::comparing::compare_paths_and_<libpath::throw_on_invalid_path_policy>("/abc", ".|./def/abc");
     }
-    catch(std::bad_alloc&)
+    catch (std::bad_alloc&)
     {
         throw;
     }
-    catch(std::exception& x)
+    catch (std::exception& x)
     {
         fprintf(stdout, "exception (%s): %s\n", typeid(x).name(), x.what());
     }
@@ -97,7 +77,7 @@ static int main_(int /* argc */, char** /*argv*/)
 int main(int argc, char** argv)
 {
 #if 0
-    { for(size_t i = 0; i < 0xffffffff; ++i){} }
+    { for(libpath_size_t i = 0; i < 0xffffffff; ++i){} }
 #endif /* 0 */
 
     try
@@ -108,16 +88,16 @@ int main(int argc, char** argv)
 
         return main_(argc, argv);
     }
-    catch(std::bad_alloc&)
+    catch (std::bad_alloc&)
     {
         fputs("out of memory\n", stderr);
     }
-    catch(std::exception& x)
+    catch (std::exception& x)
     {
         fprintf(stderr, "exception: %s\n", x.what());
     }
 #if 0
-    catch(...)
+    catch (...)
     {
     }
 #endif /* 0 */
@@ -125,4 +105,6 @@ int main(int argc, char** argv)
     return EXIT_FAILURE;
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

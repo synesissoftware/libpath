@@ -1,19 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.unit.parse.c.c
+ * File:    test.unit.parse.c.c
  *
- * Purpose:     Implementation file for the test.unit.parse.c project.
+ * Purpose: Implementation file for the test.unit.parse.c project.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2012-2016, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Created: 9th November 2012
+ * Updated: 11th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -30,8 +21,8 @@
 
 /* xTests header files */
 #include <xtests/xtests.h>
-#if _XTESTS_VER < 0x001101ff
-# error This code requires xTests 0.17.1, or later
+#if _XTESTS_VER < 0x00150000
+# error This code requires xTests 0.21.0, or later
 #endif
 
 /* STLSoft header files */
@@ -39,6 +30,7 @@
 
 /* Standard C header files */
 #include <stdlib.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -145,8 +137,9 @@
     static void test_1_98(void);
     static void test_1_99(void);
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * main
+ * main()
  */
 
 int main(int argc, char **argv)
@@ -156,7 +149,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER("test.unit.parse.c", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.parse.c", verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -267,14 +260,15 @@ int main(int argc, char **argv)
     return retCode;
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * test function implementations
  */
 
 #ifdef __cplusplus
-    size_t const    NUM_DP_ELEMENTS =   10;
+    libpath_size_t const    NUM_DP_ELEMENTS =   10;
 #else /* ? __cplusplus */
-# define            NUM_DP_ELEMENTS    (10)
+# define                    NUM_DP_ELEMENTS    (10)
 #endif /* __cplusplus */
 
 static void test_1_0()
@@ -1875,9 +1869,9 @@ static void test_1_60(void)
     };
     char const input_template[] = "/this/is/going/to/be/a.bad.path";
 
-    { size_t i; for(i = 0; i != STLSOFT_NUM_ELEMENTS(bad_chars); ++i)
+    { libpath_size_t i; for(i = 0; i != STLSOFT_NUM_ELEMENTS(bad_chars); ++i)
     {
-        { size_t j; for(j = 0; j != STLSOFT_NUM_ELEMENTS(input_template) - 1; ++j)
+        { libpath_size_t j; for(j = 0; j != STLSOFT_NUM_ELEMENTS(input_template) - 1; ++j)
         {
             libpath_ParseResult_t   r;
             LIBPATH_RC              rc;
@@ -2386,17 +2380,17 @@ static void test_1_81(void)
 static void test_1_82(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
-    char const      input[] =   "\\\\192.168.0.1\\share\\";
-    size_t const    cch     =   STLSOFT_NUM_ELEMENTS(input) - 1;
+    char const              input[] =   "\\\\192.168.0.1\\share\\";
+    libpath_size_t const    cch     =   STLSOFT_NUM_ELEMENTS(input) - 1;
 
-    { size_t i; for(i = 0; i <= cch; ++i)
+    { libpath_size_t i; for(i = 0; i <= cch; ++i)
     {
         libpath_ParseResult_t   r;
         LIBPATH_RC              rc;
 
         rc = libpath_Parse_ParsePathFromStringPtrAndLen(input, i, 0, &r, 0, NULL);
 
-        if( 1 == i ||
+        if (1 == i ||
             cch == i)
         {
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -2405,7 +2399,7 @@ static void test_1_82(void)
             XTESTS_TEST_INTEGER_EQUAL(i, r.path.len);
             XTESTS_TEST_INTEGER_EQUAL(i, r.locationPart.len);
             XTESTS_TEST_INTEGER_EQUAL(i, r.rootPart.len);
-            if(cch == i)
+            if (cch == i)
             {
                 XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
             }
@@ -2421,7 +2415,7 @@ static void test_1_82(void)
             XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
 
             XTESTS_TEST_BOOLEAN_TRUE(libpath_ParseResult_IsPathRooted(&r));
-            if(cch == i)
+            if (cch == i)
             {
                 XTESTS_TEST_BOOLEAN_TRUE(libpath_ParseResult_IsPathAbsolute(&r));
             }
@@ -2432,7 +2426,7 @@ static void test_1_82(void)
         }
         else
         {
-            if(0 == i)
+            if (0 == i)
             {
                 XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
                 XTESTS_TEST_INTEGER_EQUAL(i, r.input.len);
@@ -2531,4 +2525,6 @@ static void test_1_99(void)
 {
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

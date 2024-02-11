@@ -354,7 +354,7 @@ SOURCE=..\..\..\..\include\libpath\compare.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\libpath\common\internal\defs.h
+SOURCE=..\..\..\..\include\libpath\common\internal\nothing_.h
 # End Source File
 # Begin Source File
 
@@ -370,7 +370,7 @@ SOURCE=..\..\..\..\include\libpath\equate\types\EquateOption.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\libpath\common\types\fundamental.h
+SOURCE=..\..\..\..\include\libpath\common\types\fundamental_.h
 # End Source File
 # Begin Source File
 
@@ -410,11 +410,11 @@ SOURCE=..\..\..\..\include\libpath\common\result_codes\enumerations\rcx.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\libpath\common\result_codes\result_codes.h
+SOURCE=..\..\..\..\include\libpath\common\result_codes\result_codes_.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\..\..\include\libpath\common\types\slices.h
+SOURCE=..\..\..\..\include\libpath\common\types\slices_.h
 # End Source File
 # Begin Source File
 

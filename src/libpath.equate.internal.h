@@ -1,11 +1,12 @@
 
 /*
- * Created: 
- * Updated: 20th November 2016
+ * Created:
+ * Updated: 11th February 2024
  */
 
 #include <libpath/equate/types.h>
 #include <libpath/parse/types.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * internal API functions
@@ -43,14 +44,14 @@ libpath_Internal_roots_equal(
 ,   libpath_StringSlice_t const*    rhs
 );
 
-size_t
+libpath_size_t
 libpath_Internal_count_dots(
     libpath_StringSlice_t const* part
 );
 
-size_t
+libpath_size_t
 libpath_Internal_canonicalise_parts(
-    size_t                  cdirparts
+    libpath_size_t          cdirparts
 ,   libpath_StringSlice_t*  dirparts
 );
 
@@ -75,9 +76,9 @@ libpath_Internal_directory_part_equal(
 
 libpath_truthy_t
 libpath_Internal_directory_parts_equal(
-    size_t                  cldirparts
+    libpath_size_t          cldirparts
 ,   libpath_StringSlice_t*  ldirparts
-,   size_t                  crdirparts
+,   libpath_size_t          crdirparts
 ,   libpath_StringSlice_t*  rdirparts
 );
 
@@ -90,4 +91,12 @@ libpath_Internal_get_root_level(
 } /* extern "C" */
 #endif /* __cplusplus */
 
+
+/* ////////////////////////////////////////////////////////////////////// */
+
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -1,19 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        test.unit.equal.1.c.c
+ * File:    test.unit.equal.1.c.c
  *
- * Purpose:     Implementation file for the test.unit.equal.1.c project.
+ * Purpose: Implementation file for the test.unit.equal.1.c project.
  *
- * Created:     28th March 2013
- * Updated:     20th November 2016
- *
- * Status:      Wizard-generated
- *
- * License:     (Licensed under the Synesis Software Open License)
- *
- *              Copyright (c) 2013-2016, Synesis Software Pty Ltd.
- *              All rights reserved.
- *
- *              www:        http://www.synesis.com.au/software
+ * Created: 28th March 2013
+ * Updated: 7th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -39,6 +30,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * forward declarations
@@ -145,6 +137,7 @@ static void test_1_97(void);
 static void test_1_98(void);
 static void test_1_99(void);
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helper functions
  */
@@ -156,7 +149,7 @@ int main(int argc, char **argv)
 
     XTESTS_COMMANDLINE_PARSEVERBOSITY(argc, argv, &verbosity);
 
-    if(XTESTS_START_RUNNER("test.unit.equal.1.c", verbosity))
+    if (XTESTS_START_RUNNER("test.unit.equal.1.c", verbosity))
     {
         XTESTS_RUN_CASE(test_1_0);
         XTESTS_RUN_CASE(test_1_1);
@@ -298,15 +291,19 @@ path_equals(
     ,   &result
     );
 
-    switch(rc)
+    switch (rc)
     {
-        case    LIBPATH_RESULTCODE(FirstPathInvalid):
-        case    LIBPATH_RESULTCODE(SecondPathInvalid):
-        case    LIBPATH_RESULTCODE(WorkingDirectoryPathInvalid):
-            break;
+    case    LIBPATH_RC_OF(FirstPathInvalid):
+    case    LIBPATH_RC_OF(SecondPathInvalid):
+    case    LIBPATH_RC_OF(WorkingDirectoryPathInvalid):
+
+        break;
+    default:
+
+        break;
     }
 
-    return (LIBPATH_RESULTCODE(Success) == rc) && (0 != result);
+    return (LIBPATH_RC_OF(Success) == rc) && (0 != result);
 }
 
 
@@ -915,4 +912,6 @@ static void test_1_99(void)
 {
 }
 
+
 /* ///////////////////////////// end of file //////////////////////////// */
+

@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:        libpath/common/macros.h
+ * File:    libpath/common/macros.h
  *
- * Purpose:     Macros defined for libpath library.
+ * Purpose: Macros defined for libpath library.
  *
- * Created:     9th November 2012
- * Updated:     20th November 2016
+ * Created: 9th November 2012
+ * Updated: 8th February 2024
  *
- * Home:        http://synesis.com.au/software/
+ * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2012-2016, Matthew Wilson and Synesis Software
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -20,14 +21,14 @@
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the distribution.
- * - Neither the name(s) of Matthew Wilson and Synesis Software nor the
- *   names of any contributors may be used to endorse or promote products
- *   derived from this software without specific prior written permission.
+ * - Neither the name of the copyright holder nor the names of its
+ *   contributors may be used to endorse or promote products derived from
+ *   this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -42,16 +43,16 @@
 #ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_macros
 #define SYNSOFT_LIBPATH_INCL_libpath_common_H_macros
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
 
-
-/** \def LIBPATH_CALL(r)
+/** @def LIBPATH_CALL(r)
  *
  * Defines a standard function call return type (\c r)
  *
- * \param r The return type of the function
+ * @param r The return type of the function
  */
 #ifndef LIBPATH_CALL
 
@@ -65,12 +66,34 @@
 #endif
 
 
-/** \def LIBPATH_STATIC_CAST(type, expr)
+/** \def LIBPATH_NUM_ELEMENTS(ar)
+ *
+ * @brief Evaluates, at compile time, to the number of elements within the
+ *   given vector entity
+ *
+ * \param ar The array
+ */
+#ifdef STLSOFT_NUM_ELEMENTS
+
+# define LIBPATH_NUM_ELEMENTS(ar)                           STLSOFT_NUM_ELEMENTS(ar)
+#else
+
+# ifdef __DMC__
+
+#  define LIBPATH_NUM_ELEMENTS(ar)                          (sizeof(ar) / sizeof((ar)[0]))
+# else
+
+#  define LIBPATH_NUM_ELEMENTS(ar)                          (sizeof(ar) / sizeof(0[(ar)]))
+# endif
+#endif
+
+
+/** @def LIBPATH_STATIC_CAST(type, expr)
  *
  * A static type cast
  *
- * \param type The type to which \c expr will be cast
- * \param expr The expression to be cast
+ * @param type The type to which @c expr will be cast
+ * @param expr The expression to be cast
  */
 #ifdef __cplusplus
 
@@ -81,12 +104,12 @@
 #endif /* __cplusplus */
 
 
-/** \def LIBPATH_SUPPRESS_UNUSED(v)
+/** @def LIBPATH_SUPPRESS_UNUSED(v)
  *
  * Suppresses a warning about non-use of variable/parameter
- * by <em>using</em> the value \c v
+ * by <em>using</em> the value @c v
  *
- * \param v The value - parameter / variable to use <em>used</em>
+ * @param v The value - parameter / variable to use <em>used</em>
  */
 #ifndef LIBPATH_SUPPRESS_UNUSED
 
@@ -104,4 +127,9 @@
 
 #endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_macros */
 
+#ifdef LIBPATH_CF_pragma_once_SUPPORTED
+# pragma once
+#endif
+
 /* ///////////////////////////// end of file //////////////////////////// */
+
