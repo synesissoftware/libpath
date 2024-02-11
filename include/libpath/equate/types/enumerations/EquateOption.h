@@ -4,7 +4,7 @@
  * Purpose: Equate options defined for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -41,7 +41,8 @@
 
 
 
-#if defined(LIBPATH_DEFINING_STRING_VARIABLES)
+#if 0
+#elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
                                                                             /* String form likely used in diagnostics, so use enumerator name (contraction) */
 # define LIBPATH_DEFINE_EquateOption_(en, value, shimString, helpString)    INIT_ERR_STR_DECL(libpath_EquateOption_##en, #shimString);
 # undef LIBPATH_DEFINING_STRING_VARIABLES

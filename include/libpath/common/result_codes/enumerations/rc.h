@@ -40,7 +40,8 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#if defined(LIBPATH_DEFINING_STRING_VARIABLES)
+#if 0
+#elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
                                                                                 /* String form likely used in diagnostics, so use help string */
 # define LIBPATH_DEFINE_ResultCode_(en, value, shimString, helpString)          INIT_ERR_STR_DECL(libpath_ResultCode_##en, #helpString);
 # undef LIBPATH_DEFINING_STRING_VARIABLES
