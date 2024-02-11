@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -69,7 +69,7 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace comparing {
 
 
@@ -282,7 +282,6 @@ compare_paths_and_(
 }
 
 
-inline
 int
 compare_paths(
     char const*     lhs
@@ -297,7 +296,7 @@ compare_paths(
  */
 
 } /* namespace comparing */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

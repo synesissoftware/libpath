@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/portability/operating_system.h
+ * File:    libpath/common/portability/operating_system_.h
  *
  * Purpose: Operating-system discrimination for libpath library.
  *
  * Created: 2nd February 2013
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -40,9 +40,9 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_portability
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_portability not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_portability */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability */
 
 
 /* /////////////////////////////////////////////////////////////////////////

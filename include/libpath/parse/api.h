@@ -204,11 +204,11 @@ libpath_ParseResult_IsPathRooted(
 
 #ifdef __cplusplus
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace parsing {
 
 } /* namespace parsing */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 

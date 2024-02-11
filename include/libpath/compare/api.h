@@ -100,11 +100,11 @@ libpath_Compare_ComparePathsAsCStyleStrings(
 
 #ifdef __cplusplus
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace comparing {
 
 } /* namespace comparing */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 

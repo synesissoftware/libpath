@@ -47,6 +47,8 @@
  * includes
  */
 
+#include <libpath/common/internal.h>
+
 #include <libpath/common/exceptions/libpath_exception.hpp>
 #include <libpath/common/exceptions/invalid_path_exception.hpp>
 
@@ -55,7 +57,7 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace exceptions {
 
 
@@ -64,7 +66,7 @@ namespace exceptions {
  */
 
 } /* namespace exceptions */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

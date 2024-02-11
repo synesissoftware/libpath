@@ -1,15 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/result_codes.h
+ * File:    libpath/common/portability/compiler_.h
  *
- * Purpose: Definition of result code types.
+ * Purpose: Compiler discrimination for libpath library.
  *
- * Created: 13th February 2013
+ * Created: 7th February 2024
  * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
- * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
+ * Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,67 +39,74 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_types
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_types not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability */
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * macros
+ * compiler discrimination
+ *
+ * Discriminated features (that cannot be specified):
+ * - LIBPATH_CF_pragma_once_SUPPORTED - defined if translator supports the
+ *   `#pragma once` preprocessor directive;
  */
 
-/** @def LIBPATH_RESULTCODE(detail)
+/** @def LIBPATH_CF_pragma_once_SUPPORTED
  *
- * Generates the full name of a libpath ResultCode
- *
- * @param detail The detail part of the result code
- *
- * @see libpath_rc_t
- */
-#define LIBPATH_RESULTCODE(detail)                          libpath_ResultCode_##detail
-
-/** @def LIBPATH_SUCCESS(rc)
- *
- * Evaluates to truey if \c rc represents a success code
- *
- * @param rc The return code to evaluated
- */
-#define LIBPATH_SUCCESS(rc)                                 (LIBPATH_RESULTCODE(Success) == (rc))
-
-/** @def LIBPATH_FAILURE(rc)
- *
- * Evaluates to falsey if \c rc represents a failure code
- *
- * @param rc The return code to evaluated
- */
-#define LIBPATH_FAILURE(rc)                                 (LIBPATH_RESULTCODE(Success) != (rc))
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * types
+ * Defined if the compiler supports `#pragma once` preprocessor directive
  */
 
-/** Result code enumeration
- */
-enum libpath_rc_t
-{
-#include <libpath/common/result_codes/enumerations/rc.h>
-#ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
-    libpath_ResultCode_MaxValue
-#endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
-};
-typedef enum libpath_rc_t                                   LIBPATH_RC;
+#if 0
+#elif defined(__BORLANDC__)
 
-/** Extended result code enumeration
- */
-enum libpath_rcx_t
-{
-#include <libpath/common/result_codes/enumerations/rcx.h>
-#ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
-    libpath_ResultCodeX_MaxValue
-#endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
-};
-typedef enum libpath_rcx_t                                  LIBPATH_RCX;
+# if (__BORLANDC__ & 0xfff0) >= 0x0580
+#  define LIBPATH_CF_pragma_once_SUPPORTED
+# endif
+#elif defined(__COMO__)
+
+# define LIBPATH_CF_pragma_once_SUPPORTED
+#elif defined(__DMC__)
+
+# define LIBPATH_CF_pragma_once_SUPPORTED
+#elif defined(__INTEL_COMPILER)
+
+# if __INTEL_COMPILER >= 700
+
+#  define LIBPATH_CF_pragma_once_SUPPORTED
+# endif /* compiler */
+#elif defined(__MWERKS__)
+
+# define LIBPATH_CF_pragma_once_SUPPORTED
+#elif defined(__SUNPRO_C) || \
+      defined(__SUNPRO_CC)
+
+#elif defined(__VECTORC)
+
+#elif defined(__WATCOMC__)
+
+# if __WATCOMC__ >= 1200
+
+#  define LIBPATH_CF_pragma_once_SUPPORTED
+# endif
+#elif defined(__GNUC__)
+
+# if __GNUC__ > 3 || \
+     (   __GNUC__ == 3 && \
+         __GNUC_MINOR__ >= 4)
+
+#  define LIBPATH_CF_pragma_once_SUPPORTED
+# endif
+#elif defined(__clang__)
+
+# define LIBPATH_CF_pragma_once_SUPPORTED
+#elif defined(_MSC_VER)
+
+# if _MSC_VER >= 900
+
+#  define LIBPATH_CF_pragma_once_SUPPORTED
+# endif /* compiler */
+#endif
 
 
 /* ////////////////////////////////////////////////////////////////////// */

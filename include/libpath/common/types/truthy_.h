@@ -1,14 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/portability/compiler.h
+ * File:    libpath/common/types/truthy_.h
  *
- * Purpose: Compiler discrimination for libpath library.
+ * Purpose: Truey type.
  *
- * Created: 7th February 2024
- * Updated: 10th February 2024
+ * Created: 9th November 2012
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,74 +40,58 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_portability
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_portability not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_portability */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types */
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * compiler discrimination
- *
- * Discriminated features (that cannot be specified):
- * - LIBPATH_CF_pragma_once_SUPPORTED - defined if translator supports the
- *   `#pragma once` preprocessor directive;
+ * includes
  */
 
-/** @def LIBPATH_CF_pragma_once_SUPPORTED
- *
- * Defined if the compiler supports `#pragma once` preprocessor directive
+#include <libpath/common/internal.h>
+#include <libpath/common/macros.h>
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * types
  */
 
-#if 0
-#elif defined(__BORLANDC__)
+/** A type that is used to represent, in a language-independent manner,
+ * truthiness
+ *
+ * To test for truey, rely on the C/C++ compiler's implicit conversions to
+ * boolean, such as <code>if(t)</code>; to test for falsey, do the same with
+ * the logical NOT operator, such as <code>if(!t)</code>.
+ *
+ */
+typedef int                                                 libpath_truthy_t;
 
-# if (__BORLANDC__ & 0xfff0) >= 0x0580
-#  define LIBPATH_CF_pragma_once_SUPPORTED
-# endif
-#elif defined(__COMO__)
+#ifndef LIBPATH_NO_NAMESPACE
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 
-# define LIBPATH_CF_pragma_once_SUPPORTED
-#elif defined(__DMC__)
+/** @see libpath_truthy_t
+ */
+typedef libpath_truthy_t                                    truthy_t;
 
-# define LIBPATH_CF_pragma_once_SUPPORTED
-#elif defined(__INTEL_COMPILER)
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+#endif /* __cplusplus */
 
-# if __INTEL_COMPILER >= 700
 
-#  define LIBPATH_CF_pragma_once_SUPPORTED
-# endif /* compiler */
-#elif defined(__MWERKS__)
+/* /////////////////////////////////////////////////////////////////////////
+ * constants
+ */
 
-# define LIBPATH_CF_pragma_once_SUPPORTED
-#elif defined(__SUNPRO_C) || \
-      defined(__SUNPRO_CC)
+#if !defined(LIBPATH_NO_NAMESPACE) || \
+    defined(LIBPATH_DOCUMENTATION_SKIP_SECTION)
 
-#elif defined(__VECTORC)
+# define LIBPATH_V_TRUEY                                    LIBPATH_STATIC_CAST(LIBPATH_NS_QUALIFY(truthy_t), true)
+# define LIBPATH_V_FALSEY                                   LIBPATH_STATIC_CAST(LIBPATH_NS_QUALIFY(truthy_t), false)
+#else /* ? __cplusplus */
 
-#elif defined(__WATCOMC__)
-
-# if __WATCOMC__ >= 1200
-
-#  define LIBPATH_CF_pragma_once_SUPPORTED
-# endif
-#elif defined(__GNUC__)
-
-# if __GNUC__ > 3 || \
-     (   __GNUC__ == 3 && \
-         __GNUC_MINOR__ >= 4)
-
-#  define LIBPATH_CF_pragma_once_SUPPORTED
-# endif
-#elif defined(__clang__)
-
-# define LIBPATH_CF_pragma_once_SUPPORTED
-#elif defined(_MSC_VER)
-
-# if _MSC_VER >= 900
-
-#  define LIBPATH_CF_pragma_once_SUPPORTED
-# endif /* compiler */
-#endif
+# define LIBPATH_V_TRUEY                                    LIBPATH_STATIC_CAST(libpath_truthy_t, 1)
+# define LIBPATH_V_FALSEY                                   LIBPATH_STATIC_CAST(libpath_truthy_t, 0)
+#endif /* __cplusplus */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

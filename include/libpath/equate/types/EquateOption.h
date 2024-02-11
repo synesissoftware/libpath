@@ -36,13 +36,13 @@ typedef enum libpath_EquateOption_t                         libpath_EquateOption
 
 #ifdef __cplusplus
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace parsing {
 
 typedef libpath_EquateOption_t                              EquateOption_t;
 
 } /* namespace parsing */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 

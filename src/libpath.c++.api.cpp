@@ -15,7 +15,7 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ abort_on_invalid_path_policy::respond(
  * namespace
  */
 
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ///////////////////////////// end of file //////////////////////////// */

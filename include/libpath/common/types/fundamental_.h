@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/types/fundamental.h
+ * File:    libpath/common/types/fundamental_.h
  *
- * Purpose: Definition of fundamental types for libpath library.
+ * Purpose: Fundamental types.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024
@@ -40,9 +40,9 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_types
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_types not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types */
 
 
 /* /////////////////////////////////////////////////////////////////////////

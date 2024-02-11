@@ -48,14 +48,16 @@
  * includes - 1
  */
 
-#include <libpath/common/internal/defs.h>
-#include <libpath/common/macros.h>
-#include <libpath/common/namespace.h>
 #include <libpath/common/portability.h>
-#include <libpath/common/types/fundamental.h>
-#include <libpath/common/types/slices.h>
-#include <libpath/common/types/truthy.h>
-#include <libpath/common/result_codes/result_codes.h>
+#include <libpath/common/internal.h>
+#include <libpath/common/macros.h>
+
+#define SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+#include <libpath/common/types/fundamental_.h>
+#include <libpath/common/types/slices_.h>
+#include <libpath/common/types/truthy_.h>
+#include <libpath/common/result_codes/result_codes_.h>
+#undef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
 
 
 /* /////////////////////////////////////////////////////////////////////////

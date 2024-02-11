@@ -4,7 +4,7 @@
  * Purpose: Definition of libpath::exceptions::invalid_path_exception.
  *
  * Created: 5th April 2013
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -48,6 +48,8 @@
  * includes
  */
 
+#include <libpath/common/internal.h>
+
 #include <libpath/common/exceptions/libpath_exception.hpp>
 
 #include <string>
@@ -57,7 +59,7 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace exceptions {
 
 
@@ -69,11 +71,15 @@ class invalid_path_exception
     : public libpath_exception
 {
 public: // Member types
-    typedef invalid_path_exception                          class_type;
+    /// The parent class type
     typedef libpath_exception                               parent_class_type;
+    /// The type of this class
+    typedef invalid_path_exception                          class_type;
+    /// The string type
     typedef std::string                                     string_type;
 
 public: // Construction
+    /// Constructs an instance of this type.
     invalid_path_exception(
         LIBPATH_RC                      rc
     ,   libpath_StringSlice_t const*    path
@@ -96,7 +102,7 @@ public: // Fields
  */
 
 } /* namespace exceptions */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

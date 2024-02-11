@@ -106,11 +106,11 @@ libpath_Equate_EquatePathsAsCStyleStrings(
 
 #ifdef __cplusplus
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace equating {
 
 } /* namespace equating */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 

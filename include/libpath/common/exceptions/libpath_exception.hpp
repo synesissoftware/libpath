@@ -4,7 +4,7 @@
  * Purpose: Definition of libpath::exceptions::libpath_exception.
  *
  * Created: 5th April 2013
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -48,6 +48,8 @@
  * includes
  */
 
+#include <libpath/common/internal.h>
+
 #include <stdexcept>
 
 
@@ -55,17 +57,20 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace exceptions {
 
 class libpath_exception
     : public std::runtime_error
 {
 public: // Member types
-    typedef libpath_exception   class_type;
-    typedef std::runtime_error  parent_class_type;
+    /// The parent class type
+    typedef std::runtime_error                              parent_class_type;
+    /// The type of this class
+    typedef libpath_exception                               class_type;
 
 protected: // Construction
+    /// Constructs an instance of this type
     libpath_exception(char const* message)
       : parent_class_type(message)
     {}
@@ -81,7 +86,7 @@ private: // Implementation
  */
 
 } /* namespace exceptions */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

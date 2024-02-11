@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/internal/defs.h
+ * File:    libpath/common/internal/nothing_.h
  *
- * Purpose: Operating-system discrimination for libpath library.
+ * Purpose: Definition of `LIBPATH_NOTHING`.
  *
  * Created: 2nd February 2013
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -40,19 +40,9 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_types
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_types not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * feature discrimination
- */
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * internal API functions
- */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal */
 
 
 /* /////////////////////////////////////////////////////////////////////////

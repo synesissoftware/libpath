@@ -1,15 +1,15 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/types/slices.h
+ * File:    libpath/common/result_codes_.h
  *
- * Purpose: Definition of slice types for libpath library.
+ * Purpose: Definition of result code types.
  *
- * Created: 9th November 2012
+ * Created: 13th February 2013
  * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
  * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
- * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
+ * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,54 +40,67 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_types
-# error SYNSOFT_LIBPATH_INCL_libpath_common_H_types not defined. This file cannot be included directly
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_types */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types */
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * includes
+ * macros
  */
 
-#ifdef LIBPATH_CXX_VER_2011_plus
-# include <cstddef>
-#else
-# include <stddef.h>
-#endif
+/** @def LIBPATH_RESULTCODE(detail)
+ *
+ * Generates the full name of a libpath ResultCode
+ *
+ * @param detail The detail part of the result code
+ *
+ * @see libpath_rc_t
+ */
+#define LIBPATH_RESULTCODE(detail)                          libpath_ResultCode_##detail
+
+/** @def LIBPATH_SUCCESS(rc)
+ *
+ * Evaluates to truey if \c rc represents a success code
+ *
+ * @param rc The return code to evaluated
+ */
+#define LIBPATH_SUCCESS(rc)                                 (LIBPATH_RESULTCODE(Success) == (rc))
+
+/** @def LIBPATH_FAILURE(rc)
+ *
+ * Evaluates to falsey if \c rc represents a failure code
+ *
+ * @param rc The return code to evaluated
+ */
+#define LIBPATH_FAILURE(rc)                                 (LIBPATH_RESULTCODE(Success) != (rc))
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * types
  */
 
-/** String slice type
+/** Result code enumeration
  */
-struct libpath_StringSlice_t
+enum libpath_rc_t
 {
-    /** @brief Number of characters available at @c ptr */
-    libpath_size_t          len;
-    /** @brief Pointer to first of @c len character(s) available */
-    libpath_char_t const*   ptr;
+#include <libpath/common/result_codes/enumerations/rc.h>
+#ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
+    libpath_ResultCode_MaxValue
+#endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
 };
-#ifdef __cplusplus
-#else /* ? __cplusplus */
-typedef struct libpath_StringSlice_t                        libpath_StringSlice_t;
-#endif /* __cplusplus */
+typedef enum libpath_rc_t                                   LIBPATH_RC;
 
-
-/* /////////////////////////////////////////////////////////////////////////
- * namespace
+/** Extended result code enumeration
  */
-
-#ifdef __cplusplus
-
-namespace libpath {
-
-
-typedef libpath_StringSlice_t                               StringSlice_t;
-
-} /* namespace libpath */
-#endif /* __cplusplus */
+enum libpath_rcx_t
+{
+#include <libpath/common/result_codes/enumerations/rcx.h>
+#ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
+    libpath_ResultCodeX_MaxValue
+#endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
+};
+typedef enum libpath_rcx_t                                  LIBPATH_RCX;
 
 
 /* ////////////////////////////////////////////////////////////////////// */

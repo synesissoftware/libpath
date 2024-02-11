@@ -102,12 +102,12 @@ typedef struct libpath_WorkingDirectoryContext_t            libpath_WorkingDirec
 
 #ifdef __cplusplus
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 
 
 typedef libpath_WorkingDirectoryContext_t                   WorkingDirectoryContext_t;
 
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 

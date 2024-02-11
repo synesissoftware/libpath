@@ -56,7 +56,7 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace equating {
 
 
@@ -75,7 +75,7 @@ namespace equating {
  */
 
 } /* namespace equating */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

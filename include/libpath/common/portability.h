@@ -47,9 +47,11 @@
  * includes
  */
 
-#include <libpath/common/portability/compiler.h>
-#include <libpath/common/portability/operating_system.h>
-#include <libpath/common/portability/language.h>
+#define SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability
+#include <libpath/common/portability/compiler_.h>
+#include <libpath/common/portability/operating_system_.h>
+#include <libpath/common/portability/language_.h>
+#undef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_portability
 
 
 /* /////////////////////////////////////////////////////////////////////////

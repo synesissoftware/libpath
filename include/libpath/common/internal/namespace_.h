@@ -1,5 +1,5 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/namespace.h
+ * File:    libpath/common/internal/namespace_.h
  *
  * Purpose: Conditional discrimination and declaration for namespace for
  *          libpath library.
@@ -41,13 +41,9 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_H_namespace
-#define SYNSOFT_LIBPATH_INCL_libpath_common_H_namespace
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
- */
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_internal */
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -65,14 +61,25 @@
  * macros
  */
 
+/** @def LIBPATH_NS_OUTER_NAMESPACE_NAME
+ *
+ * @brief Specifies, if defined, the libpath library outer namespace; if
+ *   not specified then defaults to `libpath`
+ */
+
+#ifndef LIBPATH_NS_OUTER_NAMESPACE_NAME
+# define LIBPATH_NS_OUTER_NAMESPACE_NAME                    libpath
+#endif
+
+
 /** @def LIBPATH_NS_QUALIFY(name)
  *
- * Qualifies @c name with `::libpath::`
+ * @brief Qualifies @c name with `::libpath::`
  */
 
 #ifndef LIBPATH_NO_NAMESPACE
 
-# define LIBPATH_NS_QUALIFY(t)                              ::libpath::t
+# define LIBPATH_NS_QUALIFY(t)                              ::LIBPATH_NS_OUTER_NAMESPACE_NAME::t
 #else
 
 # define LIBPATH_NS_QUALIFY(t)                              t
@@ -84,14 +91,13 @@
  */
 
 #ifndef LIBPATH_NO_NAMESPACE
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif
 
-/* ////////////////////////////////////////////////////////////////////// */
 
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_H_namespace */
+/* ////////////////////////////////////////////////////////////////////// */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once

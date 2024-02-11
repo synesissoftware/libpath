@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/types/truthy.h
+ * File:    libpath/common/types/slices_.h
  *
- * Purpose: Basic types defined for libpath library.
+ * Purpose: Slice types.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -40,62 +40,57 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_types_H_truthy
-#define SYNSOFT_LIBPATH_INCL_libpath_common_types_H_truthy
+#ifndef SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types
+# error SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types not defined. This file cannot be included directly
+#endif /* !SYNSOFT_LIBPATH_IMPLEMENTING_libpath_common_H_types */
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
 
-#include <libpath/common/macros.h>
-#include <libpath/common/namespace.h>
+#ifdef LIBPATH_CXX_VER_2011_plus
+# include <cstddef>
+#else
+# include <stddef.h>
+#endif
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * types
  */
 
-/** A type that is used to represent, in a language-independent manner,
- * truthiness
- *
- * To test for truey, rely on the C/C++ compiler's implicit conversions to
- * boolean, such as <code>if(t)</code>; to test for falsey, do the same with
- * the logical NOT operator, such as <code>if(!t)</code>.
- *
+/** String slice type
  */
-typedef int                                                 libpath_truthy_t;
-
-#ifndef LIBPATH_NO_NAMESPACE
-namespace libpath {
-
-/** @see libpath_truthy_t
- */
-typedef libpath_truthy_t                                    truthy_t;
-
-} /* namespace libpath */
+struct libpath_StringSlice_t
+{
+    /** @brief Number of characters available at @c ptr */
+    libpath_size_t          len;
+    /** @brief Pointer to first of @c len character(s) available */
+    libpath_char_t const*   ptr;
+};
+#ifdef __cplusplus
+#else /* ? __cplusplus */
+typedef struct libpath_StringSlice_t                        libpath_StringSlice_t;
 #endif /* __cplusplus */
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * constants
+ * namespace
  */
 
-#if !defined(LIBPATH_NO_NAMESPACE) || \
-    defined(LIBPATH_DOCUMENTATION_SKIP_SECTION)
+#ifdef __cplusplus
 
-# define LIBPATH_V_TRUEY                                    LIBPATH_STATIC_CAST(LIBPATH_NS_QUALIFY(truthy_t), true)
-# define LIBPATH_V_FALSEY                                   LIBPATH_STATIC_CAST(LIBPATH_NS_QUALIFY(truthy_t), false)
-#else /* ? __cplusplus */
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 
-# define LIBPATH_V_TRUEY                                    LIBPATH_STATIC_CAST(libpath_truthy_t, 1)
-# define LIBPATH_V_FALSEY                                   LIBPATH_STATIC_CAST(libpath_truthy_t, 0)
+
+typedef libpath_StringSlice_t                               StringSlice_t;
+
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 
 /* ////////////////////////////////////////////////////////////////////// */
-
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_types_H_truthy */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once

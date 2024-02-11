@@ -36,13 +36,13 @@ typedef enum libpath_ParseOption_t                          libpath_ParseOption_
 
 #ifdef __cplusplus
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 namespace parsing {
 
 typedef libpath_ParseOption_t                               ParseOption_t;
 
 } /* namespace parsing */
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 #endif /* __cplusplus */
 
 

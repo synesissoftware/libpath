@@ -4,7 +4,7 @@
  * Purpose: Portability discrimination for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -106,6 +106,7 @@
     )
 
 #define LIBPATH_VER_REVISION            LIBPATH_VER_PATCH
+
 
 /* ////////////////////////////////////////////////////////////////////// */
 

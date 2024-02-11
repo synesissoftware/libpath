@@ -4,7 +4,7 @@
  * Purpose: Common types defined for libpath library.
  *
  * Created: 29th March 2013
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -55,7 +55,7 @@
  * namespace
  */
 
-namespace libpath {
+namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -123,7 +123,7 @@ struct abort_on_invalid_path_policy
  * namespace
  */
 
-} /* namespace libpath */
+} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
 
 
 /* ////////////////////////////////////////////////////////////////////// */
