@@ -40,6 +40,14 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
+#ifndef SYNSOFT_LIBPATH_INCL_libpath_HPP_compare
+#define SYNSOFT_LIBPATH_INCL_libpath_HPP_compare
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <libpath/compare.h>
 #include <libpath/common/types.hpp>
 
@@ -293,6 +301,8 @@ compare_paths(
 
 
 /* ////////////////////////////////////////////////////////////////////// */
+
+#endif /* !SYNSOFT_LIBPATH_INCL_libpath_HPP_compare */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once

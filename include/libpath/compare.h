@@ -4,7 +4,7 @@
  * Purpose: C include for libpath library's Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -40,10 +40,20 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
+#ifndef SYNSOFT_LIBPATH_INCL_libpath_H_compare
+#define SYNSOFT_LIBPATH_INCL_libpath_H_compare
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <libpath/compare/api.h>
 
 
 /* ////////////////////////////////////////////////////////////////////// */
+
+#endif /* !SYNSOFT_LIBPATH_INCL_libpath_H_compare */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once

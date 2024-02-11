@@ -41,6 +41,14 @@
 
 
 
+#ifndef SYNSOFT_LIBPATH_INCL_libpath_HPP_parse
+#define SYNSOFT_LIBPATH_INCL_libpath_HPP_parse
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
 #include <libpath/parse.h>
 #include <libpath/common/types.hpp>
 
@@ -179,6 +187,8 @@ is_rooted(
 
 
 /* ////////////////////////////////////////////////////////////////////// */
+
+#endif /* !SYNSOFT_LIBPATH_INCL_libpath_HPP_parse */
 
 #ifdef LIBPATH_CF_pragma_once_SUPPORTED
 # pragma once
