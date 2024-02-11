@@ -94,8 +94,8 @@
 
 #define LIBPATH_VER_MAJOR               0
 #define LIBPATH_VER_MINOR               1
-#define LIBPATH_VER_PATCH               4
-#define LIBPATH_VER_ALPHABETA           22
+#define LIBPATH_VER_PATCH               5
+#define LIBPATH_VER_ALPHABETA           21
 
 #define LIBPATH_VER \
     (0\
