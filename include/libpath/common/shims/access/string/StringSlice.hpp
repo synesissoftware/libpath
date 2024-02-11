@@ -69,11 +69,11 @@ libpath_char_t const*
 #if 0
 #elif defined(LIBPATH_USE_WIDE_STRINGS)
 c_str_data_w(
-    libpath::StringSlice_t const& slice
+    LIBPATH_NS_QUALIFY(StringSlice_t) const& slice
 )
 #else
 c_str_data_a(
-    libpath::StringSlice_t const& slice
+    LIBPATH_NS_QUALIFY(StringSlice_t) const& slice
 )
 #endif
 {
@@ -86,11 +86,11 @@ libpath_size_t
 #if 0
 #elif defined(LIBPATH_USE_WIDE_STRINGS)
 c_str_len_w(
-    libpath::StringSlice_t const& slice
+    LIBPATH_NS_QUALIFY(StringSlice_t) const& slice
 )
 #else
 c_str_len_a(
-    libpath::StringSlice_t const& slice
+    LIBPATH_NS_QUALIFY(StringSlice_t) const& slice
 )
 #endif
 {
@@ -100,7 +100,7 @@ c_str_len_a(
 inline
 libpath_char_t const*
 c_str_data(
-    libpath::StringSlice_t const& slice
+    LIBPATH_NS_QUALIFY(StringSlice_t) const& slice
 )
 {
     return slice.ptr;
@@ -109,7 +109,7 @@ c_str_data(
 inline
 libpath_size_t
 c_str_len(
-    libpath::StringSlice_t const& slice
+    LIBPATH_NS_QUALIFY(StringSlice_t) const& slice
 )
 {
     return slice.len;

@@ -5,7 +5,7 @@
  *          libpath library.
  *
  * Created: 20th November 2016
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -65,10 +65,16 @@
  * macros
  */
 
+/** @def LIBPATH_NS_QUALIFY(name)
+ *
+ * Qualifies @c name with `::libpath::`
+ */
+
 #ifndef LIBPATH_NO_NAMESPACE
 
 # define LIBPATH_NS_QUALIFY(t)                              ::libpath::t
 #else
+
 # define LIBPATH_NS_QUALIFY(t)                              t
 #endif
 

@@ -265,7 +265,7 @@ int main(int argc, char **argv)
  * test function implementations
  */
 
- typedef ::libpath::StringSlice_t   StringSlice_t;
+ using ::libpath::StringSlice_t;
 
  using ::libpath::parsing::ParseResult_t;
 
@@ -275,11 +275,15 @@ int main(int argc, char **argv)
  using ::libpath::parsing::is_absolute;
  using ::libpath::parsing::is_rooted;
 
+
 #ifdef __cplusplus
-    libpath_size_t const    NUM_DP_ELEMENTS =   10;
+
+    const libpath_size_t    NUM_DP_ELEMENTS =   10;
 #else /* ? __cplusplus */
+
 # define                    NUM_DP_ELEMENTS    (10)
 #endif /* __cplusplus */
+
 
 static void test_1_0()
 {
