@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  */
 
 #include "libpath.compare.internal.h"
@@ -74,8 +74,8 @@ libpath_Internal_compare_roots(
     }
     else
     {
-        size_t  i;
-        int     r = 0;
+        libpath_size_t  i;
+        int             r = 0;
 
         LIBPATH_MESSAGE_ASSERT(lhs->len >= 5, "must be UNC server+share");
         LIBPATH_MESSAGE_ASSERT(rhs->len >= 5, "must be UNC server+share");
@@ -120,10 +120,10 @@ libpath_Internal_compare_path_fragment(
 ,   int                             flags
 )
 {
-    int     r       =   0;
-    size_t  lhsLen  =   lhs->len;
-    size_t  rhsLen  =   rhs->len;
-    size_t  i;
+    int             r       =   0;
+    libpath_size_t  lhsLen  =   lhs->len;
+    libpath_size_t  rhsLen  =   rhs->len;
+    libpath_size_t  i;
 
     LIBPATH_SUPPRESS_UNUSED(flags);
 

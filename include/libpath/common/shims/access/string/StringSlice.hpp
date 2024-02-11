@@ -4,7 +4,7 @@
  * Purpose: Definition of String Access Shims for libpath StringSlice.
  *
  * Created: 13th February 2013
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -45,6 +45,13 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+#include <libpath/common/portability.h>
+
+
+/* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
 
@@ -58,8 +65,41 @@ namespace stlsoft {
  */
 
 inline
-char const*
+libpath_char_t const*
+#if 0
+#elif defined(LIBPATH_USE_WIDE_STRINGS)
+c_str_data_w(
+    libpath::StringSlice_t const& slice
+)
+#else
 c_str_data_a(
+    libpath::StringSlice_t const& slice
+)
+#endif
+{
+    return slice.ptr;
+}
+
+
+inline
+libpath_size_t
+#if 0
+#elif defined(LIBPATH_USE_WIDE_STRINGS)
+c_str_len_w(
+    libpath::StringSlice_t const& slice
+)
+#else
+c_str_len_a(
+    libpath::StringSlice_t const& slice
+)
+#endif
+{
+    return slice.len;
+}
+
+inline
+libpath_char_t const*
+c_str_data(
     libpath::StringSlice_t const& slice
 )
 {
@@ -67,8 +107,8 @@ c_str_data_a(
 }
 
 inline
-size_t
-c_str_len_a(
+libpath_size_t
+c_str_len(
     libpath::StringSlice_t const& slice
 )
 {

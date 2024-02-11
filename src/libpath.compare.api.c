@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath library's Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -121,9 +121,9 @@ static
 LIBPATH_RC
 libpath_Compare_ComparePathsAsStringPtrsAndLens_UNCHECKED_(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt
 ,   libpath_truthy_t*                           result
@@ -144,9 +144,9 @@ libpath_Compare_ComparePathsAsCStyleStrings_UNCHECKED_(
 #ifdef __cplusplus
 extern "C"
 #endif /* __cplusplus */
-size_t
+libpath_size_t
 libpath_Internal_canonicalise_parts(
-    size_t                  cdirparts
+    libpath_size_t          cdirparts
 ,   libpath_StringSlice_t*  dirparts
 );
 
@@ -164,10 +164,10 @@ libpath_Internal_compare_directory_part(
     libpath_StringSlice_t const* const  lhs =   dirpart1;
     libpath_StringSlice_t const* const  rhs =   dirpart2;
 
-    int     r       =   0;
-    size_t  lhsLen  =   lhs->len;
-    size_t  rhsLen  =   rhs->len;
-    size_t  i;
+    int             r       =   0;
+    libpath_size_t  lhsLen  =   lhs->len;
+    libpath_size_t  rhsLen  =   rhs->len;
+    libpath_size_t  i;
 
     LIBPATH_SUPPRESS_UNUSED(flags);
 
@@ -223,15 +223,15 @@ extern "C"
 static
 int
 libpath_Internal_compare_directory_parts(
-    size_t                          ndirparts1
+    libpath_size_t                  ndirparts1
 ,   libpath_StringSlice_t const*    dirparts1
-,   size_t                          ndirparts2
+,   libpath_size_t                  ndirparts2
 ,   libpath_StringSlice_t const*    dirparts2
 ,   int                             flags
 )
 {
-    int     r   =   0;
-    size_t  i;
+    int             r   =   0;
+    libpath_size_t  i;
 
     for(i = 0; 0 == r && ndirparts1 != i && ndirparts2 != i; ++i)
     {
@@ -264,18 +264,18 @@ extern "C"
 static
 int
 libpath_Internal_compare_directory_parts_with_wd(
-    size_t                          ndirparts_abs
+    libpath_size_t                  ndirparts_abs
 ,   libpath_StringSlice_t const*    dirparts_abs
-,   size_t                          ndirparts_rel
+,   libpath_size_t                  ndirparts_rel
 ,   libpath_StringSlice_t const*    dirparts_rel
-,   size_t                          ndirparts_cwd
+,   libpath_size_t                  ndirparts_cwd
 ,   libpath_StringSlice_t const*    dirparts_cwd
 ,   int                             flags
 )
 {
-    int     r   =   0;
-    size_t  i;
-    size_t  j;
+    int             r   =   0;
+    libpath_size_t  i;
+    libpath_size_t  j;
 
     for(i = 0; ndirparts_abs != i && ndirparts_cwd != i; ++i)
     {
@@ -380,9 +380,9 @@ extern "C"
 static
 void
 canonicalise_between_relative_and_cwd(
-    size_t*                             nrdirparts
+    libpath_size_t*                     nrdirparts
 ,   libpath_StringSlice_t*              rdirparts
-,   size_t*                             ncdirparts
+,   libpath_size_t*                     ncdirparts
 ,   libpath_StringSlice_t const*        cdirparts
 )
 {
@@ -791,9 +791,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 /* canonicalise all individual parts arrays ... */
 
                 {
-                size_t const            nadirparts  =   libpath_Internal_canonicalise_parts(abs->numDirectoryParts, adirparts);
-                size_t                  nrdirparts  =   libpath_Internal_canonicalise_parts(rel->numDirectoryParts, rdirparts);
-                size_t                  ncdirparts  =   libpath_Internal_canonicalise_parts(cwd->numDirectoryParts, cdirparts);
+                libpath_size_t const    nadirparts  =   libpath_Internal_canonicalise_parts(abs->numDirectoryParts, adirparts);
+                libpath_size_t          nrdirparts  =   libpath_Internal_canonicalise_parts(rel->numDirectoryParts, rdirparts);
+                libpath_size_t          ncdirparts  =   libpath_Internal_canonicalise_parts(cwd->numDirectoryParts, cdirparts);
 
                 /* ... and between relative parts and cwd parts arrays (to account for leading double-dots in relative path) */
 
@@ -885,8 +885,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                         libpath_Parse_ParsePathFromStringSlice(&rhs->input, flags, &rresult, rhs->numDirectoryParts, rdirparts);
 
                         {
-                        size_t const            nldirparts  =   libpath_Internal_canonicalise_parts(lhs->numDirectoryParts, ldirparts);
-                        size_t const            nrdirparts  =   libpath_Internal_canonicalise_parts(rhs->numDirectoryParts, rdirparts);
+                        libpath_size_t const    nldirparts  =   libpath_Internal_canonicalise_parts(lhs->numDirectoryParts, ldirparts);
+                        libpath_size_t const    nrdirparts  =   libpath_Internal_canonicalise_parts(rhs->numDirectoryParts, rdirparts);
 
                         int const               r           =   libpath_Internal_compare_directory_parts(nldirparts, ldirparts, nrdirparts, rdirparts, flags);
 
@@ -1084,7 +1084,7 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
             break;
         default:
             LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
-#ifdef LIBPATH_OS_IS_WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
         case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
 #endif
         case    libpath_WorkingDirectoryContextMechanism_getcwd:
@@ -1098,9 +1098,9 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
 LIBPATH_API
 libpath_Compare_ComparePathsAsStringPtrsAndLens(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt        /* = NULL */
 ,   void*                                       reserved    /* = NULL */
@@ -1124,9 +1124,9 @@ static
 LIBPATH_RC
 libpath_Compare_ComparePathsAsStringPtrsAndLens_UNCHECKED_(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt
 ,   libpath_truthy_t*                           result

@@ -4,7 +4,7 @@
  * Purpose: Definition of fundamental types for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -60,8 +60,10 @@
  */
 
 #ifdef LIBPATH_CXX_VER_2011_plus
+# include <cstddef>
 # include <cstdint>
 #else
+# include <stddef.h>
 # include <stdint.h>
 #endif
 
@@ -137,14 +139,22 @@ typedef char                                                libpath_char_t;
 
 #ifdef LIBPATH_CXX_VER_2011_plus
 
+typedef std::size_t                                         libpath_size_t;
+
 typedef std::int32_t                                        libpath_sint32_t;
 
 typedef std::uint32_t                                       libpath_uint32_t;
+
+typedef std::uintptr_t                                      libpath_uintptr_t;
 #else
+
+typedef size_t                                              libpath_size_t;
 
 typedef int32_t                                             libpath_sint32_t;
 
 typedef uint32_t                                            libpath_uint32_t;
+
+typedef uintptr_t                                           libpath_uintptr_t;
 #endif
 
 

@@ -4,7 +4,7 @@
  * Purpose: Main include for libpath library's Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -105,17 +105,17 @@ libpath_Parse_ParsePathFromStringSlice(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
 ,   libpath_ParseResult_t*          result /* = NULL */
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices /* = NULL */
 );
 
 LIBPATH_API
 libpath_Parse_ParsePathFromStringPtrAndLen(
     libpath_char_t const*       path
-,   size_t                      pathLen
+,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result /* = NULL */
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 );
 
@@ -124,7 +124,7 @@ libpath_Parse_ParsePathFromCStyleString(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result /* = NULL */
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 );
 

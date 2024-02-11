@@ -4,7 +4,7 @@
  * Purpose: Main include for libpath library's Comparison API .
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -74,9 +74,9 @@ libpath_Compare_ComparePathsAsStringSlices(
 LIBPATH_API
 libpath_Compare_ComparePathsAsStringPtrsAndLens(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt        /* = NULL */
 ,   void*                                       reserved    /* = NULL */

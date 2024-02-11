@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  */
 
 #include "libpath.equate.internal.h"
@@ -20,9 +20,9 @@
 
 int
 strncasecmp_(
-    char const* s1
-,   char const* s2
-,   size_t      n
+    char const*     s1
+,   char const*     s2
+,   libpath_size_t  n
 )
 {
 #ifdef LIBPATH_OS_IS_UNIX
@@ -37,7 +37,7 @@ strncasecmp_(
     return _strncmp(s1, s2, n);
 # else
 
-    { size_t i; for (i = 0; i != n; ++i, ++s1, ++s2)
+    { libpath_size_t i; for (i = 0; i != n; ++i, ++s1, ++s2)
     {
         if (*s1 != *s2)
         {
@@ -134,7 +134,7 @@ libpath_Internal_roots_equal(
 {
     LIBPATH_ASSERT(lhs->len == rhs->len);
 
-    { size_t i; for(i = 0; i != lhs->len; ++i)
+    { libpath_size_t i; for(i = 0; i != lhs->len; ++i)
     {
         libpath_char_t const    lch =   lhs->ptr[i];
         libpath_char_t const    rch =   rhs->ptr[i];
@@ -156,7 +156,7 @@ libpath_Internal_roots_equal(
     return LIBPATH_V_TRUEY;
 }
 
-size_t
+libpath_size_t
 libpath_Internal_count_dots(
     libpath_StringSlice_t const* part
 )
@@ -197,9 +197,9 @@ libpath_Internal_count_dots(
     return 0;
 }
 
-size_t
+libpath_size_t
 libpath_Internal_canonicalise_parts(
-    size_t                  cdirparts
+    libpath_size_t          cdirparts
 ,   libpath_StringSlice_t*  dirparts
 )
 {
@@ -209,11 +209,11 @@ libpath_Internal_canonicalise_parts(
     libpath_StringSlice_t*              dest    =   begin;
     libpath_StringSlice_t const*        src     =   begin;
 
-    size_t                              nonDots =   0;
+    libpath_size_t                      nonDots =   0;
 
     for(; src != end; ++src)
     {
-        size_t const numDots = libpath_Internal_count_dots(src);
+        libpath_size_t const numDots = libpath_Internal_count_dots(src);
 
         switch (numDots)
         {
@@ -255,8 +255,8 @@ libpath_Internal_directory_whole_equal(
 ,   libpath_StringSlice_t const*    rhs
 )
 {
-    size_t  lhsLen  =   lhs->len;
-    size_t  rhsLen  =   rhs->len;
+    libpath_size_t  lhsLen  =   lhs->len;
+    libpath_size_t  rhsLen  =   rhs->len;
 
     if (0 != lhsLen &&
         libpath_Internal_character_is_pathname_separator(lhs->ptr[lhsLen - 1]))
@@ -274,7 +274,7 @@ libpath_Internal_directory_whole_equal(
         return LIBPATH_V_FALSEY;
     }
 
-    { size_t i; for(i = 0; i != lhsLen; ++i)
+    { libpath_size_t i; for(i = 0; i != lhsLen; ++i)
     {
         char const  cl  =   lhs->ptr[i];
         char const  cr  =   rhs->ptr[i];
@@ -307,7 +307,7 @@ libpath_Internal_directory_whole_equal_3(
     // not be present on cwd, so determine "cwd gap" as
     // the potential absence of trailing sep
 
-    size_t cwd_gap = 0;
+    libpath_size_t cwd_gap = 0;
 
     if (0 != cwd->len)
     {
@@ -351,8 +351,8 @@ libpath_Internal_directory_part_equal(
 ,   libpath_StringSlice_t const*    rhs
 )
 {
-    size_t  lhsLen  =   lhs->len;
-    size_t  rhsLen  =   rhs->len;
+    libpath_size_t  lhsLen  =   lhs->len;
+    libpath_size_t  rhsLen  =   rhs->len;
 
     if (0 != lhsLen &&
         libpath_Internal_character_is_pathname_separator(lhs->ptr[lhsLen - 1]))
@@ -370,7 +370,7 @@ libpath_Internal_directory_part_equal(
         return LIBPATH_V_FALSEY;
     }
 
-    { size_t i; for(i = 0; i != lhsLen; ++i)
+    { libpath_size_t i; for(i = 0; i != lhsLen; ++i)
     {
         char const  cl  =   lhs->ptr[i];
         char const  cr  =   rhs->ptr[i];
@@ -390,9 +390,9 @@ libpath_Internal_directory_part_equal(
 
 libpath_truthy_t
 libpath_Internal_directory_parts_equal(
-    size_t                  cldirparts
+    libpath_size_t          cldirparts
 ,   libpath_StringSlice_t*  ldirparts
-,   size_t                  crdirparts
+,   libpath_size_t          crdirparts
 ,   libpath_StringSlice_t*  rdirparts
 )
 {
@@ -401,7 +401,7 @@ libpath_Internal_directory_parts_equal(
         return LIBPATH_V_FALSEY;
     }
 
-    { size_t i; for(i = 0; i != cldirparts; ++i)
+    { libpath_size_t i; for(i = 0; i != cldirparts; ++i)
     {
         if (!libpath_Internal_directory_part_equal(&ldirparts[i], &rdirparts[i]))
         {

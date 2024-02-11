@@ -4,7 +4,7 @@
  * Purpose: Definition of shared types for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 9th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -67,7 +67,7 @@ enum libpath_WorkingDirectoryContextMechanism_t
 {
         libpath_WorkingDirectoryContextMechanism_NoneSpecified          =   0
     ,   libpath_WorkingDirectoryContextMechanism_CStyleString           =   1
-#ifdef LIBPATH_OS_IS_WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
     ,   libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory    =   2
 #endif
     ,   libpath_WorkingDirectoryContextMechanism_getcwd                 =   3

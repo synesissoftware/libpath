@@ -4,7 +4,7 @@
  * Purpose: Main include for libpath library's Parsing API .
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -45,7 +45,7 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * includes - 1
+ * includes
  */
 
 #include <libpath/util/types.h>
@@ -63,7 +63,7 @@
  */
 LIBPATH_API
 libpath_Util_AllocateSliceArray(
-    size_t                  numSlices
+    libpath_size_t          numSlices
 ,   libpath_StringSlice_t** slices
 );
 
@@ -81,17 +81,8 @@ libpath_Util_SliceFromCStyleString(
 LIBPATH_CALL(libpath_StringSlice_t)
 libpath_Util_SliceFromStringPtrAndLen(
     libpath_char_t const*   ptr
-,   size_t                  len
+,   libpath_size_t          len
 );
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes - 2
- */
-
-#ifdef __cplusplus
-
-#endif /* __cplusplus */
 
 
 /* ////////////////////////////////////////////////////////////////////// */

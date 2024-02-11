@@ -4,7 +4,7 @@
  * Purpose: Main include for libpath library's Parsing API's types.
  *
  * Created: 9th November 2012
- * Updated: 9th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -65,17 +65,27 @@ struct libpath_ParseResult_t
 #if 0
     LIBPATH_RCX                     rcx;
 #else
-    int                             reserved0;
+    libpath_uintptr_t               reserved0;
 #endif /* 0 */
+    /** @brief The input string, unchanged. */
     libpath_StringSlice_t           input;
+    /** @brief The full path. */
     libpath_StringSlice_t           path;
+    /** @brief The location part of the path. */
     libpath_StringSlice_t           locationPart;
+    /** @brief The root part of the path. */
     libpath_StringSlice_t           rootPart;
+    /** @brief The directory part of the path. */
     libpath_StringSlice_t           directoryPart;
-    size_t                          numDirectoryParts;
-    size_t                          numDotsDirectoryParts;
+    /** @brief The number of directory parts. */
+    libpath_size_t                  numDirectoryParts;
+    /** @brief The number of directory parts that are dots (i.e. `"."` or `".."`). */
+    libpath_size_t                  numDotsDirectoryParts;
+    /** @brief The entry part of the path. */
     libpath_StringSlice_t           entryPart;
+    /** @brief The entry basename part of the path. */
     libpath_StringSlice_t           entryBaseNamePart;
+    /** @brief The entry extension part of the path. */
     libpath_StringSlice_t           entryExtensionPart;
 
     /*
@@ -98,7 +108,7 @@ struct libpath_ParseResult_t
     libpath_StringSlice_t           volumePart;
 #endif /* LIBPATH_OS_IS_WINDOWS */
 
-    size_t                          firstBadCharOffset;
+    libpath_size_t                  firstBadCharOffset;
 };
 
 #ifndef __cplusplus

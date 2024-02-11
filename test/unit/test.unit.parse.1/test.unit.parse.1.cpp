@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 7th February 2024
+ * Updated: 11th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -276,9 +276,9 @@ int main(int argc, char **argv)
  using ::libpath::parsing::is_rooted;
 
 #ifdef __cplusplus
-    size_t const    NUM_DP_ELEMENTS =   10;
+    libpath_size_t const    NUM_DP_ELEMENTS =   10;
 #else /* ? __cplusplus */
-# define            NUM_DP_ELEMENTS    (10)
+# define                    NUM_DP_ELEMENTS    (10)
 #endif /* __cplusplus */
 
 static void test_1_0()
@@ -1879,9 +1879,9 @@ static void test_1_60(void)
     };
     char const input_template[] = "/this/is/going/to/be/a.bad.path";
 
-    { for(size_t i = 0; i != STLSOFT_NUM_ELEMENTS(bad_chars); ++i)
+    { for(libpath_size_t i = 0; i != STLSOFT_NUM_ELEMENTS(bad_chars); ++i)
     {
-        { for(size_t j = 0; j != STLSOFT_NUM_ELEMENTS(input_template) - 1; ++j)
+        { for(libpath_size_t j = 0; j != STLSOFT_NUM_ELEMENTS(input_template) - 1; ++j)
         {
             char input[STLSOFT_NUM_ELEMENTS(input_template)];
 
@@ -2390,10 +2390,10 @@ static void test_1_81(void)
 static void test_1_82(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
-    char const      input[] =   "\\\\192.168.0.1\\share\\";
-    size_t const    cch     =   STLSOFT_NUM_ELEMENTS(input) - 1;
+    char const              input[] =   "\\\\192.168.0.1\\share\\";
+    libpath_size_t const    cch     =   STLSOFT_NUM_ELEMENTS(input) - 1;
 
-    { for(size_t i = 0; i <= cch; ++i)
+    { for(libpath_size_t i = 0; i <= cch; ++i)
     {
         ParseResult_t   r;
         LIBPATH_RC      rc;

@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -65,7 +65,7 @@
 
 LIBPATH_API
 libpath_Util_AllocateSliceArray(
-    size_t                  numSlices
+    libpath_size_t          numSlices
 ,   libpath_StringSlice_t** slices
 )
 {
@@ -111,7 +111,7 @@ libpath_Util_SliceFromCStyleString(
 libpath_StringSlice_t
 libpath_Util_SliceFromStringPtrAndLen(
     libpath_char_t const*   ptr
-,   size_t                  len
+,   libpath_size_t          len
 )
 {
     libpath_StringSlice_t slice;

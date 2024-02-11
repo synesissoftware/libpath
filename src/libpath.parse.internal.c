@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  */
 
 #include "libpath.parse.internal.h"
@@ -21,7 +21,7 @@ libpath_truthy_t
 libpath_Internal_path_character_is_bad(
     libpath_char_t                  ch
 ,   libpath_StringSlice_t const*    path
-,   size_t                          offset
+,   libpath_size_t                  offset
 ,   int                             flags
 )
 {
@@ -67,7 +67,7 @@ libpath_Internal_path_character_is_bad(
     }
 }
 
-size_t
+libpath_size_t
 libpath_Internal_count_trailing_dots_directory(
     libpath_StringSlice_t const* path
 )
@@ -143,7 +143,7 @@ libpath_Internal_character_is_pathname_separator(
 libpath_truthy_t
 libpath_Internal_path_is_absolute(
     libpath_StringSlice_t const*    path
-,   size_t*                         rootLen
+,   libpath_size_t*                 rootLen
 ,   libpath_truthy_t*               invalidRoot
 )
 {
@@ -307,14 +307,14 @@ libpath_Internal_path_is_absolute(
 
 libpath_truthy_t
 libpath_Internal_find_next_directory_part(
-    size_t*                         i
+    libpath_size_t*                 i
 ,   libpath_StringSlice_t const*    directoryPart
 ,   int                             flags
 ,   libpath_StringSlice_t*          part
 ,   libpath_truthy_t*               isDots
 )
 {
-    size_t numConsecutiveDots = 0;
+    libpath_size_t numConsecutiveDots = 0;
 
     LIBPATH_ASSERT(NULL != directoryPart);
     LIBPATH_ASSERT(NULL != part);
@@ -396,7 +396,7 @@ libpath_Internal_find_UNC_root_slice(
         invalid
     };
 
-    size_t i = 0;
+    libpath_size_t i = 0;
 
     int state = slash2;
 

@@ -4,7 +4,7 @@
  * Purpose: Main include for libpath library's Equating API.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -74,9 +74,9 @@ libpath_Equate_EquatePathsAsStringSlices(
 LIBPATH_API
 libpath_Equate_EquatePathsAsStringPtrsAndLens(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = NULL */
 ,   void*                                       reserved /* = NULL */

@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath library's Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -67,7 +67,7 @@ libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 );
 
@@ -75,10 +75,10 @@ static
 LIBPATH_RC
 libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
     libpath_char_t const*       path
-,   size_t                      pathLen
+,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 );
 
@@ -87,7 +87,7 @@ LIBPATH_RC
 Xyz1(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_ParseResult_t*          result
 );
@@ -101,7 +101,7 @@ Xyz2(
 ,   libpath_sint32_t                flags
 ,   libpath_char_t const*           lastSlash
 ,   libpath_char_t const*           lastPeriod
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_ParseResult_t*          result
 );
@@ -116,7 +116,7 @@ Xyz3(
 ,   libpath_char_t const*           startOfEntry
 ,   libpath_char_t const*           endOfEntryBaseName
 ,   libpath_char_t const*           startOfEntryExtension
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_ParseResult_t*          result
 );
@@ -132,7 +132,7 @@ libpath_Parse_ParsePathFromStringSlice(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
 ,   libpath_ParseResult_t*          result                  /* = NULL */
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices     /* = NULL */
 )
 {
@@ -174,7 +174,7 @@ LIBPATH_RC
 Xyz1(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_ParseResult_t*          result
 )
@@ -221,9 +221,9 @@ Xyz1(
             break;
         default:
 
-            if (libpath_Internal_path_character_is_bad(*s, path, LIBPATH_STATIC_CAST(size_t, s - begin), flags))
+            if (libpath_Internal_path_character_is_bad(*s, path, LIBPATH_STATIC_CAST(libpath_size_t, s - begin), flags))
             {
-                result->firstBadCharOffset = LIBPATH_STATIC_CAST(size_t, s - begin);
+                result->firstBadCharOffset = LIBPATH_STATIC_CAST(libpath_size_t, s - begin);
 
                 return LIBPATH_RESULTCODE(BadPathCharacter);
             }
@@ -266,7 +266,7 @@ Xyz2(
 ,   libpath_sint32_t                flags
 ,   libpath_char_t const*           lastSlash
 ,   libpath_char_t const*           lastPeriod
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_ParseResult_t*          result
 )
@@ -276,7 +276,7 @@ Xyz2(
     libpath_char_t const*       endOfEntryBaseName;
     libpath_char_t const*       startOfEntryExtension;
 
-    size_t const                numTrailingDots = libpath_Internal_count_trailing_dots_directory(path);
+    libpath_size_t const        numTrailingDots = libpath_Internal_count_trailing_dots_directory(path);
 
     if (0 != numTrailingDots)
     {
@@ -335,7 +335,7 @@ Xyz3(
 ,   libpath_char_t const*           startOfEntry
 ,   libpath_char_t const*           endOfEntryBaseName
 ,   libpath_char_t const*           startOfEntryExtension
-,   size_t                          numDirectoryPartSlices
+,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_ParseResult_t*          result
 )
@@ -343,7 +343,7 @@ Xyz3(
 #endif /* !__cplusplus */
 
     libpath_char_t const*   startOfDirectory;
-    size_t                  rootLen;
+    libpath_size_t          rootLen;
     libpath_truthy_t        pathIsAbsolute;
     libpath_truthy_t        invalidRoot;
 
@@ -418,8 +418,8 @@ Xyz3(
 
     if (0 != result->directoryPart.len)
     {
-        size_t                  pre =   0;
-        size_t                  i   =   0;
+        libpath_size_t          pre =   0;
+        libpath_size_t          i   =   0;
         libpath_truthy_t isDots;
         libpath_StringSlice_t   part;
 
@@ -460,10 +460,10 @@ Xyz3(
 LIBPATH_API
 libpath_Parse_ParsePathFromStringPtrAndLen(
     libpath_char_t const*       path
-,   size_t                      pathLen
+,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result /* = NULL */
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 )
 {
@@ -478,10 +478,10 @@ static
 LIBPATH_RC
 libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
     libpath_char_t const*       path
-,   size_t                      pathLen
+,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 )
 {
@@ -496,7 +496,7 @@ libpath_Parse_ParsePathFromCStyleString(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result /* = NULL */
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 )
 {
@@ -513,7 +513,7 @@ libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
 ,   libpath_ParseResult_t*      result
-,   size_t                      numDirectoryPartSlices
+,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 )
 {

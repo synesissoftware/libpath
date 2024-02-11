@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath library's Equating API.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -79,9 +79,9 @@ static
 LIBPATH_RC
 libpath_Equate_EquatePathsAsStringPtrsAndLens_UNCHECKED_(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt /* = NULL */
 ,   void*                                       reserved
@@ -350,8 +350,8 @@ libpath_Internal_PathEquals_impl_2_(
             }
             else
             {
-                size_t const        nldirparts  =   libpath_Internal_canonicalise_parts(lresult->numDirectoryParts, *ldirparts);
-                size_t const        nrdirparts  =   libpath_Internal_canonicalise_parts(rresult->numDirectoryParts, *rdirparts);
+                libpath_size_t const    nldirparts  =   libpath_Internal_canonicalise_parts(lresult->numDirectoryParts, *ldirparts);
+                libpath_size_t const    nrdirparts  =   libpath_Internal_canonicalise_parts(rresult->numDirectoryParts, *rdirparts);
 
                 *result = libpath_Internal_directory_parts_equal(nldirparts, *ldirparts, nrdirparts, *rdirparts);
 
@@ -455,16 +455,16 @@ libpath_Internal_PathEquals_impl_2_(
                         }
                         else
                         {
-                            size_t const        nabs_dirparts   =   libpath_Internal_canonicalise_parts(abs_result->numDirectoryParts, *abs_dirparts);
-                            size_t const        nrel_dirparts   =   libpath_Internal_canonicalise_parts(rel_result->numDirectoryParts, *rel_dirparts);
-                            size_t const        ncwd_dirparts   =   libpath_Internal_canonicalise_parts(cwd_result.numDirectoryParts, *cwd_dirparts);
+                            libpath_size_t const    nabs_dirparts   =   libpath_Internal_canonicalise_parts(abs_result->numDirectoryParts, *abs_dirparts);
+                            libpath_size_t const    nrel_dirparts   =   libpath_Internal_canonicalise_parts(rel_result->numDirectoryParts, *rel_dirparts);
+                            libpath_size_t const    ncwd_dirparts   =   libpath_Internal_canonicalise_parts(cwd_result.numDirectoryParts, *cwd_dirparts);
 
 
                             // Now work backwards comparing abs and rel parts
 
-                            size_t nabs = nabs_dirparts;
-                            size_t nrel = nrel_dirparts;
-                            size_t ncwd = ncwd_dirparts;
+                            libpath_size_t  nabs    =   nabs_dirparts;
+                            libpath_size_t  nrel    =   nrel_dirparts;
+                            libpath_size_t  ncwd    =   ncwd_dirparts;
 
                             // first canonicalise cwd and relative parts
                             //
@@ -473,8 +473,8 @@ libpath_Internal_PathEquals_impl_2_(
                             //
                             for(; 0 != nrel && 0 != ncwd; )
                             {
-                                libpath_StringSlice_t const*    rel_first_part  =   &(*rel_dirparts)[0];
-                                libpath_StringSlice_t const*    cwd_last_part   =   &(*cwd_dirparts)[ncwd - 1];
+                                libpath_StringSlice_t const* const  rel_first_part  =   &(*rel_dirparts)[0];
+                                libpath_StringSlice_t const* const  cwd_last_part   =   &(*cwd_dirparts)[ncwd - 1];
 
                                 if (2 == libpath_Internal_count_dots(rel_first_part) &&
                                     0 == libpath_Internal_count_dots(cwd_last_part))
@@ -586,7 +586,7 @@ libpath_Equate_EquatePathsAsStringSlices(
             break;
         default:
             LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
-#ifdef LIBPATH_OS_IS_WINDOWS
+#if defined(_WIN32) || defined(_WIN64)
         case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
 #endif
         case    libpath_WorkingDirectoryContextMechanism_getcwd:
@@ -600,9 +600,9 @@ libpath_Equate_EquatePathsAsStringSlices(
 LIBPATH_API
 libpath_Equate_EquatePathsAsStringPtrsAndLens(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt /* = NULL */
 ,   void*                                       reserved
@@ -621,9 +621,9 @@ static
 LIBPATH_RC
 libpath_Equate_EquatePathsAsStringPtrsAndLens_UNCHECKED_(
     libpath_char_t const*                       lhs
-,   size_t                                      lhsLen
+,   libpath_size_t                              lhsLen
 ,   libpath_char_t const*                       rhs
-,   size_t                                      rhsLen
+,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
 ,   libpath_WorkingDirectoryContext_t const*    ctxt /* = NULL */
 ,   void*                                       reserved

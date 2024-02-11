@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath library's Parsing API.
  *
  * Created: 29th March 2013
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -63,14 +63,14 @@ typedef libpath_ParseResult_t                               ParseResult_t;
 class dp_slices
 {
 public: // Member types
-    typedef StringSlice_t               string_slice_type;
-    typedef string_slice_type*          pointer;
-    typedef string_slice_type const*    const_pointer;
-    typedef string_slice_type&          reference;
-    typedef string_slice_type const&    const_reference;
-    typedef pointer                     iterator;
-    typedef const_pointer               const_iterator;
-    typedef size_t                      size_type;
+    typedef StringSlice_t                                   string_slice_type;
+    typedef string_slice_type*                              pointer;
+    typedef string_slice_type const*                        const_pointer;
+    typedef string_slice_type&                              reference;
+    typedef string_slice_type const&                        const_reference;
+    typedef pointer                                         iterator;
+    typedef const_pointer                                   const_iterator;
+    typedef libpath_size_t                                  size_type;
 
 public: // Construction
     dp_slices();
@@ -102,7 +102,7 @@ parse_path_from_string_slice(
     StringSlice_t const*    path
 ,   sint32_t                flags
 ,   ParseResult_t*          result
-,   size_t                  numDirectoryPartSlices
+,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
 {
@@ -115,7 +115,7 @@ parse_path_from_string_slice(
     StringSlice_t const&    path
 ,   sint32_t                flags
 ,   ParseResult_t*          result
-,   size_t                  numDirectoryPartSlices
+,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
 {
@@ -126,10 +126,10 @@ inline
 LIBPATH_RC
 parse_path_from_string_ptr_and_len(
     libpath_char_t const*   path
-,   size_t                  pathLen
+,   libpath_size_t          pathLen
 ,   sint32_t                flags
 ,   ParseResult_t*          result
-,   size_t                  numDirectoryPartSlices
+,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
 {
@@ -142,7 +142,7 @@ parse_path_from_cstyle_string(
     libpath_char_t const*   path
 ,   sint32_t                flags
 ,   ParseResult_t*          result
-,   size_t                  numDirectoryPartSlices
+,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
 {

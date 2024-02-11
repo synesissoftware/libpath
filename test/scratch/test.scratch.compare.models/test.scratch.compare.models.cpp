@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.scratch.compare.models project.
  *
  * Created: 29th March 2013
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -77,7 +77,7 @@ static int main_(int /* argc */, char** /*argv*/)
 int main(int argc, char** argv)
 {
 #if 0
-    { for(size_t i = 0; i < 0xffffffff; ++i){} }
+    { for(libpath_size_t i = 0; i < 0xffffffff; ++i){} }
 #endif /* 0 */
 
     try
