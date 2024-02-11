@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/equate/types.h
  *
- * Purpose: Main include for libpath library's Equating API's types.
+ * Purpose: libpath Equating API types.
  *
  * Created: 9th November 2012
  * Updated: 8th February 2024

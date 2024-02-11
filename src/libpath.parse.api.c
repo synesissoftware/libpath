@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath.parse.api.c
  *
- * Purpose: Main implementation file for libpath library's Parsing API.
+ * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

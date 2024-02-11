@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/common/types.hpp
  *
- * Purpose: Main include for common types defined for libpath library.
+ * Purpose: Common types defined for libpath library.
  *
  * Created: 29th March 2013
  * Updated: 8th February 2024

@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath.equate.api.c
  *
- * Purpose: Main implementation file for libpath library's Equating API.
+ * Purpose: Main implementation file for libpath Equating API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

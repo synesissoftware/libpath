@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/parse.hpp
  *
- * Purpose: C++ include for libpath library's Parsing API.
+ * Purpose: C++ include for libpath Parsing API.
  *
  * Created: 29th March 2013
  * Updated: 11th February 2024

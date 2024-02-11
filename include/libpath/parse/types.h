@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/parse/types.h
  *
- * Purpose: Main include for libpath library's Parsing API's types.
+ * Purpose: libpath Parsing API types.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/util.h
  *
- * Purpose: C include for libpath library's Utility API.
+ * Purpose: C include for libpath Utility API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

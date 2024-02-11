@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath.util.api.c
  *
- * Purpose: Main implementation file for libpath library.
+ * Purpose: Main implementation file for libpath Utility API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

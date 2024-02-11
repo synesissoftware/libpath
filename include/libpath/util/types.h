@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/util/types.h
  *
- * Purpose: Main include for libpath library's Util API's types.
+ * Purpose: libpath Utility API types.
  *
  * Created: 9th November 2012
- * Updated: 8th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *

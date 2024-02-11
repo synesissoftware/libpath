@@ -1,10 +1,10 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/common/types.h
  *
- * Purpose: Main include for common types defined for libpath library.
+ * Purpose: Common types defined for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *

@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/parse/api.h
  *
- * Purpose: Main include for libpath library's Parsing API.
+ * Purpose: libpath Parsing API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath.equate.api.cpp
  *
- * Purpose: Main implementation file for libpath library's Comparing API.
+ * Purpose: Main implementation file for libpath Comparing API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/util.hpp
  *
- * Purpose: C++ include for libpath library's Utility API.
+ * Purpose: C++ include for libpath Utility API.
  *
  * Created: 11th February 2024
  * Updated: 11th February 2024

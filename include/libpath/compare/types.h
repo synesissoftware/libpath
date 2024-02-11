@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/compare/types.h
  *
- * Purpose: Main include for libpath library's Comparing API's types.
+ * Purpose: libpath Comparing API types.
  *
  * Created: 9th November 2012
  * Updated: 10th February 2024

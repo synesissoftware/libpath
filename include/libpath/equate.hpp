@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/equate.hpp
  *
- * Purpose: C++ include for libpath library's Equating API.
+ * Purpose: C++ include for libpath Equating API.
  *
  * Created: 11th February 2024
  * Updated: 11th February 2024

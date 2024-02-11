@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/compare/api.h
  *
- * Purpose: Main include for libpath library's Comparison API .
+ * Purpose: libpath Comparing API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024

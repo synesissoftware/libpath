@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/compare.hpp
  *
- * Purpose: C++ include for libpath library's Comparing API.
+ * Purpose: C++ include for libpath Comparing API.
  *
  * Created: 9th November 2012
  * Updated: 10th February 2024

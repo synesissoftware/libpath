@@ -1,7 +1,7 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:    libpath/equate.h
  *
- * Purpose: C include for libpath library's Equating API.
+ * Purpose: C include for libpath Equating API.
  *
  * Created: 9th November 2012
  * Updated: 11th February 2024
