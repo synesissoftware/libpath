@@ -7,6 +7,7 @@
     "editor.tabSize": 4,
     "files.associations": {
         "__locale": "c",
+        "rc.h": "c",
     },
     "files.trimTrailingWhitespace": true,
 }
