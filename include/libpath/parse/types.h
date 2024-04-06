@@ -83,8 +83,8 @@ struct libpath_ParseResult_t
     libpath_size_t                  numDotsDirectoryParts;
     /** @brief The entry part of the path. */
     libpath_StringSlice_t           entryPart;
-    /** @brief The entry basename part of the path. */
-    libpath_StringSlice_t           entryBaseNamePart;
+    /** @brief The entry stem part of the path. */
+    libpath_StringSlice_t           entryStemPart;
     /** @brief The entry extension part of the path. */
     libpath_StringSlice_t           entryExtensionPart;
 

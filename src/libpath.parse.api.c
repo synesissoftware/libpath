@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 6th April 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -114,7 +114,7 @@ Xyz3(
 ,   libpath_char_t const* const     end
 ,   libpath_sint32_t                flags
 ,   libpath_char_t const*           startOfEntry
-,   libpath_char_t const*           endOfEntryBaseName
+,   libpath_char_t const*           endOfEntryStem
 ,   libpath_char_t const*           startOfEntryExtension
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
@@ -273,7 +273,7 @@ Xyz2(
 {
 #endif /* !__cplusplus */
     libpath_char_t const*       startOfEntry;
-    libpath_char_t const*       endOfEntryBaseName;
+    libpath_char_t const*       endOfEntryStem;
     libpath_char_t const*       startOfEntryExtension;
 
     libpath_size_t const        numTrailingDots = libpath_Internal_count_trailing_dots_directory(path);
@@ -301,12 +301,12 @@ Xyz2(
 
     if (lastPeriod < startOfEntry)
     {
-        endOfEntryBaseName = end;
+        endOfEntryStem = end;
         startOfEntryExtension = end;
     }
     else
     {
-        endOfEntryBaseName = lastPeriod;
+        endOfEntryStem = lastPeriod;
         startOfEntryExtension = lastPeriod + 1;
     }
 #ifndef __cplusplus
@@ -317,7 +317,7 @@ Xyz2(
             ,   end
             ,   flags
             ,   startOfEntry
-            ,   endOfEntryBaseName
+            ,   endOfEntryStem
             ,   startOfEntryExtension
             ,   numDirectoryPartSlices
             ,   directoryPartSlices
@@ -333,7 +333,7 @@ Xyz3(
 ,   libpath_char_t const* const     end
 ,   libpath_sint32_t                flags
 ,   libpath_char_t const*           startOfEntry
-,   libpath_char_t const*           endOfEntryBaseName
+,   libpath_char_t const*           endOfEntryStem
 ,   libpath_char_t const*           startOfEntryExtension
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
@@ -448,8 +448,8 @@ Xyz3(
     result->entryPart.ptr = startOfEntry;
     result->entryPart.len = end - startOfEntry;
 
-    result->entryBaseNamePart.ptr = result->entryPart.ptr;
-    result->entryBaseNamePart.len = endOfEntryBaseName - result->entryPart.ptr;
+    result->entryStemPart.ptr = result->entryPart.ptr;
+    result->entryStemPart.len = endOfEntryStem - result->entryPart.ptr;
 
     result->entryExtensionPart.ptr = startOfEntryExtension;
     result->entryExtensionPart.len = end - startOfEntryExtension;
