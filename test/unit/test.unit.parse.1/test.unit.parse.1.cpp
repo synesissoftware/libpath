@@ -293,7 +293,7 @@ static void test_1_0(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[1];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
 
@@ -327,7 +327,7 @@ static void test_1_1(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -363,7 +363,7 @@ static void test_1_2(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -399,7 +399,7 @@ static void test_1_3(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -439,7 +439,7 @@ static void test_1_4(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -480,7 +480,7 @@ static void test_1_6(void)
     char const input[] = "...";
 
     ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, NULL);
+    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -505,7 +505,7 @@ static void test_1_7(void)
     char const input[] = ".....";
 
     ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, NULL);
+    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -529,7 +529,7 @@ static void test_1_8(void)
     char const input[] = "..abc.def..";
 
     ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, NULL);
+    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -560,7 +560,7 @@ static void test_1_10(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -594,7 +594,7 @@ static void test_1_11(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -628,7 +628,7 @@ static void test_1_12(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -666,7 +666,7 @@ static void test_1_14(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -704,7 +704,7 @@ static void test_1_15(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -744,7 +744,7 @@ static void test_1_16(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -784,7 +784,7 @@ static void test_1_17(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -860,7 +860,7 @@ static void test_1_18(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -910,7 +910,7 @@ static void test_1_19(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -960,7 +960,7 @@ static void test_1_20(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1010,7 +1010,7 @@ static void test_1_21(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1048,7 +1048,7 @@ static void test_1_22(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1111,7 +1111,7 @@ static void test_1_30(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1145,7 +1145,7 @@ static void test_1_31(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1179,7 +1179,7 @@ static void test_1_32(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1213,7 +1213,7 @@ static void test_1_33(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1247,7 +1247,7 @@ static void test_1_34(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1293,7 +1293,7 @@ static void test_1_35(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1327,7 +1327,7 @@ static void test_1_36(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1361,7 +1361,7 @@ static void test_1_37(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1415,7 +1415,7 @@ static void test_1_40(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1449,7 +1449,7 @@ static void test_1_41(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1483,7 +1483,7 @@ static void test_1_42(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1529,7 +1529,7 @@ static void test_1_43(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1575,7 +1575,7 @@ static void test_1_44(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1641,7 +1641,7 @@ static void test_1_50(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1675,7 +1675,7 @@ static void test_1_51(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1721,7 +1721,7 @@ static void test_1_52(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1767,7 +1767,7 @@ static void test_1_53(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1814,7 +1814,7 @@ static void test_1_54(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1899,7 +1899,7 @@ static void test_1_60(void)
             LIBPATH_RC      rc;
             StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-            rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+            rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
 
@@ -1919,41 +1919,41 @@ static void test_1_61(void)
     LIBPATH_RC        rc;
 
 
-    rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(0u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
 
 
-    rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(2u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(3u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(4u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
@@ -1961,7 +1961,7 @@ static void test_1_61(void)
 
 
 
-    rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
@@ -2332,7 +2332,7 @@ static void test_1_80(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -2366,7 +2366,7 @@ static void test_1_81(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -2402,7 +2402,7 @@ static void test_1_82(void)
         ParseResult_t   r;
         LIBPATH_RC      rc;
 
-        rc = parse_path_from_string_ptr_and_len(input, i, 0, &r, 0, NULL);
+        rc = parse_path_from_string_ptr_and_len(input, i, 0, &r, 0, LIBPATH_LF_nullptr);
 
         if (1 == i ||
             cch == i)

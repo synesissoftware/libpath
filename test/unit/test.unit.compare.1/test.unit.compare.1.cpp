@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.compare.1 project.
  *
  * Created: 17th February 2013
- * Updated: 7th February 2024
+ * Updated: 4th May 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -282,8 +282,8 @@ namespace
     compare_paths(
         char const*   lhs
     ,   char const*   rhs
-    ,   char const*   cwd   = NULL
-    ,   char const* /*mem*/ = NULL
+    ,   char const*   cwd   = LIBPATH_LF_nullptr
+    ,   char const* /*mem*/ = LIBPATH_LF_nullptr
     )
     {
         libpath_sint32_t                    flags   =   0;
@@ -298,7 +298,7 @@ namespace
         ,   rhs
         ,   flags
         ,   &ctxt
-        ,   NULL
+        ,   LIBPATH_LF_nullptr
         ,   &result
         );
 

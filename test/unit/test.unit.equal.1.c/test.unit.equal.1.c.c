@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.equal.1.c project.
  *
  * Created: 28th March 2013
- * Updated: 7th February 2024
+ * Updated: 4th May 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -270,8 +270,8 @@ bool
 path_equals(
     char const* lhs
 ,   char const* rhs
-,   char const* cwd /* = NULL */
-,   char const* mem /* = NULL */
+,   char const* cwd /* = LIBPATH_LF_nullptr */
+,   char const* mem /* = LIBPATH_LF_nullptr */
 )
 {
     libpath_sint32_t                    flags   =   0;
@@ -287,7 +287,7 @@ path_equals(
     ,   rhs
     ,   flags
     ,   &ctxt
-    ,   NULL
+    ,   LIBPATH_LF_nullptr
     ,   &result
     );
 
@@ -309,132 +309,132 @@ path_equals(
 
 static void test_1_0(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("", "", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("", "", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_1(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("", "a", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("a", "", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("", "a", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("a", "", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_2(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("file", "file", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("file", "file", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("fil1", "fil2", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("fil1", "fil2", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_3(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("file.ext", "file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("file.ext", "file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("file.ex1", "file.ex2", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("file.ex1", "file.ex2", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_4(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\file.ext", "dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\file.ext", "dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\file.ext", "dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\file.ext", "dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_5(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir2/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1\\file.ext", "dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1\\file.ext", "dir2/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1\\file.ext", "dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1\\file.ext", "dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_6(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/dir2/../file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/dir3/../file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/./file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "./dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/dir2/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/dir3/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/./file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "./dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/././././././././././././././././././././././././././././././././././././././././././././././file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/././././././././././././././././././././././././././././././././././././././././././././././file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/dir2/../dir3/../dir4/../dir5/../dir6/../dir7/../file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/dir2/dir3/dir4/dir5/dir6/dir7/../../../../../../file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/dir2/../dir3/../dir4/../dir5/../dir6/../dir7/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/dir2/dir3/dir4/dir5/dir6/dir7/../../../../../../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("../dir1/dir2/../file.ext", "../dir1/dir2/../file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("../dir1/dir2/../file.ext", "../dir1/dir2/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_7(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/dir2/../file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/dir3/../file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/./file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "./dir9/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/dir2/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/dir3/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/./file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "./dir9/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/././././././././././././././././././././././././././././././././././././././././././././././file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/././././././././././././././././././././././././././././././././././././././././././././././file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir9/dir2/../dir3/../dir4/../dir5/../dir6/../dir7/../file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir9/dir2/dir3/dir4/dir5/dir6/dir7/../../../../../../file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir9/dir2/../dir3/../dir4/../dir5/../dir6/../dir7/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir9/dir2/dir3/dir4/dir5/dir6/dir7/../../../../../../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("../dir1/dir2/../file.ext", "../dir9/dir2/../file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("../dir1/dir2/../file.ext", "../dir9/dir2/../file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_8(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/../../file.ext", "dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/../../file.ext", "dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "../dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "../dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_9(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "D:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "C:\\dir2\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "D:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "C:\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_10(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share1\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share1\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share2\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server2\\share1\\dir1\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share1\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share2\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server2\\share1\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server10\\share10\\dir1\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server10\\share10\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_11(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1/dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1/dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1\\dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1\\dir2\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1/dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1\\dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2\\file.ext", "dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1/dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1/dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1\\dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1\\dir2\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1/dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1\\dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1\\dir2/file.ext", "dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1/dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1/dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1\\dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1\\dir2\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1/dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1\\dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2\\file.ext", "dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1\\dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1\\dir2\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1\\dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
@@ -474,18 +474,18 @@ static void test_1_20(void)
 {
     // Trailing slashes
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def", "abc.def", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def/", "abc.def", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def", "abc.def/", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def", "abc.def", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def/", "abc.def", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def", "abc.def/", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def\\", "abc.def", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def", "abc.def\\", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def\\", "abc.def", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("abc.def", "abc.def\\", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def/", "abc.def/", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def/", "abc.def/", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def\\", "abc.def/", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def/", "abc.def\\", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def\\", "abc.def\\", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def\\", "abc.def/", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def/", "abc.def\\", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("abc.def\\", "abc.def\\", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 
 }
@@ -528,44 +528,44 @@ static void test_1_29(void)
 
 static void test_1_30(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir2", NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir8", NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir2/dir3/..", NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir4/.././file.ext", "/./dir1/dir2/dir3/dir4//..", NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir2", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir8", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir2/dir3/..", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir4/.././file.ext", "/./dir1/dir2/dir3/dir4//..", LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/../file.ext", ".././file.ext", "/dir1/dir2/dir3/dir4", NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", ".././file.ext", "/dir1/dir2/dir3/dir4", NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/../file.ext", ".././../file.ext", "/dir1/dir2/dir3/dir4", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/../file.ext", ".././file.ext", "/dir1/dir2/dir3/dir4", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", ".././file.ext", "/dir1/dir2/dir3/dir4", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/../file.ext", ".././../file.ext", "/dir1/dir2/dir3/dir4", LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/dir4/dir5/file.ext", "file.ext", "/dir1/dir2/dir3/dir4/dir5", NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/dir4/dir5/file.ext", "file.ext", "/dir1/dir2/dir3/dir4/dir5", LIBPATH_LF_nullptr));
 }
 
 static void test_1_31(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", "/dir1/dir2", NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "dir3/", "/dir1/dir2", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", "/dir1/dir2", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "dir3/", "/dir1/dir2", LIBPATH_LF_nullptr));
 }
 
 static void test_1_32(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/file.ext", "dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/file.ext", "dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "C:\\dir1\\file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "C:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_33(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "dir1/file.ext", "/", NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "dir1/file.ext", "/", LIBPATH_LF_nullptr));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "C:\\dir1\\file.ext", "C:/", NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\dir1/file.ext", "C:\\dir1\\file.ext", "C:", NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "C:\\dir1\\file.ext", "C:/", LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\dir1/file.ext", "C:\\dir1\\file.ext", "C:", LIBPATH_LF_nullptr));
 #endif
 }
 
@@ -595,101 +595,101 @@ static void test_1_39(void)
 
 static void test_1_40(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "/dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\dir1\\file.ext", "\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\dir1\\file.ext", "/dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\dir1\\file.ext", "\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("\\dir1\\file.ext", "/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_41(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:/dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "C:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "C:/dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "C:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "C:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "c:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:\\dir1\\file.ext", "C:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:\\dir1\\file.ext", "c:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "C:/dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "c:/dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:/dir1/file.ext", "C:/dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:/dir1/file.ext", "c:/dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "c:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:\\dir1\\file.ext", "C:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:\\dir1\\file.ext", "c:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "C:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:/dir1/file.ext", "c:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:/dir1/file.ext", "C:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("c:/dir1/file.ext", "c:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "D:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "D:/dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:/dir1/file.ext", "D:\\dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:/dir1/file.ext", "D:/dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "D:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "D:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:/dir1/file.ext", "D:\\dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:/dir1/file.ext", "D:/dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1\\file.ext", "C:dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1\\file.ext", "C:dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1/file.ext", "C:dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1/file.ext", "C:dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1\\file.ext", "C:dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1\\file.ext", "C:dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1/file.ext", "C:dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:dir1/file.ext", "C:dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1\\file.ext", "D:dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1\\file.ext", "D:dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1/file.ext", "D:dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1/file.ext", "D:dir1/file.ext", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1\\file.ext", "D:dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1\\file.ext", "D:dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1/file.ext", "D:dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:dir1/file.ext", "D:dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_42(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/file.ext", "dir1/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "dir1/file.ext", "/", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/file.ext", "dir1/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "dir1/file.ext", "/", LIBPATH_LF_nullptr));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "c:dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "c:dir1\\file.ext", "/", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "c:dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "c:dir1\\file.ext", "/", LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "d:dir1\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "d:dir1\\file.ext", "/", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "d:dir1\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\file.ext", "d:dir1\\file.ext", "/", LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_43(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "dir2/file.ext", "/dir1", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "dir2/file.ext", "/dir1", LIBPATH_LF_nullptr));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir1\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir2\\file.ext", "/dir1", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir2\\file.ext", "/dir1", LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir1\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir2\\file.ext", "\\dir1\\", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir2\\file.ext", "\\dir1\\", LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_44(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "dir2/file.ext", "/dir1/dir2/dir3/./../..", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "dir2/file.ext", "/dir1/dir2/dir3/./../..", LIBPATH_LF_nullptr));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir1\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir2\\file.ext", "/dir1/dir2/dir3/./../..", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir2\\file.ext", "/dir1/dir2/dir3/./../..", LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir1\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir2\\file.ext", "\\dir1\\dir2\\dir3\\.\\..\\..", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir1\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir2\\file.ext", "\\dir1\\dir2\\dir3\\.\\..\\..", LIBPATH_LF_nullptr));
 #endif
 }
 
 static void test_1_45(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/dir3/./../../dir2/file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "./../../dir2/file.ext", "/dir1/dir2/dir3/", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/dir3/./../../dir2/file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "./../../dir2/file.ext", "/dir1/dir2/dir3/", LIBPATH_LF_nullptr));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir1\\dir2\\dir3\\.\\..\\..\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\dir2\\file.ext", "c:.\\..\\..\\dir2\\file.ext", "/dir1/dir2/dir3", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "c:dir1\\dir2\\dir3\\.\\..\\..\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\dir2\\file.ext", "c:.\\..\\..\\dir2\\file.ext", "/dir1/dir2/dir3", LIBPATH_LF_nullptr));
 
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir1\\dir2\\dir3\\.\\..\\..\\dir2\\file.ext", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:.\\..\\..\\dir2\\file.ext", "\\dir1\\dir2\\dir3", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:dir1\\dir2\\dir3\\.\\..\\..\\dir2\\file.ext", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("C:\\dir1\\dir2\\file.ext", "d:.\\..\\..\\dir2\\file.ext", "\\dir1\\dir2\\dir3", LIBPATH_LF_nullptr));
 #endif
 }
 
@@ -711,9 +711,9 @@ static void test_1_49(void)
 
 static void test_1_50(void)
 {
-    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "/dir1/dir2/dir3/", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "/dir1/dir2/dir3", NULL, NULL));
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3", "/dir1/dir2/dir3/", NULL, NULL));
+    XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "/dir1/dir2/dir3/", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "/dir1/dir2/dir3", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3", "/dir1/dir2/dir3/", LIBPATH_LF_nullptr, LIBPATH_LF_nullptr));
 }
 
 static void test_1_51(void)

@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Utility API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -69,11 +69,11 @@ libpath_Util_AllocateSliceArray(
 ,   libpath_StringSlice_t** slices
 )
 {
-    LIBPATH_ASSERT(NULL != slices);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != slices);
 
     *slices = (libpath_StringSlice_t*)malloc(numSlices * sizeof(libpath_StringSlice_t));
 
-    if (NULL == *slices)
+    if (LIBPATH_LF_nullptr == *slices)
     {
         return LIBPATH_RC_OF(OutOfMemory);
     }
@@ -100,7 +100,7 @@ libpath_Util_SliceFromCStyleString(
 {
     libpath_StringSlice_t slice;
 
-    LIBPATH_ASSERT(NULL != s);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != s);
 
     slice.len   =   libpath_Internal_standard_string_strlen(s);
     slice.ptr   =   s;

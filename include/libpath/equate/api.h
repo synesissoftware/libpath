@@ -4,7 +4,7 @@
  * Purpose: libpath Equating API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -66,8 +66,8 @@ libpath_Equate_EquatePathsAsStringSlices(
     libpath_StringSlice_t const*                lhs
 ,   libpath_StringSlice_t const*                rhs
 ,   libpath_sint32_t                            flags
-,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = NULL */
-,   void*                                       reserved /* = NULL */
+,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = LIBPATH_LF_nullptr */
+,   void*                                       reserved /* = LIBPATH_LF_nullptr */
 ,   libpath_truthy_t*                           result
 );
 
@@ -78,8 +78,8 @@ libpath_Equate_EquatePathsAsStringPtrsAndLens(
 ,   libpath_char_t const*                       rhs
 ,   libpath_size_t                              rhsLen
 ,   libpath_sint32_t                            flags
-,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = NULL */
-,   void*                                       reserved /* = NULL */
+,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = LIBPATH_LF_nullptr */
+,   void*                                       reserved /* = LIBPATH_LF_nullptr */
 ,   libpath_truthy_t*                           result
 );
 
@@ -94,8 +94,8 @@ libpath_Equate_EquatePathsAsCStyleStrings(
     libpath_char_t const*                       lhs
 ,   libpath_char_t const*                       rhs
 ,   libpath_sint32_t                            flags
-,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = NULL */
-,   void*                                       reserved /* = NULL */
+,   libpath_WorkingDirectoryContext_t const*    ctxt     /* = LIBPATH_LF_nullptr */
+,   void*                                       reserved /* = LIBPATH_LF_nullptr */
 ,   libpath_truthy_t*                           result
 );
 

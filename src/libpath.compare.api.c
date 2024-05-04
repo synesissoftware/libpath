@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -455,8 +455,8 @@ compare_volume_letters(
 ,   libpath_StringSlice_t const* rhs
 )
 {
-    LIBPATH_ASSERT(NULL != lhs);
-    LIBPATH_ASSERT(NULL != rhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != lhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != rhs);
 
     LIBPATH_ASSERT(0 != lhs->len);
     LIBPATH_ASSERT(0 != rhs->len);
@@ -476,9 +476,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs, "lhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs, "rhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs, "lhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs, "rhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
     {
     int const   lhsRelativity   =   libpath_ParseResult_get_relativity_level_(lhs);
@@ -528,7 +528,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
     }
 #endif
 
-    if (NULL == cwd)
+    if (LIBPATH_LF_nullptr == cwd)
     {
         switch (LIBPATH_COMBINE_RLEVELS_(lhsRelativity, rhsRelativity))
         {
@@ -562,7 +562,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         }
     }
 
-    LIBPATH_ASSERT((OLD_REL(lhsRelativity) == OLD_REL(rhsRelativity)) || (NULL != cwd));
+    LIBPATH_ASSERT((OLD_REL(lhsRelativity) == OLD_REL(rhsRelativity)) || (LIBPATH_LF_nullptr != cwd));
 
 
     /* If both absolute, see if roots are different */
@@ -584,227 +584,149 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 
     if (OLD_REL(lhsRelativity) != OLD_REL(rhsRelativity))
     {
-        LIBPATH_ASSERT(NULL != cwd);
+        LIBPATH_ASSERT(LIBPATH_LF_nullptr != cwd);
 
         {
-        int const                       cwdRelativity   =   libpath_ParseResult_get_relativity_level_(cwd);
-        int const                       reversed        =   (OLD_REL(lhsRelativity) > OLD_REL(rhsRelativity));
-        int const                       absRelativity   =   reversed ? lhsRelativity : rhsRelativity;
+            int const                       cwdRelativity   =   libpath_ParseResult_get_relativity_level_(cwd);
+            int const                       reversed        =   (OLD_REL(lhsRelativity) > OLD_REL(rhsRelativity));
+            int const                       absRelativity   =   reversed ? lhsRelativity : rhsRelativity;
 #ifdef LIBPATH_OS_IS_WINDOWS
-        int const                       relRelativity   =   reversed ? rhsRelativity : lhsRelativity;
+            int const                       relRelativity   =   reversed ? rhsRelativity : lhsRelativity;
 #endif
-        libpath_ParseResult_t const*    abs             =   reversed ? lhs : rhs;
-        libpath_ParseResult_t const*    rel             =   reversed ? rhs : lhs;
-        int const                       r_multiplier    =   reversed ? +1 : -1;
+            libpath_ParseResult_t const*    abs             =   reversed ? lhs : rhs;
+            libpath_ParseResult_t const*    rel             =   reversed ? rhs : lhs;
+            int const                       r_multiplier    =   reversed ? +1 : -1;
 
-        /* TODO: need to change the way paths are qualified, so as to be a
-         * bitmap of fields:
-         *
-         * - rooted
-         * - volume
-         * - UNC
-         *
-         * That way we can test combinations of REL|CWD with ABS for
-         * easier comparison, and avoid the following baroque logic
-         */
+            /* TODO: need to change the way paths are qualified, so as to be a
+            * bitmap of fields:
+            *
+            * - rooted
+            * - volume
+            * - UNC
+            *
+            * That way we can test combinations of REL|CWD with ABS for
+            * easier comparison, and avoid the following baroque logic
+            */
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-        /* On Windows, any of the three can have a volume part, regardless
-         * of whether that qualifies as a full root.
-         *
-         * NOTE: absolute may not be absolute here (on Windows), only that
-         * it is _more absolute_ than relative
-         *
-         *      absolute    relative    cwd         action
-         *      --------    --------    ---         ------
-         * 0.     UNC         UNC         *         CANNOT OCCUR : handled above
-         * 5.     UNC         vol         *         return +1
-         * 6.     UNC        no-vol       vol       return +1
-         * 7.     UNC        no-vol       UNC       do nothing here
-         * 8.     UNC        no-vol      no-vol     return +1
-         * 1.     vol         vol         *         volumes must be same (!= is handled above); need to check whether cwd gives root
-         * 2.     vol        no-vol       vol       compare abs and cwd vols, return if different
-         * 3.     vol        no-vol       UNC       return -1
-         * 4.     vol        no-vol      no-vol     return +1
-         *
-         */
+            /* On Windows, any of the three can have a volume part, regardless
+            * of whether that qualifies as a full root.
+            *
+            * NOTE: absolute may not be absolute here (on Windows), only that
+            * it is _more absolute_ than relative
+            *
+            *      absolute    relative    cwd         action
+            *      --------    --------    ---         ------
+            * 0.     UNC         UNC         *         CANNOT OCCUR : handled above
+            * 5.     UNC         vol         *         return +1
+            * 6.     UNC        no-vol       vol       return +1
+            * 7.     UNC        no-vol       UNC       do nothing here
+            * 8.     UNC        no-vol      no-vol     return +1
+            * 1.     vol         vol         *         volumes must be same (!= is handled above); need to check whether cwd gives root
+            * 2.     vol        no-vol       vol       compare abs and cwd vols, return if different
+            * 3.     vol        no-vol       UNC       return -1
+            * 4.     vol        no-vol      no-vol     return +1
+            *
+            */
 
-        int const cmbRelativity =   relRelativity | cwdRelativity;
+            int const cmbRelativity =   relRelativity | cwdRelativity;
 
-        if (LIBPATH_IS_UNC_(absRelativity))
-        {
-            if (!LIBPATH_IS_UNC_(cmbRelativity))
+            if (LIBPATH_IS_UNC_(absRelativity))
             {
-                /* 5. */
-                /* 6. */
-                /* 8. */
-                *result = +1 * r_multiplier;
+                if (!LIBPATH_IS_UNC_(cmbRelativity))
+                {
+                    /* 5. */
+                    /* 6. */
+                    /* 8. */
+                    *result = +1 * r_multiplier;
 
-                return LIBPATH_RC_OF(Success);
+                    return LIBPATH_RC_OF(Success);
+                }
+                else
+                {
+                    /* 7. */
+
+                    ; // do nothing here
+                }
             }
             else
+            if (LIBPATH_HAS_VOLUME_(absRelativity))
             {
-                /* 7. */
-
-                ; // do nothing here
-            }
-        }
-        else
-        if (LIBPATH_HAS_VOLUME_(absRelativity))
-        {
-            if (LIBPATH_HAS_VOLUME_(relRelativity))
-            {
-                /* 1. */
-
-                LIBPATH_ASSERT(LIBPATH_IS_ABSOLUTE_(absRelativity));
-
-                /* Special case: at this point, the relative might have a
-                 * volume but no root, and the cwd also has no root
-                 */
-
-                if (LIBPATH_IS_RELATIVE_(cwdRelativity) &&
-                    LIBPATH_IS_RELATIVE_(relRelativity))
+                if (LIBPATH_HAS_VOLUME_(relRelativity))
                 {
+                    /* 1. */
+
+                    LIBPATH_ASSERT(LIBPATH_IS_ABSOLUTE_(absRelativity));
+
+                    /* Special case: at this point, the relative might have a
+                    * volume but no root, and the cwd also has no root
+                    */
+
+                    if (LIBPATH_IS_RELATIVE_(cwdRelativity) &&
+                        LIBPATH_IS_RELATIVE_(relRelativity))
+                    {
+                        *result = +1 * r_multiplier;
+
+                        return LIBPATH_RC_OF(Success);
+                    }
+                }
+                else
+                if (LIBPATH_HAS_VOLUME_(cwdRelativity))
+                {
+                    /* 2. */
+                    int const r = compare_volume_letters(&abs->volumePart, &cwd->volumePart);
+
+                    if (0 != r)
+                    {
+                        *result = r * r_multiplier;
+
+                        return LIBPATH_RC_OF(Success);
+                    }
+
+                    LIBPATH_ASSERT(LIBPATH_IS_ABSOLUTE_(absRelativity));
+
+                    /* Special case: at this point, we look for combination
+                    * of relative relative and relative cwd having volume
+                    */
+
+                    if (LIBPATH_IS_RELATIVE_(cwdRelativity) &&
+                        LIBPATH_IS_RELATIVE_(relRelativity))
+                    {
+                        *result = +1 * r_multiplier;
+
+                        return LIBPATH_RC_OF(Success);
+                    }
+                }
+                else
+                if (LIBPATH_IS_UNC_(cwdRelativity))
+                {
+                    /* 3. */
+                    *result = -1 * r_multiplier;
+
+                    return LIBPATH_RC_OF(Success);
+                }
+                else
+                {
+                    /* 4. */
                     *result = +1 * r_multiplier;
 
                     return LIBPATH_RC_OF(Success);
                 }
             }
-            else
-            if (LIBPATH_HAS_VOLUME_(cwdRelativity))
-            {
-                /* 2. */
-                int const r = compare_volume_letters(&abs->volumePart, &cwd->volumePart);
-
-                if (0 != r)
-                {
-                    *result = r * r_multiplier;
-
-                    return LIBPATH_RC_OF(Success);
-                }
-
-                LIBPATH_ASSERT(LIBPATH_IS_ABSOLUTE_(absRelativity));
-
-                /* Special case: at this point, we look for combination
-                 * of relative relative and relative cwd having volume
-                 */
-
-                if (LIBPATH_IS_RELATIVE_(cwdRelativity) &&
-                    LIBPATH_IS_RELATIVE_(relRelativity))
-                {
-                    *result = +1 * r_multiplier;
-
-                    return LIBPATH_RC_OF(Success);
-                }
-            }
-            else
-            if (LIBPATH_IS_UNC_(cwdRelativity))
-            {
-                /* 3. */
-                *result = -1 * r_multiplier;
-
-                return LIBPATH_RC_OF(Success);
-            }
-            else
-            {
-                /* 4. */
-                *result = +1 * r_multiplier;
-
-                return LIBPATH_RC_OF(Success);
-            }
-        }
 #else
-        if (cwdRelativity < absRelativity)
-        {
-            *result = +1 * r_multiplier;
-
-            return LIBPATH_RC_OF(Success);
-        }
-#endif
-
-#ifdef LIBPATH_OS_IS_WINDOWS
-        if (LIBPATH_IS_ABSOLUTE_(absRelativity) &&
-            LIBPATH_IS_ABSOLUTE_(cwdRelativity))
-        {
-            int const r = libpath_Internal_compare_roots(&abs->rootPart, &cwd->rootPart, flags);
-
-            if (0 != r)
+            if (cwdRelativity < absRelativity)
             {
-                *result = r * r_multiplier;
+                *result = +1 * r_multiplier;
 
                 return LIBPATH_RC_OF(Success);
             }
-        }
 #endif
 
-        {
-            libpath_StringSlice_t*  adirparts   =   NULL;
-            libpath_StringSlice_t*  rdirparts   =   NULL;
-            libpath_StringSlice_t*  cdirparts   =   NULL;
-
-            LIBPATH_RC rc = LIBPATH_RC_OF(Success);
-
-            if (LIBPATH_RC_SUCCESS(rc))
+#ifdef LIBPATH_OS_IS_WINDOWS
+            if (LIBPATH_IS_ABSOLUTE_(absRelativity) &&
+                LIBPATH_IS_ABSOLUTE_(cwdRelativity))
             {
-                rc = libpath_Util_AllocateSliceArray(abs->numDirectoryParts, &adirparts);
-            }
-
-            if (LIBPATH_RC_SUCCESS(rc))
-            {
-                rc = libpath_Util_AllocateSliceArray(rel->numDirectoryParts, &rdirparts);
-            }
-
-            if (LIBPATH_RC_SUCCESS(rc))
-            {
-                rc = libpath_Util_AllocateSliceArray(cwd->numDirectoryParts, &cdirparts);
-            }
-
-            if (LIBPATH_RC_FAILURE(rc))
-            {
-                libpath_Util_FreeSliceArray(adirparts);
-                libpath_Util_FreeSliceArray(rdirparts);
-                libpath_Util_FreeSliceArray(cdirparts);
-
-                return rc;
-            }
-            else
-            {
-                libpath_ParseResult_t   aresult     =   { 0 };
-                libpath_ParseResult_t   rresult     =   { 0 };
-                libpath_ParseResult_t   cresult     =   { 0 };
-                int const               abs_flags   =   0
-                                                    |   flags
-                                                    ;
-                int const               rel_flags   =   0
-                                                    |   flags
-                                                    ;
-                int const               cwd_flags   =   0
-                                                    |   libpath_ParseOption_AssumeDirectory
-                                                    ;
-
-                /* we don't check the return from these, because they can't fail */
-
-                libpath_Parse_ParsePathFromStringSlice(&abs->input, abs_flags, &aresult, abs->numDirectoryParts, adirparts);
-                libpath_Parse_ParsePathFromStringSlice(&rel->input, rel_flags, &rresult, rel->numDirectoryParts, rdirparts);
-                libpath_Parse_ParsePathFromStringSlice(&cwd->input, cwd_flags, &cresult, cwd->numDirectoryParts, cdirparts);
-
-                /* canonicalise all individual parts arrays ... */
-
-                {
-                libpath_size_t const    nadirparts  =   libpath_Internal_canonicalise_parts(abs->numDirectoryParts, adirparts);
-                libpath_size_t          nrdirparts  =   libpath_Internal_canonicalise_parts(rel->numDirectoryParts, rdirparts);
-                libpath_size_t          ncdirparts  =   libpath_Internal_canonicalise_parts(cwd->numDirectoryParts, cdirparts);
-
-                /* ... and between relative parts and cwd parts arrays (to account for leading double-dots in relative path) */
-
-                canonicalise_between_relative_and_cwd(&nrdirparts, rdirparts, &ncdirparts, cdirparts);
-
-                {
-                int const               r           =   libpath_Internal_compare_directory_parts_with_wd(nadirparts, adirparts, nrdirparts, rdirparts, ncdirparts, cdirparts, flags);
-
-                libpath_Util_FreeSliceArray(adirparts);
-                libpath_Util_FreeSliceArray(rdirparts);
-                libpath_Util_FreeSliceArray(cdirparts);
+                int const r = libpath_Internal_compare_roots(&abs->rootPart, &cwd->rootPart, flags);
 
                 if (0 != r)
                 {
@@ -812,10 +734,88 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 
                     return LIBPATH_RC_OF(Success);
                 }
+            }
+#endif
+
+            {
+                libpath_StringSlice_t*  adirparts   =   LIBPATH_LF_nullptr;
+                libpath_StringSlice_t*  rdirparts   =   LIBPATH_LF_nullptr;
+                libpath_StringSlice_t*  cdirparts   =   LIBPATH_LF_nullptr;
+
+                LIBPATH_RC rc = LIBPATH_RC_OF(Success);
+
+                if (LIBPATH_RC_SUCCESS(rc))
+                {
+                    rc = libpath_Util_AllocateSliceArray(abs->numDirectoryParts, &adirparts);
                 }
+
+                if (LIBPATH_RC_SUCCESS(rc))
+                {
+                    rc = libpath_Util_AllocateSliceArray(rel->numDirectoryParts, &rdirparts);
+                }
+
+                if (LIBPATH_RC_SUCCESS(rc))
+                {
+                    rc = libpath_Util_AllocateSliceArray(cwd->numDirectoryParts, &cdirparts);
+                }
+
+                if (LIBPATH_RC_FAILURE(rc))
+                {
+                    libpath_Util_FreeSliceArray(adirparts);
+                    libpath_Util_FreeSliceArray(rdirparts);
+                    libpath_Util_FreeSliceArray(cdirparts);
+
+                    return rc;
+                }
+                else
+                {
+                    libpath_ParseResult_t   aresult     =   { 0 };
+                    libpath_ParseResult_t   rresult     =   { 0 };
+                    libpath_ParseResult_t   cresult     =   { 0 };
+                    int const               abs_flags   =   0
+                                                        |   flags
+                                                        ;
+                    int const               rel_flags   =   0
+                                                        |   flags
+                                                        ;
+                    int const               cwd_flags   =   0
+                                                        |   libpath_ParseOption_AssumeDirectory
+                                                        ;
+
+                    /* we don't check the return from these, because they can't fail */
+
+                    libpath_Parse_ParsePathFromStringSlice(&abs->input, abs_flags, &aresult, abs->numDirectoryParts, adirparts);
+                    libpath_Parse_ParsePathFromStringSlice(&rel->input, rel_flags, &rresult, rel->numDirectoryParts, rdirparts);
+                    libpath_Parse_ParsePathFromStringSlice(&cwd->input, cwd_flags, &cresult, cwd->numDirectoryParts, cdirparts);
+
+                    /* canonicalise all individual parts arrays ... */
+
+                    {
+                        libpath_size_t const    nadirparts  =   libpath_Internal_canonicalise_parts(abs->numDirectoryParts, adirparts);
+                        libpath_size_t          nrdirparts  =   libpath_Internal_canonicalise_parts(rel->numDirectoryParts, rdirparts);
+                        libpath_size_t          ncdirparts  =   libpath_Internal_canonicalise_parts(cwd->numDirectoryParts, cdirparts);
+
+                        /* ... and between relative parts and cwd parts arrays (to account for leading double-dots in relative path) */
+
+                        canonicalise_between_relative_and_cwd(&nrdirparts, rdirparts, &ncdirparts, cdirparts);
+
+                        {
+                            int const               r           =   libpath_Internal_compare_directory_parts_with_wd(nadirparts, adirparts, nrdirparts, rdirparts, ncdirparts, cdirparts, flags);
+
+                            libpath_Util_FreeSliceArray(adirparts);
+                            libpath_Util_FreeSliceArray(rdirparts);
+                            libpath_Util_FreeSliceArray(cdirparts);
+
+                            if (0 != r)
+                            {
+                                *result = r * r_multiplier;
+
+                                return LIBPATH_RC_OF(Success);
+                            }
+                        }
+                    }
                 }
             }
-        }
         }
     }
     else
@@ -852,8 +852,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 #endif /* NDEBUG */
 
                 {
-                    libpath_StringSlice_t*  ldirparts   =   NULL;
-                    libpath_StringSlice_t*  rdirparts   =   NULL;
+                    libpath_StringSlice_t*  ldirparts   =   LIBPATH_LF_nullptr;
+                    libpath_StringSlice_t*  rdirparts   =   LIBPATH_LF_nullptr;
 
                     LIBPATH_RC rc = LIBPATH_RC_OF(Success);
 
@@ -935,9 +935,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs, "lhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs, "rhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs, "lhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs, "rhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
     {
     LIBPATH_RC              rc;
@@ -953,7 +953,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
     libpath_truthy_t        shouldParseCwd = LIBPATH_V_FALSEY;
 
-    rc = libpath_Parse_ParsePathFromStringSlice(lhs, lParseFlags, &lresult, 0, NULL);
+    rc = libpath_Parse_ParsePathFromStringSlice(lhs, lParseFlags, &lresult, 0, LIBPATH_LF_nullptr);
 
     if (LIBPATH_RC_OF(Success) != rc)
     {
@@ -971,7 +971,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         return rc;
     }
 
-    rc = libpath_Parse_ParsePathFromStringSlice(rhs, rParseFlags, &rresult, 0, NULL);
+    rc = libpath_Parse_ParsePathFromStringSlice(rhs, rParseFlags, &rresult, 0, LIBPATH_LF_nullptr);
 
     if (LIBPATH_RC_OF(Success) != rc)
     {
@@ -989,7 +989,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         return rc;
     }
 
-    if (NULL != cwd)
+    if (LIBPATH_LF_nullptr != cwd)
     {
         if (libpath_ParseResult_get_relativity_level_(&lresult) != libpath_ParseResult_get_relativity_level_(&rresult))
         {
@@ -998,7 +998,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
         if (shouldParseCwd)
         {
-            rc = libpath_Parse_ParsePathFromStringSlice(cwd, dParseFlags, &dresult, 0, NULL);
+            rc = libpath_Parse_ParsePathFromStringSlice(cwd, dParseFlags, &dresult, 0, LIBPATH_LF_nullptr);
 
             if (LIBPATH_RC_OF(Success) != rc)
             {
@@ -1019,7 +1019,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         }
     }
 
-    return libpath_Compare_ComparePathsAsStringSlices_impl2_(&lresult, &rresult, shouldParseCwd ? &dresult : NULL, flags, result);
+    return libpath_Compare_ComparePathsAsStringSlices_impl2_(&lresult, &rresult, shouldParseCwd ? &dresult : LIBPATH_LF_nullptr, flags, result);
     }
 }
 
@@ -1038,11 +1038,11 @@ libpath_Compare_ComparePathsAsStringSlices(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs, "lhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs, "rhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs, "lhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs, "rhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
-    if (NULL != reserved)
+    if (LIBPATH_LF_nullptr != reserved)
     {
         return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
@@ -1064,25 +1064,29 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
 #endif /* !__cplusplus */
 
     libpath_StringSlice_t           cwd_;
-    libpath_StringSlice_t const*    cwd = NULL;
+    libpath_StringSlice_t const*    cwd = LIBPATH_LF_nullptr;
 
-    if (NULL != ctxt)
+    if (LIBPATH_LF_nullptr != ctxt)
     {
         switch (ctxt->mechanism)
         {
         case    libpath_WorkingDirectoryContextMechanism_NoneSpecified:
+
             break;
         case    libpath_WorkingDirectoryContextMechanism_CStyleString:
-            if (NULL != ctxt->details.cwd_css)
+
+            if (LIBPATH_LF_nullptr != ctxt->details.cwd_css)
             {
                 cwd_ = libpath_Util_SliceFromCStyleString(ctxt->details.cwd_css);
                 cwd = &cwd_;
             }
             break;
         case    libpath_WorkingDirectoryContextMechanism_StringSlice:
+
             cwd = &ctxt->details.cwd_slice;
             break;
         default:
+
             LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
 #if defined(_WIN32) || defined(_WIN64)
         case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
@@ -1107,11 +1111,11 @@ libpath_Compare_ComparePathsAsStringPtrsAndLens(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs || 0 == lhsLen, "lhs parameter may not be NULL if lhsLen is not 0");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs || 0 == rhsLen, "rhs parameter may not be NULL if rhsLen is not 0");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs || 0 == lhsLen, "lhs parameter may not be NULL if lhsLen is not 0");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs || 0 == rhsLen, "rhs parameter may not be NULL if rhsLen is not 0");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
-    if (NULL != reserved)
+    if (LIBPATH_LF_nullptr != reserved)
     {
         return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
@@ -1137,7 +1141,7 @@ libpath_Compare_ComparePathsAsStringPtrsAndLens_UNCHECKED_(
     libpath_StringSlice_t const lhs_sl = libpath_Util_SliceFromStringPtrAndLen(lhs, lhsLen);
     libpath_StringSlice_t const rhs_sl = libpath_Util_SliceFromStringPtrAndLen(rhs, rhsLen);
 
-    return libpath_Compare_ComparePathsAsStringSlices(&lhs_sl, &rhs_sl, flags, ctxt, NULL, result);
+    return libpath_Compare_ComparePathsAsStringSlices(&lhs_sl, &rhs_sl, flags, ctxt, LIBPATH_LF_nullptr, result);
 }
 
 LIBPATH_API
@@ -1150,11 +1154,11 @@ libpath_Compare_ComparePathsAsCStyleStrings(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs, "lhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs, "rhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs, "lhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs, "rhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
-    if (NULL != reserved)
+    if (LIBPATH_LF_nullptr != reserved)
     {
         return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
@@ -1178,7 +1182,7 @@ libpath_Compare_ComparePathsAsCStyleStrings_UNCHECKED_(
     libpath_StringSlice_t const lhs_sl = libpath_Util_SliceFromCStyleString(lhs);
     libpath_StringSlice_t const rhs_sl = libpath_Util_SliceFromCStyleString(rhs);
 
-    return libpath_Compare_ComparePathsAsStringSlices(&lhs_sl, &rhs_sl, flags, ctxt, NULL, result);
+    return libpath_Compare_ComparePathsAsStringSlices(&lhs_sl, &rhs_sl, flags, ctxt, LIBPATH_LF_nullptr, result);
 }
 
 

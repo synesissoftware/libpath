@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.equal.1 project.
  *
  * Created: 9th November 2012
- * Updated: 7th February 2024
+ * Updated: 4th May 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -283,8 +283,8 @@ namespace
     path_equals(
         char const*   lhs
     ,   char const*   rhs
-    ,   char const*   cwd   = NULL
-    ,   char const* /*mem*/ = NULL
+    ,   char const*   cwd   = LIBPATH_LF_nullptr
+    ,   char const* /*mem*/ = LIBPATH_LF_nullptr
     )
     {
         libpath_sint32_t                    flags   =   0;
@@ -299,7 +299,7 @@ namespace
         ,   rhs
         ,   flags
         ,   &ctxt
-        ,   NULL
+        ,   LIBPATH_LF_nullptr
         ,   &result
         );
 
@@ -541,7 +541,7 @@ static void test_1_29(void)
 
 static void test_1_30(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", LIBPATH_LF_nullptr));
 
     XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir2"));
     XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", "/dir1/dir8"));
@@ -557,7 +557,7 @@ static void test_1_30(void)
 
 static void test_1_31(void)
 {
-    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", NULL));
+    XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", LIBPATH_LF_nullptr));
 
     XTESTS_TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", "/dir1/dir2"));
     XTESTS_TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "dir3/", "/dir1/dir2"));

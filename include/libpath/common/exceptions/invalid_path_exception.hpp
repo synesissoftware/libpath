@@ -86,7 +86,7 @@ public: // Construction
     )
         : parent_class_type("invalid path")
         , rc(rc)
-        , path(NULL == path ? "" : path->ptr, NULL == path ? 0u : path->len)
+        , path(LIBPATH_LF_nullptr == path ? "" : path->ptr, LIBPATH_LF_nullptr == path ? 0u : path->len)
     {}
     ~invalid_path_exception() LIBPATH_LF_noexcept
     {}
