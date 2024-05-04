@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.c project.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -271,7 +271,7 @@ int main(int argc, char **argv)
 # define                    NUM_DP_ELEMENTS    (10)
 #endif /* __cplusplus */
 
-static void test_1_0()
+static void test_1_0(void)
 {
     char const input[] = "";
 
@@ -305,7 +305,7 @@ static void test_1_0()
     XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
 }
 
-static void test_1_1()
+static void test_1_1(void)
 {
     char const input[] = ".";
 
@@ -341,7 +341,7 @@ static void test_1_1()
     XTESTS_TEST_BOOLEAN_FALSE(libpath_ParseResult_IsPathAbsolute(&r));
 }
 
-static void test_1_2()
+static void test_1_2(void)
 {
     char const input[] = "..";
 
@@ -377,7 +377,7 @@ static void test_1_2()
     XTESTS_TEST_BOOLEAN_FALSE(libpath_ParseResult_IsPathAbsolute(&r));
 }
 
-static void test_1_3()
+static void test_1_3(void)
 {
     char const input[] = "/.";
 
@@ -417,7 +417,7 @@ static void test_1_3()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_4()
+static void test_1_4(void)
 {
     char const input[] = "/..";
 
@@ -457,11 +457,11 @@ static void test_1_4()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_5()
+static void test_1_5(void)
 {
 }
 
-static void test_1_6()
+static void test_1_6(void)
 {
     char const input[] = "...";
 
@@ -486,7 +486,7 @@ static void test_1_6()
     XTESTS_TEST_INTEGER_EQUAL(2u, r.entryExtensionPart.len);
 }
 
-static void test_1_7()
+static void test_1_7(void)
 {
     char const input[] = ".....";
 
@@ -510,7 +510,7 @@ static void test_1_7()
     XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
 }
 
-static void test_1_8()
+static void test_1_8(void)
 {
     char const input[] = "..abc.def..";
 
@@ -534,11 +534,11 @@ static void test_1_8()
     XTESTS_TEST_INTEGER_EQUAL(1u, r.entryExtensionPart.len);
 }
 
-static void test_1_9()
+static void test_1_9(void)
 {
 }
 
-static void test_1_10()
+static void test_1_10(void)
 {
     char const input[] = "abc";
 
@@ -572,7 +572,7 @@ static void test_1_10()
     XTESTS_TEST_BOOLEAN_FALSE(libpath_ParseResult_IsPathAbsolute(&r));
 }
 
-static void test_1_11()
+static void test_1_11(void)
 {
     char const input[] = "a.c";
 
@@ -606,7 +606,7 @@ static void test_1_11()
     XTESTS_TEST_BOOLEAN_FALSE(libpath_ParseResult_IsPathAbsolute(&r));
 }
 
-static void test_1_12()
+static void test_1_12(void)
 {
     char const input[] = ".bc";
 
@@ -640,11 +640,11 @@ static void test_1_12()
     XTESTS_TEST_BOOLEAN_FALSE(libpath_ParseResult_IsPathAbsolute(&r));
 }
 
-static void test_1_13()
+static void test_1_13(void)
 {
 }
 
-static void test_1_14()
+static void test_1_14(void)
 {
     char const input[] = "/abc";
 
@@ -682,7 +682,7 @@ static void test_1_14()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_15()
+static void test_1_15(void)
 {
     char const input[] = "/dir/abc";
 
@@ -722,7 +722,7 @@ static void test_1_15()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_16()
+static void test_1_16(void)
 {
     char const input[] = "/dir/";
 
@@ -762,7 +762,7 @@ static void test_1_16()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_17()
+static void test_1_17(void)
 {
     char const input[] = "/dir/dir2/";
 
@@ -838,7 +838,7 @@ static void test_1_17()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_18()
+static void test_1_18(void)
 {
     char const input[] = "/directory1/directory2/dir3/dir4/d5/d6/";
 
@@ -888,7 +888,7 @@ static void test_1_18()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_19()
+static void test_1_19(void)
 {
     char const input[] = "/directory1/directory2/dir3/dir4/d5/d6/file.ext";
 
