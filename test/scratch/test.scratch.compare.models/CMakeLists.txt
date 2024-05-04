@@ -15,8 +15,7 @@ target_compile_options(test.scratch.compare.models PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
         -Werror -Wall -Wextra -pedantic
 
-        -Wno-unused-parameter
-        -Wno-unused-variable
+        -Wno-c++11-long-long
     >
     $<$<CXX_COMPILER_ID:MSVC>:
         /WX /W4

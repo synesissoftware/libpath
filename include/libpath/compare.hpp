@@ -172,7 +172,14 @@ handle_compare_result_(
 
     if (NULL != p)
     {
-        libpath_StringSlice_t path = { std::strlen(p), p };
+        libpath_StringSlice_t path = {
+#ifdef LIBPATH_CXX_VER_2011_plus
+            std::strlen(p)
+#else
+            ::strlen(p)
+#endif
+            ,   p
+        };
 
         P::respond(rc, &path);
     }
@@ -198,7 +205,11 @@ handle_compare_result_(
 ,   yes_type
 )
 {
+#ifdef LIBPATH_CXX_VER_2011_plus
     std::abort();
+#else
+    ::abort();
+#endif
 
     return 0;
 }
