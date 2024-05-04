@@ -1,4 +1,8 @@
 {
+    "[cmake]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+    },
     "[ruby]": {
         "editor.tabSize": 2,
     },
