@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -41,15 +41,15 @@
     static void test_1_2(void);
     static void test_1_3(void);
     static void test_1_4(void);
-    static void test_1_5(void);
+
     static void test_1_6(void);
     static void test_1_7(void);
     static void test_1_8(void);
-    static void test_1_9(void);
+
     static void test_1_10(void);
     static void test_1_11(void);
     static void test_1_12(void);
-    static void test_1_13(void);
+
     static void test_1_14(void);
     static void test_1_15(void);
     static void test_1_16(void);
@@ -59,13 +59,7 @@
     static void test_1_20(void);
     static void test_1_21(void);
     static void test_1_22(void);
-    static void test_1_23(void);
-    static void test_1_24(void);
-    static void test_1_25(void);
-    static void test_1_26(void);
-    static void test_1_27(void);
-    static void test_1_28(void);
-    static void test_1_29(void);
+
     static void test_1_30(void);
     static void test_1_31(void);
     static void test_1_32(void);
@@ -74,68 +68,30 @@
     static void test_1_35(void);
     static void test_1_36(void);
     static void test_1_37(void);
-    static void test_1_38(void);
-    static void test_1_39(void);
+
     static void test_1_40(void);
     static void test_1_41(void);
     static void test_1_42(void);
     static void test_1_43(void);
     static void test_1_44(void);
-    static void test_1_45(void);
-    static void test_1_46(void);
-    static void test_1_47(void);
-    static void test_1_48(void);
-    static void test_1_49(void);
+
     static void test_1_50(void);
     static void test_1_51(void);
     static void test_1_52(void);
     static void test_1_53(void);
     static void test_1_54(void);
-    static void test_1_55(void);
-    static void test_1_56(void);
-    static void test_1_57(void);
-    static void test_1_58(void);
-    static void test_1_59(void);
+
     static void test_1_60(void);
     static void test_1_61(void);
-    static void test_1_62(void);
-    static void test_1_63(void);
-    static void test_1_64(void);
-    static void test_1_65(void);
-    static void test_1_66(void);
-    static void test_1_67(void);
-    static void test_1_68(void);
-    static void test_1_69(void);
+
     static void test_1_70(void);
     static void test_1_71(void);
     static void test_1_72(void);
     static void test_1_73(void);
-    static void test_1_74(void);
-    static void test_1_75(void);
-    static void test_1_76(void);
-    static void test_1_77(void);
-    static void test_1_78(void);
-    static void test_1_79(void);
+
     static void test_1_80(void);
     static void test_1_81(void);
     static void test_1_82(void);
-    static void test_1_83(void);
-    static void test_1_84(void);
-    static void test_1_85(void);
-    static void test_1_86(void);
-    static void test_1_87(void);
-    static void test_1_88(void);
-    static void test_1_89(void);
-    static void test_1_90(void);
-    static void test_1_91(void);
-    static void test_1_92(void);
-    static void test_1_93(void);
-    static void test_1_94(void);
-    static void test_1_95(void);
-    static void test_1_96(void);
-    static void test_1_97(void);
-    static void test_1_98(void);
-    static void test_1_99(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -156,15 +112,15 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_2);
         XTESTS_RUN_CASE(test_1_3);
         XTESTS_RUN_CASE(test_1_4);
-        XTESTS_RUN_CASE(test_1_5);
+
         XTESTS_RUN_CASE(test_1_6);
         XTESTS_RUN_CASE(test_1_7);
         XTESTS_RUN_CASE(test_1_8);
-        XTESTS_RUN_CASE(test_1_9);
+
         XTESTS_RUN_CASE(test_1_10);
         XTESTS_RUN_CASE(test_1_11);
         XTESTS_RUN_CASE(test_1_12);
-        XTESTS_RUN_CASE(test_1_13);
+
         XTESTS_RUN_CASE(test_1_14);
         XTESTS_RUN_CASE(test_1_15);
         XTESTS_RUN_CASE(test_1_16);
@@ -174,13 +130,7 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_20);
         XTESTS_RUN_CASE(test_1_21);
         XTESTS_RUN_CASE(test_1_22);
-        XTESTS_RUN_CASE(test_1_23);
-        XTESTS_RUN_CASE(test_1_24);
-        XTESTS_RUN_CASE(test_1_25);
-        XTESTS_RUN_CASE(test_1_26);
-        XTESTS_RUN_CASE(test_1_27);
-        XTESTS_RUN_CASE(test_1_28);
-        XTESTS_RUN_CASE(test_1_29);
+
         XTESTS_RUN_CASE(test_1_30);
         XTESTS_RUN_CASE(test_1_31);
         XTESTS_RUN_CASE(test_1_32);
@@ -189,68 +139,30 @@ int main(int argc, char **argv)
         XTESTS_RUN_CASE(test_1_35);
         XTESTS_RUN_CASE(test_1_36);
         XTESTS_RUN_CASE(test_1_37);
-        XTESTS_RUN_CASE(test_1_38);
-        XTESTS_RUN_CASE(test_1_39);
+
         XTESTS_RUN_CASE(test_1_40);
         XTESTS_RUN_CASE(test_1_41);
         XTESTS_RUN_CASE(test_1_42);
         XTESTS_RUN_CASE(test_1_43);
         XTESTS_RUN_CASE(test_1_44);
-        XTESTS_RUN_CASE(test_1_45);
-        XTESTS_RUN_CASE(test_1_46);
-        XTESTS_RUN_CASE(test_1_47);
-        XTESTS_RUN_CASE(test_1_48);
-        XTESTS_RUN_CASE(test_1_49);
+
         XTESTS_RUN_CASE(test_1_50);
         XTESTS_RUN_CASE(test_1_51);
         XTESTS_RUN_CASE(test_1_52);
         XTESTS_RUN_CASE(test_1_53);
         XTESTS_RUN_CASE(test_1_54);
-        XTESTS_RUN_CASE(test_1_55);
-        XTESTS_RUN_CASE(test_1_56);
-        XTESTS_RUN_CASE(test_1_57);
-        XTESTS_RUN_CASE(test_1_58);
-        XTESTS_RUN_CASE(test_1_59);
+
         XTESTS_RUN_CASE(test_1_60);
         XTESTS_RUN_CASE(test_1_61);
-        XTESTS_RUN_CASE(test_1_62);
-        XTESTS_RUN_CASE(test_1_63);
-        XTESTS_RUN_CASE(test_1_64);
-        XTESTS_RUN_CASE(test_1_65);
-        XTESTS_RUN_CASE(test_1_66);
-        XTESTS_RUN_CASE(test_1_67);
-        XTESTS_RUN_CASE(test_1_68);
-        XTESTS_RUN_CASE(test_1_69);
+
         XTESTS_RUN_CASE(test_1_70);
         XTESTS_RUN_CASE(test_1_71);
         XTESTS_RUN_CASE(test_1_72);
         XTESTS_RUN_CASE(test_1_73);
-        XTESTS_RUN_CASE(test_1_74);
-        XTESTS_RUN_CASE(test_1_75);
-        XTESTS_RUN_CASE(test_1_76);
-        XTESTS_RUN_CASE(test_1_77);
-        XTESTS_RUN_CASE(test_1_78);
-        XTESTS_RUN_CASE(test_1_79);
+
         XTESTS_RUN_CASE(test_1_80);
         XTESTS_RUN_CASE(test_1_81);
         XTESTS_RUN_CASE(test_1_82);
-        XTESTS_RUN_CASE(test_1_83);
-        XTESTS_RUN_CASE(test_1_84);
-        XTESTS_RUN_CASE(test_1_85);
-        XTESTS_RUN_CASE(test_1_86);
-        XTESTS_RUN_CASE(test_1_87);
-        XTESTS_RUN_CASE(test_1_88);
-        XTESTS_RUN_CASE(test_1_89);
-        XTESTS_RUN_CASE(test_1_90);
-        XTESTS_RUN_CASE(test_1_91);
-        XTESTS_RUN_CASE(test_1_92);
-        XTESTS_RUN_CASE(test_1_93);
-        XTESTS_RUN_CASE(test_1_94);
-        XTESTS_RUN_CASE(test_1_95);
-        XTESTS_RUN_CASE(test_1_96);
-        XTESTS_RUN_CASE(test_1_97);
-        XTESTS_RUN_CASE(test_1_98);
-        XTESTS_RUN_CASE(test_1_99);
 
         XTESTS_PRINT_RESULTS();
 
@@ -285,7 +197,7 @@ int main(int argc, char **argv)
 #endif /* __cplusplus */
 
 
-static void test_1_0()
+static void test_1_0(void)
 {
     char const input[] = "";
 
@@ -293,7 +205,7 @@ static void test_1_0()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[1];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
 
@@ -319,7 +231,7 @@ static void test_1_0()
     XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
 }
 
-static void test_1_1()
+static void test_1_1(void)
 {
     char const input[] = ".";
 
@@ -327,7 +239,7 @@ static void test_1_1()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -355,7 +267,7 @@ static void test_1_1()
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_2()
+static void test_1_2(void)
 {
     char const input[] = "..";
 
@@ -363,7 +275,7 @@ static void test_1_2()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -391,7 +303,7 @@ static void test_1_2()
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_3()
+static void test_1_3(void)
 {
     char const input[] = "/.";
 
@@ -399,7 +311,7 @@ static void test_1_3()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -431,7 +343,7 @@ static void test_1_3()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_4()
+static void test_1_4(void)
 {
     char const input[] = "/..";
 
@@ -439,7 +351,7 @@ static void test_1_4()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -471,16 +383,12 @@ static void test_1_4()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_5()
-{
-}
-
-static void test_1_6()
+static void test_1_6(void)
 {
     char const input[] = "...";
 
     ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, NULL);
+    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -500,12 +408,12 @@ static void test_1_6()
     XTESTS_TEST_INTEGER_EQUAL(2u, r.entryExtensionPart.len);
 }
 
-static void test_1_7()
+static void test_1_7(void)
 {
     char const input[] = ".....";
 
     ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, NULL);
+    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -524,12 +432,12 @@ static void test_1_7()
     XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
 }
 
-static void test_1_8()
+static void test_1_8(void)
 {
     char const input[] = "..abc.def..";
 
     ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, NULL);
+    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -548,11 +456,7 @@ static void test_1_8()
     XTESTS_TEST_INTEGER_EQUAL(1u, r.entryExtensionPart.len);
 }
 
-static void test_1_9()
-{
-}
-
-static void test_1_10()
+static void test_1_10(void)
 {
     char const input[] = "abc";
 
@@ -560,7 +464,7 @@ static void test_1_10()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -586,7 +490,7 @@ static void test_1_10()
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_11()
+static void test_1_11(void)
 {
     char const input[] = "a.c";
 
@@ -594,7 +498,7 @@ static void test_1_11()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -620,7 +524,7 @@ static void test_1_11()
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_12()
+static void test_1_12(void)
 {
     char const input[] = ".bc";
 
@@ -628,7 +532,7 @@ static void test_1_12()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -654,11 +558,7 @@ static void test_1_12()
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_13()
-{
-}
-
-static void test_1_14()
+static void test_1_14(void)
 {
     char const input[] = "/abc";
 
@@ -666,7 +566,7 @@ static void test_1_14()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -696,7 +596,7 @@ static void test_1_14()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_15()
+static void test_1_15(void)
 {
     char const input[] = "/dir/abc";
 
@@ -704,7 +604,7 @@ static void test_1_15()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -736,7 +636,7 @@ static void test_1_15()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_16()
+static void test_1_16(void)
 {
     char const input[] = "/dir/";
 
@@ -744,7 +644,7 @@ static void test_1_16()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -776,7 +676,7 @@ static void test_1_16()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_17()
+static void test_1_17(void)
 {
     char const input[] = "/dir/dir2/";
 
@@ -784,7 +684,7 @@ static void test_1_17()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -852,7 +752,7 @@ static void test_1_17()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_18()
+static void test_1_18(void)
 {
     char const input[] = "/directory1/directory2/dir3/dir4/d5/d6/";
 
@@ -860,7 +760,7 @@ static void test_1_18()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -902,7 +802,7 @@ static void test_1_18()
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_19()
+static void test_1_19(void)
 {
     char const input[] = "/directory1/directory2/dir3/dir4/d5/d6/file.ext";
 
@@ -910,7 +810,7 @@ static void test_1_19()
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -960,7 +860,7 @@ static void test_1_20(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1010,7 +910,7 @@ static void test_1_21(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1048,7 +948,7 @@ static void test_1_22(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1074,34 +974,6 @@ static void test_1_22(void)
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_23(void)
-{
-}
-
-static void test_1_24(void)
-{
-}
-
-static void test_1_25(void)
-{
-}
-
-static void test_1_26(void)
-{
-}
-
-static void test_1_27(void)
-{
-}
-
-static void test_1_28(void)
-{
-}
-
-static void test_1_29(void)
-{
-}
-
 static void test_1_30(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -1111,7 +983,7 @@ static void test_1_30(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1145,7 +1017,7 @@ static void test_1_31(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1179,7 +1051,7 @@ static void test_1_32(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1213,7 +1085,7 @@ static void test_1_33(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1247,7 +1119,7 @@ static void test_1_34(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1293,7 +1165,7 @@ static void test_1_35(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1327,7 +1199,7 @@ static void test_1_36(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1361,7 +1233,7 @@ static void test_1_37(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1398,14 +1270,6 @@ static void test_1_37(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_38(void)
-{
-}
-
-static void test_1_39(void)
-{
-}
-
 static void test_1_40(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -1415,7 +1279,7 @@ static void test_1_40(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1449,7 +1313,7 @@ static void test_1_41(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1483,7 +1347,7 @@ static void test_1_42(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1529,7 +1393,7 @@ static void test_1_43(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1575,7 +1439,7 @@ static void test_1_44(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1612,26 +1476,6 @@ static void test_1_44(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_45(void)
-{
-}
-
-static void test_1_46(void)
-{
-}
-
-static void test_1_47(void)
-{
-}
-
-static void test_1_48(void)
-{
-}
-
-static void test_1_49(void)
-{
-}
-
 static void test_1_50(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -1641,7 +1485,7 @@ static void test_1_50(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1675,7 +1519,7 @@ static void test_1_51(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1721,7 +1565,7 @@ static void test_1_52(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1767,7 +1611,7 @@ static void test_1_53(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1814,7 +1658,7 @@ static void test_1_54(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -1844,26 +1688,6 @@ static void test_1_54(void)
 #else /* ? LIBPATH_OS_IS_WINDOWS */
     XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
-}
-
-static void test_1_55(void)
-{
-}
-
-static void test_1_56(void)
-{
-}
-
-static void test_1_57(void)
-{
-}
-
-static void test_1_58(void)
-{
-}
-
-static void test_1_59(void)
-{
 }
 
 static void test_1_60(void)
@@ -1899,7 +1723,7 @@ static void test_1_60(void)
             LIBPATH_RC      rc;
             StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-            rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+            rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
 
@@ -1919,41 +1743,41 @@ static void test_1_61(void)
     LIBPATH_RC        rc;
 
 
-    rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(0u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
 
 
-    rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(2u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(3u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
     XTESTS_TEST_INTEGER_EQUAL(4u, r.firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
@@ -1961,7 +1785,7 @@ static void test_1_61(void)
 
 
 
-    rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, NULL);
+    rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
@@ -1969,38 +1793,6 @@ static void test_1_61(void)
 
 
 #endif
-}
-
-static void test_1_62(void)
-{
-}
-
-static void test_1_63(void)
-{
-}
-
-static void test_1_64(void)
-{
-}
-
-static void test_1_65(void)
-{
-}
-
-static void test_1_66(void)
-{
-}
-
-static void test_1_67(void)
-{
-}
-
-static void test_1_68(void)
-{
-}
-
-static void test_1_69(void)
-{
 }
 
 static void test_1_70(void)
@@ -2299,30 +2091,6 @@ static void test_1_73(void)
 
 }
 
-static void test_1_74(void)
-{
-}
-
-static void test_1_75(void)
-{
-}
-
-static void test_1_76(void)
-{
-}
-
-static void test_1_77(void)
-{
-}
-
-static void test_1_78(void)
-{
-}
-
-static void test_1_79(void)
-{
-}
-
 static void test_1_80(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -2332,7 +2100,7 @@ static void test_1_80(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -2366,7 +2134,7 @@ static void test_1_81(void)
     LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
-    rc = parse_path_from_cstyle_string(input, 0, NULL, 0, NULL);
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
@@ -2402,7 +2170,7 @@ static void test_1_82(void)
         ParseResult_t   r;
         LIBPATH_RC      rc;
 
-        rc = parse_path_from_string_ptr_and_len(input, i, 0, &r, 0, NULL);
+        rc = parse_path_from_string_ptr_and_len(input, i, 0, &r, 0, LIBPATH_LF_nullptr);
 
         if (1 == i ||
             cch == i)
@@ -2469,74 +2237,6 @@ static void test_1_82(void)
         }
     }}
 #endif /* LIBPATH_OS_IS_WINDOWS */
-}
-
-static void test_1_83(void)
-{
-}
-
-static void test_1_84(void)
-{
-}
-
-static void test_1_85(void)
-{
-}
-
-static void test_1_86(void)
-{
-}
-
-static void test_1_87(void)
-{
-}
-
-static void test_1_88(void)
-{
-}
-
-static void test_1_89(void)
-{
-}
-
-static void test_1_90(void)
-{
-}
-
-static void test_1_91(void)
-{
-}
-
-static void test_1_92(void)
-{
-}
-
-static void test_1_93(void)
-{
-}
-
-static void test_1_94(void)
-{
-}
-
-static void test_1_95(void)
-{
-}
-
-static void test_1_96(void)
-{
-}
-
-static void test_1_97(void)
-{
-}
-
-static void test_1_98(void)
-{
-}
-
-static void test_1_99(void)
-{
 }
 
 

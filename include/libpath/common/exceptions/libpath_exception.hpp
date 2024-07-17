@@ -4,7 +4,7 @@
  * Purpose: Definition of libpath::exceptions::libpath_exception.
  *
  * Created: 5th April 2013
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -72,7 +72,9 @@ public: // Member types
 protected: // Construction
     /// Constructs an instance of this type
     libpath_exception(char const* message)
-      : parent_class_type(message)
+        : parent_class_type(message)
+    {}
+    ~libpath_exception() LIBPATH_LF_noexcept
     {}
 private:
     class_type& operator =(class_type const&);

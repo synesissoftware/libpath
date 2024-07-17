@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -158,7 +158,7 @@ handle_compare_result_(
 ,   ...
 )
 {
-    char const* p = NULL;
+    char const* p = LIBPATH_LF_nullptr;
 
     switch (rc)
     {
@@ -170,15 +170,22 @@ handle_compare_result_(
         break;
     }
 
-    if (NULL != p)
+    if (LIBPATH_LF_nullptr != p)
     {
-        libpath_StringSlice_t path = { std::strlen(p), p };
+        libpath_StringSlice_t path = {
+#ifdef LIBPATH_CXX_VER_2011_plus
+            std::strlen(p)
+#else
+            ::strlen(p)
+#endif
+            ,   p
+        };
 
         P::respond(rc, &path);
     }
     else
     {
-        P::respond(rc, NULL);
+        P::respond(rc, LIBPATH_LF_nullptr);
     }
 
     return 0;
@@ -198,7 +205,11 @@ handle_compare_result_(
 ,   yes_type
 )
 {
+#ifdef LIBPATH_CXX_VER_2011_plus
     std::abort();
+#else
+    ::abort();
+#endif
 
     return 0;
 }
@@ -236,8 +247,8 @@ int
 compare_paths_and_(
     char const*     lhs
 ,   char const*     rhs
-,   char const*     cwd = NULL
-,   char const*  /* mem */ = NULL
+,   char const*     cwd = LIBPATH_LF_nullptr
+,   char const*  /* mem */ = LIBPATH_LF_nullptr
 )
 {
     libpath_sint32_t                    flags   =   0;
@@ -252,7 +263,7 @@ compare_paths_and_(
         ,   rhs
         ,   flags
         ,   &ctxt
-        ,   NULL
+        ,   LIBPATH_LF_nullptr
         ,   &result
         );
 
@@ -274,8 +285,8 @@ int
 compare_paths_and_(
     char const*     lhs
 ,   char const*     rhs
-,   char const*     cwd = NULL
-,   char const*     mem = NULL
+,   char const*     cwd = LIBPATH_LF_nullptr
+,   char const*     mem = LIBPATH_LF_nullptr
 )
 {
     return ximpl_compare::compare_paths_and_<P>(lhs, rhs, cwd, mem);
@@ -286,8 +297,8 @@ int
 compare_paths(
     char const*     lhs
 ,   char const*     rhs
-,   char const*     cwd = NULL
-,   char const*     mem = NULL
+,   char const*     cwd = LIBPATH_LF_nullptr
+,   char const*     mem = LIBPATH_LF_nullptr
 );
 
 

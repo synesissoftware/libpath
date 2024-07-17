@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  */
 
 #include "libpath.compare.internal.h"
@@ -26,8 +26,8 @@ libpath_Internal_compare_roots(
 ,   int                             flags
 )
 {
-    LIBPATH_ASSERT(NULL != lhs);
-    LIBPATH_ASSERT(NULL != rhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != lhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != rhs);
     LIBPATH_ASSERT(0 != lhs->len);
     LIBPATH_ASSERT(0 != rhs->len);
 

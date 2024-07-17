@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  */
 
 #include "libpath.parse.internal.h"
@@ -147,12 +147,12 @@ libpath_Internal_path_is_absolute(
 ,   libpath_truthy_t*               invalidRoot
 )
 {
-    LIBPATH_ASSERT(NULL != path);
-    LIBPATH_ASSERT(NULL != rootLen);
-    LIBPATH_ASSERT(NULL != invalidRoot);
-    LIBPATH_ASSERT(0 == path->len || NULL != path->ptr);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != path);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != rootLen);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != invalidRoot);
+    LIBPATH_ASSERT(0 == path->len || LIBPATH_LF_nullptr != path->ptr);
 
-    if (NULL != rootLen)
+    if (LIBPATH_LF_nullptr != rootLen)
     {
         *rootLen = 0;
     }
@@ -193,7 +193,7 @@ libpath_Internal_path_is_absolute(
     case    '/':
         // #4
 
-        if (NULL != rootLen)
+        if (LIBPATH_LF_nullptr != rootLen)
         {
             *rootLen = 1;
         }
@@ -207,11 +207,11 @@ libpath_Internal_path_is_absolute(
         {
             // #2
 
-            if (NULL != rootLen)
+            if (LIBPATH_LF_nullptr != rootLen)
             {
                 libpath_StringSlice_t const root = libpath_Internal_find_UNC_root_slice(path);
 
-                if (NULL != rootLen)
+                if (LIBPATH_LF_nullptr != rootLen)
                 {
                     *rootLen = root.len;
                 }
@@ -230,7 +230,7 @@ libpath_Internal_path_is_absolute(
         {
             // #3
 
-            if (NULL != rootLen)
+            if (LIBPATH_LF_nullptr != rootLen)
             {
                 *rootLen = 1;
             }
@@ -260,7 +260,7 @@ libpath_Internal_path_is_absolute(
                 {
                     // #1
 
-                    if (NULL != rootLen)
+                    if (LIBPATH_LF_nullptr != rootLen)
                     {
                         *rootLen = 3;
                     }
@@ -269,7 +269,7 @@ libpath_Internal_path_is_absolute(
                 }
                 else
                 {
-                    if (NULL != rootLen)
+                    if (LIBPATH_LF_nullptr != rootLen)
                     {
                         *rootLen = 2;
                     }
@@ -293,7 +293,7 @@ libpath_Internal_path_is_absolute(
 
     if ('/' == path->ptr[0])
     {
-        if (NULL != rootLen)
+        if (LIBPATH_LF_nullptr != rootLen)
         {
             *rootLen = 1;
         }
@@ -316,9 +316,9 @@ libpath_Internal_find_next_directory_part(
 {
     libpath_size_t numConsecutiveDots = 0;
 
-    LIBPATH_ASSERT(NULL != directoryPart);
-    LIBPATH_ASSERT(NULL != part);
-    LIBPATH_ASSERT(NULL != isDots);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != directoryPart);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != part);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != isDots);
     LIBPATH_ASSERT(*i <= directoryPart->len + 1);
 
     part->ptr = directoryPart->ptr + *i;
@@ -401,7 +401,7 @@ libpath_Internal_find_UNC_root_slice(
     int state = slash2;
 
     LIBPATH_ASSERT(path->len > 1);
-    LIBPATH_ASSERT(NULL != path->ptr);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != path->ptr);
     LIBPATH_ASSERT('\\' == path->ptr[0]);
     LIBPATH_ASSERT('\\' == path->ptr[1]);
 

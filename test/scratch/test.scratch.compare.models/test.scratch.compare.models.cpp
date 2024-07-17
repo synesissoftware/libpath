@@ -41,12 +41,18 @@ static int main_(int /* argc */, char** /*argv*/)
 {
     int r0 = ::libpath::comparing::compare_paths_and_<libpath::return_0_on_invalid_path_policy>("/abc", "../def/abc");
 
+    STLSOFT_SUPPRESS_UNUSED(r0);
+
     int r1 = ::libpath::comparing::compare_paths_and_<libpath::return_minus1_on_invalid_path_policy>("/abc", "../def/abc");
+
+    STLSOFT_SUPPRESS_UNUSED(r1);
 
 
     try
     {
         int r2 = ::libpath::comparing::compare_paths_and_<libpath::throw_on_invalid_path_policy>("/abc", "../def/abc");
+
+        STLSOFT_SUPPRESS_UNUSED(r2);
     }
     catch (std::bad_alloc&)
     {
@@ -60,6 +66,8 @@ static int main_(int /* argc */, char** /*argv*/)
     try
     {
         int r3 = ::libpath::comparing::compare_paths_and_<libpath::throw_on_invalid_path_policy>("/abc", ".|./def/abc");
+
+        STLSOFT_SUPPRESS_UNUSED(r3);
     }
     catch (std::bad_alloc&)
     {

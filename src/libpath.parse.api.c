@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 6th April 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -138,10 +138,10 @@ libpath_Parse_ParsePathFromStringSlice(
 {
     libpath_ParseResult_t stub;
 
-    LIBPATH_MESSAGE_ASSERT(NULL != path, "path may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || NULL != directoryPartSlices, "invalid directory part slice parameters");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path, "path may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 
-    if (NULL == result)
+    if (LIBPATH_LF_nullptr == result)
     {
         result = &stub;
     }
@@ -188,11 +188,11 @@ Xyz1(
     // - last slash
     // - last period
 
-    libpath_char_t const*       lastSlash       =   NULL;
+    libpath_char_t const*       lastSlash       =   LIBPATH_LF_nullptr;
 #ifdef LIBPATH_OS_IS_WINDOWS
-    libpath_char_t const*       lastBackSlash   =   NULL;
+    libpath_char_t const*       lastBackSlash   =   LIBPATH_LF_nullptr;
 #endif
-    libpath_char_t const*       lastPeriod      =   NULL;
+    libpath_char_t const*       lastPeriod      =   LIBPATH_LF_nullptr;
 
     libpath_char_t const* const begin           =   path->ptr;
     libpath_char_t const* const end             =   path->ptr + path->len;
@@ -232,7 +232,7 @@ Xyz1(
     }}
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    if (NULL == lastSlash)
+    if (LIBPATH_LF_nullptr == lastSlash)
     {
         lastSlash = lastBackSlash;
     }
@@ -290,7 +290,7 @@ Xyz2(
         startOfEntry = end;
     }
     else
-    if (NULL == lastSlash)
+    if (LIBPATH_LF_nullptr == lastSlash)
     {
         startOfEntry = begin;
     }
@@ -467,8 +467,8 @@ libpath_Parse_ParsePathFromStringPtrAndLen(
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != path || 0 == pathLen, "path parameter may not be NULL if pathLen is not 0");
-    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || NULL != directoryPartSlices, "invalid directory part slice parameters");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path || 0 == pathLen, "path parameter may not be NULL if pathLen is not 0");
+    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 #ifndef __cplusplus
 
     return libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(path, pathLen, flags, result, numDirectoryPartSlices, directoryPartSlices);
@@ -500,8 +500,8 @@ libpath_Parse_ParsePathFromCStyleString(
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != path, "path parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || NULL != directoryPartSlices, "invalid directory part slice parameters");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path, "path parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 #ifndef __cplusplus
 
     return libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
@@ -529,7 +529,7 @@ libpath_ParseResult_IsPathAbsolute(
     libpath_ParseResult_t const*    result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
 #ifdef LIBPATH_OS_IS_WINDOWS
     return result->rootPart.len > 1;
@@ -543,7 +543,7 @@ libpath_ParseResult_IsPathRooted(
     libpath_ParseResult_t const*    result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
     return 0 != result->rootPart.len;
 }

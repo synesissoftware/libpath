@@ -4,7 +4,7 @@
  * Purpose: libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
