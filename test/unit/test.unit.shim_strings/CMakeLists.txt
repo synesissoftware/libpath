@@ -8,7 +8,7 @@ target_link_libraries(test.unit.shim_strings
 )
 
 target_link_libraries(test.unit.shim_strings
-    xTests::xTests.core
+    xTests::core
 )
 
 target_compile_options(test.unit.shim_strings PRIVATE

@@ -8,7 +8,7 @@ target_link_libraries(test.unit.parse.c
 )
 
 target_link_libraries(test.unit.parse.c
-    xTests::xTests.core
+    xTests::core
 )
 
 target_compile_options(test.unit.parse.c PRIVATE

@@ -8,7 +8,7 @@ target_link_libraries(test.unit.compare.1.c
 )
 
 target_link_libraries(test.unit.compare.1.c
-    xTests::xTests.core
+    xTests::core
 )
 
 target_compile_options(test.unit.compare.1.c PRIVATE

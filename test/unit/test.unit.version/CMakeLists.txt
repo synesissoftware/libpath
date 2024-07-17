@@ -8,7 +8,7 @@ target_link_libraries(test.unit.version
 )
 
 target_link_libraries(test.unit.version
-    xTests::xTests.core
+    xTests::core
 )
 
 target_compile_options(test.unit.version PRIVATE

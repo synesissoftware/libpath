@@ -8,7 +8,7 @@ target_link_libraries(test.scratch.compare.models
 )
 
 # target_link_libraries(test.scratch.compare.models
-#     xTests::xTests.core
+#     xTests::core
 # )
 
 target_compile_options(test.scratch.compare.models PRIVATE

@@ -8,7 +8,7 @@ target_link_libraries(test.unit.type_strings
 )
 
 target_link_libraries(test.unit.type_strings
-    xTests::xTests.core
+    xTests::core
 )
 
 target_compile_options(test.unit.type_strings PRIVATE
