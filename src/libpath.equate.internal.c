@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 11th February 2024
+ * Updated: 20th July 2024
  */
 
 #include "libpath.equate.internal.h"
@@ -134,7 +134,7 @@ libpath_Internal_roots_equal(
 {
     LIBPATH_ASSERT(lhs->len == rhs->len);
 
-    { libpath_size_t i; for(i = 0; i != lhs->len; ++i)
+    { libpath_size_t i; for (i = 0; i != lhs->len; ++i)
     {
         libpath_char_t const    lch =   lhs->ptr[i];
         libpath_char_t const    rch =   rhs->ptr[i];
@@ -211,7 +211,7 @@ libpath_Internal_canonicalise_parts(
 
     libpath_size_t                      nonDots =   0;
 
-    for(; src != end; ++src)
+    for (; src != end; ++src)
     {
         libpath_size_t const numDots = libpath_Internal_count_dots(src);
 
@@ -274,7 +274,7 @@ libpath_Internal_directory_whole_equal(
         return LIBPATH_V_FALSEY;
     }
 
-    { libpath_size_t i; for(i = 0; i != lhsLen; ++i)
+    { libpath_size_t i; for (i = 0; i != lhsLen; ++i)
     {
         char const  cl  =   lhs->ptr[i];
         char const  cr  =   rhs->ptr[i];
@@ -370,7 +370,7 @@ libpath_Internal_directory_part_equal(
         return LIBPATH_V_FALSEY;
     }
 
-    { libpath_size_t i; for(i = 0; i != lhsLen; ++i)
+    { libpath_size_t i; for (i = 0; i != lhsLen; ++i)
     {
         char const  cl  =   lhs->ptr[i];
         char const  cr  =   rhs->ptr[i];
@@ -401,7 +401,7 @@ libpath_Internal_directory_parts_equal(
         return LIBPATH_V_FALSEY;
     }
 
-    { libpath_size_t i; for(i = 0; i != cldirparts; ++i)
+    { libpath_size_t i; for (i = 0; i != cldirparts; ++i)
     {
         if (!libpath_Internal_directory_part_equal(&ldirparts[i], &rdirparts[i]))
         {

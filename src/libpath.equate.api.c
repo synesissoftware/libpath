@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Equating API.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 20th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -471,7 +471,7 @@ libpath_Internal_PathEquals_impl_2_(
                             // Algorithm: while the last cwd part is not double-dots
                             // and the first rel part is
                             //
-                            for(; 0 != nrel && 0 != ncwd; )
+                            for (; 0 != nrel && 0 != ncwd; )
                             {
                                 libpath_StringSlice_t const* const  rel_first_part  =   &(*rel_dirparts)[0];
                                 libpath_StringSlice_t const* const  cwd_last_part   =   &(*cwd_dirparts)[ncwd - 1];
@@ -492,7 +492,7 @@ libpath_Internal_PathEquals_impl_2_(
 
                             // correlate absolute and relative parts
 
-                            for(; 0 != nabs && 0 != nrel; --nabs, --nrel)
+                            for (; 0 != nabs && 0 != nrel; --nabs, --nrel)
                             {
                                 libpath_StringSlice_t const*    abs_part    =   &(*abs_dirparts)[nabs - 1];
                                 libpath_StringSlice_t const*    rel_part    =   &(*rel_dirparts)[nrel - 1];
@@ -507,7 +507,7 @@ libpath_Internal_PathEquals_impl_2_(
 
                             // correlate absolute and cwd parts
 
-                            for(; 0 != nabs && 0 != ncwd; --nabs, --ncwd)
+                            for (; 0 != nabs && 0 != ncwd; --nabs, --ncwd)
                             {
                                 libpath_StringSlice_t const*    abs_part    =   &(*abs_dirparts)[nabs - 1];
                                 libpath_StringSlice_t const*    cwd_part    =   &(*cwd_dirparts)[ncwd - 1];

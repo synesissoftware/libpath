@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 4th May 2024
+ * Updated: 20th July 2024
  */
 
 #include "libpath.compare.internal.h"
@@ -80,7 +80,7 @@ libpath_Internal_compare_roots(
         LIBPATH_MESSAGE_ASSERT(lhs->len >= 5, "must be UNC server+share");
         LIBPATH_MESSAGE_ASSERT(rhs->len >= 5, "must be UNC server+share");
 
-        for(i = 0; 0 == r && i != lhs->len && i != rhs->len; ++i)
+        for (i = 0; 0 == r && i != lhs->len && i != rhs->len; ++i)
         {
             char const  cl  =   (char)toupper(lhs->ptr[i]);
             char const  cr  =   (char)toupper(rhs->ptr[i]);
@@ -138,7 +138,7 @@ libpath_Internal_compare_path_fragment(
         --rhsLen;
     }
 
-    for(i = 0; 0 == r && i != lhsLen && i != rhsLen; ++i)
+    for (i = 0; 0 == r && i != lhsLen && i != rhsLen; ++i)
     {
 #ifdef LIBPATH_OS_IS_WINDOWS
         char const  cl  =   (char)toupper(lhs->ptr[i]);

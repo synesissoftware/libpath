@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 20th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -182,7 +182,7 @@ libpath_Internal_compare_directory_part(
         --rhsLen;
     }
 
-    for(i = 0; 0 == r && i != lhsLen && i != rhsLen; ++i)
+    for (i = 0; 0 == r && i != lhsLen && i != rhsLen; ++i)
     {
 #ifdef LIBPATH_OS_IS_WINDOWS
         char const  cl  =   (char)toupper(lhs->ptr[i]);
@@ -233,7 +233,7 @@ libpath_Internal_compare_directory_parts(
     int             r   =   0;
     libpath_size_t  i;
 
-    for(i = 0; 0 == r && ndirparts1 != i && ndirparts2 != i; ++i)
+    for (i = 0; 0 == r && ndirparts1 != i && ndirparts2 != i; ++i)
     {
         r = libpath_Internal_compare_directory_part(&dirparts1[i], &dirparts2[i], flags);
     }
@@ -277,7 +277,7 @@ libpath_Internal_compare_directory_parts_with_wd(
     libpath_size_t  i;
     libpath_size_t  j;
 
-    for(i = 0; ndirparts_abs != i && ndirparts_cwd != i; ++i)
+    for (i = 0; ndirparts_abs != i && ndirparts_cwd != i; ++i)
     {
         r = libpath_Internal_compare_directory_part(&dirparts_abs[i], &dirparts_cwd[i], flags);
 
@@ -322,7 +322,7 @@ libpath_Internal_compare_directory_parts_with_wd(
 
     /* 3. */
 
-    for(j = 0; ndirparts_abs != i && ndirparts_rel != j; ++i, ++j)
+    for (j = 0; ndirparts_abs != i && ndirparts_rel != j; ++i, ++j)
     {
         r = libpath_Internal_compare_directory_part(&dirparts_abs[i], &dirparts_rel[j], flags);
 
@@ -386,7 +386,7 @@ canonicalise_between_relative_and_cwd(
 ,   libpath_StringSlice_t const*        cdirparts
 )
 {
-    for(; 0 != *nrdirparts && 0 != *ncdirparts; )
+    for (; 0 != *nrdirparts && 0 != *ncdirparts; )
     {
         libpath_StringSlice_t const*    rel_first_part  =   &rdirparts[0];
         libpath_StringSlice_t const*    cwd_last_part   =   &cdirparts[*ncdirparts - 1];

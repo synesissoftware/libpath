@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 20th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -197,7 +197,7 @@ Xyz1(
     libpath_char_t const* const begin           =   path->ptr;
     libpath_char_t const* const end             =   path->ptr + path->len;
 
-    { libpath_char_t const* s; for(s = begin; s != end; ++s)
+    { libpath_char_t const* s; for (s = begin; s != end; ++s)
     {
         switch (*s)
         {

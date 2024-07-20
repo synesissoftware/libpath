@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 20th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -1707,9 +1707,9 @@ static void test_1_60(void)
     };
     char const input_template[] = "/this/is/going/to/be/a.bad.path";
 
-    { for(libpath_size_t i = 0; i != STLSOFT_NUM_ELEMENTS(bad_chars); ++i)
+    { for (libpath_size_t i = 0; i != STLSOFT_NUM_ELEMENTS(bad_chars); ++i)
     {
-        { for(libpath_size_t j = 0; j != STLSOFT_NUM_ELEMENTS(input_template) - 1; ++j)
+        { for (libpath_size_t j = 0; j != STLSOFT_NUM_ELEMENTS(input_template) - 1; ++j)
         {
             char input[STLSOFT_NUM_ELEMENTS(input_template)];
 
@@ -2165,7 +2165,7 @@ static void test_1_82(void)
     char const              input[] =   "\\\\192.168.0.1\\share\\";
     libpath_size_t const    cch     =   STLSOFT_NUM_ELEMENTS(input) - 1;
 
-    { for(libpath_size_t i = 0; i <= cch; ++i)
+    { for (libpath_size_t i = 0; i <= cch; ++i)
     {
         ParseResult_t   r;
         LIBPATH_RC      rc;

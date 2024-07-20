@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 4th May 2024
+ * Updated: 20th July 2024
  */
 
 #include "libpath.parse.internal.h"
@@ -325,7 +325,7 @@ libpath_Internal_find_next_directory_part(
 
     *isDots = LIBPATH_V_FALSEY;
 
-    for(; *i < directoryPart->len; ++*i)
+    for (; *i < directoryPart->len; ++*i)
     {
         if (libpath_Internal_character_is_pathname_separator(directoryPart->ptr[*i]) &&
             (   (*i + 1) == directoryPart->len ||
@@ -407,7 +407,7 @@ libpath_Internal_find_UNC_root_slice(
 
     i += 2;
 
-    for(; i != path->len; ++i)
+    for (; i != path->len; ++i)
     {
         if (invalid == state)
         {
