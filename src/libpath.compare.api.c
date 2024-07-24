@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 20th July 2024
+ * Updated: 24th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -426,8 +426,8 @@ libpath_ParseResult_get_relativity_level_(
 #ifdef LIBPATH_OS_IS_WINDOWS
     switch (pr->volumePart.len)
     {
-    case    2:
-    case    3:
+    case 2:
+    case 3:
         level |= LIBPATH_RLEVEL_VOLUME_LETTER;
         break;
 
@@ -534,27 +534,27 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
         {
         default:
             LIBPATH_MESSAGE_ASSERT(0, "unexpected!");
-        case    LIBPATH_COMBINE_RLEVELS_(relative, relative):
+        case LIBPATH_COMBINE_RLEVELS_(relative, relative):
 #ifdef LIBPATH_OS_IS_WINDOWS
-        case    LIBPATH_COMBINE_RLEVELS_(rooted, rooted):
+        case LIBPATH_COMBINE_RLEVELS_(rooted, rooted):
 #endif
-        case    LIBPATH_COMBINE_RLEVELS_((absolute | rooted), (absolute | rooted)):
+        case LIBPATH_COMBINE_RLEVELS_((absolute | rooted), (absolute | rooted)):
             // do nothing here
             break;
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-        case    LIBPATH_COMBINE_RLEVELS_(rooted, (absolute | rooted)):
-        case    LIBPATH_COMBINE_RLEVELS_(relative, rooted):
+        case LIBPATH_COMBINE_RLEVELS_(rooted, (absolute | rooted)):
+        case LIBPATH_COMBINE_RLEVELS_(relative, rooted):
 #endif
-        case    LIBPATH_COMBINE_RLEVELS_(relative, (absolute | rooted)):
+        case LIBPATH_COMBINE_RLEVELS_(relative, (absolute | rooted)):
             // lhs < rhs
             *result = -1;
             return LIBPATH_RC_OF(Success);
 
-        case    LIBPATH_COMBINE_RLEVELS_((absolute | rooted), relative):
+        case LIBPATH_COMBINE_RLEVELS_((absolute | rooted), relative):
 #ifdef LIBPATH_OS_IS_WINDOWS
-        case    LIBPATH_COMBINE_RLEVELS_((absolute | rooted), rooted):
-        case    LIBPATH_COMBINE_RLEVELS_(rooted, relative):
+        case LIBPATH_COMBINE_RLEVELS_((absolute | rooted), rooted):
+        case LIBPATH_COMBINE_RLEVELS_(rooted, relative):
 #endif
             // lhs > rhs
             *result = +1;
@@ -959,12 +959,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
     {
         switch (rc)
         {
-        case    LIBPATH_RC_OF(NoPathSpecified):
-        case    LIBPATH_RC_OF(BadPathCharacter):
+        case LIBPATH_RC_OF(NoPathSpecified):
+        case LIBPATH_RC_OF(BadPathCharacter):
+
             rc = LIBPATH_RC_OF(FirstPathInvalid);
             break;
-
         default:
+
             break;
         }
 
@@ -977,12 +978,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
     {
         switch (rc)
         {
-        case    LIBPATH_RC_OF(NoPathSpecified):
-        case    LIBPATH_RC_OF(BadPathCharacter):
+        case LIBPATH_RC_OF(NoPathSpecified):
+        case LIBPATH_RC_OF(BadPathCharacter):
+
             rc = LIBPATH_RC_OF(SecondPathInvalid);
             break;
-
         default:
+
             break;
         }
 
@@ -1004,12 +1006,13 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
             {
                 switch (rc)
                 {
-                case    LIBPATH_RC_OF(NoPathSpecified):
-                case    LIBPATH_RC_OF(BadPathCharacter):
+                case LIBPATH_RC_OF(NoPathSpecified):
+                case LIBPATH_RC_OF(BadPathCharacter):
+
                     rc = LIBPATH_RC_OF(WorkingDirectoryPathInvalid);
                     break;
-
                 default:
+
                     break;
                 }
 
@@ -1070,10 +1073,10 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
     {
         switch (ctxt->mechanism)
         {
-        case    libpath_WorkingDirectoryContextMechanism_NoneSpecified:
+        case libpath_WorkingDirectoryContextMechanism_NoneSpecified:
 
             break;
-        case    libpath_WorkingDirectoryContextMechanism_CStyleString:
+        case libpath_WorkingDirectoryContextMechanism_CStyleString:
 
             if (LIBPATH_LF_nullptr != ctxt->details.cwd_css)
             {
@@ -1081,7 +1084,7 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
                 cwd = &cwd_;
             }
             break;
-        case    libpath_WorkingDirectoryContextMechanism_StringSlice:
+        case libpath_WorkingDirectoryContextMechanism_StringSlice:
 
             cwd = &ctxt->details.cwd_slice;
             break;
@@ -1089,9 +1092,9 @@ libpath_Compare_ComparePathsAsStringSlices_UNCHECKED_(
 
             LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
 #if defined(_WIN32) || defined(_WIN64)
-        case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
+        case libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
 #endif
-        case    libpath_WorkingDirectoryContextMechanism_getcwd:
+        case libpath_WorkingDirectoryContextMechanism_getcwd:
             return LIBPATH_RC_OF(OptionNotSupported);
         }
     }

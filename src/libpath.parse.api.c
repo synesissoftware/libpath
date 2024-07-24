@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 20th July 2024
+ * Updated: 24th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -180,13 +180,15 @@ Xyz1(
 )
 {
 #endif /* !__cplusplus */
-    // Now we do some actual parsing.
-    //
-    // For further functionality we find the following:
-    //
-    // - first slash
-    // - last slash
-    // - last period
+    /*
+     * Now we do some actual parsing.
+     *
+     * For further functionality we find the following:
+     *
+     * - first slash
+     * - last slash
+     * - last period
+    */
 
     libpath_char_t const*       lastSlash       =   LIBPATH_LF_nullptr;
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -532,8 +534,10 @@ libpath_ParseResult_IsPathAbsolute(
     LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
 #ifdef LIBPATH_OS_IS_WINDOWS
+
     return result->rootPart.len > 1;
 #else
+
     return 0 != result->rootPart.len;
 #endif
 }
