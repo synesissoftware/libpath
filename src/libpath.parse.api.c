@@ -84,7 +84,7 @@ libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
 
 static
 LIBPATH_RC
-Xyz1(
+libpath_Parse_ParsePathFromStringSlice_impl_1_(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
 ,   libpath_size_t                  numDirectoryPartSlices
@@ -94,7 +94,7 @@ Xyz1(
 
 static
 LIBPATH_RC
-Xyz2(
+libpath_Parse_ParsePathFromStringSlice_impl_2_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
@@ -108,7 +108,7 @@ Xyz2(
 
 static
 LIBPATH_RC
-Xyz3(
+libpath_Parse_ParsePathFromStringSlice_impl_3_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
@@ -160,7 +160,7 @@ libpath_Parse_ParsePathFromStringSlice(
     }
 #ifndef __cplusplus
 
-    return Xyz1(
+    return libpath_Parse_ParsePathFromStringSlice_impl_1_(
                 path
             ,   flags
             ,   numDirectoryPartSlices
@@ -171,7 +171,7 @@ libpath_Parse_ParsePathFromStringSlice(
 
 static
 LIBPATH_RC
-Xyz1(
+libpath_Parse_ParsePathFromStringSlice_impl_1_(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
 ,   libpath_size_t                  numDirectoryPartSlices
@@ -198,6 +198,8 @@ Xyz1(
 
     libpath_char_t const* const begin           =   path->ptr;
     libpath_char_t const* const end             =   path->ptr + path->len;
+
+    LIBPATH_ASSERT(begin != end);
 
     { libpath_char_t const* s; for (s = begin; s != end; ++s)
     {
@@ -246,7 +248,7 @@ Xyz1(
 #endif
 #ifndef __cplusplus
 
-    return Xyz2(
+    return libpath_Parse_ParsePathFromStringSlice_impl_2_(
                 path
             ,   begin
             ,   end
@@ -261,7 +263,7 @@ Xyz1(
 
 static
 LIBPATH_RC
-Xyz2(
+libpath_Parse_ParsePathFromStringSlice_impl_2_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
@@ -313,7 +315,7 @@ Xyz2(
     }
 #ifndef __cplusplus
 
-    return Xyz3(
+    return libpath_Parse_ParsePathFromStringSlice_impl_3_(
                 path
             ,   begin
             ,   end
@@ -329,7 +331,7 @@ Xyz2(
 
 static
 LIBPATH_RC
-Xyz3(
+libpath_Parse_ParsePathFromStringSlice_impl_3_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
@@ -422,7 +424,7 @@ Xyz3(
     {
         libpath_size_t          pre =   0;
         libpath_size_t          i   =   0;
-        libpath_truthy_t isDots;
+        libpath_truthy_t        isDots;
         libpath_StringSlice_t   part;
 
         while (libpath_Internal_find_next_directory_part(&i, &result->directoryPart, flags, &part, &isDots))
