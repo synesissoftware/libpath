@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 20th July 2024
+ * Updated: 27th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -14,6 +14,7 @@
  */
 
 #include <libpath/parse.hpp>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * includes
@@ -235,15 +236,9 @@ static void test_1_1(void)
 {
     char const input[] = ".";
 
-    ParseResult_t   r;
-    LIBPATH_RC      rc;
-    StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
-
-    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
-
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-
-    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
+    ParseResult_t       r;
+    StringSlice_t       directoryPartSlices[NUM_DP_ELEMENTS];
+    LIBPATH_RC const    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
     XTESTS_TEST_INTEGER_EQUAL(1u, r.input.len);
@@ -271,15 +266,9 @@ static void test_1_2(void)
 {
     char const input[] = "..";
 
-    ParseResult_t   r;
-    LIBPATH_RC      rc;
-    StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
-
-    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
-
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-
-    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
+    ParseResult_t       r;
+    StringSlice_t       directoryPartSlices[NUM_DP_ELEMENTS];
+    LIBPATH_RC const    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
     XTESTS_TEST_INTEGER_EQUAL(2u, r.input.len);
@@ -494,15 +483,9 @@ static void test_1_11(void)
 {
     char const input[] = "a.c";
 
-    ParseResult_t   r;
-    LIBPATH_RC      rc;
-    StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
-
-    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
-
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-
-    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
+    ParseResult_t       r;
+    StringSlice_t       directoryPartSlices[NUM_DP_ELEMENTS];
+    LIBPATH_RC const    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
     XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
