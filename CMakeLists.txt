@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libpath
 #
 # Created:  7th February 2024
-# Updated:  8th February 2024
+# Updated:  26th July 2024
 #
 # ######################################################################## #
 
@@ -71,30 +71,7 @@ set(CMAKE_CXX_EXTENSIONS ON)
 # ##########################################################
 # dependencies
 
-#[====[
-set(STLSoft_REQUIRED_VERSION_ 0.10.8)
-
-find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
-
-message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
-
-
-set(b64_DESIRED_VERSION_ 1.4.7)
-
-find_package(b64 ${b64_DESIRED_VERSION_})
-
-message("-- CMake package b64 found (version ${b64_VERSION}; ${b64_DESIRED_VERSION_} requested)")
-#]====]
-
-
 if(BUILD_TESTING)
-
-	# set(shwild_REQUIRED_VERSION_ 0.11.6)
-
-	# find_package(shwild ${shwild_REQUIRED_VERSION_} REQUIRED)
-
-	# message("-- CMake package shwild found (version ${shwild_VERSION}; ${shwild_REQUIRED_VERSION_} requested)")
-
 
 	# ##########################################################
 	# STLSoft
@@ -129,6 +106,9 @@ if(BUILD_TESTING)
 		include_directories(${STLSOFT_INCLUDE_DIR})
 	endif()
 
+
+	# ##########################################################
+	# xTests
 
 	set(xTests_REQUIRED_VERSION_ 0.23)
 
