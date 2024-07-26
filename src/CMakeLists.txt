@@ -53,8 +53,8 @@ set(CORE_PUBLIC_HEADERS
 )
 
 set_target_properties(core PROPERTIES
-	OUTPUT_NAME "xtests.core"
-	PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
+	OUTPUT_NAME "libpath.core"
+	# PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
 )
 
 target_include_directories(core PUBLIC
@@ -83,21 +83,13 @@ install(TARGETS core
 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
+	# PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
 )
 
-# additional headers into specific sub-directories
-
+# install the include/libpath/*/ subdirectories here, as do not (yet) know how to do so via PUBLIC_HEADER property
 install(
-	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
+	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/
 	DESTINATION include/${PROJECT_NAME_LOWER}
-	FILES_MATCHING
-	PATTERN "*.h*"
-)
-
-install(
-	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/test/util
-	DESTINATION include/${PROJECT_NAME_LOWER}/test
 	FILES_MATCHING
 	PATTERN "*.h*"
 )

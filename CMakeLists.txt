@@ -155,7 +155,7 @@ if(BUILD_TESTING)
 	message("-- enabled building of tests ...")
 
 	add_subdirectory(test)
-endif()
+endif(BUILD_TESTING)
 
 
 # ##########################################################
@@ -167,7 +167,7 @@ if(BUILD_EXAMPLES)
 	message("-- enabled building of examples ...")
 
 	add_subdirectory(examples)
-endif()
+endif(BUILD_EXAMPLES)
 
 
 # ##########################################################
