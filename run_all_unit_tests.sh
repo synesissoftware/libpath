@@ -3,7 +3,7 @@
 ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
-CMakePath=$Dir/_build
+CMakeDir=$Dir/_build
 
 
 # ##########################################################
@@ -51,9 +51,9 @@ done
 # ##########################################################
 # main()
 
-mkdir -p $CMakePath || exit 1
+mkdir -p $CMakeDir || exit 1
 
-cd $CMakePath
+cd $CMakeDir
 
 echo "Executing make and then running all test programs"
 

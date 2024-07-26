@@ -3,7 +3,7 @@
 ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
-CMakePath=$Dir/_build
+CMakeDir=$Dir/_build
 
 
 CMakeExamplesDisabled=0
@@ -123,9 +123,9 @@ done
 # ##########################################################
 # main()
 
-mkdir -p $CMakePath || exit 1
+mkdir -p $CMakeDir || exit 1
 
-cd $CMakePath
+cd $CMakeDir
 
 echo "Executing CMake"
 
@@ -165,8 +165,8 @@ cd ->/dev/null
 
 if [ $CMakeVerboseMakefile -ne 0 ]; then
 
-  echo -e "contents of $CMakePath:"
-  ls -al $CMakePath
+  echo -e "contents of $CMakeDir:"
+  ls -al $CMakeDir
 fi
 
 exit $status
