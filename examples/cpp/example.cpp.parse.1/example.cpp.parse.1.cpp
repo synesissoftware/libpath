@@ -107,6 +107,7 @@ parse_and_display_results(
     assert(NULL != stm_cr);
     assert(NULL != path);
 
+    static char const   blanks[] = "                                                                                                                                                                                                                                                                                            ";
 
     int const           flags   =   0
                                 ;
@@ -120,37 +121,38 @@ parse_and_display_results(
                                     ,   numDirectoryPartSlices
                                     ,   &directoryPartSlices[0]
                                     );
+    int                 dp_width;
 
     if (LIBPATH_RC_SUCCESS(rc))
     {
         fprintf(
             stm_out
         ,   "results of parsing '%s':\n"
-            "\tinput:                \t'%.*s'\n"
-            "\tpath:                 \t'%.*s'\n"
-            "\tlocationPart:         \t'%.*s'\n"
+            "\tinput:                \t%.*s'%.*s'\n"
+            "\tpath:                 \t%.*s'%.*s'\n"
+            "\tlocationPart:         \t%.*s'%.*s'\n"
 #ifdef LIBPATH_OS_IS_WINDOWS
-            "\tvolumePart:           \t'%.*s'\n"
+            "\tvolumePart:           \t%.*s'%.*s'\n"
 #endif /* LIBPATH_OS_IS_WINDOWS */
-            "\trootPart:             \t'%.*s'\n"
-            "\tdirectoryPart:        \t'%.*s'\n"
-            "\tentryPart:            \t'%.*s'\n"
-            "\tentryStemPart:        \t'%.*s'\n"
-            "\tentryExtensionPart:   \t'%.*s'\n"
+            "\trootPart:             \t%.*s'%.*s'\n"
+            "\tdirectoryPart:        \t%.*s'%.*s'\n"
+            "\tentryPart:            \t%.*s'%.*s'\n"
+            "\tentryStemPart:        \t%.*s'%.*s'\n"
+            "\tentryExtensionPart:   \t%.*s'%.*s'\n"
             "\tnumDotsDirectoryParts:\t%lu:\n"
             "\tnumDirectoryParts:    \t%lu:\n"
         ,   path
-        ,   int(result.input.len), result.input.ptr
-        ,   int(result.path.len), result.path.ptr
-        ,   int(result.locationPart.len), result.locationPart.ptr
+        ,   0, "", int(result.input.len), result.input.ptr
+        ,   0, "", int(result.path.len), result.path.ptr
+        ,   0, "", int(result.locationPart.len), result.locationPart.ptr
 #ifdef LIBPATH_OS_IS_WINDOWS
-        ,   int(result.volumePart.len), result.volumePart.ptr
+        ,   0, "", int(result.volumePart.len), result.volumePart.ptr
 #endif /* LIBPATH_OS_IS_WINDOWS */
-        ,   int(result.rootPart.len), result.rootPart.ptr
-        ,   int(result.directoryPart.len), result.directoryPart.ptr
-        ,   int(result.entryPart.len), result.entryPart.ptr
-        ,   int(result.entryStemPart.len), result.entryStemPart.ptr
-        ,   int(result.entryExtensionPart.len), result.entryExtensionPart.ptr
+        ,   0, "", int(result.rootPart.len), result.rootPart.ptr
+        ,   int(result.rootPart.len), blanks, int(result.directoryPart.len), result.directoryPart.ptr
+        ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryPart.len), result.entryPart.ptr
+        ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryStemPart.len), result.entryStemPart.ptr
+        ,   int(result.rootPart.len + result.directoryPart.len + result.entryStemPart.len), blanks, int(result.entryExtensionPart.len), result.entryExtensionPart.ptr
         ,   result.numDotsDirectoryParts
         ,   result.numDirectoryParts
         );
@@ -158,15 +160,19 @@ parse_and_display_results(
             stm_out
         ,   "\tdirectoryParts:\n"
         );
+        dp_width = int(result.rootPart.len);
         for (size_t i = 0; i != result.numDirectoryParts; ++i)
         {
-            StringSlice_t const&    directoryPart = directoryPartSlices[i];
+            StringSlice_t const& directoryPart = directoryPartSlices[i];
 
             fprintf(
                 stm_out
-            ,   "\t                      \t'%.*s'\n"
+            ,   "\t                      \t%.*s'%.*s'\n"
+            ,   dp_width, blanks
             ,   int(directoryPart.len), directoryPart.ptr
             );
+
+            dp_width += int(directoryPart.len);
         }
 
         return EXIT_SUCCESS;
