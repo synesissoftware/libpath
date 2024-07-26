@@ -19,39 +19,40 @@ STLSoftDirGiven=
 # command-line handling
 
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        -v|--cmake-verbose-makefile)
 
-            CMakeVerboseMakefile=1
-            ;;
-        -d|--debug-configuration)
+  case $1 in
+    -v|--cmake-verbose-makefile)
 
-            Configuration=Debug
-            ;;
-        -E|--disable-examples)
+      CMakeVerboseMakefile=1
+      ;;
+    -d|--debug-configuration)
 
-            CMakeExamplesDisabled=1
-            ;;
-        -T|--disable-testing)
+      Configuration=Debug
+      ;;
+    -E|--disable-examples)
 
-            CMakeTestingDisabled=1
-            ;;
-        -m|--run-make)
+      CMakeExamplesDisabled=1
+      ;;
+    -T|--disable-testing)
 
-            RunMake=1
-            ;;
-        -w|--simulate-windows-on-unix)
+      CMakeTestingDisabled=1
+      ;;
+    -m|--run-make)
 
-            SimulateWindowsOnUnix=1
-            ;;
-        -s|--stlsoft-root-dir)
+      RunMake=1
+      ;;
+    -w|--simulate-windows-on-unix)
 
-            shift
-            STLSoftDirGiven=$1
-            ;;
-        --help)
+      SimulateWindowsOnUnix=1
+      ;;
+    -s|--stlsoft-root-dir)
 
-            cat << EOF
+      shift
+      STLSoftDirGiven=$1
+      ;;
+    --help)
+
+      cat << EOF
 libpath is a path parsing library (for C and C++)
 Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
@@ -105,17 +106,17 @@ Flags/options:
 
 EOF
 
-            exit 0
-            ;;
-        *)
+      exit 0
+      ;;
+    *)
 
-            >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
+      >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
 
-            exit 1
-            ;;
-    esac
+      exit 1
+      ;;
+  esac
 
-    shift
+  shift
 done
 
 
@@ -141,31 +142,31 @@ if [ -z $STLSoftDirGiven ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVari
 LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX
 
 cmake \
-    $CMakeSTLSoftVariable \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
-    -DLIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX:BOOL=$CMakeSimulateWindowsOnUnixFlag \
-    .. || (cd ->/dev/null ; exit 1)
+  $CMakeSTLSoftVariable \
+  -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
+  -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
+  -DCMAKE_BUILD_TYPE=$Configuration \
+  -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
+  -DLIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX:BOOL=$CMakeSimulateWindowsOnUnixFlag \
+  .. || (cd ->/dev/null ; exit 1)
 
 status=0
 
 if [ $RunMake -ne 0 ]; then
 
-    echo "Executing make"
+  echo "Executing make"
 
-    make
+  make
 
-    status=$?
+  status=$?
 fi
 
 cd ->/dev/null
 
 if [ $CMakeVerboseMakefile -ne 0 ]; then
 
-    echo -e "contents of $CMakePath:"
-    ls -al $CMakePath
+  echo -e "contents of $CMakePath:"
+  ls -al $CMakePath
 fi
 
 exit $status
