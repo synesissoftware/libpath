@@ -73,7 +73,7 @@ set(CMAKE_CXX_EXTENSIONS ON)
 
 if(BUILD_TESTING)
 
-	# ##########################################################
+	# ##################################################
 	# STLSoft
 	#
 	# We provide flexibility here, as in:
@@ -107,7 +107,7 @@ if(BUILD_TESTING)
 	endif()
 
 
-	# ##########################################################
+	# ##################################################
 	# xTests
 
 	set(xTests_REQUIRED_VERSION_ 0.23)
@@ -179,7 +179,6 @@ include(CMakePackageConfigHelpers)
 
 set(EXPORT_NAME ${PROJECT_NAME_LOWER})
 
-#[====[
 configure_package_config_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/${EXPORT_NAME}-config.cmake.in
 	${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config.cmake
@@ -208,7 +207,6 @@ install( FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
-#]====]
 
 
 # ############################## end of file ############################# #

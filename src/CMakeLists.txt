@@ -1,12 +1,5 @@
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-if(APPLE)
-
-	message("-- -- adding '/usr/local/include' to include-directories for 'projects'")
-
-	include_directories("/usr/local/include")
-endif(APPLE)
+# include_directories(${CMAKE_SOURCE_DIR}/include)
 
 if(UNIX)
 
@@ -40,14 +33,36 @@ if ((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
 endif()
 
 
-file(GLOB UTIL_SRCS
+file(GLOB CORE_SRCS
 	*.c
 	*.cpp
 )
 
-add_library(libpath ${UTIL_SRCS})
+add_library(core
+	${CORE_SRCS}
+)
 
-target_compile_options(libpath PRIVATE
+# specify the primary public headers for the library, which controls whether
+# they'll be installed
+#
+# NOTE: it is not yet known (to me, at least) how to include additional
+# header files from sub-directories, so this is done below in an additional
+# `install()` step
+set(CORE_PUBLIC_HEADERS
+	"${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/${PROJECT_NAME_LOWER}.h"
+)
+
+set_target_properties(core PROPERTIES
+	OUTPUT_NAME "xtests.core"
+	PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
+)
+
+target_include_directories(core PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+	$<INSTALL_INTERFACE:include>
+)
+
+target_compile_options(core PRIVATE
 	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
 		-Werror -Wall -Wextra -pedantic
 
@@ -59,7 +74,33 @@ target_compile_options(libpath PRIVATE
 	>
 )
 
-install(TARGETS libpath)
+
+# ##########################################################
+# install
+
+install(TARGETS core
+	EXPORT project-targets
+	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME_LOWER}
+)
+
+# additional headers into specific sub-directories
+
+install(
+	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/util
+	DESTINATION include/${PROJECT_NAME_LOWER}
+	FILES_MATCHING
+	PATTERN "*.h*"
+)
+
+install(
+	DIRECTORY ${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME_LOWER}/test/util
+	DESTINATION include/${PROJECT_NAME_LOWER}/test
+	FILES_MATCHING
+	PATTERN "*.h*"
+)
 
 
 # ############################## end of file ############################# #

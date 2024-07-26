@@ -1,17 +1,10 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-if(APPLE)
-
-    message("-- -- adding '/usr/local/include' to include-directories for 'test'")
-
-    include_directories("/usr/local/include")
-endif(APPLE)
-
 if(UNIX)
 
-    add_definitions(-DUNIX)
-    add_definitions(-Dunix)
+	add_definitions(-DUNIX)
+	add_definitions(-Dunix)
 endif(UNIX)
 
 if(WIN32)
@@ -27,6 +20,9 @@ if(WIN32)
 
 		add_definitions(-DWIN32)
 	endif()
+
+	# suppress implicit-link file
+	add_definitions(-DLIBPATH_INCL_LIBPATH_H_IMPLICIT_LINK)
 endif(WIN32)
 
 if ((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
