@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 20th July 2024
+ * Updated: 27th July 2024
  */
 
 #include "libpath.equate.internal.h"
@@ -414,7 +414,7 @@ libpath_Internal_directory_parts_equal(
 
 int
 libpath_Internal_get_root_level(
-    libpath_ParseResult_t const* r
+    libpath_PathDescriptor_t const* r
 )
 {
 #ifndef LIBPATH_OS_IS_WINDOWS

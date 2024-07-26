@@ -101,7 +101,7 @@ parse_and_display_results(
 {
     using libpath::StringSlice_t;
     using namespace libpath::parsing;
-    // using libpath::parsing::ParseResult_t;
+    // using libpath::parsing::PathDescriptor_t;
 
     assert(NULL != stm_out);
     assert(NULL != stm_cr);
@@ -111,7 +111,7 @@ parse_and_display_results(
 
     int const           flags   =   0
                                 ;
-    ParseResult_t       result;
+    PathDescriptor_t    result;
     StringSlice_t       directoryPartSlices[20]; // WARNING: magic number!
     libpath_size_t      numDirectoryPartSlices = sizeof(directoryPartSlices) / sizeof(0[directoryPartSlices]);
     LIBPATH_RC const    rc      =   parse_path_from_cstyle_string(

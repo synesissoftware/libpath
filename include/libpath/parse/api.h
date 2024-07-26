@@ -4,7 +4,7 @@
  * Purpose: libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -149,7 +149,7 @@ libpath_Parse_ParsePathFromCStyleString(
  */
 LIBPATH_CALL(int)
 libpath_ParseResult_IsPathAbsolute(
-    libpath_ParseResult_t const*    result
+    libpath_PathDescriptor_t const* result
 );
 
 #ifdef __cplusplus
@@ -157,7 +157,7 @@ extern "C++"
 inline
 int
 libpath_ParseResult_IsPathAbsolute(
-    libpath_ParseResult_t const&    result
+    libpath_PathDescriptor_t const& result
 )
 {
     return libpath_ParseResult_IsPathAbsolute(&result);
@@ -182,7 +182,7 @@ libpath_ParseResult_IsPathAbsolute(
  */
 LIBPATH_CALL(int)
 libpath_ParseResult_IsPathRooted(
-    libpath_ParseResult_t const*    result
+    libpath_PathDescriptor_t const* result
 );
 
 #ifdef __cplusplus
@@ -190,7 +190,7 @@ extern "C++"
 inline
 int
 libpath_ParseResult_IsPathRooted(
-    libpath_ParseResult_t const&    result
+    libpath_PathDescriptor_t const& result
 )
 {
     return libpath_ParseResult_IsPathRooted(&result);

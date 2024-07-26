@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.compare.1.c project.
  *
  * Created: 28th March 2013
- * Updated: 25th July 2024
+ * Updated: 27th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -408,10 +408,9 @@ static void test_1_11(void)
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/", LIBPATH_LF_nullptr));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/", LIBPATH_LF_nullptr));
 
-#ifdef NDEBUG
+#if LIBPATH_VER >= 0x00030000
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/", LIBPATH_LF_nullptr));
-#else /* ? NDEBUG */
-#endif /* NDEBUG */
+#endif
 
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/", LIBPATH_LF_nullptr));
 

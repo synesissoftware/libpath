@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath Parsing API.
  *
  * Created: 29th March 2013
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -65,7 +65,7 @@ namespace parsing {
  * types
  */
 
-typedef libpath_ParseResult_t                               ParseResult_t;
+typedef libpath_PathDescriptor_t                            PathDescriptor_t;
 
 
 class dp_slices
@@ -109,7 +109,7 @@ LIBPATH_RC
 parse_path_from_string_slice(
     StringSlice_t const*    path
 ,   sint32_t                flags
-,   ParseResult_t*          result
+,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
@@ -122,7 +122,7 @@ LIBPATH_RC
 parse_path_from_string_slice(
     StringSlice_t const&    path
 ,   sint32_t                flags
-,   ParseResult_t*          result
+,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
@@ -136,7 +136,7 @@ parse_path_from_string_ptr_and_len(
     libpath_char_t const*   path
 ,   libpath_size_t          pathLen
 ,   sint32_t                flags
-,   ParseResult_t*          result
+,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
@@ -149,7 +149,7 @@ LIBPATH_RC
 parse_path_from_cstyle_string(
     libpath_char_t const*   path
 ,   sint32_t                flags
-,   ParseResult_t*          result
+,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t*          directoryPartSlices
 )
@@ -162,7 +162,7 @@ parse_path_from_cstyle_string(
 inline
 bool
 is_absolute(
-    ParseResult_t const& result
+    PathDescriptor_t const& result
 )
 {
     return 0 != libpath_ParseResult_IsPathAbsolute(result);
@@ -171,7 +171,7 @@ is_absolute(
 inline
 bool
 is_rooted(
-    ParseResult_t const& result
+    PathDescriptor_t const& result
 )
 {
     return 0 != libpath_ParseResult_IsPathRooted(result);

@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 20th July 2024
+ * Updated: 27th July 2024
  */
 
 #include "libpath.compare.internal.h"
@@ -31,6 +31,10 @@ libpath_Internal_compare_roots(
     LIBPATH_ASSERT(0 != lhs->len);
     LIBPATH_ASSERT(0 != rhs->len);
 
+#ifndef LIBPATH_OS_IS_WINDOWS
+    LIBPATH_SUPPRESS_UNUSED(lhs);
+    LIBPATH_SUPPRESS_UNUSED(rhs);
+#endif
     LIBPATH_SUPPRESS_UNUSED(flags);
 
 #ifdef LIBPATH_OS_IS_WINDOWS

@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 24th July 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -409,7 +409,7 @@ canonicalise_between_relative_and_cwd(
 static
 int
 libpath_ParseResult_get_relativity_level_(
-    libpath_ParseResult_t const* pr
+    libpath_PathDescriptor_t const* pr
 )
 {
     int level = LIBPATH_RLEVEL_RELATIVE;
@@ -469,9 +469,9 @@ compare_volume_letters(
 static
 LIBPATH_RC
 libpath_Compare_ComparePathsAsStringSlices_impl2_(
-    libpath_ParseResult_t const*                lhs
-,   libpath_ParseResult_t const*                rhs
-,   libpath_ParseResult_t const*                cwd
+    libpath_PathDescriptor_t const*             lhs
+,   libpath_PathDescriptor_t const*             rhs
+,   libpath_PathDescriptor_t const*             cwd
 ,   libpath_sint32_t                            flags
 ,   libpath_sint32_t                            lParseFlags
 ,   libpath_sint32_t                            rParseFlags
@@ -595,8 +595,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 #ifdef LIBPATH_OS_IS_WINDOWS
             int const                       relRelativity   =   reversed ? rhsRelativity : lhsRelativity;
 #endif
-            libpath_ParseResult_t const*    abs             =   reversed ? lhs : rhs;
-            libpath_ParseResult_t const*    rel             =   reversed ? rhs : lhs;
+            libpath_PathDescriptor_t const*    abs             =   reversed ? lhs : rhs;
+            libpath_PathDescriptor_t const*    rel             =   reversed ? rhs : lhs;
             int const                       r_multiplier    =   reversed ? +1 : -1;
             int const                       abs_base_flags  =   reversed ? lParseFlags : rParseFlags;
             int const                       rel_base_flags  =   reversed ? rParseFlags : lParseFlags;
@@ -773,9 +773,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                 }
                 else
                 {
-                    libpath_ParseResult_t   aresult     =   { 0 };
-                    libpath_ParseResult_t   rresult     =   { 0 };
-                    libpath_ParseResult_t   cresult     =   { 0 };
+                    libpath_PathDescriptor_t   aresult     =   { 0 };
+                    libpath_PathDescriptor_t   rresult     =   { 0 };
+                    libpath_PathDescriptor_t   cresult     =   { 0 };
                     int const               abs_flags   =   0
                                                         |   abs_base_flags
                                                         ;
@@ -845,15 +845,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
             if (0 != lhs->numDirectoryParts ||
                 0 != rhs->numDirectoryParts)
             {
-#ifdef NDEBUG
-# error Rename libpath_ParseResult_t to libpath_PathDescriptor_t (or similar)
-#else /* ? NDEBUG */
-#endif /* NDEBUG */
-
-#ifdef NDEBUG
+#if LIBPATH_VER >= 0x00030000
 # error create libpath_Parse_DeriveDirectoryPartsFrom/For/OnPathDescriptor()
-#else /* ? NDEBUG */
-#endif /* NDEBUG */
+#endif
 
                 {
                     libpath_StringSlice_t*  ldirparts   =   LIBPATH_LF_nullptr;
@@ -880,8 +874,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                     }
                     else
                     {
-                        libpath_ParseResult_t   lresult     =   { 0 };
-                        libpath_ParseResult_t   rresult     =   { 0 };
+                        libpath_PathDescriptor_t   lresult     =   { 0 };
+                        libpath_PathDescriptor_t   rresult     =   { 0 };
 
                         /* we don't check the return from these, because they can't fail */
 
@@ -951,9 +945,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
                                         |   libpath_ParseOption_AssumeDirectory
                                         ;
 
-    libpath_ParseResult_t   lresult;
-    libpath_ParseResult_t   rresult;
-    libpath_ParseResult_t   dresult;
+    libpath_PathDescriptor_t   lresult;
+    libpath_PathDescriptor_t   rresult;
+    libpath_PathDescriptor_t   dresult;
 
     libpath_truthy_t        shouldParseCwd = LIBPATH_V_FALSEY;
 

@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 25th July 2024
+ * Updated: 27th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 
  using ::libpath::StringSlice_t;
 
- using ::libpath::parsing::ParseResult_t;
+ typedef ::libpath::parsing::PathDescriptor_t               ParseResult_t;
 
  using ::libpath::parsing::parse_path_from_cstyle_string;
  using ::libpath::parsing::parse_path_from_string_ptr_and_len;

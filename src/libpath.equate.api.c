@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Equating API.
  *
  * Created: 9th November 2012
- * Updated: 20th July 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -70,8 +70,8 @@ libpath_Internal_PathEquals_impl_2_(
 ,   libpath_StringSlice_t const*    cwd
 ,   libpath_sint32_t                flags
 ,   libpath_StringSlice_t*        (*dpallocs)[3]
-,   libpath_ParseResult_t*          lresult
-,   libpath_ParseResult_t*          rresult
+,   libpath_PathDescriptor_t*       lresult
+,   libpath_PathDescriptor_t*       rresult
 ,   libpath_truthy_t*               result
 );
 
@@ -182,8 +182,8 @@ libpath_Internal_PathEquals_impl_(
 
     int const           flags   =   0;
 
-    libpath_ParseResult_t  lresult;
-    libpath_ParseResult_t  rresult;
+    libpath_PathDescriptor_t  lresult;
+    libpath_PathDescriptor_t  rresult;
 
     LIBPATH_ASSERT(LIBPATH_LF_nullptr != lhs);
     LIBPATH_ASSERT(LIBPATH_LF_nullptr != rhs);
@@ -248,8 +248,8 @@ libpath_Internal_PathEquals_impl_2_(
 ,   libpath_StringSlice_t const*    cwd
 ,   libpath_sint32_t                flags
 ,   libpath_StringSlice_t*        (*dpallocs)[3]
-,   libpath_ParseResult_t*          lresult
-,   libpath_ParseResult_t*          rresult
+,   libpath_PathDescriptor_t*       lresult
+,   libpath_PathDescriptor_t*       rresult
 ,   libpath_truthy_t*               result
 )
 {
@@ -376,18 +376,16 @@ libpath_Internal_PathEquals_impl_2_(
             int const                           cwd_flags   =   0
                                                             |   libpath_ParseOption_AssumeDirectory
                                                             ;
-            libpath_ParseResult_t*     abs_result  =   (0 != lhsRootLevel) ? lresult : rresult;
-            libpath_ParseResult_t*     rel_result  =   (0 != lhsRootLevel) ? rresult : lresult;
-            libpath_ParseResult_t      cwd_result;
+            libpath_PathDescriptor_t*     abs_result  =   (0 != lhsRootLevel) ? lresult : rresult;
+            libpath_PathDescriptor_t*     rel_result  =   (0 != lhsRootLevel) ? rresult : lresult;
+            libpath_PathDescriptor_t      cwd_result;
 
             if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, LIBPATH_LF_nullptr))
             {
-#ifdef NDEBUG
+#if LIBPATH_VER >= 0x00030000
 # error This needs to return a result code that indicates that it's the cwd
 # error Also: need to ensure that cwd is absolute
-#else /* ? NDEBUG */
-#endif /* NDEBUG */
-
+#endif
                 *result = LIBPATH_V_FALSEY;
 
                 return LIBPATH_RC_OF(Success);
