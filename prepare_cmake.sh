@@ -71,7 +71,8 @@ Flags/options:
 
     -d
     --debug-configuration
-        uses Debug configuration. Default is to use Release
+        use Debug configuration (by setting CMAKE_BUILD_TYPE=Debug). Default
+        is to use Release
 
     -E
     --disable-examples
@@ -157,7 +158,6 @@ if [ $RunMake -ne 0 ]; then
   echo "Executing make"
 
   make
-
   status=$?
 fi
 
