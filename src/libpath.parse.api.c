@@ -217,8 +217,6 @@ libpath_Parse_ParsePathFromStringSlice_impl_1_(
 #endif
         case    '.':
 
-            if (s == begin ||
-                '.' != s[-1])
             {
                 lastPeriod = s;
             }
@@ -280,13 +278,7 @@ libpath_Parse_ParsePathFromStringSlice_impl_2_(
     libpath_char_t const*       endOfEntryStem;
     libpath_char_t const*       startOfEntryExtension;
 
-    libpath_size_t const        numTrailingDots = libpath_Internal_count_trailing_dots_directory(path);
 
-    if (0 != numTrailingDots)
-    {
-        startOfEntry = end;
-    }
-    else
     // TODO: discriminate the actual flags
     if (libpath_ParseOption_AssumeDirectory == (libpath_ParseOption_AssumeDirectory & flags) &&
         !libpath_Internal_character_is_pathname_separator(end[-1]))
@@ -303,6 +295,12 @@ libpath_Parse_ParsePathFromStringSlice_impl_2_(
         startOfEntry = lastSlash + 1;
     }
 
+    if ('.' == end[-1])
+    {
+        endOfEntryStem = end;
+        startOfEntryExtension = end;
+    }
+    else
     if (lastPeriod < startOfEntry)
     {
         endOfEntryStem = end;
@@ -311,7 +309,7 @@ libpath_Parse_ParsePathFromStringSlice_impl_2_(
     else
     {
         endOfEntryStem = lastPeriod;
-        startOfEntryExtension = lastPeriod + 1;
+        startOfEntryExtension = lastPeriod;
     }
 #ifndef __cplusplus
 

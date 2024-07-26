@@ -473,6 +473,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 ,   libpath_ParseResult_t const*                rhs
 ,   libpath_ParseResult_t const*                cwd
 ,   libpath_sint32_t                            flags
+,   libpath_sint32_t                            lParseFlags
+,   libpath_sint32_t                            rParseFlags
 ,   libpath_truthy_t*                           result
 )
 {
@@ -596,6 +598,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
             libpath_ParseResult_t const*    abs             =   reversed ? lhs : rhs;
             libpath_ParseResult_t const*    rel             =   reversed ? rhs : lhs;
             int const                       r_multiplier    =   reversed ? +1 : -1;
+            int const                       abs_base_flags  =   reversed ? lParseFlags : rParseFlags;
+            int const                       rel_base_flags  =   reversed ? rParseFlags : lParseFlags;
 
             /* TODO: need to change the way paths are qualified, so as to be a
             * bitmap of fields:
@@ -773,10 +777,10 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
                     libpath_ParseResult_t   rresult     =   { 0 };
                     libpath_ParseResult_t   cresult     =   { 0 };
                     int const               abs_flags   =   0
-                                                        |   flags
+                                                        |   abs_base_flags
                                                         ;
                     int const               rel_flags   =   0
-                                                        |   flags
+                                                        |   rel_base_flags
                                                         ;
                     int const               cwd_flags   =   0
                                                         |   libpath_ParseOption_AssumeDirectory
@@ -881,8 +885,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 
                         /* we don't check the return from these, because they can't fail */
 
-                        libpath_Parse_ParsePathFromStringSlice(&lhs->input, flags, &lresult, lhs->numDirectoryParts, ldirparts);
-                        libpath_Parse_ParsePathFromStringSlice(&rhs->input, flags, &rresult, rhs->numDirectoryParts, rdirparts);
+                        libpath_Parse_ParsePathFromStringSlice(&lhs->input, lParseFlags, &lresult, lhs->numDirectoryParts, ldirparts);
+                        libpath_Parse_ParsePathFromStringSlice(&rhs->input, rParseFlags, &rresult, rhs->numDirectoryParts, rdirparts);
 
                         {
                         libpath_size_t const    nldirparts  =   libpath_Internal_canonicalise_parts(lhs->numDirectoryParts, ldirparts);
@@ -953,6 +957,19 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
     libpath_truthy_t        shouldParseCwd = LIBPATH_V_FALSEY;
 
+    libpath_size_t const    lNumTrailingDots = libpath_Internal_count_trailing_dots_directory(lhs);
+    libpath_size_t const    rNumTrailingDots = libpath_Internal_count_trailing_dots_directory(rhs);
+
+    if (0 != lNumTrailingDots)
+    {
+        lParseFlags |= libpath_ParseOption_AssumeDirectory;
+    }
+
+    if (0 != rNumTrailingDots)
+    {
+        rParseFlags |= libpath_ParseOption_AssumeDirectory;
+    }
+
     rc = libpath_Parse_ParsePathFromStringSlice(lhs, lParseFlags, &lresult, 0, LIBPATH_LF_nullptr);
 
     if (LIBPATH_RC_OF(Success) != rc)
@@ -1022,7 +1039,15 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         }
     }
 
-    return libpath_Compare_ComparePathsAsStringSlices_impl2_(&lresult, &rresult, shouldParseCwd ? &dresult : LIBPATH_LF_nullptr, flags, result);
+    return libpath_Compare_ComparePathsAsStringSlices_impl2_(
+            &lresult
+        ,   &rresult
+        ,   shouldParseCwd ? &dresult : LIBPATH_LF_nullptr
+        ,   flags
+        ,   lParseFlags
+        ,   rParseFlags
+        ,   result
+        );
     }
 }
 

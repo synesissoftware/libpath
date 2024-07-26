@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.compare.1.c project.
  *
  * Created: 28th March 2013
- * Updated: 27th July 2024
+ * Updated: 25th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 

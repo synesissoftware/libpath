@@ -37,6 +37,29 @@ libpath_Internal_path_character_is_bad(
 ,   int                             flags
 );
 
+/* Evaluates whether the path ends with a dots directory, i.e. one of the
+ * following sequences (where <pes> means possibly-empty-string and <nes>
+ * means non-empty-string that does not end in '.' or a recognised slash):
+ *
+ * path                 |      result
+ * ----                 |      ------
+ * ""                   |          0
+ * "."                  |          1
+ * ".."                 |          2
+ * "..."                |          0
+ * "...."               |          0
+ * "<pes>/."            |          1
+ * "<pes>/.."           |          2
+ * "<pes>/..."          |          0
+ * "<pes>/...."         |          0
+ * "<pes>\."            |          1    (Windows-only)
+ * "<pes>\.."           |          2    (Windows-only)
+ * "<pes>\..."          |          0    (Windows-only)
+ * "<pes>\...."         |          0    (Windows-only)
+ * "<nes>."             |          0
+ * "<nes>.."            |          0
+ * "<nes>..."           |          0
+ */
 libpath_size_t
 libpath_Internal_count_trailing_dots_directory(
     libpath_StringSlice_t const*    path
