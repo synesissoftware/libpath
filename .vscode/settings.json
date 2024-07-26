@@ -5,10 +5,12 @@
   },
   "[c]": {
     "editor.insertSpaces": true,
+    "editor.rulers": [ 60, 76 ],
     "editor.tabSize": 4,
   },
   "[cpp]": {
     "editor.insertSpaces": true,
+    "editor.rulers": [ 60, 76 ],
     "editor.tabSize": 4,
   },
   "[json]": {
@@ -17,10 +19,12 @@
   },
   "[ruby]": {
     "editor.insertSpaces": true,
+    "editor.rulers": [ 60, 76 ],
     "editor.tabSize": 2,
   },
   "[rust]": {
     "editor.insertSpaces": true,
+    "editor.rulers": [ 60, 76 ],
     "editor.tabSize": 4,
   },
   "[toml]": {
@@ -31,6 +35,7 @@
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "all",
+  "editor.rulers": [ 76 ],
   "editor.tabSize": 2,
   "files.associations": {
     "__bit_reference": "cpp",
