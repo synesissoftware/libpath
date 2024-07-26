@@ -11,7 +11,7 @@ CMakeTestingDisabled=0
 CMakeVerboseMakefile=0
 Configuration=Release
 RunMake=0
-SimulateWindowsOnUnix=0
+CMakeSimulateWindowsOnUnix=0
 STLSoftDirGiven=
 
 
@@ -41,9 +41,9 @@ while [[ $# -gt 0 ]]; do
 
       RunMake=1
       ;;
-    -w|--simulate-windows-on-unix)
+    --simulate-windows-on-unix)
 
-      SimulateWindowsOnUnix=1
+      CMakeSimulateWindowsOnUnix=1
       ;;
     -s|--stlsoft-root-dir)
 
@@ -88,7 +88,6 @@ Flags/options:
     --run-make
         executes make after a successful running of CMake
 
-    -w
     --simulate-windows-on-unix
         defines the LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX object-like
         preprocessor macro
@@ -139,8 +138,6 @@ if [ $CMakeVerboseMakefile -eq 0 ]; then CMakeVerboseMakefileFlag="OFF" ; else C
 if [ $CMakeSimulateWindowsOnUnix -eq 0 ]; then CMakeSimulateWindowsOnUnixFlag="OFF" ; else CMakeSimulateWindowsOnUnixFlag="ON" ; fi
 
 if [ -z $STLSoftDirGiven ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVariable="-DSTLSOFT=$STLSoftDirGiven/" ; fi
-
-LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX
 
 cmake \
   $CMakeSTLSoftVariable \

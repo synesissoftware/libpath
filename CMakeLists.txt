@@ -128,7 +128,9 @@ include(GNUInstallDirs)
 # ##########################################################
 # features
 
-if(DEFINED LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
+if(LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
+
+	message("-- defining LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX")
 
 	add_definitions(-DLIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
 endif()
