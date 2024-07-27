@@ -1,26 +1,25 @@
 
 add_executable(test.scratch.compare.models
-    test.scratch.compare.models.cpp
+	test.scratch.compare.models.cpp
 )
 
 target_link_libraries(test.scratch.compare.models
-    libpath
+	core
 )
 
-# target_link_libraries(test.scratch.compare.models
-#     xTests::xTests.core
-# )
+target_link_libraries(test.scratch.compare.models
+	$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+)
 
 target_compile_options(test.scratch.compare.models PRIVATE
-    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-        -Werror -Wall -Wextra -pedantic
+	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+		-Werror -Wall -Wextra -pedantic
 
-        -Wno-unused-parameter
-        -Wno-unused-variable
-    >
-    $<$<CXX_COMPILER_ID:MSVC>:
-        /WX /W4
-    >
+		-Wno-c++11-long-long
+	>
+	$<$<CXX_COMPILER_ID:MSVC>:
+		/WX /W4
+	>
 )
 
 

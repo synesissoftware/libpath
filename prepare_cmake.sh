@@ -3,7 +3,7 @@
 ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
-CMakePath=$Dir/_build
+CMakeDir=$Dir/_build
 
 
 CMakeExamplesDisabled=0
@@ -11,6 +11,7 @@ CMakeTestingDisabled=0
 CMakeVerboseMakefile=0
 Configuration=Release
 RunMake=0
+CMakeSimulateWindowsOnUnix=0
 STLSoftDirGiven=
 
 
@@ -18,35 +19,40 @@ STLSoftDirGiven=
 # command-line handling
 
 while [[ $# -gt 0 ]]; do
-    case $1 in
-        -v|--cmake-verbose-makefile)
 
-            CMakeVerboseMakefile=1
-            ;;
-        -d|--debug-configuration)
+  case $1 in
+    -v|--cmake-verbose-makefile)
 
-            Configuration=Debug
-            ;;
-        -E|--disable-examples)
+      CMakeVerboseMakefile=1
+      ;;
+    -d|--debug-configuration)
 
-            CMakeExamplesDisabled=1
-            ;;
-        -T|--disable-testing)
+      Configuration=Debug
+      ;;
+    -E|--disable-examples)
 
-            CMakeTestingDisabled=1
-            ;;
-        -m|--run-make)
+      CMakeExamplesDisabled=1
+      ;;
+    -T|--disable-testing)
 
-            RunMake=1
-            ;;
-        -s|--stlsoft-root-dir)
+      CMakeTestingDisabled=1
+      ;;
+    -m|--run-make)
 
-            shift
-            STLSoftDirGiven=$1
-            ;;
-        --help)
+      RunMake=1
+      ;;
+    --simulate-windows-on-unix)
 
-            cat << EOF
+      CMakeSimulateWindowsOnUnix=1
+      ;;
+    -s|--stlsoft-root-dir)
+
+      shift
+      STLSoftDirGiven=$1
+      ;;
+    --help)
+
+      cat << EOF
 libpath is a path parsing library (for C and C++)
 Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
@@ -65,7 +71,8 @@ Flags/options:
 
     -d
     --debug-configuration
-        uses Debug configuration. Default is to use Release
+        use Debug configuration (by setting CMAKE_BUILD_TYPE=Debug). Default
+        is to use Release
 
     -E
     --disable-examples
@@ -81,6 +88,10 @@ Flags/options:
     --run-make
         executes make after a successful running of CMake
 
+    --simulate-windows-on-unix
+        defines the LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX object-like
+        preprocessor macro
+
     -s <dir>
     --stlsoft-root-dir <dir>
         specifies the STLSoft root-directory, which will be passed to CMake
@@ -95,26 +106,26 @@ Flags/options:
 
 EOF
 
-            exit 0
-            ;;
-        *)
+      exit 0
+      ;;
+    *)
 
-            >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
+      >&2 echo "$ScriptPath: unrecognised argument '$1'; use --help for usage"
 
-            exit 1
-            ;;
-    esac
+      exit 1
+      ;;
+  esac
 
-    shift
+  shift
 done
 
 
 # ##########################################################
 # main()
 
-mkdir -p $CMakePath || exit 1
+mkdir -p $CMakeDir || exit 1
 
-cd $CMakePath
+cd $CMakeDir
 
 echo "Executing CMake"
 
@@ -124,33 +135,35 @@ if [ $CMakeTestingDisabled -eq 0 ]; then CMakeBuildTestingFlag="ON" ; else CMake
 
 if [ $CMakeVerboseMakefile -eq 0 ]; then CMakeVerboseMakefileFlag="OFF" ; else CMakeVerboseMakefileFlag="ON" ; fi
 
+if [ $CMakeSimulateWindowsOnUnix -eq 0 ]; then CMakeSimulateWindowsOnUnixFlag="OFF" ; else CMakeSimulateWindowsOnUnixFlag="ON" ; fi
+
 if [ -z $STLSoftDirGiven ]; then CMakeSTLSoftVariable="" ; else CMakeSTLSoftVariable="-DSTLSOFT=$STLSoftDirGiven/" ; fi
 
 cmake \
-    -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
-    -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
-    -DCMAKE_BUILD_TYPE=$Configuration \
-    -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
-    $CMakeSTLSoftVariable \
-    .. || (cd ->/dev/null ; exit 1)
+  $CMakeSTLSoftVariable \
+  -DBUILD_EXAMPLES:BOOL=$CMakeBuildExamplesFlag \
+  -DBUILD_TESTING:BOOL=$CMakeBuildTestingFlag \
+  -DCMAKE_BUILD_TYPE=$Configuration \
+  -DCMAKE_VERBOSE_MAKEFILE:BOOL=$CMakeVerboseMakefileFlag \
+  -DLIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX:BOOL=$CMakeSimulateWindowsOnUnixFlag \
+  .. || (cd ->/dev/null ; exit 1)
 
 status=0
 
 if [ $RunMake -ne 0 ]; then
 
-    echo "Executing make"
+  echo "Executing make"
 
-    make
-
-    status=$?
+  make
+  status=$?
 fi
 
 cd ->/dev/null
 
 if [ $CMakeVerboseMakefile -ne 0 ]; then
 
-    echo -e "contents of $CMakePath:"
-    ls -al $CMakePath
+  echo -e "contents of $CMakeDir:"
+  ls -al $CMakeDir
 fi
 
 exit $status

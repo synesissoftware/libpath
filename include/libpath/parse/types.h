@@ -4,7 +4,7 @@
  * Purpose: libpath Parsing API types.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -60,7 +60,7 @@
 /** parse-result information
  *
  */
-struct libpath_ParseResult_t
+struct libpath_PathDescriptor_t
 {
 #if 0
     LIBPATH_RCX                     rcx;
@@ -83,8 +83,8 @@ struct libpath_ParseResult_t
     libpath_size_t                  numDotsDirectoryParts;
     /** @brief The entry part of the path. */
     libpath_StringSlice_t           entryPart;
-    /** @brief The entry basename part of the path. */
-    libpath_StringSlice_t           entryBaseNamePart;
+    /** @brief The entry stem part of the path. */
+    libpath_StringSlice_t           entryStemPart;
     /** @brief The entry extension part of the path. */
     libpath_StringSlice_t           entryExtensionPart;
 
@@ -112,8 +112,9 @@ struct libpath_ParseResult_t
 };
 
 #ifndef __cplusplus
-typedef struct libpath_ParseResult_t                        libpath_ParseResult_t;
+typedef struct libpath_PathDescriptor_t                     libpath_PathDescriptor_t;
 #endif /* __cplusplus */
+typedef struct libpath_PathDescriptor_t                     libpath_ParseResult_t;
 
 
 /* ////////////////////////////////////////////////////////////////////// */

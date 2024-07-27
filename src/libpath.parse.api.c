@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -66,7 +66,7 @@ LIBPATH_RC
 libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result
+,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 );
@@ -77,24 +77,24 @@ libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
     libpath_char_t const*       path
 ,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result
+,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 );
 
 static
 LIBPATH_RC
-Xyz1(
+libpath_Parse_ParsePathFromStringSlice_impl_1_(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
-,   libpath_ParseResult_t*          result
+,   libpath_PathDescriptor_t*       result
 );
 
 static
 LIBPATH_RC
-Xyz2(
+libpath_Parse_ParsePathFromStringSlice_impl_2_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
@@ -103,22 +103,22 @@ Xyz2(
 ,   libpath_char_t const*           lastPeriod
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
-,   libpath_ParseResult_t*          result
+,   libpath_PathDescriptor_t*       result
 );
 
 static
 LIBPATH_RC
-Xyz3(
+libpath_Parse_ParsePathFromStringSlice_impl_3_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
 ,   libpath_sint32_t                flags
 ,   libpath_char_t const*           startOfEntry
-,   libpath_char_t const*           endOfEntryBaseName
+,   libpath_char_t const*           endOfEntryStem
 ,   libpath_char_t const*           startOfEntryExtension
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
-,   libpath_ParseResult_t*          result
+,   libpath_PathDescriptor_t*       result
 );
 #endif /* !__cplusplus */
 
@@ -131,17 +131,17 @@ LIBPATH_API
 libpath_Parse_ParsePathFromStringSlice(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
-,   libpath_ParseResult_t*          result                  /* = NULL */
+,   libpath_PathDescriptor_t*       result                  /* = NULL */
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices     /* = NULL */
 )
 {
     libpath_ParseResult_t stub;
 
-    LIBPATH_MESSAGE_ASSERT(NULL != path, "path may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || NULL != directoryPartSlices, "invalid directory part slice parameters");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path, "path may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 
-    if (NULL == result)
+    if (LIBPATH_LF_nullptr == result)
     {
         result = &stub;
     }
@@ -160,7 +160,7 @@ libpath_Parse_ParsePathFromStringSlice(
     }
 #ifndef __cplusplus
 
-    return Xyz1(
+    return libpath_Parse_ParsePathFromStringSlice_impl_1_(
                 path
             ,   flags
             ,   numDirectoryPartSlices
@@ -171,33 +171,37 @@ libpath_Parse_ParsePathFromStringSlice(
 
 static
 LIBPATH_RC
-Xyz1(
+libpath_Parse_ParsePathFromStringSlice_impl_1_(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
-,   libpath_ParseResult_t*          result
+,   libpath_PathDescriptor_t*       result
 )
 {
 #endif /* !__cplusplus */
-    // Now we do some actual parsing.
-    //
-    // For further functionality we find the following:
-    //
-    // - first slash
-    // - last slash
-    // - last period
+    /*
+     * Now we do some actual parsing.
+     *
+     * For further functionality we find the following:
+     *
+     * - first slash
+     * - last slash
+     * - last period
+    */
 
-    libpath_char_t const*       lastSlash       =   NULL;
+    libpath_char_t const*       lastSlash       =   LIBPATH_LF_nullptr;
 #ifdef LIBPATH_OS_IS_WINDOWS
-    libpath_char_t const*       lastBackSlash   =   NULL;
+    libpath_char_t const*       lastBackSlash   =   LIBPATH_LF_nullptr;
 #endif
-    libpath_char_t const*       lastPeriod      =   NULL;
+    libpath_char_t const*       lastPeriod      =   LIBPATH_LF_nullptr;
 
     libpath_char_t const* const begin           =   path->ptr;
     libpath_char_t const* const end             =   path->ptr + path->len;
 
-    { libpath_char_t const* s; for(s = begin; s != end; ++s)
+    LIBPATH_ASSERT(begin != end);
+
+    { libpath_char_t const* s; for (s = begin; s != end; ++s)
     {
         switch (*s)
         {
@@ -213,8 +217,6 @@ Xyz1(
 #endif
         case    '.':
 
-            if (s == begin ||
-                '.' != s[-1])
             {
                 lastPeriod = s;
             }
@@ -232,7 +234,7 @@ Xyz1(
     }}
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    if (NULL == lastSlash)
+    if (LIBPATH_LF_nullptr == lastSlash)
     {
         lastSlash = lastBackSlash;
     }
@@ -244,7 +246,7 @@ Xyz1(
 #endif
 #ifndef __cplusplus
 
-    return Xyz2(
+    return libpath_Parse_ParsePathFromStringSlice_impl_2_(
                 path
             ,   begin
             ,   end
@@ -259,7 +261,7 @@ Xyz1(
 
 static
 LIBPATH_RC
-Xyz2(
+libpath_Parse_ParsePathFromStringSlice_impl_2_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
@@ -268,21 +270,15 @@ Xyz2(
 ,   libpath_char_t const*           lastPeriod
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
-,   libpath_ParseResult_t*          result
+,   libpath_PathDescriptor_t*       result
 )
 {
 #endif /* !__cplusplus */
     libpath_char_t const*       startOfEntry;
-    libpath_char_t const*       endOfEntryBaseName;
+    libpath_char_t const*       endOfEntryStem;
     libpath_char_t const*       startOfEntryExtension;
 
-    libpath_size_t const        numTrailingDots = libpath_Internal_count_trailing_dots_directory(path);
 
-    if (0 != numTrailingDots)
-    {
-        startOfEntry = end;
-    }
-    else
     // TODO: discriminate the actual flags
     if (libpath_ParseOption_AssumeDirectory == (libpath_ParseOption_AssumeDirectory & flags) &&
         !libpath_Internal_character_is_pathname_separator(end[-1]))
@@ -290,7 +286,7 @@ Xyz2(
         startOfEntry = end;
     }
     else
-    if (NULL == lastSlash)
+    if (LIBPATH_LF_nullptr == lastSlash)
     {
         startOfEntry = begin;
     }
@@ -299,25 +295,31 @@ Xyz2(
         startOfEntry = lastSlash + 1;
     }
 
+    if ('.' == end[-1])
+    {
+        endOfEntryStem = end;
+        startOfEntryExtension = end;
+    }
+    else
     if (lastPeriod < startOfEntry)
     {
-        endOfEntryBaseName = end;
+        endOfEntryStem = end;
         startOfEntryExtension = end;
     }
     else
     {
-        endOfEntryBaseName = lastPeriod;
-        startOfEntryExtension = lastPeriod + 1;
+        endOfEntryStem = lastPeriod;
+        startOfEntryExtension = lastPeriod;
     }
 #ifndef __cplusplus
 
-    return Xyz3(
+    return libpath_Parse_ParsePathFromStringSlice_impl_3_(
                 path
             ,   begin
             ,   end
             ,   flags
             ,   startOfEntry
-            ,   endOfEntryBaseName
+            ,   endOfEntryStem
             ,   startOfEntryExtension
             ,   numDirectoryPartSlices
             ,   directoryPartSlices
@@ -327,17 +329,17 @@ Xyz2(
 
 static
 LIBPATH_RC
-Xyz3(
+libpath_Parse_ParsePathFromStringSlice_impl_3_(
     libpath_StringSlice_t const*    path
 ,   libpath_char_t const* const     begin
 ,   libpath_char_t const* const     end
 ,   libpath_sint32_t                flags
 ,   libpath_char_t const*           startOfEntry
-,   libpath_char_t const*           endOfEntryBaseName
+,   libpath_char_t const*           endOfEntryStem
 ,   libpath_char_t const*           startOfEntryExtension
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
-,   libpath_ParseResult_t*          result
+,   libpath_PathDescriptor_t*       result
 )
 {
 #endif /* !__cplusplus */
@@ -420,7 +422,7 @@ Xyz3(
     {
         libpath_size_t          pre =   0;
         libpath_size_t          i   =   0;
-        libpath_truthy_t isDots;
+        libpath_truthy_t        isDots;
         libpath_StringSlice_t   part;
 
         while (libpath_Internal_find_next_directory_part(&i, &result->directoryPart, flags, &part, &isDots))
@@ -448,8 +450,8 @@ Xyz3(
     result->entryPart.ptr = startOfEntry;
     result->entryPart.len = end - startOfEntry;
 
-    result->entryBaseNamePart.ptr = result->entryPart.ptr;
-    result->entryBaseNamePart.len = endOfEntryBaseName - result->entryPart.ptr;
+    result->entryStemPart.ptr = result->entryPart.ptr;
+    result->entryStemPart.len = endOfEntryStem - result->entryPart.ptr;
 
     result->entryExtensionPart.ptr = startOfEntryExtension;
     result->entryExtensionPart.len = end - startOfEntryExtension;
@@ -462,13 +464,13 @@ libpath_Parse_ParsePathFromStringPtrAndLen(
     libpath_char_t const*       path
 ,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result /* = NULL */
+,   libpath_PathDescriptor_t*   result /* = NULL */
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != path || 0 == pathLen, "path parameter may not be NULL if pathLen is not 0");
-    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || NULL != directoryPartSlices, "invalid directory part slice parameters");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path || 0 == pathLen, "path parameter may not be NULL if pathLen is not 0");
+    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 #ifndef __cplusplus
 
     return libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(path, pathLen, flags, result, numDirectoryPartSlices, directoryPartSlices);
@@ -480,7 +482,7 @@ libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
     libpath_char_t const*       path
 ,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result
+,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 )
@@ -495,13 +497,13 @@ LIBPATH_API
 libpath_Parse_ParsePathFromCStyleString(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result /* = NULL */
+,   libpath_PathDescriptor_t*   result /* = NULL */
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != path, "path parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || NULL != directoryPartSlices, "invalid directory part slice parameters");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path, "path parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 #ifndef __cplusplus
 
     return libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
@@ -512,7 +514,7 @@ LIBPATH_RC
 libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result
+,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
 )
@@ -529,11 +531,13 @@ libpath_ParseResult_IsPathAbsolute(
     libpath_ParseResult_t const*    result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
 #ifdef LIBPATH_OS_IS_WINDOWS
+
     return result->rootPart.len > 1;
 #else
+
     return 0 != result->rootPart.len;
 #endif
 }
@@ -543,7 +547,7 @@ libpath_ParseResult_IsPathRooted(
     libpath_ParseResult_t const*    result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
     return 0 != result->rootPart.len;
 }

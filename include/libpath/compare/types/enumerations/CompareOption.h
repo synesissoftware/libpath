@@ -1,15 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
- * File:    libpath/common/exceptions/libpath_exception.hpp
+ * File:    libpath/compare/types/enumerations/CompareOption.h
  *
- * Purpose: Definition of libpath::exceptions::libpath_exception.
+ * Purpose: Compare options defined for libpath library.
  *
- * Created: 5th April 2013
- * Updated: 4th May 2024
+ * Created: 10th February 2024
+ * Updated: 11th February 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
- * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
+ * Copyright (c) 2024, Matthew Wilson and Synesis Information Systems
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,64 +39,23 @@
  * ////////////////////////////////////////////////////////////////////// */
 
 
-#ifndef SYNSOFT_LIBPATH_INCL_libpath_common_exceptions_HPP_libpath_exception
-#define SYNSOFT_LIBPATH_INCL_libpath_common_exceptions_HPP_libpath_exception
 
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
- */
-
-#include <libpath/common/internal.h>
-
-#include <stdexcept>
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * namespace
- */
-
-namespace LIBPATH_NS_OUTER_NAMESPACE_NAME {
-namespace exceptions {
-
-class libpath_exception
-    : public std::runtime_error
-{
-public: // Member types
-    /// The parent class type
-    typedef std::runtime_error                              parent_class_type;
-    /// The type of this class
-    typedef libpath_exception                               class_type;
-
-protected: // Construction
-    /// Constructs an instance of this type
-    libpath_exception(char const* message)
-        : parent_class_type(message)
-    {}
-    ~libpath_exception() LIBPATH_LF_noexcept
-    {}
-private:
-    class_type& operator =(class_type const&);
-
-private: // Implementation
-};
-
-
-/* /////////////////////////////////////////////////////////////////////////
- * namespace
- */
-
-} /* namespace exceptions */
-} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
-
-
-/* ////////////////////////////////////////////////////////////////////// */
-
-#endif /* !SYNSOFT_LIBPATH_INCL_libpath_common_exceptions_HPP_libpath_exception */
-
-#ifdef LIBPATH_CF_pragma_once_SUPPORTED
-# pragma once
+#if 0
+#elif defined(LIBPATH_DEFINING_STRING_VARIABLES)
+                                                                            /* String form likely used in diagnostics, so use enumerator name (contraction) */
+# define LIBPATH_DEFINE_CompareOption_(en, value, shimString, helpString)   LOOKUP_STR_DECL_(libpath_CompareOption_##en, #shimString);
+# undef LIBPATH_DEFINING_STRING_VARIABLES
+#elif defined(LIBPATH_DEFINING_STRING_ARRAY)
+# define LIBPATH_DEFINE_CompareOption_(en, value, shimString, helpString)   LOOKUP_STR_ARRAY_ENTRY_(libpath_CompareOption_##en),
+# undef LIBPATH_DEFINING_STRING_ARRAY
+#else
+# define LIBPATH_DEFINE_CompareOption_(en, value, shimString, helpString)   libpath_CompareOption_##en value /*!< helpString */,
 #endif
+
+//LIBPATH_DEFINE_CompareOption_(AssumeDirectory, = 0x0001, AssumeDirectory, causes the full path to be assumed to be a directory as if it had a trailing slash)
+
+#undef LIBPATH_DEFINE_CompareOption_
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

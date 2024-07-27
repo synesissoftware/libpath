@@ -4,7 +4,7 @@
  * Purpose: Portability discrimination for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -89,13 +89,13 @@
  *  - bits 24-31: the major version
  *  - bits 16-23: the minor version
  *  - bits 8-15: the patch version
- *  - bits 0-7: the alpha-beta number; if not a beta, it is 0xFF
+ *  - bits 0-7: the alpha-beta number; if not alpha/beta, it is 0xFF
  */
 
 #define LIBPATH_VER_MAJOR               0
-#define LIBPATH_VER_MINOR               1
-#define LIBPATH_VER_PATCH               5
-#define LIBPATH_VER_ALPHABETA           21
+#define LIBPATH_VER_MINOR               2
+#define LIBPATH_VER_PATCH               0
+#define LIBPATH_VER_ALPHABETA           02
 
 #define LIBPATH_VER \
     (0\

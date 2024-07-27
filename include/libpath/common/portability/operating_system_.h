@@ -4,7 +4,7 @@
  * Purpose: Operating-system discrimination for libpath library.
  *
  * Created: 2nd February 2013
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -72,10 +72,11 @@
 /* detect Unix first */
 #if 0 || \
     defined(UNIX) || \
-    defined(unix) || \
-    defined(unix__) || \
+    defined(__MACH__) || \
     defined(__unix) || \
     defined(__unix__) || \
+    defined(unix) || \
+    defined(unix__) || \
     0
 
 # define LIBPATH_OS_IS_UNIX

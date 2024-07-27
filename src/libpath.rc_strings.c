@@ -4,7 +4,7 @@
  * Purpose: Strings defined associated with `rc` type.
  *
  * Created: 10th February 2024
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -96,7 +96,7 @@ libpath_lookup_ResultCode_4_(
      */
     size_t  len_;
 
-    if (NULL == len)
+    if (LIBPATH_LF_nullptr == len)
     {
         len = &len_;
     }
@@ -174,7 +174,7 @@ libpath_rc_getStringPtr(
     LIBPATH_RC  rc
 )
 {
-    return libpath_lookup_rc_2_((int)rc, NULL);
+    return libpath_lookup_rc_2_((int)rc, LIBPATH_LF_nullptr);
 }
 
 LIBPATH_CALL(libpath_size_t)
@@ -192,7 +192,7 @@ libpath_rcx_getStringPtr(
     LIBPATH_RCX rcx
 )
 {
-    return libpath_lookup_rcx_2_((int)rcx, NULL);
+    return libpath_lookup_rcx_2_((int)rcx, LIBPATH_LF_nullptr);
 }
 
 LIBPATH_CALL(libpath_size_t)

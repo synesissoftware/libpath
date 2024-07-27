@@ -4,7 +4,7 @@
  * Purpose: Definition of libpath::exceptions::invalid_path_exception.
  *
  * Created: 5th April 2013
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -84,9 +84,11 @@ public: // Construction
         LIBPATH_RC                      rc
     ,   libpath_StringSlice_t const*    path
     )
-        :   parent_class_type("invalid path")
-        ,   rc(rc)
-        ,   path(NULL == path ? "" : path->ptr, NULL == path ? 0u : path->len)
+        : parent_class_type("invalid path")
+        , rc(rc)
+        , path(LIBPATH_LF_nullptr == path ? "" : path->ptr, LIBPATH_LF_nullptr == path ? 0u : path->len)
+    {}
+    ~invalid_path_exception() LIBPATH_LF_noexcept
     {}
 private:
     class_type& operator =(class_type const&);

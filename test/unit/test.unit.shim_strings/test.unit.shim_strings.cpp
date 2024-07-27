@@ -4,7 +4,7 @@
  * Purpose: Unit-test for shim-strings.
  *
  * Created: 11th February 2024
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -39,9 +39,6 @@
  */
 
     static void test_rc_known_values(void);
-    static void test_1_1(void);
-    static void test_1_2(void);
-    static void test_1_3(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -58,9 +55,6 @@ int main(int argc, char **argv)
     if (XTESTS_START_RUNNER("test.unit.shim_strings", verbosity))
     {
         XTESTS_RUN_CASE(test_rc_known_values);
-        XTESTS_RUN_CASE(test_1_1);
-        XTESTS_RUN_CASE(test_1_2);
-        XTESTS_RUN_CASE(test_1_3);
 
         XTESTS_PRINT_RESULTS();
 
@@ -100,18 +94,6 @@ static void test_rc_known_values()
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("working directory path parameter is invalid", stlsoft::sas_to_string(LIBPATH_RC_OF(WorkingDirectoryPathInvalid)));
 
     XTESTS_TEST_MULTIBYTE_STRING_EQUAL("operation completed successfully", stlsoft::sas_to_string(LIBPATH_RC_OF(Success)));
-}
-
-static void test_1_1()
-{
-}
-
-static void test_1_2()
-{
-}
-
-static void test_1_3()
-{
 }
 
 

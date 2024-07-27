@@ -4,7 +4,7 @@
  * Purpose: Language discrimination for libpath library.
  *
  * Created: 2nd February 2013
- * Updated: 11th February 2024
+ * Updated: 4th May 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -53,6 +53,7 @@
  *   2023, 2020, 2017, 2014, 2011, 1998, or, if the version is not
  *   recognised, 0. Not defined for C language;
  * - LIBPATH_CXX_VER_2023_plus - defined, for C++, if C++23 or later;
+ * - LIBPATH_CXX_VER_202101_plus - defined, for C++, if C++2b or later;
  * - LIBPATH_CXX_VER_2020_plus - defined, for C++, if C++20 or later;
  * - LIBPATH_CXX_VER_2017_plus - defined, for C++, if C++17 or later;
  * - LIBPATH_CXX_VER_2014_plus - defined, for C++, if C++14 or later;
@@ -73,6 +74,9 @@
 #ifdef LIBPATH_CXX_VER_2023_plus
 # undef LIBPATH_CXX_VER_2023_plus
 #endif /* !LIBPATH_CXX_VER_2023_plus */
+#ifdef LIBPATH_CXX_VER_202101_plus
+# undef LIBPATH_CXX_VER_202101_plus
+#endif /* !LIBPATH_CXX_VER_202101_plus */
 #ifdef LIBPATH_CXX_VER_2020_plus
 # undef LIBPATH_CXX_VER_2020_plus
 #endif /* !LIBPATH_CXX_VER_2020_plus */
@@ -96,6 +100,9 @@
 # elif __cplusplus == 202302L
 
 #  define LIBPATH_CXX_VER                                   2023
+# elif __cplusplus == 202101L
+
+#  define LIBPATH_CXX_VER                                   2021
 # elif __cplusplus == 202002L
 
 #  define LIBPATH_CXX_VER                                   2020
@@ -131,11 +138,56 @@
 # if __cplusplus >= 202003L
 #  define LIBPATH_CXX_VER_2020_plus
 # endif
+# if __cplusplus >= 202101L
+#  define LIBPATH_CXX_VER_202101_plus
+# endif
 # if __cplusplus >= 202302L
 #  define LIBPATH_CXX_VER_2023_plus
 # endif
-
 #endif
+
+
+/* /////////////////////////////////////////////////////////////////////////
+ * feature abstraction
+ */
+
+#ifndef LIBPATH_CXX_VER_2011_plus
+
+# include <stddef.h>
+#endif
+
+
+
+
+/* LIBPATH_LF_noexcept */
+
+#ifdef __cplusplus
+
+# if 0
+# elif LIBPATH_CXX_VER >= 2023
+
+#  define LIBPATH_LF_noexcept                               noexcept(true)
+# elif LIBPATH_CXX_VER >= 2011
+
+#  define LIBPATH_LF_noexcept                               noexcept
+# elif LIBPATH_CXX_VER >= 1998
+
+#  define LIBPATH_LF_noexcept                               throw()
+# endif
+#endif
+
+
+/* LIBPATH_LF_nullptr */
+
+#if 0
+#elif defined(LIBPATH_CXX_VER_2011_plus)
+
+# define LIBPATH_LF_nullptr                                 nullptr
+#else
+
+# define LIBPATH_LF_nullptr                                 NULL
+#endif
+
 
 
 /* ////////////////////////////////////////////////////////////////////// */

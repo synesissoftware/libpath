@@ -4,7 +4,7 @@
  * Purpose: Main implementation file for libpath Equating API.
  *
  * Created: 9th November 2012
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -70,8 +70,8 @@ libpath_Internal_PathEquals_impl_2_(
 ,   libpath_StringSlice_t const*    cwd
 ,   libpath_sint32_t                flags
 ,   libpath_StringSlice_t*        (*dpallocs)[3]
-,   libpath_ParseResult_t*          lresult
-,   libpath_ParseResult_t*          rresult
+,   libpath_PathDescriptor_t*       lresult
+,   libpath_PathDescriptor_t*       rresult
 ,   libpath_truthy_t*               result
 );
 
@@ -127,7 +127,7 @@ libpath_Internal_PathEquals_(
 ,   libpath_truthy_t*               result
 )
 {
-    libpath_StringSlice_t*  dpAllocs[3] =   { NULL, NULL, NULL };
+    libpath_StringSlice_t*  dpAllocs[3] =   { LIBPATH_LF_nullptr, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr };
     libpath_truthy_t const  r           =   libpath_Internal_PathEquals_impl_(lhs, rhs, cwd, mem, &dpAllocs, result);
 
     libpath_Util_FreeSliceArray(dpAllocs[0]);
@@ -182,16 +182,16 @@ libpath_Internal_PathEquals_impl_(
 
     int const           flags   =   0;
 
-    libpath_ParseResult_t  lresult;
-    libpath_ParseResult_t  rresult;
+    libpath_PathDescriptor_t  lresult;
+    libpath_PathDescriptor_t  rresult;
 
-    LIBPATH_ASSERT(NULL != lhs);
-    LIBPATH_ASSERT(NULL != rhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != lhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != rhs);
 
     LIBPATH_SUPPRESS_UNUSED(mem);
 
-    if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(lhs, flags, &lresult, 0, NULL) ||
-        libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(rhs, flags, &rresult, 0, NULL))
+    if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(lhs, flags, &lresult, 0, LIBPATH_LF_nullptr) ||
+        libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(rhs, flags, &rresult, 0, LIBPATH_LF_nullptr))
     {
         *result = LIBPATH_V_FALSEY;
 
@@ -248,8 +248,8 @@ libpath_Internal_PathEquals_impl_2_(
 ,   libpath_StringSlice_t const*    cwd
 ,   libpath_sint32_t                flags
 ,   libpath_StringSlice_t*        (*dpallocs)[3]
-,   libpath_ParseResult_t*          lresult
-,   libpath_ParseResult_t*          rresult
+,   libpath_PathDescriptor_t*       lresult
+,   libpath_PathDescriptor_t*       rresult
 ,   libpath_truthy_t*               result
 )
 {
@@ -361,7 +361,7 @@ libpath_Internal_PathEquals_impl_2_(
     }
     else
     {
-        if (NULL == cwd ||
+        if (LIBPATH_LF_nullptr == cwd ||
             '\0' == cwd->len)
         {
             *result = LIBPATH_V_FALSEY;
@@ -376,18 +376,16 @@ libpath_Internal_PathEquals_impl_2_(
             int const                           cwd_flags   =   0
                                                             |   libpath_ParseOption_AssumeDirectory
                                                             ;
-            libpath_ParseResult_t*     abs_result  =   (0 != lhsRootLevel) ? lresult : rresult;
-            libpath_ParseResult_t*     rel_result  =   (0 != lhsRootLevel) ? rresult : lresult;
-            libpath_ParseResult_t      cwd_result;
+            libpath_PathDescriptor_t*     abs_result  =   (0 != lhsRootLevel) ? lresult : rresult;
+            libpath_PathDescriptor_t*     rel_result  =   (0 != lhsRootLevel) ? rresult : lresult;
+            libpath_PathDescriptor_t      cwd_result;
 
-            if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, NULL))
+            if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, LIBPATH_LF_nullptr))
             {
-#ifdef NDEBUG
+#if LIBPATH_VER >= 0x00030000
 # error This needs to return a result code that indicates that it's the cwd
 # error Also: need to ensure that cwd is absolute
-#else /* ? NDEBUG */
-#endif /* NDEBUG */
-
+#endif
                 *result = LIBPATH_V_FALSEY;
 
                 return LIBPATH_RC_OF(Success);
@@ -471,7 +469,7 @@ libpath_Internal_PathEquals_impl_2_(
                             // Algorithm: while the last cwd part is not double-dots
                             // and the first rel part is
                             //
-                            for(; 0 != nrel && 0 != ncwd; )
+                            for (; 0 != nrel && 0 != ncwd; )
                             {
                                 libpath_StringSlice_t const* const  rel_first_part  =   &(*rel_dirparts)[0];
                                 libpath_StringSlice_t const* const  cwd_last_part   =   &(*cwd_dirparts)[ncwd - 1];
@@ -492,7 +490,7 @@ libpath_Internal_PathEquals_impl_2_(
 
                             // correlate absolute and relative parts
 
-                            for(; 0 != nabs && 0 != nrel; --nabs, --nrel)
+                            for (; 0 != nabs && 0 != nrel; --nabs, --nrel)
                             {
                                 libpath_StringSlice_t const*    abs_part    =   &(*abs_dirparts)[nabs - 1];
                                 libpath_StringSlice_t const*    rel_part    =   &(*rel_dirparts)[nrel - 1];
@@ -507,7 +505,7 @@ libpath_Internal_PathEquals_impl_2_(
 
                             // correlate absolute and cwd parts
 
-                            for(; 0 != nabs && 0 != ncwd; --nabs, --ncwd)
+                            for (; 0 != nabs && 0 != ncwd; --nabs, --ncwd)
                             {
                                 libpath_StringSlice_t const*    abs_part    =   &(*abs_dirparts)[nabs - 1];
                                 libpath_StringSlice_t const*    cwd_part    =   &(*cwd_dirparts)[ncwd - 1];
@@ -555,36 +553,40 @@ libpath_Equate_EquatePathsAsStringSlices(
 )
 {
     libpath_StringSlice_t           cwd_;
-    libpath_StringSlice_t const*    cwd = NULL;
+    libpath_StringSlice_t const*    cwd = LIBPATH_LF_nullptr;
 
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs, "lhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs, "rhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs, "lhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs, "rhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 
     LIBPATH_SUPPRESS_UNUSED(flags);
 
-    if (NULL != reserved)
+    if (LIBPATH_LF_nullptr != reserved)
     {
         return LIBPATH_RC_OF(ParameterIsReservedAndMustBeZero);
     }
 
-    if (NULL != ctxt)
+    if (LIBPATH_LF_nullptr != ctxt)
     {
         switch (ctxt->mechanism)
         {
         case    libpath_WorkingDirectoryContextMechanism_NoneSpecified:
+
             break;
         case    libpath_WorkingDirectoryContextMechanism_CStyleString:
-            if (NULL != ctxt->details.cwd_css)
+
+            if (LIBPATH_LF_nullptr != ctxt->details.cwd_css)
             {
                 cwd_ = libpath_Util_SliceFromCStyleString(ctxt->details.cwd_css);
                 cwd = &cwd_;
             }
             break;
         case    libpath_WorkingDirectoryContextMechanism_StringSlice:
+
             cwd = &ctxt->details.cwd_slice;
             break;
         default:
+
             LIBPATH_MESSAGE_ASSERT(0, "invalid WorkingDirectoryContextMechanism");
 #if defined(_WIN32) || defined(_WIN64)
         case    libpath_WorkingDirectoryContextMechanism_GetCurrentDirectory:
@@ -594,7 +596,7 @@ libpath_Equate_EquatePathsAsStringSlices(
         }
     }
 
-    return libpath_Internal_PathEquals_(lhs, rhs, cwd, NULL, result);
+    return libpath_Internal_PathEquals_(lhs, rhs, cwd, LIBPATH_LF_nullptr, result);
 }
 
 LIBPATH_API
@@ -609,9 +611,9 @@ libpath_Equate_EquatePathsAsStringPtrsAndLens(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs || 0 == lhsLen, "lhs parameter may not be NULL if lhsLen is not 0");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs || 0 == rhsLen, "rhs parameter may not be NULL if rhsLen is not 0");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs || 0 == lhsLen, "lhs parameter may not be NULL if lhsLen is not 0");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs || 0 == rhsLen, "rhs parameter may not be NULL if rhsLen is not 0");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 #ifndef __cplusplus
 
     return libpath_Equate_EquatePathsAsStringPtrsAndLens_UNCHECKED_(lhs, lhsLen, rhs, rhsLen, flags, ctxt, reserved, result);
@@ -648,9 +650,9 @@ libpath_Equate_EquatePathsAsCStyleStrings(
 ,   libpath_truthy_t*                           result
 )
 {
-    LIBPATH_MESSAGE_ASSERT(NULL != lhs, "lhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != rhs, "rhs parameter may not be NULL");
-    LIBPATH_MESSAGE_ASSERT(NULL != result, "result parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != lhs, "lhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != rhs, "rhs parameter may not be NULL");
+    LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != result, "result parameter may not be NULL");
 #ifndef __cplusplus
 
     return libpath_Equate_EquatePathsAsCStyleStrings_UNCHECKED_(lhs, rhs, flags, ctxt, reserved, result);

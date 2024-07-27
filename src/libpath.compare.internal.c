@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 11th February 2024
+ * Updated: 27th July 2024
  */
 
 #include "libpath.compare.internal.h"
@@ -26,11 +26,15 @@ libpath_Internal_compare_roots(
 ,   int                             flags
 )
 {
-    LIBPATH_ASSERT(NULL != lhs);
-    LIBPATH_ASSERT(NULL != rhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != lhs);
+    LIBPATH_ASSERT(LIBPATH_LF_nullptr != rhs);
     LIBPATH_ASSERT(0 != lhs->len);
     LIBPATH_ASSERT(0 != rhs->len);
 
+#ifndef LIBPATH_OS_IS_WINDOWS
+    LIBPATH_SUPPRESS_UNUSED(lhs);
+    LIBPATH_SUPPRESS_UNUSED(rhs);
+#endif
     LIBPATH_SUPPRESS_UNUSED(flags);
 
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -80,7 +84,7 @@ libpath_Internal_compare_roots(
         LIBPATH_MESSAGE_ASSERT(lhs->len >= 5, "must be UNC server+share");
         LIBPATH_MESSAGE_ASSERT(rhs->len >= 5, "must be UNC server+share");
 
-        for(i = 0; 0 == r && i != lhs->len && i != rhs->len; ++i)
+        for (i = 0; 0 == r && i != lhs->len && i != rhs->len; ++i)
         {
             char const  cl  =   (char)toupper(lhs->ptr[i]);
             char const  cr  =   (char)toupper(rhs->ptr[i]);
@@ -138,7 +142,7 @@ libpath_Internal_compare_path_fragment(
         --rhsLen;
     }
 
-    for(i = 0; 0 == r && i != lhsLen && i != rhsLen; ++i)
+    for (i = 0; 0 == r && i != lhsLen && i != rhsLen; ++i)
     {
 #ifdef LIBPATH_OS_IS_WINDOWS
         char const  cl  =   (char)toupper(lhs->ptr[i]);
