@@ -114,6 +114,8 @@ compare_paths(
     int                                 result;
     LIBPATH_RC                          rc;
 
+    STLSOFT_SUPPRESS_UNUSED(mem);
+
     ctxt.mechanism          =   libpath_WorkingDirectoryContextMechanism_CStyleString;
     ctxt.details.cwd_css    =   cwd;
 

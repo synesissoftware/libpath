@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.equal.1.c project.
  *
  * Created: 28th March 2013
- * Updated: 4th May 2024
+ * Updated: 27th July 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -134,6 +134,8 @@ path_equals(
     libpath_WorkingDirectoryContext_t   ctxt;
     int                                 result;
     LIBPATH_RC                          rc;
+
+    STLSOFT_SUPPRESS_UNUSED(mem);
 
     ctxt.mechanism          =   libpath_WorkingDirectoryContextMechanism_CStyleString;
     ctxt.details.cwd_css    =   cwd;

@@ -34,7 +34,7 @@ strncasecmp_(
 # if 0
 # elif defined(_MSC_VER)
 
-    return _strncmp(s1, s2, n);
+    return _strnicmp(s1, s2, n);
 # else
 
     { libpath_size_t i; for (i = 0; i != n; ++i, ++s1, ++s2)

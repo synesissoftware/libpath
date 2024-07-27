@@ -153,8 +153,8 @@ parse_and_display_results(
         ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryPart.len), result.entryPart.ptr
         ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryStemPart.len), result.entryStemPart.ptr
         ,   int(result.rootPart.len + result.directoryPart.len + result.entryStemPart.len), blanks, int(result.entryExtensionPart.len), result.entryExtensionPart.ptr
-        ,   result.numDotsDirectoryParts
-        ,   result.numDirectoryParts
+        ,   static_cast<unsigned long>(result.numDotsDirectoryParts)
+        ,   static_cast<unsigned long>(result.numDirectoryParts)
         );
         fprintf(
             stm_out
@@ -184,7 +184,7 @@ parse_and_display_results(
         ,   "%s: failed to parse '%s', at offset %lu: %.*s\n"
         ,   program_name
         ,   path
-        ,   result.firstBadCharOffset
+        ,   static_cast<unsigned long>(result.firstBadCharOffset)
         ,   int(libpath_rc_getStringLen(rc)), libpath_rc_getStringPtr(rc)
         );
 

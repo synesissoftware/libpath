@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 27th July 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -144,6 +144,12 @@ handle_compare_result_(
     return -1;
 }
 
+#if 0
+#elif defined(_MSC_VER) && _MSC_VER >= 1200
+# pragma warning(push)
+# pragma warning(disable : 4702)
+#endif
+
 template <typename P>
 int
 handle_compare_result_(
@@ -158,7 +164,7 @@ handle_compare_result_(
 ,   ...
 )
 {
-    char const* p = LIBPATH_LF_nullptr;
+    char const* p;
 
     switch (rc)
     {
@@ -167,6 +173,8 @@ handle_compare_result_(
     case  libpath_ResultCode_WorkingDirectoryPathInvalid: p = cwd; break;
 
     default:
+
+        p = LIBPATH_LF_nullptr;
         break;
     }
 
@@ -190,6 +198,11 @@ handle_compare_result_(
 
     return 0;
 }
+
+#if 0
+#elif defined(_MSC_VER) && _MSC_VER >= 1200
+# pragma warning(pop)
+#endif
 
 template <typename P>
 int
