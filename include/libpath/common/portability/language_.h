@@ -4,7 +4,7 @@
  * Purpose: Language discrimination for libpath library.
  *
  * Created: 2nd February 2013
- * Updated: 4th May 2024
+ * Updated: 12th August 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -158,7 +158,6 @@
 
 
 
-
 /* LIBPATH_LF_noexcept */
 
 #ifdef __cplusplus
@@ -177,6 +176,7 @@
 #endif
 
 
+
 /* LIBPATH_LF_nullptr */
 
 #if 0
@@ -188,6 +188,20 @@
 # define LIBPATH_LF_nullptr                                 NULL
 #endif
 
+
+
+/* LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT */
+
+#ifdef __cplusplus
+
+# if 0 ||\
+     defined(LIBPATH_CXX_VER_2011_plus) ||\
+     defined(STLSOFT_CF_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT) ||\
+     0
+
+#  define LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+# endif
+#endif
 
 
 /* ////////////////////////////////////////////////////////////////////// */
