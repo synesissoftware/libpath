@@ -1,10 +1,22 @@
 
 # directories (by name)
 
+/.git-old/
 /.vs/
 
 /_build/
 /_internal/
+
+/bin/
+/ipch/
+/lib/
+
+/doc/
+/dox/
+/ideas/
+/releases/
+/scratch/
+/temp/
 
 /include/b64/
 /include/shwild/
@@ -22,6 +34,8 @@
 /doc/
 /ideas/
 /lib/
+
+.svn/
 
 Debug Multithreaded DLL/
 Debug Multithreaded/
@@ -43,7 +57,6 @@ vc8/
 vc9/
 
 Win32/
-ipch/
 x64/
 
 
@@ -58,6 +71,7 @@ x64/
 
 list_changes.cmd
 prepare.cmd
+sh.exe.stackdump
 tidydir.cmd
 update_deps.cmd
 
@@ -73,15 +87,28 @@ test/tests-plan.txt
 # files (by pattern)
 
 *~
+*.???_obj
 *.a
 *.app
+*.aps
+*.b64
+*.bak
+*.chm
+*.d
 *.dll
+*.dsp
 *.dylib
 *.exe
 *.gch
+*.idb
 *.ilk
+*.iobj
 *.ipch
+*.ipdb
+*.la
+*.lai
 *.lib
+*.lo
 *.log
 *.ncb
 *.o
@@ -92,17 +119,31 @@ test/tests-plan.txt
 *.out
 *.pch
 *.pdb
+*.rar
+*.res
 *.sbr
 *.scc
 *.sdf
+*.slo
 *.so
 *.suo
 *.swp
+*.tlog
+*.tmp
+*.unsuccessfulbuild
 *.vcproj*.user
 *.vcxproj*.user
+*.xcuserstate
+*.zip
+
+RCa0*
+RCb0*
 
 *.vc71.sln
 *.vc8.sln
 *.vc9.sln
 
+build/*.tmplgen
+build/*.tmpl
+build/*.tools.xml
 

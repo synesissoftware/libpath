@@ -4,20 +4,23 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+/* /////////////////////////////////////
  * test component header file include(s)
  */
 
 #include <libpath/parse.hpp>
 
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
+/* /////////////////////////////////////
+ * general includes
  */
 
 /* xTests header files */
@@ -37,69 +40,69 @@
  * forward declarations
  */
 
-    static void test_1_0(void);
-    static void test_1_1(void);
-    static void test_1_2(void);
-    static void test_1_3(void);
-    static void test_1_4(void);
+static void test_1_0(void);
+static void test_1_1(void);
+static void test_1_2(void);
+static void test_1_3(void);
+static void test_1_4(void);
 
-    static void test_1_6(void);
-    static void test_1_7(void);
-    static void test_1_8(void);
+static void test_1_6(void);
+static void test_1_7(void);
+static void test_1_8(void);
 
-    static void test_1_10(void);
-    static void test_1_11(void);
-    static void test_1_12(void);
+static void test_1_10(void);
+static void test_1_11(void);
+static void test_1_12(void);
 
-    static void test_1_14(void);
-    static void test_1_15(void);
-    static void test_1_16(void);
-    static void test_1_17(void);
-    static void test_1_18(void);
-    static void test_1_19(void);
-    static void test_1_20(void);
-    static void test_1_21(void);
-    static void test_1_22(void);
+static void test_1_14(void);
+static void test_1_15(void);
+static void test_1_16(void);
+static void test_1_17(void);
+static void test_1_18(void);
+static void test_1_19(void);
+static void test_1_20(void);
+static void test_1_21(void);
+static void test_1_22(void);
 
-    static void test_1_30(void);
-    static void test_1_31(void);
-    static void test_1_32(void);
-    static void test_1_33(void);
-    static void test_1_34(void);
-    static void test_1_35(void);
-    static void test_1_36(void);
-    static void test_1_37(void);
+static void test_1_30(void);
+static void test_1_31(void);
+static void test_1_32(void);
+static void test_1_33(void);
+static void test_1_34(void);
+static void test_1_35(void);
+static void test_1_36(void);
+static void test_1_37(void);
 
-    static void test_1_40(void);
-    static void test_1_41(void);
-    static void test_1_42(void);
-    static void test_1_43(void);
-    static void test_1_44(void);
+static void test_1_40(void);
+static void test_1_41(void);
+static void test_1_42(void);
+static void test_1_43(void);
+static void test_1_44(void);
 
-    static void test_1_50(void);
-    static void test_1_51(void);
-    static void test_1_52(void);
-    static void test_1_53(void);
-    static void test_1_54(void);
+static void test_1_50(void);
+static void test_1_51(void);
+static void test_1_52(void);
+static void test_1_53(void);
+static void test_1_54(void);
 
-    static void test_1_60(void);
-    static void test_1_61(void);
+static void test_1_60(void);
+static void test_1_61(void);
 
-    static void test_1_70(void);
-    static void test_1_71(void);
-    static void test_1_72(void);
-    static void test_1_73(void);
+static void test_1_70(void);
+static void test_1_71(void);
+static void test_1_72(void);
+static void test_1_73(void);
 
-    static void test_1_80(void);
-    static void test_1_81(void);
-    static void test_1_82(void);
+static void test_1_80(void);
+static void test_1_81(void);
+static void test_1_82(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * main
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;
@@ -210,6 +213,13 @@ static void test_1_0(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
@@ -300,6 +310,13 @@ static void test_1_3(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -338,6 +355,13 @@ static void test_1_4(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -450,6 +474,13 @@ static void test_1_10(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -513,6 +544,13 @@ static void test_1_12(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -546,6 +584,13 @@ static void test_1_14(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -587,6 +632,13 @@ static void test_1_15(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -630,6 +682,13 @@ static void test_1_16(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -670,6 +729,13 @@ static void test_1_17(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -748,6 +814,13 @@ static void test_1_18(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -798,6 +871,13 @@ static void test_1_19(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -852,6 +932,13 @@ static void test_1_20(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -902,6 +989,13 @@ static void test_1_21(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -940,6 +1034,13 @@ static void test_1_22(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -975,6 +1076,13 @@ static void test_1_30(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1008,6 +1116,13 @@ static void test_1_31(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1043,6 +1158,13 @@ static void test_1_32(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1077,6 +1199,13 @@ static void test_1_33(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1110,6 +1239,13 @@ static void test_1_34(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1157,6 +1293,13 @@ static void test_1_35(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1191,6 +1334,13 @@ static void test_1_36(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1224,6 +1374,13 @@ static void test_1_37(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1271,6 +1428,13 @@ static void test_1_40(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1305,6 +1469,13 @@ static void test_1_41(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1338,6 +1509,13 @@ static void test_1_42(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1385,6 +1563,13 @@ static void test_1_43(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1430,6 +1615,13 @@ static void test_1_44(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1477,6 +1669,13 @@ static void test_1_50(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1510,6 +1709,13 @@ static void test_1_51(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1557,6 +1763,13 @@ static void test_1_52(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1603,6 +1816,13 @@ static void test_1_53(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -1647,6 +1867,13 @@ static void test_1_54(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
@@ -1714,6 +1941,13 @@ static void test_1_60(void)
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
 
             rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+            XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
+
+            rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+#endif
 
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
             XTESTS_TEST_INTEGER_EQUAL(31u, r.input.len);
@@ -2090,6 +2324,13 @@ static void test_1_80(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
 
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -2123,6 +2364,13 @@ static void test_1_81(void)
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 

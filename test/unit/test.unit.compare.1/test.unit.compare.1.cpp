@@ -4,20 +4,23 @@
  * Purpose: Implementation file for the test.unit.compare.1 project.
  *
  * Created: 17th February 2013
- * Updated: 27th July 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+/* /////////////////////////////////////
  * test component header file include(s)
  */
 
 #include <libpath/compare.hpp>
 
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
+/* /////////////////////////////////////
+ * general includes
  */
 
 /* xTests header files */
@@ -68,7 +71,7 @@ namespace
  * helper functions
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;

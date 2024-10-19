@@ -4,12 +4,16 @@
  * Purpose: Implementation file for the test.unit.equal.1 project.
  *
  * Created: 9th November 2012
- * Updated: 4th May 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+/* /////////////////////////////////////
  * test component header file include(s)
  */
 
@@ -17,8 +21,8 @@
 
 #include <libpath/common/types.hpp>
 
-/* /////////////////////////////////////////////////////////////////////////
- * includes
+/* /////////////////////////////////////
+ * general includes
  */
 
 /* xTests header files */
@@ -79,7 +83,7 @@ namespace
  * helper functions
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;

@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath Parsing API.
  *
  * Created: 29th March 2013
- * Updated: 27th July 2024
+ * Updated: 11th August 2024
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -111,7 +111,7 @@ parse_path_from_string_slice(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
-,   StringSlice_t*          directoryPartSlices
+,   StringSlice_t           directoryPartSlices[]
 )
 {
     return libpath_Parse_ParsePathFromStringSlice(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
@@ -124,11 +124,44 @@ parse_path_from_string_slice(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
-,   StringSlice_t*          directoryPartSlices
+,   StringSlice_t           directoryPartSlices[]
 )
 {
     return libpath_Parse_ParsePathFromStringSlice(&path, flags, result, numDirectoryPartSlices, directoryPartSlices);
 }
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+template <
+    libpath_size_t  V_dimension
+>
+inline
+LIBPATH_RC
+parse_path_from_string_slice(
+    StringSlice_t const*    path
+,   sint32_t                flags
+,   PathDescriptor_t*       result
+,   StringSlice_t           (&directoryPartSlices)[V_dimension]
+)
+{
+    return libpath_Parse_ParsePathFromStringSlice(path, flags, result, V_dimension, &directoryPartSlices[0]);
+}
+
+template <
+    libpath_size_t  V_dimension
+>
+inline
+LIBPATH_RC
+parse_path_from_string_slice(
+    StringSlice_t const&    path
+,   sint32_t                flags
+,   PathDescriptor_t*       result
+,   StringSlice_t           (&directoryPartSlices)[V_dimension]
+)
+{
+    return libpath_Parse_ParsePathFromStringSlice(&path, flags, result, V_dimension, &directoryPartSlices[0]);
+}
+#endif /* C++11 or later */
 
 inline
 LIBPATH_RC
@@ -138,7 +171,7 @@ parse_path_from_string_ptr_and_len(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
-,   StringSlice_t*          directoryPartSlices
+,   StringSlice_t           directoryPartSlices[]
 )
 {
     return libpath_Parse_ParsePathFromStringPtrAndLen(path, pathLen, flags, result, numDirectoryPartSlices, directoryPartSlices);
@@ -151,11 +184,29 @@ parse_path_from_cstyle_string(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
-,   StringSlice_t*          directoryPartSlices
+,   StringSlice_t           directoryPartSlices[]
 )
 {
     return libpath_Parse_ParsePathFromCStyleString(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
 }
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+template <
+    libpath_size_t  V_dimension
+>
+inline
+LIBPATH_RC
+parse_path_from_cstyle_string(
+    libpath_char_t const*   path
+,   sint32_t                flags
+,   PathDescriptor_t*       result
+,   StringSlice_t           (&directoryPartSlices)[V_dimension]
+)
+{
+    return libpath_Parse_ParsePathFromCStyleString(path, flags, result, V_dimension, &directoryPartSlices[0]);
+}
+#endif /* C++11 or later */
 
 
 

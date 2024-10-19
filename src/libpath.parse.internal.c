@@ -1,7 +1,7 @@
 
 /*
  *
- * Updated: 20th July 2024
+ * Updated: 19th October 2024
  */
 
 #include "libpath.parse.internal.h"
@@ -420,6 +420,7 @@ libpath_Internal_find_UNC_root_slice(
 
             if (state == share)
             {
+                /* fall through */
         case    '\\':
 
                 switch (state)
@@ -435,7 +436,8 @@ libpath_Internal_find_UNC_root_slice(
                 }
             break;
             }
-            else // '/' fall through
+            else /* '/' */
+                /* fall through */
         default:
 
             switch (state)

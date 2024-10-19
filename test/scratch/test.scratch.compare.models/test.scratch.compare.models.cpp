@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.scratch.compare.models project.
  *
  * Created: 29th March 2013
- * Updated: 20th July 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -29,15 +29,10 @@
 
 
 /* /////////////////////////////////////////////////////////////////////////
- * forward declarations
- */
-
-
-/* /////////////////////////////////////////////////////////////////////////
  * main()
  */
 
-static int main_(int /* argc */, char** /*argv*/)
+static int main_(int /* argc */, char* /*argv*/[])
 {
     int r0 = ::libpath::comparing::compare_paths_and_<libpath::return_0_on_invalid_path_policy>("/abc", "../def/abc");
 
@@ -82,7 +77,7 @@ static int main_(int /* argc */, char** /*argv*/)
     return EXIT_SUCCESS;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
 #if 0
     { for (libpath_size_t i = 0; i < 0xffffffff; ++i){} }

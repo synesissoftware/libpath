@@ -1,6 +1,15 @@
 # shwild - History
 
 
+19th October 2024 - 0.2.0-alpha3 released
+-----------------------------------------
+
+* C++ overloads in the API;
+* CMake build scripts enhancements;
+* CMake improvements;
+* MinGW compatibility;
+
+
 27th July 2024 - 0.2.0-alpha2 released
 --------------------------------------
 

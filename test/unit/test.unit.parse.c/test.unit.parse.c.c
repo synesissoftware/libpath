@@ -4,19 +4,23 @@
  * Purpose: Implementation file for the test.unit.parse.c project.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+/* /////////////////////////////////////
  * test component header file include(s)
  */
 
 #include <libpath/parse.h>
 
-/* /////////////////////////////////////////////////////////////////////////
- * includes
+/* /////////////////////////////////////
+ * general includes
  */
 
 /* xTests header files */
@@ -36,73 +40,72 @@
  * forward declarations
  */
 
-    static void test_empty(void);
-    static void test_1_dot(void);
-    static void test_2_dots(void);
-    static void test_3_dots(void);
-    static void test_4_dots(void);
-    static void test_5_dots(void);
-    static void test_rooted_1_dot(void);
-    static void test_rooted_2_dots(void);
-    static void test_rooted_3_dots(void);
-    static void test_rooted_4_dots(void);
+static void test_empty(void);
+static void test_1_dot(void);
+static void test_2_dots(void);
+static void test_3_dots(void);
+static void test_4_dots(void);
+static void test_5_dots(void);
+static void test_rooted_1_dot(void);
+static void test_rooted_2_dots(void);
+static void test_rooted_3_dots(void);
+static void test_rooted_4_dots(void);
 
-    static void test_filename_with_trailing_dot(void);
-    static void test_filename_with_trailing_dots(void);
-    static void test_stem_only(void);
-    static void test_filename(void);
-    static void test_extension_only(void);
+static void test_filename_with_trailing_dot(void);
+static void test_filename_with_trailing_dots(void);
+static void test_stem_only(void);
+static void test_filename(void);
+static void test_extension_only(void);
 
-    static void test_rooted_1_stem(void);
-    static void test_rooted_1_dir_1_stem(void);
-    static void test_rooted_1_dir_trailing_slash(void);
-    static void test_rooted_2_dirs_trailing_slash(void);
-    static void test_rooted_6_dirs_trailing_slash(void);
-    static void test_rooted_6_dirs_and_filename(void);
-    static void test_rooted_6_dirs_and_stem(void);
-    static void test_slash_only(void);
-    static void test_filename_multiple_dots(void);
+static void test_rooted_1_stem(void);
+static void test_rooted_1_dir_1_stem(void);
+static void test_rooted_1_dir_trailing_slash(void);
+static void test_rooted_2_dirs_trailing_slash(void);
+static void test_rooted_6_dirs_trailing_slash(void);
+static void test_rooted_6_dirs_and_filename(void);
+static void test_rooted_6_dirs_and_stem(void);
+static void test_slash_only(void);
+static void test_filename_multiple_dots(void);
 
-    static void test_Windows_backslash_only(void);
-    static void test_Windows_backslash_rooted_1_stem(void);
-    static void test_Windows_volume_and_backslash_root(void);
-    static void test_Windows_volume_and_backslash_rooted_1_stem(void);
-    static void test_Windows_volume_and_backslash_rooted_6_dirs_and_filename(void);
-    static void test_Windows_volume_and_slash_root(void);
-    static void test_Windows_slash_rooted_1_stem(void);
-    static void test_Windows_volume_and_slash_rooted_6_dirs_and_filename(void);
+static void test_Windows_backslash_only(void);
+static void test_Windows_backslash_rooted_1_stem(void);
+static void test_Windows_volume_and_backslash_root(void);
+static void test_Windows_volume_and_backslash_rooted_1_stem(void);
+static void test_Windows_volume_and_backslash_rooted_6_dirs_and_filename(void);
+static void test_Windows_volume_and_slash_root(void);
+static void test_Windows_slash_rooted_1_stem(void);
+static void test_Windows_volume_and_slash_rooted_6_dirs_and_filename(void);
 
-    static void test_Windows_UNC_share(void);
-    static void test_Windows_UNC_share_and_entry(void);
-    static void test_Windows_UNC_share_and_6_dirs_and_filename(void);
-    static void test_Windows_UNC_share_and_6_dirs_and_filename_altslashes(void);
-    static void test_Windows_UNC_share_and_6_dirs_and_filename_altslashes_2(void);
+static void test_Windows_UNC_share(void);
+static void test_Windows_UNC_share_and_entry(void);
+static void test_Windows_UNC_share_and_6_dirs_and_filename(void);
+static void test_Windows_UNC_share_and_6_dirs_and_filename_altslashes(void);
+static void test_Windows_UNC_share_and_6_dirs_and_filename_altslashes_2(void);
 
-    static void test_Windows_driveletterrelative_and_stem(void);
-    static void test_Windows_driveletterrelative_and_6_dirs_and_filename(void);
-    static void test_Windows_driveletterrelative_and_6_dirs_and_filename_altslashes(void);
-    static void test_Windows_driveletterrelative_and_6_dirs_and_dotsdir_altslashes(void);
-    static void test_rooted_1_dir_1_stem_extraslashes(void);
+static void test_Windows_driveletterrelative_and_stem(void);
+static void test_Windows_driveletterrelative_and_6_dirs_and_filename(void);
+static void test_Windows_driveletterrelative_and_6_dirs_and_filename_altslashes(void);
+static void test_Windows_driveletterrelative_and_6_dirs_and_dotsdir_altslashes(void);
+static void test_rooted_1_dir_1_stem_extraslashes(void);
 
-    static void test_bad_characters(void);
-    static void test_Windows_bad_characters(void);
+static void test_bad_characters(void);
+static void test_Windows_bad_characters(void);
 
-    static void test_1_component_with_libpath_ParseOption_AssumeDirectory(void);
-    static void test_2_components_with_libpath_ParseOption_AssumeDirectory(void);
-    static void test_2_components_with_last_2dotsdir_with_libpath_ParseOption_AssumeDirectory(void);
-    static void test_2_components_with_last_1dotsdir_with_libpath_ParseOption_AssumeDirectory(void);
+static void test_1_component_with_libpath_ParseOption_AssumeDirectory(void);
+static void test_2_components_with_libpath_ParseOption_AssumeDirectory(void);
+static void test_2_components_with_last_2dotsdir_with_libpath_ParseOption_AssumeDirectory(void);
+static void test_2_components_with_last_1dotsdir_with_libpath_ParseOption_AssumeDirectory(void);
 
-    static void test_Windows_UNC_share_trailing_backslash(void);
-    static void test_Windows_UNC_share_trailing_slash(void);
-    static void test_Windows_UNC_share_with_charwise_steps(void);
-
+static void test_Windows_UNC_share_trailing_backslash(void);
+static void test_Windows_UNC_share_trailing_slash(void);
+static void test_Windows_UNC_share_with_charwise_steps(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * main()
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;

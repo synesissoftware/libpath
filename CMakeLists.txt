@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libpath
 #
 # Created:  7th February 2024
-# Updated:  26th July 2024
+# Updated:  19th October 2024
 #
 # ######################################################################## #
 
@@ -55,21 +55,57 @@ set(PROJECT_VERSION_MINOR ${_VERSION_MINOR})
 set(PROJECT_VERSION_PATCH ${_VERSION_PATCH})
 set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
-message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}")
-
-
 # adhere strictly to C and C++ standards plus extensions. These are actually
 # useless since we do not compile anything; they merely state our intention.
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON) # GNU extensions and POSIX standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+if(MSVC)
+
+	if(MSVC_VERSION LESS 1930)
+
+		set(CMAKE_C_STANDARD 90)
+		set(CMAKE_CXX_STANDARD 98)
+	endif()
+endif(MSVC)
+
 
 # ##########################################################
+# dependencies, includes, options
+
+# ################################################
+# includes - 1
+
+include(BuildType)
+include(LanguageFullVersion)
+include(TargetMacros)
+
+
+# ################################################
+# dependencies and options
+
+option(BUILD_EXAMPLES "Build examples" ON)
+
+if(LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
+
+	message("-- defining LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX")
+
+	add_definitions(-DLIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
+endif(LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
+
+
+# ######################################
 # dependencies
+#
+# required:
+#
+# optional:
+# - STLSoft - required for testing;
+# - xTests - required for testing;
 
 if(BUILD_TESTING)
 
@@ -78,39 +114,44 @@ if(BUILD_TESTING)
 	#
 	# We provide flexibility here, as in:
 	# 1. if a CMake variable STLSOFT is provided then it is used; otherwise
-	# 2. if an environment variable STLSOFT is provided then it then it is used; otherwise
-	# 3. if the package STLSoft (via find_package()) is found then it is used; otherwise
+	# 2. if an environment variable STLSOFT is provided then it then it is
+	#    used; otherwise
+	# 3. if the package STLSoft (via find_package()) is found then it is
+	#    used; otherwise
 	# 4. we abort
 
-	if(NOT DEFINED STLSOFT AND NOT DEFINED ENV{STLSOFT})
+	if(DEFINED STLSOFT)
+
+		message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
+
+		set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
+	elseif(DEFINED ENV{STLSOFT})
+
+		message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
+
+		set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
+	else()
 
 		set(STLSoft_REQUIRED_VERSION_ 1.11)
 
 		find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
 
 		message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
-	else()
+	endif()
 
-		if(DEFINED STLSOFT)
-
-			message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
-
-			set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
-		else()
-
-			message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
-
-			set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
-		endif()
+	if(DEFINED STLSOFT_INCLUDE_DIR)
 
 		include_directories(${STLSOFT_INCLUDE_DIR})
 	endif()
+endif(BUILD_TESTING)
 
 
-	# ##################################################
-	# xTests
+# ############################
+# xTests
 
-	set(xTests_REQUIRED_VERSION_ 0.23)
+if(BUILD_TESTING)
+
+	set(xTests_REQUIRED_VERSION_ 0.24)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
@@ -118,56 +159,52 @@ if(BUILD_TESTING)
 endif(BUILD_TESTING)
 
 
-# ##########################################################
-# install
+# ################################################
+# includes - 2
 
-# provides install directory variables as defined by the GNU Coding Standards.
+include(CMakePackageConfigHelpers)
+if(BUILD_TESTING)
+
+	include(CTest)
+endif(BUILD_TESTING)
 include(GNUInstallDirs)
 
 
 # ##########################################################
-# features
+# targets
 
-if(LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
-
-	message("-- defining LIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX")
-
-	add_definitions(-DLIBPATH_OS_SIMULATE_WINDOWS_ON_UNIX)
-endif()
-
-
-# ##########################################################
-# build
-
-# load/default `CMAKE_BUILD_TYPE`
-include(BuildType)
+# ################################################
+# main library
 
 add_subdirectory(src)
 
 
-# ##########################################################
-# test
+# ################################################
+# examples
 
-include(CTest)
+if(BUILD_EXAMPLES)
+
+	message("-- enabled building of examples ...")
+
+	add_subdirectory(examples)
+else(BUILD_EXAMPLES)
+
+	message("-- disabled building of examples - define BUILD_EXAMPLES to enable")
+endif(BUILD_EXAMPLES)
+
+
+# ################################################
+# tests
 
 if(BUILD_TESTING)
 
 	message("-- enabled building of tests ...")
 
 	add_subdirectory(test)
+else(BUILD_TESTING)
+
+	message("-- disabled building of tests - define BUILD_TESTING to enable")
 endif(BUILD_TESTING)
-
-
-# ##########################################################
-# examples
-
-option(BUILD_EXAMPLES "Build examples" ON)
-if(BUILD_EXAMPLES)
-
-	message("-- enabled building of examples ...")
-
-	add_subdirectory(examples)
-endif(BUILD_EXAMPLES)
 
 
 # ##########################################################
@@ -176,8 +213,6 @@ endif(BUILD_EXAMPLES)
 
 # ##########################################################
 # export
-
-include(CMakePackageConfigHelpers)
 
 set(EXPORT_NAME ${PROJECT_NAME_LOWER})
 
@@ -209,6 +244,12 @@ install( FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/cmake/${EXPORT_NAME}-config-version.cmake"
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}
 )
+
+
+# ##########################################################
+# completion
+
+message(NOTICE "Generating CMake build scripts for ${PROJECT_NAME} ${PROJECT_VERSION}, for C${CMAKE_C_STANDARD} C++${CMAKE_CXX_STANDARD}")
 
 
 # ############################## end of file ############################# #
