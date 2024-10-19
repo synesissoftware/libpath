@@ -1,4 +1,15 @@
 
+# ######################################################################## #
+# File:     /src/CMakeLists.txt
+#
+# Purpose:  CMake lists file for libpath core library
+#
+# Created:  ...
+# Updated:  18th October 2024
+#
+# ######################################################################## #
+
+
 # include_directories(${CMAKE_SOURCE_DIR}/include)
 
 if(UNIX)
@@ -26,7 +37,7 @@ if ((MSVC) AND (MSVC_VERSION GREATER_EQUAL 1914))
 
 	add_compile_options("/Zc:__cplusplus")
 
-	# add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
+	add_definitions(-D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING)
 endif()
 
 
@@ -54,21 +65,28 @@ set_target_properties(core PROPERTIES
 	# PUBLIC_HEADER "${CORE_PUBLIC_HEADERS}"
 )
 
-target_include_directories(core PUBLIC
-	$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
-	$<INSTALL_INTERFACE:include>
+target_include_directories(core
+	PUBLIC
+		$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+		$<INSTALL_INTERFACE:include>
 )
 
-target_compile_options(core PRIVATE
-	$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-		-Werror -Wall -Wextra -pedantic
+target_link_libraries(core
+	PRIVATE
+		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
+)
 
-		-Wno-deprecated-copy-with-user-provided-copy
-		-Wno-unused-but-set-parameter
-	>
-	$<$<CXX_COMPILER_ID:MSVC>:
-		/WX /W4
-	>
+target_compile_options(core
+	PRIVATE
+		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+			-Werror -Wall -Wextra -pedantic
+
+			# -Wno-deprecated-copy-with-user-provided-copy
+			# -Wno-unused-but-set-parameter
+		>
+		$<$<CXX_COMPILER_ID:MSVC>:
+			/WX /W4
+		>
 )
 
 
