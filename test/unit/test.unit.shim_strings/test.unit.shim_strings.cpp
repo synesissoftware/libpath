@@ -4,20 +4,23 @@
  * Purpose: Unit-test for shim-strings.
  *
  * Created: 11th February 2024
- * Updated: 4th May 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+/* /////////////////////////////////////
  * test component header file include(s)
  */
 
 #include <libpath/common/types.h>
 
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
+/* /////////////////////////////////////
+ * general includes
  */
 
 /* xTests header files */
@@ -38,14 +41,14 @@
  * forward declarations
  */
 
-    static void test_rc_known_values(void);
+static void test_rc_known_values(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * main
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;

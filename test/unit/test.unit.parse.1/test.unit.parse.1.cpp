@@ -4,20 +4,23 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 12th August 2024
+ * Updated: 19th October 2024
  *
  * ////////////////////////////////////////////////////////////////////// */
 
 
 /* /////////////////////////////////////////////////////////////////////////
+ * includes
+ */
+
+/* /////////////////////////////////////
  * test component header file include(s)
  */
 
 #include <libpath/parse.hpp>
 
-
-/* /////////////////////////////////////////////////////////////////////////
- * includes
+/* /////////////////////////////////////
+ * general includes
  */
 
 /* xTests header files */
@@ -37,69 +40,69 @@
  * forward declarations
  */
 
-    static void test_1_0(void);
-    static void test_1_1(void);
-    static void test_1_2(void);
-    static void test_1_3(void);
-    static void test_1_4(void);
+static void test_1_0(void);
+static void test_1_1(void);
+static void test_1_2(void);
+static void test_1_3(void);
+static void test_1_4(void);
 
-    static void test_1_6(void);
-    static void test_1_7(void);
-    static void test_1_8(void);
+static void test_1_6(void);
+static void test_1_7(void);
+static void test_1_8(void);
 
-    static void test_1_10(void);
-    static void test_1_11(void);
-    static void test_1_12(void);
+static void test_1_10(void);
+static void test_1_11(void);
+static void test_1_12(void);
 
-    static void test_1_14(void);
-    static void test_1_15(void);
-    static void test_1_16(void);
-    static void test_1_17(void);
-    static void test_1_18(void);
-    static void test_1_19(void);
-    static void test_1_20(void);
-    static void test_1_21(void);
-    static void test_1_22(void);
+static void test_1_14(void);
+static void test_1_15(void);
+static void test_1_16(void);
+static void test_1_17(void);
+static void test_1_18(void);
+static void test_1_19(void);
+static void test_1_20(void);
+static void test_1_21(void);
+static void test_1_22(void);
 
-    static void test_1_30(void);
-    static void test_1_31(void);
-    static void test_1_32(void);
-    static void test_1_33(void);
-    static void test_1_34(void);
-    static void test_1_35(void);
-    static void test_1_36(void);
-    static void test_1_37(void);
+static void test_1_30(void);
+static void test_1_31(void);
+static void test_1_32(void);
+static void test_1_33(void);
+static void test_1_34(void);
+static void test_1_35(void);
+static void test_1_36(void);
+static void test_1_37(void);
 
-    static void test_1_40(void);
-    static void test_1_41(void);
-    static void test_1_42(void);
-    static void test_1_43(void);
-    static void test_1_44(void);
+static void test_1_40(void);
+static void test_1_41(void);
+static void test_1_42(void);
+static void test_1_43(void);
+static void test_1_44(void);
 
-    static void test_1_50(void);
-    static void test_1_51(void);
-    static void test_1_52(void);
-    static void test_1_53(void);
-    static void test_1_54(void);
+static void test_1_50(void);
+static void test_1_51(void);
+static void test_1_52(void);
+static void test_1_53(void);
+static void test_1_54(void);
 
-    static void test_1_60(void);
-    static void test_1_61(void);
+static void test_1_60(void);
+static void test_1_61(void);
 
-    static void test_1_70(void);
-    static void test_1_71(void);
-    static void test_1_72(void);
-    static void test_1_73(void);
+static void test_1_70(void);
+static void test_1_71(void);
+static void test_1_72(void);
+static void test_1_73(void);
 
-    static void test_1_80(void);
-    static void test_1_81(void);
-    static void test_1_82(void);
+static void test_1_80(void);
+static void test_1_81(void);
+static void test_1_82(void);
 
 
 /* /////////////////////////////////////////////////////////////////////////
  * main
  */
 
-int main(int argc, char **argv)
+int main(int argc, char* argv[])
 {
     int retCode = EXIT_SUCCESS;
     int verbosity = 2;
