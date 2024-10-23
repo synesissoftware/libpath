@@ -1,6 +1,12 @@
 # shwild - History
 
 
+23rd October 2024 - 0.2.0-alpha4 released
+-----------------------------------------
+
+* Minor updates;
+
+
 19th October 2024 - 0.2.0-alpha3 released
 -----------------------------------------
 

@@ -2,6 +2,7 @@
 
 | Date                  | News Item                                 |
 | --------------------- | ----------------------------------------- |
+| 23rd October 2024     |   libpath 0.2.0 (alpha 4) released        |
 | 19th October 2024     |   libpath 0.2.0 (alpha 3) released        |
 | 27th July 2024        |   libpath 0.2.0 (alpha 2) released        |
 | 11th February 2024    |   libpath 0.1.5.21 released               |

@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for libpath
 #
 # Created:  7th February 2024
-# Updated:  19th October 2024
+# Updated:  23rd October 2024
 #
 # ######################################################################## #
 
@@ -151,7 +151,7 @@ endif(BUILD_TESTING)
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.24)
+	set(xTests_REQUIRED_VERSION_ 0.25)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
