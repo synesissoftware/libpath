@@ -56,7 +56,7 @@ The primary choice for installation is by use of **CMake**.
 
 
    ```bash
-   $ sudo cmake --install ./_build --config Release
+   $ sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
    ```
 
 7. Then to use the library, it is a simple matter as follows:
@@ -159,16 +159,16 @@ The primary choice for installation is by use of **CMake**.
       ```bash
       $ ./parse_path
       results of parsing './parse_path':
-        input:                	'./parse_path'
-        path:                 	'./parse_path'
-        locationPart:         	'./'
-        rootPart:             	''
-        directoryPart:        	'./'
-        entryPart:            	'parse_path'
-        entryStemPart:        	'parse_path'
-        entryExtensionPart:   	''
-        numDotsDirectoryParts:	1:
-        numDirectoryParts:    	1:
+        input:                  './parse_path'
+        path:                   './parse_path'
+        locationPart:           './'
+        rootPart:               ''
+        directoryPart:          './'
+        entryPart:              'parse_path'
+        entryStemPart:          'parse_path'
+        entryExtensionPart:     ''
+        numDotsDirectoryParts:  1:
+        numDirectoryParts:      1:
       ```
 
       or as in:
@@ -176,16 +176,16 @@ The primary choice for installation is by use of **CMake**.
       ```bash
       $ ./parse_path ../../../libpath/install/example/parse_path.o
       results of parsing '../../../libpath/install/example/parse_path.o':
-        input:                	'../../../libpath/install/example/parse_path.o'
-        path:                 	'../../../libpath/install/example/parse_path.o'
-        locationPart:         	'../../../libpath/install/example/'
-        rootPart:             	''
-        directoryPart:        	'../../../libpath/install/example/'
-        entryPart:            	'parse_path.o'
-        entryStemPart:        	'parse_path'
-        entryExtensionPart:   	'.o'
-        numDotsDirectoryParts:	3:
-        numDirectoryParts:    	6:
+        input:                  '../../../libpath/install/example/parse_path.o'
+        path:                   '../../../libpath/install/example/parse_path.o'
+        locationPart:           '../../../libpath/install/example/'
+        rootPart:               ''
+        directoryPart:          '../../../libpath/install/example/'
+        entryPart:              'parse_path.o'
+        entryStemPart:          'parse_path'
+        entryExtensionPart:     '.o'
+        numDotsDirectoryParts:  3:
+        numDirectoryParts:      6:
       ```
 
 

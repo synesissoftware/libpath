@@ -1,5 +1,10 @@
 # shwild - History
 
+22nd February 2025 - 0.2.0-alpha5 released
+------------------------------------------
+
+ * boilerplate tidying
+
 
 23rd October 2024 - 0.2.0-alpha4 released
 -----------------------------------------

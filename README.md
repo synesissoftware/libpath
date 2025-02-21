@@ -74,6 +74,7 @@ In order to run the test programs, **libpath** has the following development dep
 
 ### Related projects
 
+* [**libpath.Go**](https://github.com/synesissoftware/libpath.Go);
 * [**libpath.Ruby**](https://github.com/synesissoftware/libpath.Ruby);
 * [**libpath.Rust**](https://github.com/synesissoftware/libpath.Rust);
 * [**recls**](https://github.com/synesissoftware/recls);
