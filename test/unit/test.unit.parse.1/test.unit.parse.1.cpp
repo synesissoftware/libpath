@@ -183,15 +183,15 @@ int main(int argc, char* argv[])
  * test function implementations
  */
 
- using ::libpath::StringSlice_t;
+using ::libpath::StringSlice_t;
 
- typedef ::libpath::parsing::PathDescriptor_t               ParseResult_t;
+typedef ::libpath::parsing::PathDescriptor_t                ParseResult_t;
 
- using ::libpath::parsing::parse_path_from_cstyle_string;
- using ::libpath::parsing::parse_path_from_string_ptr_and_len;
+using ::libpath::parsing::parse_path_from_cstyle_string;
+using ::libpath::parsing::parse_path_from_string_ptr_and_len;
 
- using ::libpath::parsing::is_absolute;
- using ::libpath::parsing::is_rooted;
+using ::libpath::parsing::is_absolute;
+using ::libpath::parsing::is_rooted;
 
 
 #ifdef __cplusplus
@@ -395,8 +395,8 @@ static void test_1_6(void)
 {
     char const input[] = "...";
 
-    ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
+    ParseResult_t   r;
+    LIBPATH_RC      rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -420,8 +420,8 @@ static void test_1_7(void)
 {
     char const input[] = ".....";
 
-    ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
+    ParseResult_t   r;
+    LIBPATH_RC      rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -444,8 +444,8 @@ static void test_1_8(void)
 {
     char const input[] = "..abc.def..";
 
-    ParseResult_t  r;
-    LIBPATH_RC        rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
+    ParseResult_t   r;
+    LIBPATH_RC      rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
@@ -2008,8 +2008,8 @@ static void test_1_60(void)
 static void test_1_61(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
-    ParseResult_t  r;
-    LIBPATH_RC        rc;
+    ParseResult_t   r;
+    LIBPATH_RC      rc;
 
 
     rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
@@ -2066,8 +2066,8 @@ static void test_1_61(void)
 
 static void test_1_70(void)
 {
-    ParseResult_t  r;
-    LIBPATH_RC        rc;
+    ParseResult_t   r;
+    LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
 
@@ -2133,8 +2133,8 @@ static void test_1_70(void)
 
 static void test_1_71(void)
 {
-    ParseResult_t  r;
-    LIBPATH_RC        rc;
+    ParseResult_t   r;
+    LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
 
@@ -2208,8 +2208,8 @@ static void test_1_71(void)
 
 static void test_1_72(void)
 {
-    ParseResult_t  r;
-    LIBPATH_RC        rc;
+    ParseResult_t   r;
+    LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
 
@@ -2285,8 +2285,8 @@ static void test_1_72(void)
 
 static void test_1_73(void)
 {
-    ParseResult_t  r;
-    LIBPATH_RC        rc;
+    ParseResult_t   r;
+    LIBPATH_RC      rc;
     StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
 
 

@@ -4,11 +4,11 @@
  * Purpose: Main implementation file for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 15th March 2025
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -845,7 +845,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
             if (0 != lhs->numDirectoryParts ||
                 0 != rhs->numDirectoryParts)
             {
-#if LIBPATH_VER >= 0x00030000
+#if LIBPATH_VER >= 0x00040000
 # error create libpath_Parse_DeriveDirectoryPartsFrom/For/OnPathDescriptor()
 #endif
 

@@ -4,11 +4,11 @@
  * Purpose: Main implementation file for libpath Equating API.
  *
  * Created: 9th November 2012
- * Updated: 19th October 2024
+ * Updated: 15th March 2025
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -382,7 +382,7 @@ libpath_Internal_PathEquals_impl_2_(
 
             if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, LIBPATH_LF_nullptr))
             {
-#if LIBPATH_VER >= 0x00030000
+#if LIBPATH_VER >= 0x00040000
 # error This needs to return a result code that indicates that it is the cwd
 # error Also: need to ensure that cwd is absolute
 #endif

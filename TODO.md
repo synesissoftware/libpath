@@ -9,7 +9,7 @@
 
 ## Functional improvements
 
-* \<none>
+* [ ] Separate out `libpath_PathDescriptor_t#firstBadCharOffset`;
 
 
 ## Performance improvements

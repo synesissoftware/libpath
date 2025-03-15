@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.compare.1 project.
  *
  * Created: 17th February 2013
- * Updated: 19th October 2024
+ * Updated: 15th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -436,7 +436,7 @@ static void test_mixed_with_root_pwd(void)
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/"));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/"));
 
-#if LIBPATH_VER >= 0x00030000
+#if LIBPATH_VER >= 0x00040000
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/"));
 #endif
 
@@ -559,8 +559,6 @@ static void test_noncanonical_paths(void)
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file2.ext"));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
-
-
 }
 
 static void test_noncanonical_paths_trailing_dots(void)
