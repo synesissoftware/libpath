@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.1 project.
  *
  * Created: 9th November 2012
- * Updated: 19th October 2024
+ * Updated: 15th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -84,6 +84,7 @@ static void test_1_51(void);
 static void test_1_52(void);
 static void test_1_53(void);
 static void test_1_54(void);
+static void test_1_55(void);
 
 static void test_1_60(void);
 static void test_1_61(void);
@@ -155,6 +156,7 @@ int main(int argc, char* argv[])
         XTESTS_RUN_CASE(test_1_52);
         XTESTS_RUN_CASE(test_1_53);
         XTESTS_RUN_CASE(test_1_54);
+        XTESTS_RUN_CASE(test_1_55);
 
         XTESTS_RUN_CASE(test_1_60);
         XTESTS_RUN_CASE(test_1_61);
@@ -1900,6 +1902,53 @@ static void test_1_54(void)
     XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
     XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+#endif /* LIBPATH_OS_IS_WINDOWS */
+}
+
+static void test_1_55(void)
+{
+    char const input[] = "dir/abc";
+
+    ParseResult_t   r;
+    LIBPATH_RC      rc;
+    StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
+
+    rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+
+#ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+#endif
+
+    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    XTESTS_TEST_INTEGER_EQUAL(7u, r.input.len);
+    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
+    XTESTS_TEST_INTEGER_EQUAL(7u, r.path.len);
+    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
+    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+#ifdef LIBPATH_OS_IS_WINDOWS
+    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+#endif
+    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
+    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
+    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
+    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
+    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
+    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryPart.len);
+    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
+    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+
+    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
+#ifdef LIBPATH_OS_IS_WINDOWS
+    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+#else /* ? LIBPATH_OS_IS_WINDOWS */
+    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
