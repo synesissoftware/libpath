@@ -102,7 +102,7 @@ The primary choice for installation is by use of **CMake**.
               "\tnumDirectoryParts:    \t%lu:\n"
           ,   path
           ,   (int)(result.input.len), result.input.ptr
-          ,   (int)(result.path.len), result.path.ptr
+          ,   (int)(result.fullPath.len), result.fullPath.ptr
           ,   (int)(result.locationPart.len), result.locationPart.ptr
       #ifdef LIBPATH_OS_IS_WINDOWS
           ,   (int)(result.volumePart.len), result.volumePart.ptr

@@ -143,7 +143,7 @@ parse_and_display_results(
             "\tnumDirectoryParts:    \t%lu:\n"
         ,   path
         ,   0, "", int(result.input.len), result.input.ptr
-        ,   0, "", int(result.path.len), result.path.ptr
+        ,   0, "", int(result.fullPath.len), result.fullPath.ptr
         ,   0, "", int(result.locationPart.len), result.locationPart.ptr
 #ifdef LIBPATH_OS_IS_WINDOWS
         ,   0, "", int(result.volumePart.len), result.volumePart.ptr

@@ -70,7 +70,7 @@ struct libpath_PathDescriptor_t
     /** @brief The input string, unchanged. */
     libpath_StringSlice_t           input;
     /** @brief The full path. */
-    libpath_StringSlice_t           path;
+    libpath_StringSlice_t           fullPath;
     /** @brief The location part of the path. */
     libpath_StringSlice_t           locationPart;
     /** @brief The root part of the path. */

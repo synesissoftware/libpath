@@ -384,7 +384,7 @@ libpath_Parse_ParsePathFromStringSlice_impl_3_(
 
     // 1. path
 
-    result->path = result->input;
+    result->fullPath = result->input;
 
     // 2. location
 
