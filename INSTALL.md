@@ -74,12 +74,14 @@ The primary choice for installation is by use of **CMake**.
         char const* const         program_name = argv[0];
         char const* const         path = (argc > 1) ? argv[1] : program_name;
         libpath_PathDescriptor_t  result;
+        libpath_size_t            firstBadCharOffset;
         LIBPATH_RC const          rc  = libpath_Parse_ParsePathFromCStyleString(
                                           path
                                         , 0
                                         , &result
                                         , 0
                                         , NULL
+                                        , &firstBadCharOffset
                                         );
 
         if (LIBPATH_RC_SUCCESS(rc))
@@ -98,8 +100,8 @@ The primary choice for installation is by use of **CMake**.
               "\tentryPart:            \t'%.*s'\n"
               "\tentryStemPart:        \t'%.*s'\n"
               "\tentryExtensionPart:   \t'%.*s'\n"
-              "\tnumDotsDirectoryParts:\t%lu:\n"
-              "\tnumDirectoryParts:    \t%lu:\n"
+              "\tnumDotsDirectoryParts:\t%zu:\n"
+              "\tnumDirectoryParts:    \t%zu:\n"
           ,   path
           ,   (int)(result.input.len), result.input.ptr
           ,   (int)(result.fullPath.len), result.fullPath.ptr
@@ -122,10 +124,10 @@ The primary choice for installation is by use of **CMake**.
         {
           fprintf(
               stdout
-          ,   "%s: failed to parse '%s', at offset %lu: %.*s\n"
+          ,   "%s: failed to parse '%s', at offset %zu: %.*s\n"
           ,   program_name
           ,   path
-          ,   result.firstBadCharOffset
+          ,   firstBadCharOffset
           ,   (int)libpath_rc_getStringLen(rc), libpath_rc_getStringPtr(rc)
           );
 

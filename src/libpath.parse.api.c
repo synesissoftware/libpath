@@ -69,6 +69,7 @@ libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
 ,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
+,   libpath_size_t*             firstBadCharOffset
 );
 
 static
@@ -80,6 +81,7 @@ libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
 ,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
+,   libpath_size_t*             firstBadCharOffset
 );
 
 static
@@ -90,6 +92,7 @@ libpath_Parse_ParsePathFromStringSlice_impl_1_(
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_PathDescriptor_t*       result
+,   libpath_size_t*                 firstBadCharOffset
 );
 
 static
@@ -134,9 +137,11 @@ libpath_Parse_ParsePathFromStringSlice(
 ,   libpath_PathDescriptor_t*       result                  /* = NULL */
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices     /* = NULL */
+,   libpath_size_t*                 firstBadCharOffset      /* = NULL */
 )
 {
-    libpath_ParseResult_t stub;
+    libpath_ParseResult_t   stub;
+    libpath_size_t          stub_firstBadCharOffset_;
 
     LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path, "path may not be NULL");
     LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
@@ -147,6 +152,12 @@ libpath_Parse_ParsePathFromStringSlice(
     }
     memset(result, 0, sizeof(*result));
 
+    if (LIBPATH_LF_nullptr == firstBadCharOffset)
+    {
+        firstBadCharOffset = &stub_firstBadCharOffset_;
+    }
+    *firstBadCharOffset = SIZE_MAX;
+
     if (0 != numDirectoryPartSlices)
     {
         memset(directoryPartSlices, 0, sizeof(directoryPartSlices[0]) * numDirectoryPartSlices);
@@ -156,6 +167,8 @@ libpath_Parse_ParsePathFromStringSlice(
 
     if (0 == path->len)
     {
+        *firstBadCharOffset = 0;
+
         return libpath_ResultCode_NoPathSpecified;
     }
 #ifndef __cplusplus
@@ -166,6 +179,7 @@ libpath_Parse_ParsePathFromStringSlice(
             ,   numDirectoryPartSlices
             ,   directoryPartSlices
             ,   result
+            ,   firstBadCharOffset
             );
 }
 
@@ -177,6 +191,7 @@ libpath_Parse_ParsePathFromStringSlice_impl_1_(
 ,   libpath_size_t                  numDirectoryPartSlices
 ,   libpath_StringSlice_t*          directoryPartSlices
 ,   libpath_PathDescriptor_t*       result
+,   libpath_size_t*                 firstBadCharOffset
 )
 {
 #endif /* !__cplusplus */
@@ -225,7 +240,7 @@ libpath_Parse_ParsePathFromStringSlice_impl_1_(
 
             if (libpath_Internal_path_character_is_bad(*s, path, LIBPATH_STATIC_CAST(libpath_size_t, s - begin), flags))
             {
-                result->firstBadCharOffset = LIBPATH_STATIC_CAST(libpath_size_t, s - begin);
+                *firstBadCharOffset = LIBPATH_STATIC_CAST(libpath_size_t, s - begin);
 
                 return LIBPATH_RC_OF(BadPathCharacter);
             }
@@ -464,16 +479,23 @@ libpath_Parse_ParsePathFromStringPtrAndLen(
     libpath_char_t const*       path
 ,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
-,   libpath_PathDescriptor_t*   result /* = NULL */
+,   libpath_PathDescriptor_t*   result                      /* = NULL */
 ,   libpath_size_t              numDirectoryPartSlices
-,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
+,   libpath_StringSlice_t*      directoryPartSlices         /* = NULL */
+,   libpath_size_t*             firstBadCharOffset          /* = NULL */
 )
 {
     LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path || 0 == pathLen, "path parameter may not be NULL if pathLen is not 0");
     LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 #ifndef __cplusplus
 
-    return libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(path, pathLen, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
+        path, pathLen
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+);
 }
 
 static
@@ -485,12 +507,19 @@ libpath_Parse_ParsePathFromStringPtrAndLen_UNCHECKED_(
 ,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
+,   libpath_size_t*             firstBadCharOffset          /* = NULL */
 )
 {
     libpath_StringSlice_t const path_sl = libpath_Util_SliceFromStringPtrAndLen(path, pathLen);
 #endif /* !__cplusplus */
 
-    return libpath_Parse_ParsePathFromStringSlice(&path_sl, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromStringSlice(
+        &path_sl
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
 
 LIBPATH_API
@@ -500,13 +529,20 @@ libpath_Parse_ParsePathFromCStyleString(
 ,   libpath_PathDescriptor_t*   result /* = NULL */
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
+,   libpath_size_t*             firstBadCharOffset
 )
 {
     LIBPATH_MESSAGE_ASSERT(LIBPATH_LF_nullptr != path, "path parameter may not be NULL");
     LIBPATH_MESSAGE_ASSERT(0 == numDirectoryPartSlices || LIBPATH_LF_nullptr != directoryPartSlices, "invalid directory part slice parameters");
 #ifndef __cplusplus
 
-    return libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
+        path
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
 
 static
@@ -517,13 +553,20 @@ libpath_Parse_ParsePathFromCStyleString_UNCHECKED_(
 ,   libpath_PathDescriptor_t*   result
 ,   libpath_size_t              numDirectoryPartSlices
 ,   libpath_StringSlice_t*      directoryPartSlices
+,   libpath_size_t*             firstBadCharOffset
 )
 {
 #endif /* !__cplusplus */
 
     libpath_StringSlice_t const path_sl = libpath_Util_SliceFromCStyleString(path);
 
-    return libpath_Parse_ParsePathFromStringSlice(&path_sl, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromStringSlice(
+        &path_sl
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
 
 LIBPATH_CALL(int)

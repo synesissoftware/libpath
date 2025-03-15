@@ -4,11 +4,11 @@
  * Purpose: Language discrimination for libpath library.
  *
  * Created: 2nd February 2013
- * Updated: 12th August 2024
+ * Updated: 15th March 2025
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -173,6 +173,9 @@
 
 #  define LIBPATH_LF_noexcept                               throw()
 # endif
+#else
+
+# define LIBPATH_LF_noexcept
 #endif
 
 

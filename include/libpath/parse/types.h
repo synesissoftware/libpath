@@ -112,8 +112,6 @@ struct libpath_PathDescriptor_t
 #ifdef LIBPATH_OS_IS_WINDOWS
     libpath_StringSlice_t           volumePart;
 #endif /* LIBPATH_OS_IS_WINDOWS */
-
-    libpath_size_t                  firstBadCharOffset;
 };
 
 #ifndef __cplusplus

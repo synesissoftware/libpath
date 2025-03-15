@@ -114,12 +114,14 @@ parse_and_display_results(
     PathDescriptor_t    result;
     StringSlice_t       directoryPartSlices[20]; // WARNING: magic number!
     libpath_size_t      numDirectoryPartSlices = sizeof(directoryPartSlices) / sizeof(0[directoryPartSlices]);
+    libpath_size_t      firstBadCharOffset;
     LIBPATH_RC const    rc      =   parse_path_from_cstyle_string(
                                         path
                                     ,   flags
                                     ,   &result
                                     ,   numDirectoryPartSlices
                                     ,   &directoryPartSlices[0]
+                                    ,   &firstBadCharOffset
                                     );
     int                 dp_width;
 
@@ -139,8 +141,8 @@ parse_and_display_results(
             "\tentryPart:            \t%.*s'%.*s'\n"
             "\tentryStemPart:        \t%.*s'%.*s'\n"
             "\tentryExtensionPart:   \t%.*s'%.*s'\n"
-            "\tnumDotsDirectoryParts:\t%lu:\n"
-            "\tnumDirectoryParts:    \t%lu:\n"
+            "\tnumDotsDirectoryParts:\t%zu:\n"
+            "\tnumDirectoryParts:    \t%zu:\n"
         ,   path
         ,   0, "", int(result.input.len), result.input.ptr
         ,   0, "", int(result.fullPath.len), result.fullPath.ptr
@@ -153,8 +155,8 @@ parse_and_display_results(
         ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryNamePart.len), result.entryNamePart.ptr
         ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryStemPart.len), result.entryStemPart.ptr
         ,   int(result.rootPart.len + result.directoryPart.len + result.entryStemPart.len), blanks, int(result.entryExtensionPart.len), result.entryExtensionPart.ptr
-        ,   static_cast<unsigned long>(result.numDotsDirectoryParts)
-        ,   static_cast<unsigned long>(result.numDirectoryParts)
+        ,   result.numDotsDirectoryParts
+        ,   result.numDirectoryParts
         );
         fprintf(
             stm_out
@@ -181,10 +183,10 @@ parse_and_display_results(
     {
         fprintf(
             stm_cr
-        ,   "%s: failed to parse '%s', at offset %lu: %.*s\n"
+        ,   "%s: failed to parse '%s', at offset %zu: %.*s\n"
         ,   program_name
         ,   path
-        ,   static_cast<unsigned long>(result.firstBadCharOffset)
+        ,   firstBadCharOffset
         ,   int(libpath_rc_getStringLen(rc)), libpath_rc_getStringPtr(rc)
         );
 

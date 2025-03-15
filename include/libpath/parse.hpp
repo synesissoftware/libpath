@@ -104,6 +104,8 @@ private:
  * API functions
  */
 
+/* `parse_path_from_string_slice()` */
+
 inline
 LIBPATH_RC
 parse_path_from_string_slice(
@@ -112,9 +114,16 @@ parse_path_from_string_slice(
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t           directoryPartSlices[]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromStringSlice(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromStringSlice(
+        path
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
 
 inline
@@ -125,11 +134,17 @@ parse_path_from_string_slice(
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t           directoryPartSlices[]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromStringSlice(&path, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromStringSlice(
+        &path
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
-
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
 template <
@@ -142,9 +157,16 @@ parse_path_from_string_slice(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   StringSlice_t           (&directoryPartSlices)[V_dimension]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromStringSlice(path, flags, result, V_dimension, &directoryPartSlices[0]);
+    return libpath_Parse_ParsePathFromStringSlice(
+        path
+    ,   flags
+    ,   result
+    ,   V_dimension, &directoryPartSlices[0]
+    ,   firstBadCharOffset
+    );
 }
 
 template <
@@ -157,11 +179,21 @@ parse_path_from_string_slice(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   StringSlice_t           (&directoryPartSlices)[V_dimension]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromStringSlice(&path, flags, result, V_dimension, &directoryPartSlices[0]);
+    return libpath_Parse_ParsePathFromStringSlice(
+        &path
+    ,   flags
+    ,   result
+    ,   V_dimension, &directoryPartSlices[0]
+    ,   firstBadCharOffset
+    );
 }
 #endif /* C++11 or later */
+
+
+/* `parse_path_from_string_ptr_and_len()` */
 
 inline
 LIBPATH_RC
@@ -172,10 +204,20 @@ parse_path_from_string_ptr_and_len(
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t           directoryPartSlices[]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromStringPtrAndLen(path, pathLen, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromStringPtrAndLen(
+        path, pathLen
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
+
+
+/* `parse_path_from_cstyle_string()` */
 
 inline
 LIBPATH_RC
@@ -185,9 +227,16 @@ parse_path_from_cstyle_string(
 ,   PathDescriptor_t*       result
 ,   libpath_size_t          numDirectoryPartSlices
 ,   StringSlice_t           directoryPartSlices[]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromCStyleString(path, flags, result, numDirectoryPartSlices, directoryPartSlices);
+    return libpath_Parse_ParsePathFromCStyleString(
+        path
+    ,   flags
+    ,   result
+    ,   numDirectoryPartSlices, directoryPartSlices
+    ,   firstBadCharOffset
+    );
 }
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
@@ -202,28 +251,57 @@ parse_path_from_cstyle_string(
 ,   sint32_t                flags
 ,   PathDescriptor_t*       result
 ,   StringSlice_t           (&directoryPartSlices)[V_dimension]
-)
+,   libpath_size_t*         firstBadCharOffset          =   LIBPATH_LF_nullptr
+) LIBPATH_LF_noexcept
 {
-    return libpath_Parse_ParsePathFromCStyleString(path, flags, result, V_dimension, &directoryPartSlices[0]);
+    return libpath_Parse_ParsePathFromCStyleString(
+        path
+    ,   flags
+    ,   result
+    ,   V_dimension, &directoryPartSlices[0]
+    ,   firstBadCharOffset
+    );
 }
 #endif /* C++11 or later */
 
 
+/* `is_absolute()` */
 
 inline
 bool
 is_absolute(
-    PathDescriptor_t const& result
-)
+    PathDescriptor_t const* result
+) LIBPATH_LF_noexcept
 {
     return 0 != libpath_ParseResult_IsPathAbsolute(result);
 }
 
 inline
 bool
+is_absolute(
+    PathDescriptor_t const& result
+) LIBPATH_LF_noexcept
+{
+    return 0 != libpath_ParseResult_IsPathAbsolute(result);
+}
+
+
+/* `is_rooted()` */
+
+inline
+bool
+is_rooted(
+    PathDescriptor_t const* result
+) LIBPATH_LF_noexcept
+{
+    return 0 != libpath_ParseResult_IsPathRooted(result);
+}
+
+inline
+bool
 is_rooted(
     PathDescriptor_t const& result
-)
+) LIBPATH_LF_noexcept
 {
     return 0 != libpath_ParseResult_IsPathRooted(result);
 }

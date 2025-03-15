@@ -1984,23 +1984,24 @@ static void test_1_60(void)
             ParseResult_t   r;
             LIBPATH_RC      rc;
             StringSlice_t   directoryPartSlices[NUM_DP_ELEMENTS];
+            libpath_size_t  firstBadCharOffset;
 
-            rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
+            rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
 
-            rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
+            rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0], &firstBadCharOffset);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
 
-            rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
+            rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices, &firstBadCharOffset);
 #endif
 
             XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
             XTESTS_TEST_INTEGER_EQUAL(31u, r.input.len);
-            XTESTS_TEST_INTEGER_EQUAL(j, r.firstBadCharOffset);
+            XTESTS_TEST_INTEGER_EQUAL(j, firstBadCharOffset);
         }}
     }}
 }
@@ -2010,55 +2011,55 @@ static void test_1_61(void)
 #ifdef LIBPATH_OS_IS_WINDOWS
     ParseResult_t   r;
     LIBPATH_RC      rc;
+    libpath_size_t  firstBadCharOffset;
 
 
-    rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
+    rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(0u, firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
+    rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
 
 
-    rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
+    rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(2u, firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
-
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.firstBadCharOffset);
-
-
-    rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
+    rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(3u, firstBadCharOffset);
 
 
-    rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
-
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.firstBadCharOffset);
-
-
-
-    rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr);
+    rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(4u, firstBadCharOffset);
+
+
+    rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
+    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
+    XTESTS_TEST_INTEGER_EQUAL(5u, firstBadCharOffset);
+
+
+    rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
+
+    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
+    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
+    XTESTS_TEST_INTEGER_EQUAL(1u, firstBadCharOffset);
 
 
 #endif

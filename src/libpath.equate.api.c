@@ -190,8 +190,8 @@ libpath_Internal_PathEquals_impl_(
 
     LIBPATH_SUPPRESS_UNUSED(mem);
 
-    if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(lhs, flags, &lresult, 0, LIBPATH_LF_nullptr) ||
-        libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(rhs, flags, &rresult, 0, LIBPATH_LF_nullptr))
+    if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(lhs, flags, &lresult, 0, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr) ||
+        libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(rhs, flags, &rresult, 0, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr))
     {
         *result = LIBPATH_V_FALSEY;
 
@@ -336,12 +336,12 @@ libpath_Internal_PathEquals_impl_2_(
 
             if (LIBPATH_RC_SUCCESS(rc))
             {
-                rc = libpath_Parse_ParsePathFromStringSlice(lhs, flags, lresult, lresult->numDirectoryParts, *ldirparts);
+                rc = libpath_Parse_ParsePathFromStringSlice(lhs, flags, lresult, lresult->numDirectoryParts, *ldirparts, LIBPATH_LF_nullptr);
             }
 
             if (LIBPATH_RC_SUCCESS(rc))
             {
-                rc = libpath_Parse_ParsePathFromStringSlice(rhs, flags, rresult, rresult->numDirectoryParts, *rdirparts);
+                rc = libpath_Parse_ParsePathFromStringSlice(rhs, flags, rresult, rresult->numDirectoryParts, *rdirparts, LIBPATH_LF_nullptr);
             }
 
             if (LIBPATH_RC_FAILURE(rc))
@@ -380,7 +380,7 @@ libpath_Internal_PathEquals_impl_2_(
             libpath_PathDescriptor_t*     rel_result  =   (0 != lhsRootLevel) ? rresult : lresult;
             libpath_PathDescriptor_t      cwd_result;
 
-            if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, LIBPATH_LF_nullptr))
+            if (libpath_ResultCode_Success != libpath_Parse_ParsePathFromStringSlice(cwd, cwd_flags, &cwd_result, 0, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr))
             {
 #if LIBPATH_VER >= 0x00040000
 # error This needs to return a result code that indicates that it is the cwd
@@ -434,17 +434,17 @@ libpath_Internal_PathEquals_impl_2_(
 
                         if (LIBPATH_RC_SUCCESS(rc))
                         {
-                            rc = libpath_Parse_ParsePathFromStringSlice( abs,     flags, abs_result, abs_result->numDirectoryParts, *abs_dirparts);
+                            rc = libpath_Parse_ParsePathFromStringSlice( abs,     flags, abs_result, abs_result->numDirectoryParts, *abs_dirparts, LIBPATH_LF_nullptr);
                         }
 
                         if (LIBPATH_RC_SUCCESS(rc))
                         {
-                            rc = libpath_Parse_ParsePathFromStringSlice( rel,     flags, rel_result, rel_result->numDirectoryParts, *rel_dirparts);
+                            rc = libpath_Parse_ParsePathFromStringSlice( rel,     flags, rel_result, rel_result->numDirectoryParts, *rel_dirparts, LIBPATH_LF_nullptr);
                         }
 
                         if (LIBPATH_RC_SUCCESS(rc))
                         {
-                            rc = libpath_Parse_ParsePathFromStringSlice( cwd, cwd_flags, &cwd_result, cwd_result.numDirectoryParts, *cwd_dirparts);
+                            rc = libpath_Parse_ParsePathFromStringSlice( cwd, cwd_flags, &cwd_result, cwd_result.numDirectoryParts, *cwd_dirparts, LIBPATH_LF_nullptr);
                         }
 
                         if (LIBPATH_RC_FAILURE(rc))

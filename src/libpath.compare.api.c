@@ -788,9 +788,9 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 
                     /* we don't check the return from these, because they can't fail */
 
-                    libpath_Parse_ParsePathFromStringSlice(&abs->input, abs_flags, &aresult, abs->numDirectoryParts, adirparts);
-                    libpath_Parse_ParsePathFromStringSlice(&rel->input, rel_flags, &rresult, rel->numDirectoryParts, rdirparts);
-                    libpath_Parse_ParsePathFromStringSlice(&cwd->input, cwd_flags, &cresult, cwd->numDirectoryParts, cdirparts);
+                    libpath_Parse_ParsePathFromStringSlice(&abs->input, abs_flags, &aresult, abs->numDirectoryParts, adirparts, LIBPATH_LF_nullptr);
+                    libpath_Parse_ParsePathFromStringSlice(&rel->input, rel_flags, &rresult, rel->numDirectoryParts, rdirparts, LIBPATH_LF_nullptr);
+                    libpath_Parse_ParsePathFromStringSlice(&cwd->input, cwd_flags, &cresult, cwd->numDirectoryParts, cdirparts, LIBPATH_LF_nullptr);
 
                     /* canonicalise all individual parts arrays ... */
 
@@ -879,8 +879,8 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
 
                         /* we don't check the return from these, because they can't fail */
 
-                        libpath_Parse_ParsePathFromStringSlice(&lhs->input, lParseFlags, &lresult, lhs->numDirectoryParts, ldirparts);
-                        libpath_Parse_ParsePathFromStringSlice(&rhs->input, rParseFlags, &rresult, rhs->numDirectoryParts, rdirparts);
+                        libpath_Parse_ParsePathFromStringSlice(&lhs->input, lParseFlags, &lresult, lhs->numDirectoryParts, ldirparts, LIBPATH_LF_nullptr);
+                        libpath_Parse_ParsePathFromStringSlice(&rhs->input, rParseFlags, &rresult, rhs->numDirectoryParts, rdirparts, LIBPATH_LF_nullptr);
 
                         {
                         libpath_size_t const    nldirparts  =   libpath_Internal_canonicalise_parts(lhs->numDirectoryParts, ldirparts);
@@ -964,7 +964,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         rParseFlags |= libpath_ParseOption_AssumeDirectory;
     }
 
-    rc = libpath_Parse_ParsePathFromStringSlice(lhs, lParseFlags, &lresult, 0, LIBPATH_LF_nullptr);
+    rc = libpath_Parse_ParsePathFromStringSlice(lhs, lParseFlags, &lresult, 0, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr);
 
     if (LIBPATH_RC_OF(Success) != rc)
     {
@@ -983,7 +983,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
         return rc;
     }
 
-    rc = libpath_Parse_ParsePathFromStringSlice(rhs, rParseFlags, &rresult, 0, LIBPATH_LF_nullptr);
+    rc = libpath_Parse_ParsePathFromStringSlice(rhs, rParseFlags, &rresult, 0, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr);
 
     if (LIBPATH_RC_OF(Success) != rc)
     {
@@ -1011,7 +1011,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl1_(
 
         if (shouldParseCwd)
         {
-            rc = libpath_Parse_ParsePathFromStringSlice(cwd, dParseFlags, &dresult, 0, LIBPATH_LF_nullptr);
+            rc = libpath_Parse_ParsePathFromStringSlice(cwd, dParseFlags, &dresult, 0, LIBPATH_LF_nullptr, LIBPATH_LF_nullptr);
 
             if (LIBPATH_RC_OF(Success) != rc)
             {
