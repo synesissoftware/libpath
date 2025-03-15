@@ -208,7 +208,7 @@ libpath_Internal_PathEquals_impl_(
         // 5. If different "level" of root and cwd, then get cwd and three-way compare of directories
 
         // entry first
-        if (!libpath_Internal_directory_part_equal(&lresult.entryPart, &rresult.entryPart))
+        if (!libpath_Internal_directory_part_equal(&lresult.entryNamePart, &rresult.entryNamePart))
         {
             *result = LIBPATH_V_FALSEY;
 

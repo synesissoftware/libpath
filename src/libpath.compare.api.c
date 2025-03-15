@@ -907,7 +907,7 @@ libpath_Compare_ComparePathsAsStringSlices_impl2_(
     /* If everything else is the same, then see if entries are different */
 
     {
-        int const r = libpath_Internal_compare_path_fragment(&lhs->entryPart, &rhs->entryPart, flags);
+        int const r = libpath_Internal_compare_path_fragment(&lhs->entryNamePart, &rhs->entryNamePart, flags);
 
         if (0 != r)
         {

@@ -109,7 +109,7 @@ The primary choice for installation is by use of **CMake**.
       #endif /* LIBPATH_OS_IS_WINDOWS */
           ,   (int)(result.rootPart.len), result.rootPart.ptr
           ,   (int)(result.directoryPart.len), result.directoryPart.ptr
-          ,   (int)(result.entryPart.len), result.entryPart.ptr
+          ,   (int)(result.entryNamePart.len), result.entryNamePart.ptr
           ,   (int)(result.entryStemPart.len), result.entryStemPart.ptr
           ,   (int)(result.entryExtensionPart.len), result.entryExtensionPart.ptr
           ,   result.numDotsDirectoryParts
@@ -164,7 +164,7 @@ The primary choice for installation is by use of **CMake**.
         locationPart:           './'
         rootPart:               ''
         directoryPart:          './'
-        entryPart:              'parse_path'
+        entryNamePart:          'parse_path'
         entryStemPart:          'parse_path'
         entryExtensionPart:     ''
         numDotsDirectoryParts:  1:
@@ -181,7 +181,7 @@ The primary choice for installation is by use of **CMake**.
         locationPart:           '../../../libpath/install/example/'
         rootPart:               ''
         directoryPart:          '../../../libpath/install/example/'
-        entryPart:              'parse_path.o'
+        entryNamePart:          'parse_path.o'
         entryStemPart:          'parse_path'
         entryExtensionPart:     '.o'
         numDotsDirectoryParts:  3:

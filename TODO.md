@@ -11,7 +11,7 @@
 
 * [ ] Standardise names of `libpath_PathDescriptor_t` fields, as per [**libpath-concepts**](https://github.com/synesissoftware/libpath-concepts):
   * [ ] `#path` -> `#fullPath`;
-  * [ ] `#entryPart` -> `#entryNamePart`;
+  * [x] `#entryPart` -> `#entryNamePart`;
 * [ ] Separate out `libpath_PathDescriptor_t#firstBadCharOffset`;
 
 

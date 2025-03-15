@@ -150,7 +150,7 @@ parse_and_display_results(
 #endif /* LIBPATH_OS_IS_WINDOWS */
         ,   0, "", int(result.rootPart.len), result.rootPart.ptr
         ,   int(result.rootPart.len), blanks, int(result.directoryPart.len), result.directoryPart.ptr
-        ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryPart.len), result.entryPart.ptr
+        ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryNamePart.len), result.entryNamePart.ptr
         ,   int(result.rootPart.len + result.directoryPart.len), blanks, int(result.entryStemPart.len), result.entryStemPart.ptr
         ,   int(result.rootPart.len + result.directoryPart.len + result.entryStemPart.len), blanks, int(result.entryExtensionPart.len), result.entryExtensionPart.ptr
         ,   static_cast<unsigned long>(result.numDotsDirectoryParts)

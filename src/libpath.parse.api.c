@@ -4,11 +4,11 @@
  * Purpose: Main implementation file for libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 15th March 2025
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -447,11 +447,11 @@ libpath_Parse_ParsePathFromStringSlice_impl_3_(
 
     // 5. entry
 
-    result->entryPart.ptr = startOfEntry;
-    result->entryPart.len = end - startOfEntry;
+    result->entryNamePart.ptr = startOfEntry;
+    result->entryNamePart.len = end - startOfEntry;
 
-    result->entryStemPart.ptr = result->entryPart.ptr;
-    result->entryStemPart.len = endOfEntryStem - result->entryPart.ptr;
+    result->entryStemPart.ptr = result->entryNamePart.ptr;
+    result->entryStemPart.len = endOfEntryStem - result->entryNamePart.ptr;
 
     result->entryExtensionPart.ptr = startOfEntryExtension;
     result->entryExtensionPart.len = end - startOfEntryExtension;

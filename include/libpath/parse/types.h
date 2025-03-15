@@ -81,8 +81,13 @@ struct libpath_PathDescriptor_t
     libpath_size_t                  numDirectoryParts;
     /** @brief The number of directory parts that are dots (i.e. `"."` or `".."`). */
     libpath_size_t                  numDotsDirectoryParts;
-    /** @brief The entry part of the path. */
-    libpath_StringSlice_t           entryPart;
+    /** @brief The entry name part of the path.
+     *
+     * @note This corresponds to the concept of "base-name", with the caveat
+     *  that it will never be obtained non-empty from an input path that
+     *  bears a trailing path-name separator.
+     */
+    libpath_StringSlice_t           entryNamePart;
     /** @brief The entry stem part of the path. */
     libpath_StringSlice_t           entryStemPart;
     /** @brief The entry extension part of the path. */
