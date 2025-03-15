@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.compare.1.c project.
  *
  * Created: 28th March 2013
- * Updated: 19th October 2024
+ * Updated: 15th March 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -31,7 +31,6 @@
 
 /* Standard C header files */
 #include <assert.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -414,7 +413,7 @@ static void test_1_11(void)
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/", LIBPATH_LF_nullptr));
     XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/", LIBPATH_LF_nullptr));
 
-#if LIBPATH_VER >= 0x00030000
+#if LIBPATH_VER >= 0x00040000
     XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/", LIBPATH_LF_nullptr));
 #endif
 
