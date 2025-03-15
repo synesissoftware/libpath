@@ -13,6 +13,8 @@
   * [x] `#path` -> `#fullPath`;
   * [x] `#entryPart` -> `#entryNamePart`;
 * [x] Separate out `libpath_PathDescriptor_t#firstBadCharOffset`;
+* [ ] Remove Visual C++ project/solution files;
+* [ ] Remove implicit-link implementation files;
 
 
 ## Performance improvements
