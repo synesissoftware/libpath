@@ -14,7 +14,7 @@
   * [x] `#entryPart` -> `#entryNamePart`;
 * [x] Separate out `libpath_PathDescriptor_t#firstBadCharOffset`;
 * [x] Remove Visual C++ project/solution files;
-* [ ] Remove implicit-link implementation files;
+* [x] Remove implicit-link implementation files;
 
 
 ## Performance improvements
