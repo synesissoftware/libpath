@@ -4,11 +4,11 @@
  * Purpose: libpath Parsing API.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 15th March 2025
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -104,9 +104,10 @@ LIBPATH_API
 libpath_Parse_ParsePathFromStringSlice(
     libpath_StringSlice_t const*    path
 ,   libpath_sint32_t                flags
-,   libpath_ParseResult_t*          result /* = NULL */
+,   libpath_ParseResult_t*          result                  /* = NULL */
 ,   libpath_size_t                  numDirectoryPartSlices
-,   libpath_StringSlice_t*          directoryPartSlices /* = NULL */
+,   libpath_StringSlice_t*          directoryPartSlices     /* = NULL */
+,   libpath_size_t*                 firstBadCharOffset      /* = NULL */
 );
 
 LIBPATH_API
@@ -114,18 +115,20 @@ libpath_Parse_ParsePathFromStringPtrAndLen(
     libpath_char_t const*       path
 ,   libpath_size_t              pathLen
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result /* = NULL */
+,   libpath_ParseResult_t*      result                      /* = NULL */
 ,   libpath_size_t              numDirectoryPartSlices
-,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
+,   libpath_StringSlice_t*      directoryPartSlices         /* = NULL */
+,   libpath_size_t*             firstBadCharOffset          /* = NULL */
 );
 
 LIBPATH_API
 libpath_Parse_ParsePathFromCStyleString(
     libpath_char_t const*       path
 ,   libpath_sint32_t            flags
-,   libpath_ParseResult_t*      result /* = NULL */
+,   libpath_ParseResult_t*      result                      /* = NULL */
 ,   libpath_size_t              numDirectoryPartSlices
-,   libpath_StringSlice_t*      directoryPartSlices /* = NULL */
+,   libpath_StringSlice_t*      directoryPartSlices         /* = NULL */
+,   libpath_size_t*             firstBadCharOffset          /* = NULL */
 );
 
 

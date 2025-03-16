@@ -4,11 +4,11 @@
  * Purpose: libpath Parsing API types.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 15th March 2025
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -70,7 +70,7 @@ struct libpath_PathDescriptor_t
     /** @brief The input string, unchanged. */
     libpath_StringSlice_t           input;
     /** @brief The full path. */
-    libpath_StringSlice_t           path;
+    libpath_StringSlice_t           fullPath;
     /** @brief The location part of the path. */
     libpath_StringSlice_t           locationPart;
     /** @brief The root part of the path. */
@@ -81,8 +81,13 @@ struct libpath_PathDescriptor_t
     libpath_size_t                  numDirectoryParts;
     /** @brief The number of directory parts that are dots (i.e. `"."` or `".."`). */
     libpath_size_t                  numDotsDirectoryParts;
-    /** @brief The entry part of the path. */
-    libpath_StringSlice_t           entryPart;
+    /** @brief The entry name part of the path.
+     *
+     * @note This corresponds to the concept of "base-name", with the caveat
+     *  that it will never be obtained non-empty from an input path that
+     *  bears a trailing path-name separator.
+     */
+    libpath_StringSlice_t           entryNamePart;
     /** @brief The entry stem part of the path. */
     libpath_StringSlice_t           entryStemPart;
     /** @brief The entry extension part of the path. */
@@ -107,8 +112,6 @@ struct libpath_PathDescriptor_t
 #ifdef LIBPATH_OS_IS_WINDOWS
     libpath_StringSlice_t           volumePart;
 #endif /* LIBPATH_OS_IS_WINDOWS */
-
-    libpath_size_t                  firstBadCharOffset;
 };
 
 #ifndef __cplusplus

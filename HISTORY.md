@@ -1,4 +1,10 @@
-# shwild - History
+# libpath - History
+
+15th March 2025 - 0.3.0-alpha1 released
+---------------------------------------
+
+ * changed API;
+
 
 23rd February 2025 - 0.2.0-alpha5 released
 ------------------------------------------

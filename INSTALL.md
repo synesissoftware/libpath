@@ -74,12 +74,14 @@ The primary choice for installation is by use of **CMake**.
         char const* const         program_name = argv[0];
         char const* const         path = (argc > 1) ? argv[1] : program_name;
         libpath_PathDescriptor_t  result;
+        libpath_size_t            firstBadCharOffset;
         LIBPATH_RC const          rc  = libpath_Parse_ParsePathFromCStyleString(
                                           path
                                         , 0
                                         , &result
                                         , 0
                                         , NULL
+                                        , &firstBadCharOffset
                                         );
 
         if (LIBPATH_RC_SUCCESS(rc))
@@ -98,18 +100,18 @@ The primary choice for installation is by use of **CMake**.
               "\tentryPart:            \t'%.*s'\n"
               "\tentryStemPart:        \t'%.*s'\n"
               "\tentryExtensionPart:   \t'%.*s'\n"
-              "\tnumDotsDirectoryParts:\t%lu:\n"
-              "\tnumDirectoryParts:    \t%lu:\n"
+              "\tnumDotsDirectoryParts:\t%zu:\n"
+              "\tnumDirectoryParts:    \t%zu:\n"
           ,   path
           ,   (int)(result.input.len), result.input.ptr
-          ,   (int)(result.path.len), result.path.ptr
+          ,   (int)(result.fullPath.len), result.fullPath.ptr
           ,   (int)(result.locationPart.len), result.locationPart.ptr
       #ifdef LIBPATH_OS_IS_WINDOWS
           ,   (int)(result.volumePart.len), result.volumePart.ptr
       #endif /* LIBPATH_OS_IS_WINDOWS */
           ,   (int)(result.rootPart.len), result.rootPart.ptr
           ,   (int)(result.directoryPart.len), result.directoryPart.ptr
-          ,   (int)(result.entryPart.len), result.entryPart.ptr
+          ,   (int)(result.entryNamePart.len), result.entryNamePart.ptr
           ,   (int)(result.entryStemPart.len), result.entryStemPart.ptr
           ,   (int)(result.entryExtensionPart.len), result.entryExtensionPart.ptr
           ,   result.numDotsDirectoryParts
@@ -122,10 +124,10 @@ The primary choice for installation is by use of **CMake**.
         {
           fprintf(
               stdout
-          ,   "%s: failed to parse '%s', at offset %lu: %.*s\n"
+          ,   "%s: failed to parse '%s', at offset %zu: %.*s\n"
           ,   program_name
           ,   path
-          ,   result.firstBadCharOffset
+          ,   firstBadCharOffset
           ,   (int)libpath_rc_getStringLen(rc), libpath_rc_getStringPtr(rc)
           );
 
@@ -164,7 +166,7 @@ The primary choice for installation is by use of **CMake**.
         locationPart:           './'
         rootPart:               ''
         directoryPart:          './'
-        entryPart:              'parse_path'
+        entryNamePart:          'parse_path'
         entryStemPart:          'parse_path'
         entryExtensionPart:     ''
         numDotsDirectoryParts:  1:
@@ -181,7 +183,7 @@ The primary choice for installation is by use of **CMake**.
         locationPart:           '../../../libpath/install/example/'
         rootPart:               ''
         directoryPart:          '../../../libpath/install/example/'
-        entryPart:              'parse_path.o'
+        entryNamePart:          'parse_path.o'
         entryStemPart:          'parse_path'
         entryExtensionPart:     '.o'
         numDotsDirectoryParts:  3:
