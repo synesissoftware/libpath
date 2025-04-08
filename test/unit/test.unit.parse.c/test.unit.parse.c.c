@@ -4,7 +4,7 @@
  * Purpose: Implementation file for the test.unit.parse.c project.
  *
  * Created: 9th November 2012
- * Updated: 15th March 2025
+ * Updated: 8th April 2025
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -1708,7 +1708,7 @@ static void test_Windows_bad_characters(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, &firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(0u, firstBadCharOffset);
 
 
     rc = libpath_Parse_ParsePathFromCStyleString("C:\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
@@ -1721,28 +1721,28 @@ static void test_Windows_bad_characters(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, &firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(2u, firstBadCharOffset);
 
 
     rc = libpath_Parse_ParsePathFromCStyleString("C\\d:ir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, &firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(3u, firstBadCharOffset);
 
 
     rc = libpath_Parse_ParsePathFromCStyleString("C\\di:r\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, &firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(4u, firstBadCharOffset);
 
 
     rc = libpath_Parse_ParsePathFromCStyleString("C\\dir:\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, &firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(5u, firstBadCharOffset);
 
 
 
@@ -1750,7 +1750,7 @@ static void test_Windows_bad_characters(void)
 
     XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
     XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, &firstBadCharOffset);
+    XTESTS_TEST_INTEGER_EQUAL(1u, firstBadCharOffset);
 #endif
 }
 
@@ -2109,6 +2109,7 @@ static void test_Windows_UNC_share_with_charwise_steps(void)
     { libpath_size_t i; for (i = 0; i <= cch; ++i)
     {
         libpath_ParseResult_t   r;
+        libpath_size_t          firstBadCharOffset;
         LIBPATH_RC const        rc = libpath_Parse_ParsePathFromStringPtrAndLen(input, i, 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
         if (1 == i ||
