@@ -15,10 +15,8 @@ while [[ $# -gt 0 ]]; do
   case $1 in
     --help)
 
+      [ -f "$Dir/.sis/script_info_lines.txt" ] && cat "$Dir/.sis/script_info_lines.txt"
       cat << EOF
-libpath is a path parsing library (for C and C++)
-Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
-Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
 Executes CMake-generated artefacts to clean project
 
 $ScriptPath [ ... flags/options ... ]
