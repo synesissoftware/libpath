@@ -1,4 +1,4 @@
-# libpath - News
+# libpath - News <!-- omit in toc -->
 
 | Date                  | News Item                                 |
 | --------------------- | ----------------------------------------- |
