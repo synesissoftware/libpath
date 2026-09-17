@@ -1,4 +1,4 @@
-# libpath - History
+# libpath - History <!-- omit in toc -->
 
 15th March 2025 - 0.3.0-alpha1 released
 ---------------------------------------
