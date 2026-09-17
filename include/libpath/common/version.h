@@ -4,11 +4,11 @@
  * Purpose: Portability discrimination for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 14th March 2025
+ * Updated: 17th September 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
   * All rights reserved.
  *
@@ -105,7 +105,9 @@
         |   (   LIBPATH_VER_ALPHABETA   <<  0   ) \
     )
 
-#define LIBPATH_VER_REVISION            LIBPATH_VER_PATCH
+#ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
+# define LIBPATH_VER_REVISION                               LIBPATH_VER_PATCH
+#endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
 
 
 /* ////////////////////////////////////////////////////////////////////// */
