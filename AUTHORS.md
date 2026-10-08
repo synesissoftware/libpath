@@ -1,4 +1,4 @@
-# libpath - AUTHORS <!-- omit in toc -->
+# libpath - Authors <!-- omit in toc -->
 
 
 
