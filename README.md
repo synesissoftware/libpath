@@ -3,6 +3,14 @@
 Path parsing library (for C and C++)
 
 
+![C](https://img.shields.io/badge/C-00599C?style=flat&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat&logo=c%2B%2B&logoColor=white)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![GitHub release](https://img.shields.io/github/v/release/synesissoftware/libpath.svg)](https://github.com/synesissoftware/libpath/releases/latest)
+[![Last Commit](https://img.shields.io/github/last-commit/synesissoftware/libpath)](https://github.com/synesissoftware/libpath/commits/master)
+[![CI](https://github.com/synesissoftware/libpath/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/libpath/actions/workflows/ci.yml)
+
+
 ## Table of Contents <!-- omit in toc -->
 
 - [Introduction](#introduction)

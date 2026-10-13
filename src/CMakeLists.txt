@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for libpath core library
 #
 # Created:  ...
-# Updated:  18th October 2024
+# Updated:  13th October 2026
 #
 # ######################################################################## #
 
@@ -71,10 +71,8 @@ target_include_directories(core
 		$<INSTALL_INTERFACE:include>
 )
 
-target_link_libraries(core
-	PRIVATE
-		$<$<STREQUAL:${STLSOFT_INCLUDE_DIR},>:STLSoft::STLSoft>
-)
+# core is standalone: no PUBLIC/PRIVATE link to STLSoft or xTests.
+# STLSoft and xTests are test-only (see top-level CMakeLists.txt).
 
 target_compile_options(core
 	PRIVATE
