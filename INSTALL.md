@@ -46,7 +46,7 @@ The primary choice for installation is by use of **CMake**.
    not need this step.)
 
 4. As a check, execute the built test program files via the
-   **build_run_all_unit_tests.sh** script, as in:
+   **run_all_unit_tests.sh** script, as in:
 
    ```bash
    $ ./run_all_unit_tests.sh
@@ -59,7 +59,7 @@ The primary choice for installation is by use of **CMake**.
    $ sudo cmake --install ${SIS_CMAKE_BUILD_DIR:-./_build} --config Release
    ```
 
-7. Then to use the library, it is a simple matter as follows:
+6. Then to use the library, it is a simple matter as follows:
 
    1. Assuming a simple program that will verify the installation:
 

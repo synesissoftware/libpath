@@ -76,8 +76,8 @@ If you'd like to help out with the project, please raise an issue via [GitHub Pa
 
 In order to run the test programs, **libpath** has the following development dependencies:
 
-* [STLSoft 1.11](http://github.com/synesissoftware/STLSoft-1.11/);
-* [xTests](http://github.com/synesissoftware/xTests/);
+* [STLSoft](https://github.com/synesissoftware/STLSoft) **1.11** or later;
+* [xTests](https://github.com/synesissoftware/xTests) **0.26** or later;
 
 
 ### Related projects

@@ -43,7 +43,7 @@ version(
 }
 
 
-int main(int /* argc */, char* /* argv */[])
+int main(int /*argc*/, char* /*argv*/[])
 {
     {
         unsigned const libver = LIBPATH_VER;

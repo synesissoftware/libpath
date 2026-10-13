@@ -4,7 +4,7 @@
  * Purpose: Unit-test the library version macros.
  *
  * Created: 8th February 2024
- * Updated: 19th October 2024
+ * Updated: 14th October 2026
  *
  * ////////////////////////////////////////////////////////////////////// */
 
@@ -71,15 +71,17 @@ int main(int argc, char* argv[])
 
 static void test_version(void)
 {
-    unsigned const  major   =   (LIBPATH_VER >> 24) & 0xff;
-    unsigned const  minor   =   (LIBPATH_VER >> 16) & 0xff;
-    unsigned const  patch   =   (LIBPATH_VER >>  8) & 0xff;
-    unsigned const  ab      =   (LIBPATH_VER >>  0) & 0xff;
+    unsigned const  major       =   (LIBPATH_VER >> 24) & 0xff;
+    unsigned const  minor       =   (LIBPATH_VER >> 16) & 0xff;
+    unsigned const  patch       =   (LIBPATH_VER >>  8) & 0xff;
+    unsigned const  relstatus   =   (LIBPATH_VER >>  0) & 0xff;
 
     XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_MAJOR, major);
     XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_MINOR, minor);
+    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_PATCH, patch);
     XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_REVISION, patch);
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_ALPHABETA, ab);
+    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_RELSTATUS, relstatus);
+    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_ALPHABETA, relstatus);
 }
 
 

@@ -4,13 +4,13 @@
  * Purpose: Portability discrimination for libpath library.
  *
  * Created: 9th November 2012
- * Updated: 17th September 2026
+ * Updated: 14th October 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
  * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
-  * All rights reserved.
+ * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -73,39 +73,41 @@
  * changes.
  */
 
-/** @def LIBPATH_VER_ALPHABETA
- * The alpha-beta number of libpath
+/** @def LIBPATH_VER_RELSTATUS
+ * The release-status number of libpath
  *
- * This number indicates the alpha/beta/release-candidate nature of the
- * released version of the library.
+ * This number indicates the pre-alpha / alpha / beta / release-candidate /
+ * full-release nature of the released version of the library. A value of
+ * 0xFF means a full release.
  */
 
-/** @def LIBPATH
+/** @def LIBPATH_VER
  * The current composite version number of libpath
  *
- * In addition to the individual version symbols - LIBPATH_MAJOR,
- * LIBPATH_MINOR and LIBPATH_PATCH - a composite symbol
- * LIBPATH is defined, where:
+ * In addition to the individual version symbols - LIBPATH_VER_MAJOR,
+ * LIBPATH_VER_MINOR, LIBPATH_VER_PATCH, and LIBPATH_VER_RELSTATUS - a
+ * composite symbol LIBPATH_VER is defined, where:
  *  - bits 24-31: the major version
  *  - bits 16-23: the minor version
  *  - bits 8-15: the patch version
- *  - bits 0-7: the alpha-beta number; if not alpha/beta, it is 0xFF
+ *  - bits 0-7: the release status; if a full release, it is 0xFF
  */
 
 #define LIBPATH_VER_MAJOR               0
 #define LIBPATH_VER_MINOR               3
 #define LIBPATH_VER_PATCH               0
-#define LIBPATH_VER_ALPHABETA           41
+#define LIBPATH_VER_RELSTATUS           0x81
 
 #define LIBPATH_VER \
     (0\
         |   (   LIBPATH_VER_MAJOR       << 24   ) \
         |   (   LIBPATH_VER_MINOR       << 16   ) \
         |   (   LIBPATH_VER_PATCH       <<  8   ) \
-        |   (   LIBPATH_VER_ALPHABETA   <<  0   ) \
+        |   (   LIBPATH_VER_RELSTATUS   <<  0   ) \
     )
 
 #ifndef LIBPATH_DOCUMENTATION_SKIP_SECTION
+# define LIBPATH_VER_ALPHABETA                              LIBPATH_VER_RELSTATUS
 # define LIBPATH_VER_REVISION                               LIBPATH_VER_PATCH
 #endif /* !LIBPATH_DOCUMENTATION_SKIP_SECTION */
 
