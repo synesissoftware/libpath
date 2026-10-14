@@ -24,7 +24,7 @@
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -167,25 +167,25 @@ static void test_compare_filenames(void)
 {
     // Just entry parts
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("file.ext", "file.ext"));
+    TEST_INT_EQ(0,   compare_paths("file.ext", "file.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("fil1.ext", "fil2.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("fil2.ext", "fil1.ext"));
+    TEST_INT_LT(0,    compare_paths("fil1.ext", "fil2.ext"));
+    TEST_INT_GT(0, compare_paths("fil2.ext", "fil1.ext"));
 
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("...",  "..."));
+    TEST_INT_EQ(0,   compare_paths("...",  "..."));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("...",  "...."));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("....", "..."));
+    TEST_INT_LT(0,    compare_paths("...",  "...."));
+    TEST_INT_GT(0, compare_paths("....", "..."));
 
 #ifdef LIBPATH_OS_IS_UNIX
 #endif
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("file.ext", "FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths("file.ext", "FILE.EXT"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("fil1.ext", "fil2.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("FIL2.EXT", "FIL1.EXT"));
+    TEST_INT_LT(0,    compare_paths("fil1.ext", "fil2.ext"));
+    TEST_INT_GT(0, compare_paths("FIL2.EXT", "FIL1.EXT"));
 #endif
 }
 
@@ -193,28 +193,28 @@ static void test_compare_slash_rooted_filenames(void)
 {
     // Just rooted entry parts
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/file.ext", "/file.ext"));
+    TEST_INT_EQ(0,   compare_paths("/file.ext", "/file.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/fil1.ext", "/fil2.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/fil2.ext", "/fil1.ext"));
+    TEST_INT_LT(0,    compare_paths("/fil1.ext", "/fil2.ext"));
+    TEST_INT_GT(0, compare_paths("/fil2.ext", "/fil1.ext"));
 
 #ifdef LIBPATH_OS_IS_UNIX
 #endif
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/file.ext",  "/FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\file.ext",  "/FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/file.ext", "\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\file.ext", "\\FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths( "/file.ext",  "/FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths("\\file.ext",  "/FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths( "/file.ext", "\\FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths("\\file.ext", "\\FILE.EXT"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/fil1.ext",  "/FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "/FIL2.EXT",  "/fil1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\fil1.ext",  "/FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\FIL2.EXT",  "/fil1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/fil1.ext", "\\FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "/FIL2.EXT", "\\fil1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\fil1.ext", "\\FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\FIL2.EXT", "\\fil1.ext"));
+    TEST_INT_LT(0,    compare_paths( "/fil1.ext",  "/FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths( "/FIL2.EXT",  "/fil1.ext"));
+    TEST_INT_LT(0,    compare_paths("\\fil1.ext",  "/FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths("\\FIL2.EXT",  "/fil1.ext"));
+    TEST_INT_LT(0,    compare_paths( "/fil1.ext", "\\FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths( "/FIL2.EXT", "\\fil1.ext"));
+    TEST_INT_LT(0,    compare_paths("\\fil1.ext", "\\FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths("\\FIL2.EXT", "\\fil1.ext"));
 #endif
 }
 
@@ -226,35 +226,35 @@ static void test_compare_Windows_drive_rooted_filenames(void)
 
     // case of entry-part
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "C:/file.ext",  "C:/FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:\\file.ext",  "C:/FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "C:/file.ext", "C:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:\\file.ext", "C:\\FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths( "C:/file.ext",  "C:/FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths("C:\\file.ext",  "C:/FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths( "C:/file.ext", "C:\\FILE.EXT"));
+    TEST_INT_EQ(0,   compare_paths("C:\\file.ext", "C:\\FILE.EXT"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "C:/fil1.ext",  "C:/FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "C:/FIL2.EXT",  "C:/fil1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\fil1.ext",  "C:/FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\FIL2.EXT",  "C:/fil1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "C:/fil1.ext", "C:\\FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "C:/FIL2.EXT", "C:\\fil1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\fil1.ext", "C:\\FIL2.EXT"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\FIL2.EXT", "C:\\fil1.ext"));
+    TEST_INT_LT(0,    compare_paths( "C:/fil1.ext",  "C:/FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths( "C:/FIL2.EXT",  "C:/fil1.ext"));
+    TEST_INT_LT(0,    compare_paths("C:\\fil1.ext",  "C:/FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths("C:\\FIL2.EXT",  "C:/fil1.ext"));
+    TEST_INT_LT(0,    compare_paths( "C:/fil1.ext", "C:\\FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths( "C:/FIL2.EXT", "C:\\fil1.ext"));
+    TEST_INT_LT(0,    compare_paths("C:\\fil1.ext", "C:\\FIL2.EXT"));
+    TEST_INT_GT(0, compare_paths("C:\\FIL2.EXT", "C:\\fil1.ext"));
 
 
     // case of volume part
 
-    XTESTS_TEST_INTEGER_EQUAL(0,  compare_paths("C:\\file.ext", "C:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,  compare_paths("C:\\file.ext", "c:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,  compare_paths("c:\\file.ext", "C:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_EQUAL(0,  compare_paths("c:\\file.ext", "c:\\FILE.EXT"));
+    TEST_INT_EQ(0,  compare_paths("C:\\file.ext", "C:\\FILE.EXT"));
+    TEST_INT_EQ(0,  compare_paths("C:\\file.ext", "c:\\FILE.EXT"));
+    TEST_INT_EQ(0,  compare_paths("c:\\file.ext", "C:\\FILE.EXT"));
+    TEST_INT_EQ(0,  compare_paths("c:\\file.ext", "c:\\FILE.EXT"));
 
 
     // different volumes
 
-    XTESTS_TEST_INTEGER_LESS(0,   compare_paths("C:\\file.ext", "D:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_LESS(0,   compare_paths("C:\\file.ext", "d:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_LESS(0,   compare_paths("c:\\file.ext", "D:\\FILE.EXT"));
-    XTESTS_TEST_INTEGER_LESS(0,   compare_paths("c:\\file.ext", "d:\\FILE.EXT"));
+    TEST_INT_LT(0,   compare_paths("C:\\file.ext", "D:\\FILE.EXT"));
+    TEST_INT_LT(0,   compare_paths("C:\\file.ext", "d:\\FILE.EXT"));
+    TEST_INT_LT(0,   compare_paths("c:\\file.ext", "D:\\FILE.EXT"));
+    TEST_INT_LT(0,   compare_paths("c:\\file.ext", "d:\\FILE.EXT"));
 
 #endif
 }
@@ -263,32 +263,32 @@ static void test_compare_relative_directory(void)
 {
     // Just directory parts
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/", "dir1/"));
+    TEST_INT_EQ(0,   compare_paths("dir1/", "dir1/"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/", "dir2/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir2/", "dir1/"));
+    TEST_INT_LT(0,    compare_paths("dir1/", "dir2/"));
+    TEST_INT_GT(0, compare_paths("dir2/", "dir1/"));
 
 #ifdef LIBPATH_OS_IS_UNIX
 #endif
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/",  "DIR1/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("DIR1/",  "dir1/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("DIR1/",  "DIR1/"));
+    TEST_INT_EQ(0,   compare_paths("dir1/",  "DIR1/"));
+    TEST_INT_EQ(0,   compare_paths("DIR1/",  "dir1/"));
+    TEST_INT_EQ(0,   compare_paths("DIR1/",  "DIR1/"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/",  "dir1/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/",  "dir1\\"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1\\", "dir1/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1\\", "dir1\\"));
+    TEST_INT_EQ(0,   compare_paths("dir1/",  "dir1/"));
+    TEST_INT_EQ(0,   compare_paths("dir1/",  "dir1\\"));
+    TEST_INT_EQ(0,   compare_paths("dir1\\", "dir1/"));
+    TEST_INT_EQ(0,   compare_paths("dir1\\", "dir1\\"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/",  "DIR2/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("DIR2/",  "dir1/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/",  "DIR2\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("DIR2/",  "dir1\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\", "DIR2/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("DIR2\\", "dir1/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\", "DIR2\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("DIR2\\", "dir1\\"));
+    TEST_INT_LT(0,    compare_paths("dir1/",  "DIR2/"));
+    TEST_INT_GT(0, compare_paths("DIR2/",  "dir1/"));
+    TEST_INT_LT(0,    compare_paths("dir1/",  "DIR2\\"));
+    TEST_INT_GT(0, compare_paths("DIR2/",  "dir1\\"));
+    TEST_INT_LT(0,    compare_paths("dir1\\", "DIR2/"));
+    TEST_INT_GT(0, compare_paths("DIR2\\", "dir1/"));
+    TEST_INT_LT(0,    compare_paths("dir1\\", "DIR2\\"));
+    TEST_INT_GT(0, compare_paths("DIR2\\", "dir1\\"));
 #endif
 }
 
@@ -296,21 +296,21 @@ static void test_compare_dots_directory(void)
 {
     // Just single dots dir - 1-dot
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".",  "."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".",  "./"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./", "."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./", "./"));
+    TEST_INT_EQ(0,   compare_paths(".",  "."));
+    TEST_INT_EQ(0,   compare_paths(".",  "./"));
+    TEST_INT_EQ(0,   compare_paths("./", "."));
+    TEST_INT_EQ(0,   compare_paths("./", "./"));
 
 #ifdef LIBPATH_OS_IS_UNIX
 #endif
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".",   "."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".",   ".\\"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".\\", "."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./",  ".\\"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".\\", "./"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".\\", ".\\"));
+    TEST_INT_EQ(0,   compare_paths(".",   "."));
+    TEST_INT_EQ(0,   compare_paths(".",   ".\\"));
+    TEST_INT_EQ(0,   compare_paths(".\\", "."));
+    TEST_INT_EQ(0,   compare_paths("./",  ".\\"));
+    TEST_INT_EQ(0,   compare_paths(".\\", "./"));
+    TEST_INT_EQ(0,   compare_paths(".\\", ".\\"));
 #endif
 }
 
@@ -318,21 +318,21 @@ static void test_compare_2dotsdir(void)
 {
     // Just single dots dir - 2-dot
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..",  ".."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..",  "../"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("../", ".."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("../", "../"));
+    TEST_INT_EQ(0,   compare_paths("..",  ".."));
+    TEST_INT_EQ(0,   compare_paths("..",  "../"));
+    TEST_INT_EQ(0,   compare_paths("../", ".."));
+    TEST_INT_EQ(0,   compare_paths("../", "../"));
 
 #ifdef LIBPATH_OS_IS_UNIX
 #endif
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..",   ".."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..",   "..\\"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..\\", ".."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("../",  "..\\"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..\\", "../"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..\\", "..\\"));
+    TEST_INT_EQ(0,   compare_paths("..",   ".."));
+    TEST_INT_EQ(0,   compare_paths("..",   "..\\"));
+    TEST_INT_EQ(0,   compare_paths("..\\", ".."));
+    TEST_INT_EQ(0,   compare_paths("../",  "..\\"));
+    TEST_INT_EQ(0,   compare_paths("..\\", "../"));
+    TEST_INT_EQ(0,   compare_paths("..\\", "..\\"));
 #endif
 }
 
@@ -340,30 +340,30 @@ static void test_compare_mixed_dots_directory(void)
 {
     // mixed dots entities
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths(".",  "."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("..",  ".."));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("...",  "..."));
+    TEST_INT_EQ(0,   compare_paths(".",  "."));
+    TEST_INT_EQ(0,   compare_paths("..",  ".."));
+    TEST_INT_EQ(0,   compare_paths("...",  "..."));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths(".",  ".."));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("..",  "...")); // '...' is a file; '..' is a directory
+    TEST_INT_LT(0,    compare_paths(".",  ".."));
+    TEST_INT_GT(0, compare_paths("..",  "...")); // '...' is a file; '..' is a directory
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("...",  "...."));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("....",  "....."));
+    TEST_INT_LT(0,    compare_paths("...",  "...."));
+    TEST_INT_LT(0,    compare_paths("....",  "....."));
 }
 
 static void test_compare_slash(void)
 {
     // root directory
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/", "/"));
+    TEST_INT_EQ(0,   compare_paths("/", "/"));
 
 #ifdef LIBPATH_OS_IS_UNIX
 #endif
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/",  "\\"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\", "\\"));
+    TEST_INT_EQ(0,   compare_paths("/",  "\\"));
+    TEST_INT_EQ(0,   compare_paths("\\", "/"));
+    TEST_INT_EQ(0,   compare_paths("\\", "\\"));
 #endif
 }
 
@@ -371,37 +371,37 @@ static void test_compare_2_dirs_and_filename(void)
 {
     // more complex relative paths
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/file.ext", "dir1/dir3/file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1/dir3/file.ext", "dir1/dir2/file.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/file.ext", "dir1/dir3/file.ext"));
+    TEST_INT_GT(0, compare_paths("dir1/dir3/file.ext", "dir1/dir2/file.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/file.ext", "dir1/dir21/file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1/dir21/file.ext", "dir1/dir2/file.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/file.ext", "dir1/dir21/file.ext"));
+    TEST_INT_GT(0, compare_paths("dir1/dir21/file.ext", "dir1/dir2/file.ext"));
 }
 
 static void test_compare_slash_rooted_filename(void)
 {
     // absolute vs relative - no cwd
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("file.ext", "/file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/file.ext", "file.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file.ext", "/dir1/file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/dir1/file.ext", "dir1/file.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/file.ext", "/dir1/dir2/file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/dir1/dir2/file.ext", "dir1/dir2/file.ext"));
+    TEST_INT_LT(0,    compare_paths("file.ext", "/file.ext"));
+    TEST_INT_GT(0, compare_paths("/file.ext", "file.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file.ext", "/dir1/file.ext"));
+    TEST_INT_GT(0, compare_paths("/dir1/file.ext", "dir1/file.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/file.ext", "/dir1/dir2/file.ext"));
+    TEST_INT_GT(0, compare_paths("/dir1/dir2/file.ext", "dir1/dir2/file.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/", "abcdefghijklmnopqrstuvwxyz.ext"));
+    TEST_INT_LT(0,    compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "/"));
+    TEST_INT_GT(0, compare_paths("/", "abcdefghijklmnopqrstuvwxyz.ext"));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("file.ext", "C:\\file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\file.ext", "file.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\file.ext", "C:\\dir1\\file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\dir1\\file.ext", "dir1\\file.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\dir2\\file.ext", "C:\\dir1\\dir2\\file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\dir1\\dir2\\file.ext", "dir1\\dir2\\file.ext"));
+    TEST_INT_LT(0,    compare_paths("file.ext", "C:\\file.ext"));
+    TEST_INT_GT(0, compare_paths("C:\\file.ext", "file.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1\\file.ext", "C:\\dir1\\file.ext"));
+    TEST_INT_GT(0, compare_paths("C:\\dir1\\file.ext", "dir1\\file.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1\\dir2\\file.ext", "C:\\dir1\\dir2\\file.ext"));
+    TEST_INT_GT(0, compare_paths("C:\\dir1\\dir2\\file.ext", "dir1\\dir2\\file.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "X:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("X:\\", "abcdefghijklmnopqrstuvwxyz.ext"));
+    TEST_INT_LT(0,    compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "X:\\"));
+    TEST_INT_GT(0, compare_paths("X:\\", "abcdefghijklmnopqrstuvwxyz.ext"));
 #endif
 }
 
@@ -411,15 +411,15 @@ static void test_Windows_mixed_rooted_paths(void)
 
 #ifdef LIBPATH_OS_IS_WINDOWS
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\file.ext", "C:\\file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\file.ext", "\\file.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\dir1\\file.ext", "C:\\dir1\\file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\dir1\\file.ext", "\\dir1\\file.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\dir1\\dir2\\file.ext", "C:\\dir1\\dir2\\file.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\dir1\\dir2\\file.ext", "\\dir1\\dir2\\file.ext"));
+    TEST_INT_LT(0,    compare_paths("\\file.ext", "C:\\file.ext"));
+    TEST_INT_GT(0, compare_paths("C:\\file.ext", "\\file.ext"));
+    TEST_INT_LT(0,    compare_paths("\\dir1\\file.ext", "C:\\dir1\\file.ext"));
+    TEST_INT_GT(0, compare_paths("C:\\dir1\\file.ext", "\\dir1\\file.ext"));
+    TEST_INT_LT(0,    compare_paths("\\dir1\\dir2\\file.ext", "C:\\dir1\\dir2\\file.ext"));
+    TEST_INT_GT(0, compare_paths("C:\\dir1\\dir2\\file.ext", "\\dir1\\dir2\\file.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\abcdefghijklmnopqrstuvwxyz.ext", "X:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("X:\\", "\\abcdefghijklmnopqrstuvwxyz.ext"));
+    TEST_INT_LT(0,    compare_paths("\\abcdefghijklmnopqrstuvwxyz.ext", "X:\\"));
+    TEST_INT_GT(0, compare_paths("X:\\", "\\abcdefghijklmnopqrstuvwxyz.ext"));
 #endif
 }
 
@@ -427,61 +427,61 @@ static void test_mixed_with_root_pwd(void)
 {
     // absolute vs relative - cwd
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/file1.ext",  "file1.ext", "/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths( "/file1.ext",  "file1.ext", "/"));
+    TEST_INT_LT(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "/dir1/dir2/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "file2.ext", "/dir1/dir2/"));
+    TEST_INT_EQ(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "/dir1/dir2/"));
+    TEST_INT_LT(0,    compare_paths( "/dir1/dir2/file1.ext",  "file2.ext", "/dir1/dir2/"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/"));
+    TEST_INT_EQ(0,   compare_paths( "/dir1/dir2/file1.ext",  "dir2/file1.ext", "/dir1/"));
+    TEST_INT_LT(0,    compare_paths( "/dir1/dir2/file1.ext",  "dir2/file2.ext", "/dir1/"));
 
 #if LIBPATH_VER >= 0x00040000
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/"));
+    TEST_INT_EQ(0,   compare_paths( "/dir1/dir2/file1.ext",  "file1.ext", "//dir1//dir2/"));
 #endif
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
+    TEST_INT_LT(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/file1.ext",  "file1.ext", "/"));
+    TEST_INT_LT(0,    compare_paths( "/file1.ext",  "file2.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths( "/file1.ext",  "file1.ext", "/"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("file.ext", "/file.ext", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/file.ext", "file.ext", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file.ext", "/dir1/file.ext", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/dir1/file.ext", "dir1/file.ext", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/file.ext", "/dir1/dir2/file.ext", "/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/dir1/dir2/file.ext", "dir1/dir2/file.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths("file.ext", "/file.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths("/file.ext", "file.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file.ext", "/dir1/file.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths("/dir1/file.ext", "dir1/file.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/file.ext", "/dir1/dir2/file.ext", "/"));
+    TEST_INT_EQ(0,   compare_paths("/dir1/dir2/file.ext", "dir1/dir2/file.ext", "/"));
 
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "/", "/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/", "abcdefghijklmnopqrstuvwxyz.ext", "/"));
+    TEST_INT_GT(0, compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "/", "/"));
+    TEST_INT_LT(0,    compare_paths("/", "abcdefghijklmnopqrstuvwxyz.ext", "/"));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "/file1.ext",  "file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "/file2.ext",  "file1.ext", "C:\\"));
+    TEST_INT_EQ(0,   compare_paths( "/file1.ext",  "file1.ext", "C:\\"));
+    TEST_INT_LT(0,    compare_paths( "/file1.ext",  "file2.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths( "/file2.ext",  "file1.ext", "C:\\"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file1.ext", "C:\\dir1\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file1.ext",  "file2.ext", "C:\\dir1\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "/file2.ext",  "file1.ext", "C:\\dir1\\"));
+    TEST_INT_LT(0,    compare_paths( "/file1.ext",  "file1.ext", "C:\\dir1\\"));
+    TEST_INT_LT(0,    compare_paths( "/file1.ext",  "file2.ext", "C:\\dir1\\"));
+    TEST_INT_LT(0,    compare_paths( "/file2.ext",  "file1.ext", "C:\\dir1\\"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths( "C:/file1.ext",  "file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths( "C:/file1.ext",  "file2.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "C:/file2.ext",  "file1.ext", "C:\\"));
+    TEST_INT_EQ(0,   compare_paths( "C:/file1.ext",  "file1.ext", "C:\\"));
+    TEST_INT_LT(0,    compare_paths( "C:/file1.ext",  "file2.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths( "C:/file2.ext",  "file1.ext", "C:\\"));
 
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "D:/file1.ext",  "file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "D:/file1.ext",  "file2.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths( "D:/file2.ext",  "file1.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths( "D:/file1.ext",  "file1.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths( "D:/file1.ext",  "file2.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths( "D:/file2.ext",  "file1.ext", "C:\\"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("file.ext", "C:\\file.ext", "/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\file.ext", "file.ext", "/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\file.ext", "C:\\dir1\\file.ext", "/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\dir1\\file.ext", "dir1\\file.ext", "/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\dir2\\file.ext", "C:\\dir1\\dir2\\file.ext", "/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:\\dir1\\dir2\\file.ext", "dir1\\dir2\\file.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("file.ext", "C:\\file.ext", "/"));
+    TEST_INT_GT(0, compare_paths("C:\\file.ext", "file.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("dir1\\file.ext", "C:\\dir1\\file.ext", "/"));
+    TEST_INT_GT(0, compare_paths("C:\\dir1\\file.ext", "dir1\\file.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("dir1\\dir2\\file.ext", "C:\\dir1\\dir2\\file.ext", "/"));
+    TEST_INT_GT(0, compare_paths("C:\\dir1\\dir2\\file.ext", "dir1\\dir2\\file.ext", "/"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "X:\\", "/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("X:\\", "abcdefghijklmnopqrstuvwxyz.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("abcdefghijklmnopqrstuvwxyz.ext", "X:\\", "/"));
+    TEST_INT_GT(0, compare_paths("X:\\", "abcdefghijklmnopqrstuvwxyz.ext", "/"));
 #endif
 }
 
@@ -490,173 +490,173 @@ static void test_noncanonical_paths(void)
     // paths that need canonicalising
 
     // file1.ext <=> file1.ext
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("file1.ext", "file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("file1.ext", "dir1/../file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/../file1.ext", "file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./file1.ext", "dir1/dir2/../../file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/../../file1.ext", "./file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./file1.ext", "dir1/../dir2/../dir3/../file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/../dir2/../dir3/../file1.ext", "./file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("file1.ext", "file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("file1.ext", "dir1/../file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/../file1.ext", "file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("./file1.ext", "dir1/dir2/../../file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/../../file1.ext", "./file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("./file1.ext", "dir1/../dir2/../dir3/../file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/../dir2/../dir3/../file1.ext", "./file1.ext"));
 
     // dir1/file1.ext <=> dir1/file1.ext
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "dir1/./file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/./file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "./dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./dir1/file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "dir1/././././././././././././././././././././././././././././././././file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/././././././././././././././././././././././././././././././././file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "dir1/dir2/../file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/../file1.ext", "dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "dir1/./file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/./file1.ext", "dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "./dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("./dir1/file1.ext", "dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "dir1/././././././././././././././././././././././././././././././././file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/././././././././././././././././././././././././././././././././file1.ext", "dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "dir1/dir2/../file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/../file1.ext", "dir1/file1.ext"));
 
     // dir1/dir2/file1.ext <=> dir1/dir2/file1.ext
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/file1.ext", "dir1/dir2/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/file1.ext", "dir1/./dir2/./file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/./dir2/./file1.ext", "dir1/dir2/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/file1.ext", "dir1/dir2/dir3/../file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/file1.ext", "dir1/dir2/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/file1.ext", "dir1/./dir2/./file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/./dir2/./file1.ext", "dir1/dir2/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/file1.ext", "dir1/dir2/dir3/../file1.ext"));
 
     // d1/d2/d3/d4/d5/file1.ext <=> d1/d2/d3/d4/d5/file1.ext
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "./d1/./d2/./d3/./d4/./d5/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("./d1/./d2/./d3/./d4/./d5/file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "./d1/./d2/./d3/./d4/./d5/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("./d1/./d2/./d3/./d4/./d5/file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext", "d1/d2/d3/d4/d5/file1.ext"));
 
 
     // file1.ext <=> file2.ext
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("file1.ext", "file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("file1.ext", "dir1/../file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/../file1.ext", "file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("./file1.ext", "dir1/dir2/../../file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/../../file1.ext", "./file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("./file1.ext", "dir1/../dir2/../dir3/../file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/../dir2/../dir3/../file1.ext", "./file2.ext"));
+    TEST_INT_LT(0,    compare_paths("file1.ext", "file2.ext"));
+    TEST_INT_LT(0,    compare_paths("file1.ext", "dir1/../file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/../file1.ext", "file2.ext"));
+    TEST_INT_LT(0,    compare_paths("./file1.ext", "dir1/dir2/../../file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/../../file1.ext", "./file2.ext"));
+    TEST_INT_LT(0,    compare_paths("./file1.ext", "dir1/../dir2/../dir3/../file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/../dir2/../dir3/../file1.ext", "./file2.ext"));
 
     // dir1/file1.ext <=> dir1/file2.ext
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "dir1/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "dir1/./file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/./file1.ext", "dir1/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "./dir1/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("./dir1/file1.ext", "dir1/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "dir1/././././././././././././././././././././././././././././././././file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/././././././././././././././././././././././././././././././././file1.ext", "dir1/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "dir1/dir2/../file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/../file1.ext", "dir1/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "dir1/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "dir1/./file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/./file1.ext", "dir1/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "./dir1/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("./dir1/file1.ext", "dir1/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "dir1/././././././././././././././././././././././././././././././././file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/././././././././././././././././././././././././././././././././file1.ext", "dir1/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "dir1/dir2/../file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/../file1.ext", "dir1/file2.ext"));
 
     // dir1/dir2/file1.ext <=> dir1/dir2/file2.ext
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/file1.ext", "dir1/dir2/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/file1.ext", "dir1/./dir2/./file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/./dir2/./file1.ext", "dir1/dir2/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/file1.ext", "dir1/dir2/dir3/../file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/file1.ext", "dir1/dir2/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/file1.ext", "dir1/./dir2/./file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/./dir2/./file1.ext", "dir1/dir2/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/file1.ext", "dir1/dir2/dir3/../file2.ext"));
 
     // d1/d2/d3/d4/d5/file1.ext <=> d1/d2/d3/d4/d5/file2.ext
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "./d1/./d2/./d3/./d4/./d5/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("./d1/./d2/./d3/./d4/./d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "./d1/./d2/./d3/./d4/./d5/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("./d1/./d2/./d3/./d4/./d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("d1/d2/d3/d4/d5/file1.ext", "d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file2.ext"));
+    TEST_INT_LT(0,    compare_paths("d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
 }
 
 static void test_noncanonical_paths_trailing_dots(void)
 {
     // trailing dots
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/..", "dir1/dir2/../"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/..", "dir1/dir3/../"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir3/..", "dir1/dir2/../"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/dir2/..", "dir4/dir3/../"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir4/dir3/..", "dir1/dir2/../"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/..", "dir1/dir2/../"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/..", "dir1/dir3/../"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir3/..", "dir1/dir2/../"));
+    TEST_INT_LT(0,    compare_paths("dir1/dir2/..", "dir4/dir3/../"));
+    TEST_INT_GT(0, compare_paths("dir4/dir3/..", "dir1/dir2/../"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/dir2/.", "dir1/dir2/./"));
+    TEST_INT_EQ(0,   compare_paths("dir1/dir2/.", "dir1/dir2/./"));
 }
 
 static void test_sliding_rel_and_cwd(void)
 {
     // sliding [rel / cwd]
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d4/d5/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d4/d5/file2.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d4/d6/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d5/d5/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d4/d4/d5/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d3/d3/d4/d5/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d2/d2/d3/d4/d5/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d4/d5/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d4/d5/file2.ext"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d4/d6/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d3/d5/d5/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d2/d4/d4/d5/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d1/d3/d3/d4/d5/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "/d2/d2/d3/d4/d5/file1.ext"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d5/file1.ext", "/d1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d5/file2.ext", "/d1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d6/file1.ext", "/d1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d5/d5/file1.ext", "/d1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d4/d4/d5/file1.ext", "/d1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d3/d4/d5/file1.ext", "/d1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d5/file1.ext", "/d2"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d5/file1.ext", "/d1"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d5/file2.ext", "/d1"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d6/file1.ext", "/d1"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d5/d5/file1.ext", "/d1"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d4/d4/d5/file1.ext", "/d1"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d3/d4/d5/file1.ext", "/d1"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d2/d3/d4/d5/file1.ext", "/d2"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file1.ext", "/d1/d2"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file2.ext", "/d1/d2"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d6/file1.ext", "/d1/d2"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d5/d5/file1.ext", "/d1/d2"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d4/d5/file1.ext", "/d1/d2"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file1.ext", "/d1/d3"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file1.ext", "/d2/d2"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file1.ext", "/d1/d2"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file2.ext", "/d1/d2"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d6/file1.ext", "/d1/d2"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d5/d5/file1.ext", "/d1/d2"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d4/d5/file1.ext", "/d1/d2"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file1.ext", "/d1/d3"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d3/d4/d5/file1.ext", "/d2/d2"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d1/d2/d3"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file2.ext", "/d1/d2/d3"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d6/file1.ext", "/d1/d2/d3"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/d5/file1.ext", "/d1/d2/d3"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d1/d2/d4"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d1/d3/d3"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d2/d2/d3"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d1/d2/d3"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file2.ext", "/d1/d2/d3"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d6/file1.ext", "/d1/d2/d3"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/d5/file1.ext", "/d1/d2/d3"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d1/d2/d4"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d1/d3/d3"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d4/d5/file1.ext", "/d2/d2/d3"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d2/d3/d4"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file2.ext", "/d1/d2/d3/d4"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d6/file1.ext", "/d1/d2/d3/d4"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d2/d3/d5"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d2/d4/d4"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d3/d3/d4"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d2/d2/d3/d4"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d2/d3/d4"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file2.ext", "/d1/d2/d3/d4"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d6/file1.ext", "/d1/d2/d3/d4"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d2/d3/d5"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d2/d4/d4"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d1/d3/d3/d4"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "d5/file1.ext", "/d2/d2/d3/d4"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d3/d4/d5"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file2.ext", "/d1/d2/d3/d4/d5"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d3/d4/d6"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d3/d5/d5"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d4/d4/d5"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d3/d3/d4/d5"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d2/d2/d3/d4/d5"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d3/d4/d5"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file2.ext", "/d1/d2/d3/d4/d5"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d3/d4/d6"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d3/d5/d5"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d2/d4/d4/d5"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d1/d3/d3/d4/d5"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "file1.ext", "/d2/d2/d3/d4/d5"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d4/d5/d6"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file2.ext", "/d1/d2/d3/d4/d5/d6"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d4/d5/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d4/d6/d6"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d5/d5/d6"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d4/d4/d5/d6"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d3/d3/d4/d5/d6"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d2/d2/d3/d4/d5/d6"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d4/d5/d6"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file2.ext", "/d1/d2/d3/d4/d5/d6"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d4/d5/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d4/d6/d6"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d3/d5/d5/d6"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d2/d4/d4/d5/d6"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d1/d3/d3/d4/d5/d6"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../file1.ext", "/d2/d2/d3/d4/d5/d6"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d5/d6/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file2.ext", "/d1/d2/d3/d4/d5/d6/d7"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d5/d6/d8"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d5/d7/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d6/d6/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d5/d5/d6/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d4/d4/d5/d6/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d3/d3/d4/d5/d6/d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d2/d2/d3/d4/d5/d6/d7"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d5/d6/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file2.ext", "/d1/d2/d3/d4/d5/d6/d7"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d5/d6/d8"));
+    TEST_INT_EQ(0,   compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d5/d7/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d4/d6/d6/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d3/d5/d5/d6/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d2/d4/d4/d5/d6/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d1/d3/d3/d4/d5/d6/d7"));
+    TEST_INT_LT(0,    compare_paths("/d1/d2/d3/d4/d5/file1.ext", "../../file1.ext", "/d2/d2/d3/d4/d5/d6/d7"));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d6\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file2.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d6\\d7"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d6\\d8"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d7\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d6\\d6\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d5\\d5\\d6\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d4\\d4\\d5\\d6\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d3\\d3\\d4\\d5\\d6\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d2\\d2\\d3\\d4\\d5\\d6\\d7"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "D:\\d1\\d2\\d3\\d4\\d5\\d6\\d7"));
+    TEST_INT_EQ(0,   compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d6\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file2.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d6\\d7"));
+    TEST_INT_EQ(0,   compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d6\\d8"));
+    TEST_INT_EQ(0,   compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d5\\d7\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d4\\d6\\d6\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d3\\d5\\d5\\d6\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d2\\d4\\d4\\d5\\d6\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d1\\d3\\d3\\d4\\d5\\d6\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "C:\\d2\\d2\\d3\\d4\\d5\\d6\\d7"));
+    TEST_INT_LT(0,    compare_paths("C:\\d1\\d2\\d3\\d4\\d5\\file1.ext", "..\\..\\file1.ext", "D:\\d1\\d2\\d3\\d4\\d5\\d6\\d7"));
 #endif
 }
 
@@ -666,17 +666,17 @@ static void test_compare_UNC_rooted_paths(void)
 
 #ifdef LIBPATH_OS_IS_WINDOWS
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\\\server1\\share1/dir1\\file1.ext", "\\\\server1\\share1\\dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("\\\\server1\\share1/dir1\\file1.ext", "\\\\server1\\share1\\dir1/file1.ext"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file2.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1\\dir1\\file2.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir2\\file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1\\dir2\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share2\\dir1\\file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share2\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server2\\share1\\dir1\\file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server2\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
+    TEST_INT_LT(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file2.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1\\dir1\\file2.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
+    TEST_INT_LT(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir2\\file1.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1\\dir2\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
+    TEST_INT_LT(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server1\\share2\\dir1\\file1.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share2\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
+    TEST_INT_LT(0,    compare_paths("\\\\server1\\share1\\dir1\\file1.ext", "\\\\server2\\share1\\dir1\\file1.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server2\\share1\\dir1\\file1.ext", "\\\\server1\\share1\\dir1\\file1.ext"));
 
 #endif
 }
@@ -685,88 +685,88 @@ static void test_Windows_mixed_pwd(void)
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1\\file1.ext", "C:\\dir1\\file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\file1.ext", "C:\\dir1\\file2.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1\\file2.ext", "C:\\dir1\\file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\file1.ext", "C:\\dir2\\file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir2\\file1.ext", "C:\\dir1\\file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1\\file1.ext", "D:\\dir1\\file1.ext", "C:\\"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1\\file1.ext", "C:\\dir1\\file1.ext", "D:\\"));
+    TEST_INT_EQ(0,   compare_paths("dir1\\file1.ext", "C:\\dir1\\file1.ext", "C:\\"));
+    TEST_INT_LT(0,    compare_paths("dir1\\file1.ext", "C:\\dir1\\file2.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths("dir1\\file2.ext", "C:\\dir1\\file1.ext", "C:\\"));
+    TEST_INT_LT(0,    compare_paths("dir1\\file1.ext", "C:\\dir2\\file1.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths("dir2\\file1.ext", "C:\\dir1\\file1.ext", "C:\\"));
+    TEST_INT_LT(0,    compare_paths("dir1\\file1.ext", "D:\\dir1\\file1.ext", "C:\\"));
+    TEST_INT_GT(0, compare_paths("dir1\\file1.ext", "C:\\dir1\\file1.ext", "D:\\"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("\\dir1\\file1.ext", "C:\\dir1\\file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\dir1\\file1.ext", "C:\\dir1\\file2.ext", "C:"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\dir1\\file2.ext", "C:\\dir1\\file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\dir1\\file1.ext", "C:\\dir2\\file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\dir2\\file1.ext", "C:\\dir1\\file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("\\dir1\\file1.ext", "D:\\dir1\\file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\dir1\\file1.ext", "C:\\dir1\\file1.ext", "D:"));
+    TEST_INT_EQ(0,   compare_paths("\\dir1\\file1.ext", "C:\\dir1\\file1.ext", "C:"));
+    TEST_INT_LT(0,    compare_paths("\\dir1\\file1.ext", "C:\\dir1\\file2.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("\\dir1\\file2.ext", "C:\\dir1\\file1.ext", "C:"));
+    TEST_INT_LT(0,    compare_paths("\\dir1\\file1.ext", "C:\\dir2\\file1.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("\\dir2\\file1.ext", "C:\\dir1\\file1.ext", "C:"));
+    TEST_INT_LT(0,    compare_paths("\\dir1\\file1.ext", "D:\\dir1\\file1.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("\\dir1\\file1.ext", "C:\\dir1\\file1.ext", "D:"));
 #endif
 }
 
 static void test_mixed_comparisons(void)
 {
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("file1.ext", "file2.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("file2.ext", "file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "dir2/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir2/file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/dir1/file1.ext", "dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("file1.ext", "file2.ext"));
+    TEST_INT_GT(0, compare_paths("file2.ext", "file1.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "dir2/file1.ext"));
+    TEST_INT_GT(0, compare_paths("dir2/file1.ext", "dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "/dir1/file1.ext"));
+    TEST_INT_GT(0, compare_paths("/dir1/file1.ext", "dir1/file1.ext"));
 
 #ifdef LIBPATH_OS_IS_WINDOWS
 
     // absolute, rooted, and relative paths
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "C:/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:/dir1/file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/dir1/file1.ext", "C:/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:/dir1/file1.ext", "/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "\\\\server1\\share1/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("/dir1/file1.ext", "\\\\server1\\share1/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:/dir1/file1.ext", "\\\\server1\\share1/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "C:/dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "C:/dir1/file1.ext"));
+    TEST_INT_GT(0, compare_paths("C:/dir1/file1.ext", "dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/dir1/file1.ext", "C:/dir1/file1.ext"));
+    TEST_INT_GT(0, compare_paths("C:/dir1/file1.ext", "/dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "\\\\server1\\share1/dir1/file1.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("/dir1/file1.ext", "\\\\server1\\share1/dir1/file1.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "/dir1/file1.ext"));
+    TEST_INT_LT(0,    compare_paths("C:/dir1/file1.ext", "\\\\server1\\share1/dir1/file1.ext"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "C:/dir1/file1.ext"));
 
 
     // relative paths with volumes
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:dir1/file1.ext", "C:dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:dir1/file1.ext", "C:dir1/file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:dir1/file1.ext", "C:dir1/file1.ext", "D:"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "C:dir1/file1.ext", "C:"));
+    TEST_INT_EQ(0,   compare_paths("C:dir1/file1.ext", "C:dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("C:dir1/file1.ext", "C:dir1/file1.ext", "C:"));
+    TEST_INT_EQ(0,   compare_paths("C:dir1/file1.ext", "C:dir1/file1.ext", "D:"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "C:dir1/file1.ext", "C:"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("/dir1/file1.ext", "C:/dir1/file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("/dir1/file1.ext", "C:/dir1/file1.ext", "D:"));
+    TEST_INT_EQ(0,   compare_paths("/dir1/file1.ext", "C:/dir1/file1.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("/dir1/file1.ext", "C:/dir1/file1.ext", "D:"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "D:"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "D:/dir1/file1.ext", "C:"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "D:"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "D:/dir1/file1.ext", "C:"));
 
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1/file2.ext", "C:/dir1/file1.ext", "C:/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir2/file1.ext", "C:/dir1/file1.ext", "C:/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file2.ext", "C:/dir1/file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir2/file1.ext", "C:/dir1/file1.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("dir1/file2.ext", "C:/dir1/file1.ext", "C:/"));
+    TEST_INT_GT(0, compare_paths("dir2/file1.ext", "C:/dir1/file1.ext", "C:/"));
+    TEST_INT_LT(0,    compare_paths("dir1/file2.ext", "C:/dir1/file1.ext", "C:"));
+    TEST_INT_LT(0,    compare_paths("dir2/file1.ext", "C:/dir1/file1.ext", "C:"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "C:/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "D:/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("dir1/file1.ext", "D:/dir1/file1.ext", "C:/"));
+    TEST_INT_EQ(0,   compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "C:/"));
+    TEST_INT_GT(0, compare_paths("dir1/file1.ext", "C:/dir1/file1.ext", "D:/"));
+    TEST_INT_LT(0,    compare_paths("dir1/file1.ext", "D:/dir1/file1.ext", "C:/"));
 
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:dir1/file1.ext", "C:/dir1/file1.ext"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:dir1/file1.ext", "C:/dir1/file1.ext", "/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:dir1/file1.ext", "C:/dir1/file2.ext", "/"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:dir1/file1.ext", "C:/dir2/file1.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("C:dir1/file1.ext", "C:/dir1/file1.ext"));
+    TEST_INT_EQ(0,   compare_paths("C:dir1/file1.ext", "C:/dir1/file1.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("C:dir1/file1.ext", "C:/dir1/file2.ext", "/"));
+    TEST_INT_LT(0,    compare_paths("C:dir1/file1.ext", "C:/dir2/file1.ext", "/"));
 
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:file1.ext", "C:/dir1/file1.ext", "/dir1/"));
-    XTESTS_TEST_INTEGER_EQUAL(0,   compare_paths("C:file1.ext", "C:/dir1/file1.ext", "/dir1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:file1.ext", "C:/dir1/file2.ext", "/dir1"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:file2.ext", "C:/dir1/file1.ext", "/dir1"));
-    XTESTS_TEST_INTEGER_LESS(0,    compare_paths("C:file1.ext", "C:/dir2/file1.ext", "/dir1"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("C:file1.ext", "C:/dir1/file1.ext", "/dir2"));
+    TEST_INT_EQ(0,   compare_paths("C:file1.ext", "C:/dir1/file1.ext", "/dir1/"));
+    TEST_INT_EQ(0,   compare_paths("C:file1.ext", "C:/dir1/file1.ext", "/dir1"));
+    TEST_INT_LT(0,    compare_paths("C:file1.ext", "C:/dir1/file2.ext", "/dir1"));
+    TEST_INT_GT(0, compare_paths("C:file2.ext", "C:/dir1/file1.ext", "/dir1"));
+    TEST_INT_LT(0,    compare_paths("C:file1.ext", "C:/dir2/file1.ext", "/dir1"));
+    TEST_INT_GT(0, compare_paths("C:file1.ext", "C:/dir1/file1.ext", "/dir2"));
 
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "dir1/file1.ext", "C:/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "C:dir1/file1.ext", "/"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "dir1/file1.ext", "C:"));
-    XTESTS_TEST_INTEGER_GREATER(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "file1.ext", "dir1"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "dir1/file1.ext", "C:/"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "C:dir1/file1.ext", "/"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "dir1/file1.ext", "C:"));
+    TEST_INT_GT(0, compare_paths("\\\\server1\\share1/dir1/file1.ext", "file1.ext", "dir1"));
 #endif
 }
 

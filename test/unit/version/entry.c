@@ -24,7 +24,7 @@
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 
 /* STLSoft header files */
 #include <stlsoft/stlsoft.h>
@@ -76,12 +76,12 @@ static void test_version(void)
     unsigned const  patch       =   (LIBPATH_VER >>  8) & 0xff;
     unsigned const  relstatus   =   (LIBPATH_VER >>  0) & 0xff;
 
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_MAJOR, major);
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_MINOR, minor);
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_PATCH, patch);
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_REVISION, patch);
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_RELSTATUS, relstatus);
-    XTESTS_TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_ALPHABETA, relstatus);
+    TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_MAJOR, major);
+    TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_MINOR, minor);
+    TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_PATCH, patch);
+    TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_REVISION, patch);
+    TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_RELSTATUS, relstatus);
+    TEST_INTEGER_EQUAL_EXACT(LIBPATH_VER_ALPHABETA, relstatus);
 }
 
 

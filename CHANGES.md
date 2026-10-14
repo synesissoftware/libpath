@@ -16,6 +16,7 @@
 * Shortened example directory/source to **examples/cpp/parse/** / **main.cpp** (target **example.cpp.parse**; formerly **example.cpp.parse.1**);
 * Shortened unit-test directories to subject names under **test/unit/** (**compare**, **compare.C**, **equal**, **equal.C**, **parse**, **parse.C**, **shim-strings**, **type-strings**, **version**), with **entry.c** / **entry.cpp** sources and matching **test.unit.*** targets;
 * Shortened scratch **test.scratch.compare.models** to **test/scratch/compare-models/** (**main.cpp**; target **test.scratch.compare-models**);
+* Switched unit-test assertion statements to the **xTests** Terse API short forms (via **xtests/terse-api.h**);
 * Created **CHANGES.md** from **HISTORY.md** and removed the subsumed **HISTORY.md**; upgraded **NEWS.md** to a three-column chronology with **Details**;
 * Project boilerplate updates (**AUTHORS.md**, **FAQ.md**, **REQUISITES.md**, **TODO.md**, **LICENSE**, **README.md** CI badge and dependency links);
 

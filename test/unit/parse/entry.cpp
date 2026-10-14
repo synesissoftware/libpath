@@ -24,7 +24,7 @@
  */
 
 /* xTests header files */
-#include <xtests/xtests.h>
+#include <xtests/terse-api.h>
 #if _XTESTS_VER < 0x00150000
 # error This code requires xTests 0.21.0, or later
 #endif
@@ -213,35 +213,35 @@ static void test_1_0(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_NoPathSpecified, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_NoPathSpecified, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_NoPathSpecified, rc);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_INT_EQ(0u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(0u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
 static void test_1_1(void)
@@ -252,24 +252,24 @@ static void test_1_1(void)
     StringSlice_t       directoryPartSlices[NUM_DP_ELEMENTS];
     LIBPATH_RC const    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(1u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(1u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(1u, r.entryNamePart.len);
+    TEST_INT_EQ(1u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
 static void test_1_2(void)
@@ -280,24 +280,24 @@ static void test_1_2(void)
     StringSlice_t       directoryPartSlices[NUM_DP_ELEMENTS];
     LIBPATH_RC const    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(2u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(2u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(2u, r.entryNamePart.len);
+    TEST_INT_EQ(2u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
 static void test_1_3(void)
@@ -310,39 +310,39 @@ static void test_1_3(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(2u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(2u, r.fullPath.len);
+    TEST_INT_EQ(1u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, directoryPartSlices[0].len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, directoryPartSlices[0].len);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(1u, r.entryNamePart.len);
+    TEST_INT_EQ(1u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -356,38 +356,38 @@ static void test_1_4(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(1u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(2u, r.entryNamePart.len);
+    TEST_INT_EQ(2u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -399,21 +399,21 @@ static void test_1_6(void)
     LIBPATH_RC      rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
 static void test_1_7(void)
@@ -424,20 +424,20 @@ static void test_1_7(void)
     LIBPATH_RC      rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(5u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(5u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(5u, r.entryNamePart.len);
+    TEST_INT_EQ(5u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
 static void test_1_8(void)
@@ -448,20 +448,20 @@ static void test_1_8(void)
     LIBPATH_RC      rc = parse_path_from_cstyle_string(input, 0, &r, 0, LIBPATH_LF_nullptr);
 
     // TODO: define failure result code
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(11u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(11u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(11u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(11u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(11u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, r.entryNamePart.len);
+    TEST_INT_EQ(11u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
 static void test_1_10(void)
@@ -474,35 +474,35 @@ static void test_1_10(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
 static void test_1_11(void)
@@ -513,25 +513,25 @@ static void test_1_11(void)
     StringSlice_t       directoryPartSlices[NUM_DP_ELEMENTS];
     LIBPATH_RC const    rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryExtensionPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL(".c", r.entryExtensionPart);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(1u, r.entryStemPart.len);
+    TEST_INT_EQ(2u, r.entryExtensionPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL(".c", r.entryExtensionPart);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
 static void test_1_12(void)
@@ -544,35 +544,35 @@ static void test_1_12(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(3u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
 static void test_1_14(void)
@@ -585,41 +585,41 @@ static void test_1_14(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.locationPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/", r.locationPart);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/", r.rootPart);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(4u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(4u, r.fullPath.len);
+    TEST_INT_EQ(1u, r.locationPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/", r.locationPart);
+    TEST_INT_EQ(1u, r.rootPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/", r.rootPart);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc", r.entryStemPart);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc", r.entryStemPart);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -633,42 +633,42 @@ static void test_1_15(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.locationPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/dir/", r.locationPart);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(8u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(8u, r.fullPath.len);
+    TEST_INT_EQ(5u, r.locationPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/dir/", r.locationPart);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc", r.entryStemPart);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc", r.entryStemPart);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -682,41 +682,41 @@ static void test_1_16(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.locationPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/dir/", r.locationPart);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(5u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(5u, r.fullPath.len);
+    TEST_INT_EQ(5u, r.locationPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/dir/", r.locationPart);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -730,43 +730,43 @@ static void test_1_17(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(10u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(10u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(10u, r.locationPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/dir/dir2/", r.locationPart);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(10u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(10u, r.fullPath.len);
+    TEST_INT_EQ(10u, r.locationPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/dir/dir2/", r.locationPart);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(9u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir2/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(9u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
+    TEST_INT_EQ(5u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir2/", directoryPartSlices[1]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 
     directoryPartSlices[1].len = 1234;
@@ -774,33 +774,33 @@ static void test_1_17(void)
 
     rc = parse_path_from_cstyle_string(input, 0, &r, 1, &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(10u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(10u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(10u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(10u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(10u, r.fullPath.len);
+    TEST_INT_EQ(10u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(9u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(9u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
 
-    XTESTS_TEST_INTEGER_EQUAL(1234u, directoryPartSlices[1].len);
-    XTESTS_TEST_POINTER_EQUAL(reinterpret_cast<char*>(1234), directoryPartSlices[1].ptr);
+    TEST_INT_EQ(1234u, directoryPartSlices[1].len);
+    TEST_PTR_EQ(reinterpret_cast<char*>(1234), directoryPartSlices[1].ptr);
 
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -814,51 +814,51 @@ static void test_1_18(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(39u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(39u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(39u, r.locationPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/directory1/directory2/dir3/dir4/d5/d6/", r.locationPart);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(39u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(39u, r.fullPath.len);
+    TEST_INT_EQ(39u, r.locationPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/directory1/directory2/dir3/dir4/d5/d6/", r.locationPart);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4/", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6/", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2/", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4/", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6/", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -872,53 +872,53 @@ static void test_1_19(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(47u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(47u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(39u, r.locationPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("/directory1/directory2/dir3/dir4/d5/d6/", r.locationPart);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(47u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(47u, r.fullPath.len);
+    TEST_INT_EQ(39u, r.locationPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("/directory1/directory2/dir3/dir4/d5/d6/", r.locationPart);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4/", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6/", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("file", r.entryStemPart);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL(".ext", r.entryExtensionPart);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2/", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4/", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6/", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("file", r.entryStemPart);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL(".ext", r.entryExtensionPart);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -932,50 +932,50 @@ static void test_1_20(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(14u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(14u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(13u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(14u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(14u, r.fullPath.len);
+    TEST_INT_EQ(13u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(12u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("1/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("2/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("3/", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("4/", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("5/", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("6/", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(12u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(2u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("1/", directoryPartSlices[0]);
+    TEST_INT_EQ(2u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("2/", directoryPartSlices[1]);
+    TEST_INT_EQ(2u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("3/", directoryPartSlices[2]);
+    TEST_INT_EQ(2u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("4/", directoryPartSlices[3]);
+    TEST_INT_EQ(2u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("5/", directoryPartSlices[4]);
+    TEST_INT_EQ(2u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("6/", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(1u, r.entryNamePart.len);
+    TEST_INT_EQ(1u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -989,38 +989,38 @@ static void test_1_21(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(1u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(1u, r.fullPath.len);
+    TEST_INT_EQ(1u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1034,35 +1034,35 @@ static void test_1_22(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(31u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(31u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(31u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(31u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(31u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(27u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(31u, r.entryNamePart.len);
+    TEST_INT_EQ(27u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
 static void test_1_30(void)
@@ -1076,33 +1076,33 @@ static void test_1_30(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(1u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(1u, r.fullPath.len);
+    TEST_INT_EQ(1u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1117,33 +1117,33 @@ static void test_1_31(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(4u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(4u, r.fullPath.len);
+    TEST_INT_EQ(1u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1158,33 +1158,33 @@ static void test_1_32(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(3u, r.locationPart.len);
+    TEST_INT_EQ(3u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1199,33 +1199,33 @@ static void test_1_33(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(6u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(6u, r.fullPath.len);
+    TEST_INT_EQ(3u, r.locationPart.len);
+    TEST_INT_EQ(3u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1240,45 +1240,45 @@ static void test_1_34(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(49u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(49u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(41u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(49u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(49u, r.fullPath.len);
+    TEST_INT_EQ(41u, r.locationPart.len);
+    TEST_INT_EQ(3u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1293,33 +1293,33 @@ static void test_1_35(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(3u, r.locationPart.len);
+    TEST_INT_EQ(3u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1334,33 +1334,33 @@ static void test_1_36(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(6u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(6u, r.fullPath.len);
+    TEST_INT_EQ(3u, r.locationPart.len);
+    TEST_INT_EQ(3u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1375,45 +1375,45 @@ static void test_1_37(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(49u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(49u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(41u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(49u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(49u, r.fullPath.len);
+    TEST_INT_EQ(41u, r.locationPart.len);
+    TEST_INT_EQ(3u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1428,33 +1428,33 @@ static void test_1_40(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(20u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(20u, r.fullPath.len);
+    TEST_INT_EQ(20u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1469,33 +1469,33 @@ static void test_1_41(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(23u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(23u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(23u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(23u, r.fullPath.len);
+    TEST_INT_EQ(20u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1510,45 +1510,45 @@ static void test_1_42(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(66u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(66u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(58u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(66u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(66u, r.fullPath.len);
+    TEST_INT_EQ(58u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1563,45 +1563,45 @@ static void test_1_43(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(66u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(66u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(58u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(66u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(66u, r.fullPath.len);
+    TEST_INT_EQ(58u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1616,45 +1616,45 @@ static void test_1_44(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(66u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(66u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(58u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4/", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6/", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(66u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(66u, r.fullPath.len);
+    TEST_INT_EQ(58u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2/", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4/", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6/", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1669,33 +1669,33 @@ static void test_1_50(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(5u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(5u, r.fullPath.len);
+    TEST_INT_EQ(2u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(2u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1710,45 +1710,45 @@ static void test_1_51(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(48u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(48u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(40u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(48u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(48u, r.fullPath.len);
+    TEST_INT_EQ(40u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(2u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1\\", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3\\", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5\\", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1763,45 +1763,45 @@ static void test_1_52(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(48u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(48u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(40u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(48u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(48u, r.fullPath.len);
+    TEST_INT_EQ(40u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(2u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(8u, r.entryNamePart.len);
+    TEST_INT_EQ(4u, r.entryStemPart.len);
+    TEST_INT_EQ(4u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1816,45 +1816,45 @@ static void test_1_53(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(41u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(41u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(40u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(38u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(11u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[2].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[3].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[4].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[5].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(41u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(41u, r.fullPath.len);
+    TEST_INT_EQ(40u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(2u, r.volumePart.len);
+    TEST_INT_EQ(38u, r.directoryPart.len);
+    TEST_INT_EQ(6u, r.numDirectoryParts);
+    TEST_INT_EQ(11u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory1/", directoryPartSlices[0]);
+    TEST_INT_EQ(11u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("directory2\\", directoryPartSlices[1]);
+    TEST_INT_EQ(5u, directoryPartSlices[2].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir3/", directoryPartSlices[2]);
+    TEST_INT_EQ(5u, directoryPartSlices[3].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir4\\", directoryPartSlices[3]);
+    TEST_INT_EQ(3u, directoryPartSlices[4].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d5/", directoryPartSlices[4]);
+    TEST_INT_EQ(3u, directoryPartSlices[5].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("d6\\", directoryPartSlices[5]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(1u, r.entryNamePart.len);
+    TEST_INT_EQ(1u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1868,40 +1868,40 @@ static void test_1_54(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(9u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(9u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(9u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(9u, r.fullPath.len);
+    TEST_INT_EQ(6u, r.locationPart.len);
+    TEST_INT_EQ(1u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(5u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir//", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(5u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(5u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir//", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1915,40 +1915,40 @@ static void test_1_55(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(7u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(7u, r.fullPath.len);
+    TEST_INT_EQ(4u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.volumePart.len);
 #endif
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("dir/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
+    TEST_INT_EQ(3u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
+    TEST_BOOLEAN_FALSE(is_rooted(r));
 #ifdef LIBPATH_OS_IS_WINDOWS
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #else /* ? LIBPATH_OS_IS_WINDOWS */
-    XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+    TEST_BOOLEAN_FALSE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -1988,20 +1988,20 @@ static void test_1_60(void)
 
             rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-            XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
+            TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
 
             rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0], &firstBadCharOffset);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
-            XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
+            TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
 
             rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices, &firstBadCharOffset);
 #endif
 
-            XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-            XTESTS_TEST_INTEGER_EQUAL(31u, r.input.len);
-            XTESTS_TEST_INTEGER_EQUAL(j, firstBadCharOffset);
+            TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+            TEST_INT_EQ(31u, r.input.len);
+            TEST_INT_EQ(j, firstBadCharOffset);
         }}
     }}
 }
@@ -2016,50 +2016,50 @@ static void test_1_61(void)
 
     rc = parse_path_from_cstyle_string(":C\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, firstBadCharOffset);
+    TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+    TEST_INT_EQ(15u, r.input.len);
+    TEST_INT_EQ(0u, firstBadCharOffset);
 
 
     rc = parse_path_from_cstyle_string("C:\\dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(15u, r.input.len);
 
 
     rc = parse_path_from_cstyle_string("C\\:dir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, firstBadCharOffset);
+    TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+    TEST_INT_EQ(15u, r.input.len);
+    TEST_INT_EQ(2u, firstBadCharOffset);
 
 
     rc = parse_path_from_cstyle_string("C\\d:ir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, firstBadCharOffset);
+    TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+    TEST_INT_EQ(15u, r.input.len);
+    TEST_INT_EQ(3u, firstBadCharOffset);
 
 
     rc = parse_path_from_cstyle_string("C\\di:r\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, firstBadCharOffset);
+    TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+    TEST_INT_EQ(15u, r.input.len);
+    TEST_INT_EQ(4u, firstBadCharOffset);
 
 
     rc = parse_path_from_cstyle_string("C\\dir:\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, firstBadCharOffset);
+    TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+    TEST_INT_EQ(15u, r.input.len);
+    TEST_INT_EQ(5u, firstBadCharOffset);
 
 
     rc = parse_path_from_cstyle_string("\\:Cdir\\file.ext", 0, &r, 0, LIBPATH_LF_nullptr, &firstBadCharOffset);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_BadPathCharacter, rc);
-    XTESTS_TEST_INTEGER_EQUAL(15u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, firstBadCharOffset);
+    TEST_ENUM_EQ(libpath_ResultCode_BadPathCharacter, rc);
+    TEST_INT_EQ(15u, r.input.len);
+    TEST_INT_EQ(1u, firstBadCharOffset);
 
 
 #endif
@@ -2074,60 +2074,60 @@ static void test_1_70(void)
 
     rc = parse_path_from_cstyle_string("abc", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(0u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(4u, r.input.len);
+    TEST_INT_EQ(4u, r.fullPath.len);
+    TEST_INT_EQ(4u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(3u, r.input.len);
+    TEST_INT_EQ(3u, r.fullPath.len);
+    TEST_INT_EQ(3u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(3u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(3u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(4u, r.input.len);
+    TEST_INT_EQ(4u, r.fullPath.len);
+    TEST_INT_EQ(4u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
 }
@@ -2141,68 +2141,68 @@ static void test_1_71(void)
 
     rc = parse_path_from_cstyle_string("abc/def", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(3u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(7u, r.input.len);
+    TEST_INT_EQ(7u, r.fullPath.len);
+    TEST_INT_EQ(4u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(3u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/def/", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("def/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(8u, r.input.len);
+    TEST_INT_EQ(8u, r.fullPath.len);
+    TEST_INT_EQ(8u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(8u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(4u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("def/", directoryPartSlices[1]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/def", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("def", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(7u, r.input.len);
+    TEST_INT_EQ(7u, r.fullPath.len);
+    TEST_INT_EQ(7u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(7u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(3u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("def", directoryPartSlices[1]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/def/", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(8u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("def/", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(8u, r.input.len);
+    TEST_INT_EQ(8u, r.fullPath.len);
+    TEST_INT_EQ(8u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(8u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(4u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("def/", directoryPartSlices[1]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
 }
@@ -2216,70 +2216,70 @@ static void test_1_72(void)
 
     rc = parse_path_from_cstyle_string("abc/..", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(6u, r.input.len);
+    TEST_INT_EQ(6u, r.fullPath.len);
+    TEST_INT_EQ(4u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(2u, r.entryNamePart.len);
+    TEST_INT_EQ(2u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/../", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("../", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(7u, r.input.len);
+    TEST_INT_EQ(7u, r.fullPath.len);
+    TEST_INT_EQ(7u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(7u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(3u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("../", directoryPartSlices[1]);
+    TEST_INT_EQ(1u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/..", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("..", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(6u, r.input.len);
+    TEST_INT_EQ(6u, r.fullPath.len);
+    TEST_INT_EQ(6u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(6u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(2u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("..", directoryPartSlices[1]);
+    TEST_INT_EQ(1u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/../", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(7u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(3u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("../", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(7u, r.input.len);
+    TEST_INT_EQ(7u, r.fullPath.len);
+    TEST_INT_EQ(7u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(7u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(3u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("../", directoryPartSlices[1]);
+    TEST_INT_EQ(1u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
 }
@@ -2293,70 +2293,70 @@ static void test_1_73(void)
 
     rc = parse_path_from_cstyle_string("abc/.", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(4u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(5u, r.input.len);
+    TEST_INT_EQ(5u, r.fullPath.len);
+    TEST_INT_EQ(4u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(4u, r.directoryPart.len);
+    TEST_INT_EQ(1u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(1u, r.entryNamePart.len);
+    TEST_INT_EQ(1u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/./", 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("./", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(6u, r.input.len);
+    TEST_INT_EQ(6u, r.fullPath.len);
+    TEST_INT_EQ(6u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(6u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(2u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("./", directoryPartSlices[1]);
+    TEST_INT_EQ(1u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/.", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(5u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL(".", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(5u, r.input.len);
+    TEST_INT_EQ(5u, r.fullPath.len);
+    TEST_INT_EQ(5u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(5u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(1u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL(".", directoryPartSlices[1]);
+    TEST_INT_EQ(1u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
     rc = parse_path_from_cstyle_string("abc/./", libpath_ParseOption_AssumeDirectory, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(6u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(2u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(4u, directoryPartSlices[0].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
-    XTESTS_TEST_INTEGER_EQUAL(2u, directoryPartSlices[1].len);
-    XTESTS_TEST_MULTIBYTE_STRING_SLICE_EQUAL("./", directoryPartSlices[1]);
-    XTESTS_TEST_INTEGER_EQUAL(1u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(6u, r.input.len);
+    TEST_INT_EQ(6u, r.fullPath.len);
+    TEST_INT_EQ(6u, r.locationPart.len);
+    TEST_INT_EQ(0u, r.rootPart.len);
+    TEST_INT_EQ(6u, r.directoryPart.len);
+    TEST_INT_EQ(2u, r.numDirectoryParts);
+    TEST_INT_EQ(4u, directoryPartSlices[0].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("abc/", directoryPartSlices[0]);
+    TEST_INT_EQ(2u, directoryPartSlices[1].len);
+    TEST_MULTIBYTE_STRING_SLICE_EQUAL("./", directoryPartSlices[1]);
+    TEST_INT_EQ(1u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
 
 
 }
@@ -2372,33 +2372,33 @@ static void test_1_80(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(20u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(20u, r.fullPath.len);
+    TEST_INT_EQ(20u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -2413,33 +2413,33 @@ static void test_1_81(void)
 
     rc = parse_path_from_cstyle_string(input, 0, LIBPATH_LF_nullptr, 0, LIBPATH_LF_nullptr);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 
 #ifdef LIBPATH_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT
 
     rc = parse_path_from_cstyle_string(input, 0, &r, directoryPartSlices);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
 #endif
 
     rc = parse_path_from_cstyle_string(input, 0, &r, STLSOFT_NUM_ELEMENTS(directoryPartSlices), &directoryPartSlices[0]);
 
-    XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.input.len);
-    XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.fullPath.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.locationPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.rootPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-    XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+    TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+    TEST_INT_EQ(20u, r.input.len);
+    TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+    TEST_INT_EQ(20u, r.fullPath.len);
+    TEST_INT_EQ(20u, r.locationPart.len);
+    TEST_INT_EQ(20u, r.rootPart.len);
+    TEST_INT_EQ(20u, r.volumePart.len);
+    TEST_INT_EQ(0u, r.directoryPart.len);
+    TEST_INT_EQ(0u, r.numDirectoryParts);
+    TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+    TEST_INT_EQ(0u, r.entryNamePart.len);
+    TEST_INT_EQ(0u, r.entryStemPart.len);
+    TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-    XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
-    XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+    TEST_BOOLEAN_TRUE(is_rooted(r));
+    TEST_BOOLEAN_TRUE(is_absolute(r));
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
@@ -2459,65 +2459,65 @@ static void test_1_82(void)
         if (1 == i ||
             cch == i)
         {
-            XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_Success, rc);
-            XTESTS_TEST_INTEGER_EQUAL(i, r.input.len);
-            XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
-            XTESTS_TEST_INTEGER_EQUAL(i, r.fullPath.len);
-            XTESTS_TEST_INTEGER_EQUAL(i, r.locationPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(i, r.rootPart.len);
+            TEST_ENUM_EQ(libpath_ResultCode_Success, rc);
+            TEST_INT_EQ(i, r.input.len);
+            TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
+            TEST_INT_EQ(i, r.fullPath.len);
+            TEST_INT_EQ(i, r.locationPart.len);
+            TEST_INT_EQ(i, r.rootPart.len);
             if (cch == i)
             {
-                XTESTS_TEST_INTEGER_EQUAL(20u, r.volumePart.len);
+                TEST_INT_EQ(20u, r.volumePart.len);
             }
             else
             {
-                XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
+                TEST_INT_EQ(0u, r.volumePart.len);
             }
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+            TEST_INT_EQ(0u, r.directoryPart.len);
+            TEST_INT_EQ(0u, r.numDirectoryParts);
+            TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+            TEST_INT_EQ(0u, r.entryNamePart.len);
+            TEST_INT_EQ(0u, r.entryStemPart.len);
+            TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-            XTESTS_TEST_BOOLEAN_TRUE(is_rooted(r));
+            TEST_BOOLEAN_TRUE(is_rooted(r));
             if (cch == i)
             {
-                XTESTS_TEST_BOOLEAN_TRUE(is_absolute(r));
+                TEST_BOOLEAN_TRUE(is_absolute(r));
             }
             else
             {
-                XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+                TEST_BOOLEAN_FALSE(is_absolute(r));
             }
         }
         else
         {
             if (0 == i)
             {
-                XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_NoPathSpecified, rc);
-                XTESTS_TEST_INTEGER_EQUAL(i, r.input.len);
-                XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
+                TEST_ENUM_EQ(libpath_ResultCode_NoPathSpecified, rc);
+                TEST_INT_EQ(i, r.input.len);
+                TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
             }
             else
             {
-                XTESTS_TEST_ENUM_EQUAL(libpath_ResultCode_InvalidRoot, rc);
-                XTESTS_TEST_INTEGER_EQUAL(i, r.input.len);
-                XTESTS_TEST_MULTIBYTE_STRING_EQUAL_N(input, r.input.ptr, r.input.len);
+                TEST_ENUM_EQ(libpath_ResultCode_InvalidRoot, rc);
+                TEST_INT_EQ(i, r.input.len);
+                TEST_MS_EQ_N(input, r.input.ptr, r.input.len);
             }
 
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.fullPath.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.locationPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.rootPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.volumePart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.directoryPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.numDirectoryParts);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.numDotsDirectoryParts);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.entryNamePart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.entryStemPart.len);
-            XTESTS_TEST_INTEGER_EQUAL(0u, r.entryExtensionPart.len);
+            TEST_INT_EQ(0u, r.fullPath.len);
+            TEST_INT_EQ(0u, r.locationPart.len);
+            TEST_INT_EQ(0u, r.rootPart.len);
+            TEST_INT_EQ(0u, r.volumePart.len);
+            TEST_INT_EQ(0u, r.directoryPart.len);
+            TEST_INT_EQ(0u, r.numDirectoryParts);
+            TEST_INT_EQ(0u, r.numDotsDirectoryParts);
+            TEST_INT_EQ(0u, r.entryNamePart.len);
+            TEST_INT_EQ(0u, r.entryStemPart.len);
+            TEST_INT_EQ(0u, r.entryExtensionPart.len);
 
-            XTESTS_TEST_BOOLEAN_FALSE(is_rooted(r));
-            XTESTS_TEST_BOOLEAN_FALSE(is_absolute(r));
+            TEST_BOOLEAN_FALSE(is_rooted(r));
+            TEST_BOOLEAN_FALSE(is_absolute(r));
         }
     }}
 #endif /* LIBPATH_OS_IS_WINDOWS */
