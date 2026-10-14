@@ -1,6 +1,3 @@
-
-add_subdirectory(test.scratch.compare.models)
+# SIS:AUTO_GENERATED: Remove this line if you edit the file, otherwise it will be overwritten
+add_subdirectory(compare-models)
 add_subdirectory(versions)
-
-
-# ############################## end of file ############################# #

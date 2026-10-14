@@ -1,14 +1,10 @@
-
-add_subdirectory(test.unit.compare.1)
-add_subdirectory(test.unit.compare.1.c)
-add_subdirectory(test.unit.equal.1)
-add_subdirectory(test.unit.equal.1.c)
-add_subdirectory(test.unit.parse.1)
-add_subdirectory(test.unit.parse.c)
-add_subdirectory(test.unit.shim_strings)
-add_subdirectory(test.unit.type_strings)
-add_subdirectory(test.unit.version)
-
-
-# ############################## end of file ############################# #
-
+# SIS:AUTO_GENERATED: Remove this line if you edit the file, otherwise it will be overwritten
+add_subdirectory(compare)
+add_subdirectory(compare.C)
+add_subdirectory(equal)
+add_subdirectory(equal.C)
+add_subdirectory(parse)
+add_subdirectory(parse.C)
+add_subdirectory(shim-strings)
+add_subdirectory(type-strings)
+add_subdirectory(version)

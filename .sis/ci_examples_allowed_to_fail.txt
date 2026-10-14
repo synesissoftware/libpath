@@ -2,6 +2,6 @@
 # when invoked with no path argument (usage / invalid-args path).
 # run_all_examples.{sh,cmd} still executes each of them, but reports a
 # non-zero exit as anticipated rather than failing the run.
-# List program names or stems (example.cpp.parse.1 and
-# example.cpp.parse.1.exe are equivalent).
-example.cpp.parse.1
+# List program names or stems (example.cpp.parse and
+# example.cpp.parse.exe are equivalent).
+example.cpp.parse
