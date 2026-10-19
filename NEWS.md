@@ -3,6 +3,7 @@
 
 | Date                | News Item                           | Details                         |
 | ------------------- | ----------------------------------- | ------------------------------- |
+| 20th October 2026   | Release of [**libpath** 0.3.0-beta2](https://github.com/synesissoftware/libpath/releases/tag/0.3.0-beta2) | Gold tip helpers                |
 | 14th October 2026   | Release of [**libpath** 0.3.0-beta1](https://github.com/synesissoftware/libpath/releases/tag/0.3.0-beta1) | Gold helpers; modular CI; `LIBPATH_VER_RELSTATUS` |
 | 15th March 2025     | Release of [**libpath** 0.3.0-alpha1](https://github.com/synesissoftware/libpath/releases/tag/0.3.0-alpha1) | Changed API                     |
 | 23rd February 2025  | Release of [**libpath** 0.2.0-alpha5](https://github.com/synesissoftware/libpath/releases/tag/0.2.0-alpha5) | Boilerplate tidying             |

@@ -1,6 +1,12 @@
 # libpath - Changes <!-- omit in toc -->
 
 
+## 0.3.0-beta2 - 20th October 2026
+
+* Aligned the **run_all_examples.sh**, **run_all_scratch_tests.sh** / **.cmd**, and **run_all_unit_tests.sh** helper scripts with **misc-dev-scripts** gold tip **0754c23**, excluding **CMakeFiles** and `*.d` / `*.o` / `*.obj` from discovery and adding scratch `--skip-interactive`;
+* Raised `LIBPATH_VER_RELSTATUS` to `0x82` for **0.3.0-beta2**;
+
+
 ## 0.3.0-beta1 - 14th October 2026
 
 * Applied **misc-dev-scripts** editor/Git/`.sis` drop-in templates (**.editorconfig**, **.gitattributes**, **.gitignore**, **.vimrc**, **.vscode/settings.json**);
