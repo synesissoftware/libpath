@@ -1,6 +1,14 @@
 
 #include <libpath/common/version.h>
 
+#ifdef HAS_STLSoft
+# include <stlsoft/stlsoft.h>
+#endif
+
+#ifdef HAS_xTests
+# include <xtests/xtests.h>
+#endif
+
 #include <iomanip>
 #include <iostream>
 
@@ -45,11 +53,41 @@ version(
 
 int main(int /*argc*/, char* /*argv*/[])
 {
+    int efferents_count = 0;
+
     {
         unsigned const libver = LIBPATH_VER;
 
         version(std::cout, "", "libpath", "LIBPATH_VER", libver);
     }
+
+#ifdef HAS_STLSoft
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = _STLSOFT_VER;
+
+        version(std::cout, "\t", "STLSoft", "_STLSOFT_VER", libver);
+    }
+#endif
+
+#ifdef HAS_xTests
+
+    if (0 == efferents_count++)
+    {
+        std::cout << "\n" << "efferent dependencies:" << std::endl;
+    }
+
+    {
+        unsigned const libver = _XTESTS_VER;
+
+        version(std::cout, "\t", "xTests", "_XTESTS_VER", libver);
+    }
+#endif
 
     return EXIT_SUCCESS;
 }
