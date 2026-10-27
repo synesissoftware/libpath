@@ -1,6 +1,11 @@
 # libpath - Changes <!-- omit in toc -->
 
 
+## 0.3.0-beta3 - 27th October 2026
+
+* Defined `HAS_xTests` and `HAS_XTESTS` when **xTests** is detected;
+
+
 ## 0.3.0-beta2 - 20th October 2026
 
 * Aligned the **run_all_examples.sh**, **run_all_scratch_tests.sh** / **.cmd**, and **run_all_unit_tests.sh** helper scripts with **misc-dev-scripts** gold tip **0754c23**, excluding **CMakeFiles** and `*.d` / `*.o` / `*.obj` from discovery and adding scratch `--skip-interactive`;

@@ -155,6 +155,12 @@ if(BUILD_TESTING)
 
 		include_directories(${STLSOFT_INCLUDE_DIR})
 	endif()
+
+	if(DEFINED STLSOFT_INCLUDE_DIR OR DEFINED STLSoft_FOUND)
+
+		add_compile_definitions(HAS_STLSOFT)
+		add_compile_definitions(HAS_STLSoft)
+	endif()
 endif(BUILD_TESTING)
 
 
@@ -163,11 +169,16 @@ endif(BUILD_TESTING)
 
 if(BUILD_TESTING)
 
-	set(xTests_REQUIRED_VERSION_ 0.26)
+	set(xTests_REQUIRED_VERSION_ 0.28)
 
 	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(
+		HAS_xTests
+		HAS_XTESTS
+	)
 endif(BUILD_TESTING)
 
 
