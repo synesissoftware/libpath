@@ -1,6 +1,12 @@
 # libpath - Changes <!-- omit in toc -->
 
 
+## 0.3.0-beta4 - 2nd November 2026
+
+* build:
+  * **STLSoft** minimum is **1.11.5**;
+  * **xTests** minimum is **0.28.2**;
+
 ## 0.3.0-beta3 - 27th October 2026
 
 * Defined `HAS_xTests` and `HAS_XTESTS` when **xTests** is detected;
