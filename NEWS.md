@@ -3,6 +3,7 @@
 
 | Date                | News Item                           | Details                         |
 | ------------------- | ----------------------------------- | ------------------------------- |
+| 5th November 2026   | Release of [**libpath** 0.3.0](https://github.com/synesissoftware/libpath/releases/tag/0.3.0) | Full release; `LIBPATH_VER_RELSTATUS` `0xFF` |
 | 2nd November 2026   | Release of [libpath 0.3.0-beta4](https://github.com/synesissoftware/libpath/releases/tag/0.3.0-beta4) | **STLSoft** **1.11.5**; **xTests** **0.28.2** |
 | 27th October 2026   | Release of [libpath 0.3.0-beta3](https://github.com/synesissoftware/libpath/releases/tag/0.3.0-beta3) | `HAS_xTests` / `HAS_XTESTS` when **xTests** is detected |
 | 20th October 2026   | Release of [**libpath** 0.3.0-beta2](https://github.com/synesissoftware/libpath/releases/tag/0.3.0-beta2) | Gold tip helpers                |

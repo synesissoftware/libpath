@@ -1,6 +1,15 @@
 # libpath - Changes <!-- omit in toc -->
 
 
+## 0.3.0 - 5th November 2026
+
+* Raised `LIBPATH_VER_RELSTATUS` to `0xFF` for the **0.3.0** full release;
+* Added a **Developer Experience** section to **README.md**;
+* Recorded the missing C++ Equating API on **TODO.md**;
+* Aligned the development-dependency floors in **README.md** and **REQUISITES.md** with **STLSoft** **1.11.5** and **xTests** **0.29**;
+* Installed **woad** before **xTests** in CI (**xTests** **0.29** requires **woad**);
+
+
 ## 0.3.0-beta4 - 2nd November 2026
 
 * build:

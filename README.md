@@ -14,6 +14,7 @@ Path parsing library (for C and C++)
 ## Table of Contents <!-- omit in toc -->
 
 - [Introduction](#introduction)
+- [Developer Experience](#developer-experience)
 - [Installation](#installation)
 - [Components](#components)
 - [Examples](#examples)
@@ -30,6 +31,49 @@ Path parsing library (for C and C++)
 ## Introduction
 
 **libpath** is a small, standalone library, implemented in C with a C and a C++ API, that provides file-system path parsing and comparison, for platform-dependent - **Unix** and **Windows** - and platform-independent path manipulation. It is intended to be useful for application-level programming as well as a basis for other libraries.
+
+
+## Developer Experience
+
+**Need**: a C compiler and **CMake** 3.20+. Tests and examples also need [STLSoft](https://github.com/synesissoftware/STLSoft) **1.11.5** or later and [xTests](https://github.com/synesissoftware/xTests) **0.29** or later. The library itself needs only the C standard library (and the C++ standard library for the C++ API).
+
+**Build**:
+
+```bash
+./prepare_cmake.sh
+./build_cmake.sh
+```
+
+**Try**:
+
+```bash
+./run_all_unit_tests.sh
+./run_all_examples.sh
+```
+
+**Simplest use** (C):
+
+```C
+#include <libpath/parse.h>
+
+libpath_PathDescriptor_t desc;
+
+libpath_Parse_ParsePathFromCStyleString("/tmp/a", 0, &desc, 0, NULL, NULL);
+int const absolute = libpath_ParseResult_IsPathAbsolute(&desc);
+```
+
+**Simplest use** (C++):
+
+```C++
+#include <libpath/parse.hpp>
+
+libpath::parsing::PathDescriptor_t desc;
+
+libpath::parsing::parse_path_from_cstyle_string("/tmp/a", 0, &desc, 0, nullptr);
+int const absolute = libpath_ParseResult_IsPathAbsolute(&desc);
+```
+
+**Read next**: [INSTALL.md](./INSTALL.md) for installation, the **examples** directory for usage, and [FAQ.md](./FAQ.md) for common questions.
 
 
 ## Installation
@@ -76,8 +120,8 @@ If you'd like to help out with the project, please raise an issue via [GitHub Pa
 
 In order to run the test programs, **libpath** has the following development dependencies:
 
-* [STLSoft](https://github.com/synesissoftware/STLSoft) **1.11** or later;
-* [xTests](https://github.com/synesissoftware/xTests) **0.26** or later;
+* [STLSoft](https://github.com/synesissoftware/STLSoft) **1.11.5** or later;
+* [xTests](https://github.com/synesissoftware/xTests) **0.29** or later;
 
 
 ### Related projects

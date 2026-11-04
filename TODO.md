@@ -15,6 +15,7 @@
   * [x] ~~~`#entryPart` -> `#entryNamePart`~~~ - ✅;
 * [x] ~~~Separate out `libpath_PathDescriptor_t#firstBadCharOffset`~~~ - ✅;
 * [x] ~~~Remove implicit-link implementation files~~~ - ✅;
+* [ ] Provide C++ overloads in **include/libpath/equate.hpp** (the `equating` namespace is empty; only the C Equating API is implemented);
 
 
 ## Performance improvements
