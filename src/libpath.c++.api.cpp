@@ -47,7 +47,7 @@ abort_on_invalid_path_policy::respond(
  * namespace
  */
 
-} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+} // namespace LIBPATH_NS_OUTER_NAMESPACE_NAME
 
 
 /* ///////////////////////////// end of file //////////////////////////// */
