@@ -4,11 +4,11 @@
  * Purpose: C++ include for libpath Parsing API.
  *
  * Created: 29th March 2013
- * Updated: 11th August 2024
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -311,8 +311,8 @@ is_rooted(
  * namespace
  */
 
-} /* namespace parsing */
-} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+} // namespace parsing
+} // namespace LIBPATH_NS_OUTER_NAMESPACE_NAME
 
 
 /* ////////////////////////////////////////////////////////////////////// */

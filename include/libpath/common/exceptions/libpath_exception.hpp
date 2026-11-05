@@ -4,11 +4,11 @@
  * Purpose: Definition of libpath::exceptions::libpath_exception.
  *
  * Created: 5th April 2013
- * Updated: 4th May 2024
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -87,8 +87,8 @@ private: // Implementation
  * namespace
  */
 
-} /* namespace exceptions */
-} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+} // namespace exceptions
+} // namespace LIBPATH_NS_OUTER_NAMESPACE_NAME
 
 
 /* ////////////////////////////////////////////////////////////////////// */

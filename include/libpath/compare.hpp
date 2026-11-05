@@ -4,11 +4,11 @@
  * Purpose: C++ include for libpath Comparing API.
  *
  * Created: 9th November 2012
- * Updated: 27th July 2024
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2012-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -287,10 +287,7 @@ compare_paths_and_(
 
     return result;
 }
-
-} /* namespace ximpl_compare */
-
-
+} // namespace ximpl_compare
 
 
 template <typename P>
@@ -319,8 +316,8 @@ compare_paths(
  * namespace
  */
 
-} /* namespace comparing */
-} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+} // namespace comparing
+} // namespace LIBPATH_NS_OUTER_NAMESPACE_NAME
 
 
 /* ////////////////////////////////////////////////////////////////////// */
