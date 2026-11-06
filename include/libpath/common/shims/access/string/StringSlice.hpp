@@ -4,11 +4,11 @@
  * Purpose: Definition of String Access Shims for libpath StringSlice.
  *
  * Created: 13th February 2013
- * Updated: 11th February 2024
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2013-2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -121,7 +121,7 @@ c_str_len(
  */
 
 #ifndef STLSOFT_NO_NAMESPACE
-} /* namespace stlsoft */
+} // namespace stlsoft
 #endif /* !STLSOFT_NO_NAMESPACE */
 
 

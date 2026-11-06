@@ -4,7 +4,7 @@
  * Purpose: C++ include for libpath Equating API.
  *
  * Created: 11th February 2024
- * Updated: 11th February 2024
+ * Updated: 6th November 2026
  *
  * Home:    https://github.com/synesissoftware/libpath
  *
@@ -74,8 +74,8 @@ namespace equating {
  * namespace
  */
 
-} /* namespace equating */
-} /* namespace LIBPATH_NS_OUTER_NAMESPACE_NAME */
+} // namespace equating
+} // namespace LIBPATH_NS_OUTER_NAMESPACE_NAME
 
 
 /* ////////////////////////////////////////////////////////////////////// */
