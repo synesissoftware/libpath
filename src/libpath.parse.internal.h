@@ -1,7 +1,7 @@
 
 /*
- * Created:
- * Updated: 11th February 2024
+ * Created: 
+ * Updated: 11th November 2026
  */
 
 #include <libpath/parse/types.h>

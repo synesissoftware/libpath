@@ -1,7 +1,7 @@
 
 /*
- * Created:
- * Updated: 10th February 2024
+ * Created: 
+ * Updated: 11th November 2026
  */
 
 #include <libpath/equate/types.h>
