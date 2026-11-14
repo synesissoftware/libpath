@@ -46,24 +46,24 @@
 namespace
 {
 
-    static void test_compare_filenames(void);
-    static void test_compare_slash_rooted_filenames(void);
-    static void test_compare_Windows_drive_rooted_filenames(void);
-    static void test_compare_relative_directory(void);
-    static void test_compare_dots_directory(void);
-    static void test_compare_2dotsdir(void);
-    static void test_compare_mixed_dots_directory(void);
-    static void test_compare_slash(void);
-    static void test_compare_2_dirs_and_filename(void);
-    static void test_compare_slash_rooted_filename(void);
-    static void test_Windows_mixed_rooted_paths(void);
-    static void test_mixed_with_root_pwd(void);
-    static void test_noncanonical_paths(void);
-    static void test_noncanonical_paths_trailing_dots(void);
-    static void test_sliding_rel_and_cwd(void);
-    static void test_compare_UNC_rooted_paths(void);
-    static void test_Windows_mixed_pwd(void);
-    static void test_mixed_comparisons(void);
+    static void test_compare_filenames();
+    static void test_compare_slash_rooted_filenames();
+    static void test_compare_Windows_drive_rooted_filenames();
+    static void test_compare_relative_directory();
+    static void test_compare_dots_directory();
+    static void test_compare_2dotsdir();
+    static void test_compare_mixed_dots_directory();
+    static void test_compare_slash();
+    static void test_compare_2_dirs_and_filename();
+    static void test_compare_slash_rooted_filename();
+    static void test_Windows_mixed_rooted_paths();
+    static void test_mixed_with_root_pwd();
+    static void test_noncanonical_paths();
+    static void test_noncanonical_paths_trailing_dots();
+    static void test_sliding_rel_and_cwd();
+    static void test_compare_UNC_rooted_paths();
+    static void test_Windows_mixed_pwd();
+    static void test_mixed_comparisons();
 } // anonymous namespace
 
 
@@ -163,7 +163,7 @@ namespace
 
 
 
-static void test_compare_filenames(void)
+static void test_compare_filenames()
 {
     // Just entry parts
 
@@ -189,7 +189,7 @@ static void test_compare_filenames(void)
 #endif
 }
 
-static void test_compare_slash_rooted_filenames(void)
+static void test_compare_slash_rooted_filenames()
 {
     // Just rooted entry parts
 
@@ -218,7 +218,7 @@ static void test_compare_slash_rooted_filenames(void)
 #endif
 }
 
-static void test_compare_Windows_drive_rooted_filenames(void)
+static void test_compare_Windows_drive_rooted_filenames()
 {
     // Windows-rooted entry parts
 
@@ -259,7 +259,7 @@ static void test_compare_Windows_drive_rooted_filenames(void)
 #endif
 }
 
-static void test_compare_relative_directory(void)
+static void test_compare_relative_directory()
 {
     // Just directory parts
 
@@ -292,7 +292,7 @@ static void test_compare_relative_directory(void)
 #endif
 }
 
-static void test_compare_dots_directory(void)
+static void test_compare_dots_directory()
 {
     // Just single dots dir - 1-dot
 
@@ -314,7 +314,7 @@ static void test_compare_dots_directory(void)
 #endif
 }
 
-static void test_compare_2dotsdir(void)
+static void test_compare_2dotsdir()
 {
     // Just single dots dir - 2-dot
 
@@ -336,7 +336,7 @@ static void test_compare_2dotsdir(void)
 #endif
 }
 
-static void test_compare_mixed_dots_directory(void)
+static void test_compare_mixed_dots_directory()
 {
     // mixed dots entities
 
@@ -351,7 +351,7 @@ static void test_compare_mixed_dots_directory(void)
     TEST_INT_LT(0,    compare_paths("....",  "....."));
 }
 
-static void test_compare_slash(void)
+static void test_compare_slash()
 {
     // root directory
 
@@ -367,7 +367,7 @@ static void test_compare_slash(void)
 #endif
 }
 
-static void test_compare_2_dirs_and_filename(void)
+static void test_compare_2_dirs_and_filename()
 {
     // more complex relative paths
 
@@ -378,7 +378,7 @@ static void test_compare_2_dirs_and_filename(void)
     TEST_INT_GT(0, compare_paths("dir1/dir21/file.ext", "dir1/dir2/file.ext"));
 }
 
-static void test_compare_slash_rooted_filename(void)
+static void test_compare_slash_rooted_filename()
 {
     // absolute vs relative - no cwd
 
@@ -405,7 +405,7 @@ static void test_compare_slash_rooted_filename(void)
 #endif
 }
 
-static void test_Windows_mixed_rooted_paths(void)
+static void test_Windows_mixed_rooted_paths()
 {
     // absolute vs rooted - no cwd
 
@@ -423,7 +423,7 @@ static void test_Windows_mixed_rooted_paths(void)
 #endif
 }
 
-static void test_mixed_with_root_pwd(void)
+static void test_mixed_with_root_pwd()
 {
     // absolute vs relative - cwd
 
@@ -485,7 +485,7 @@ static void test_mixed_with_root_pwd(void)
 #endif
 }
 
-static void test_noncanonical_paths(void)
+static void test_noncanonical_paths()
 {
     // paths that need canonicalising
 
@@ -561,7 +561,7 @@ static void test_noncanonical_paths(void)
     TEST_INT_LT(0,    compare_paths("d1/d2/d3/d4/d5/d6/d7/d8/d9/../../../../file1.ext", "d1/d2/d3/d4/d5/file2.ext"));
 }
 
-static void test_noncanonical_paths_trailing_dots(void)
+static void test_noncanonical_paths_trailing_dots()
 {
     // trailing dots
 
@@ -574,7 +574,7 @@ static void test_noncanonical_paths_trailing_dots(void)
     TEST_INT_EQ(0,   compare_paths("dir1/dir2/.", "dir1/dir2/./"));
 }
 
-static void test_sliding_rel_and_cwd(void)
+static void test_sliding_rel_and_cwd()
 {
     // sliding [rel / cwd]
 
@@ -660,7 +660,7 @@ static void test_sliding_rel_and_cwd(void)
 #endif
 }
 
-static void test_compare_UNC_rooted_paths(void)
+static void test_compare_UNC_rooted_paths()
 {
     // UNC roots
 
@@ -681,7 +681,7 @@ static void test_compare_UNC_rooted_paths(void)
 #endif
 }
 
-static void test_Windows_mixed_pwd(void)
+static void test_Windows_mixed_pwd()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
 
@@ -703,7 +703,7 @@ static void test_Windows_mixed_pwd(void)
 #endif
 }
 
-static void test_mixed_comparisons(void)
+static void test_mixed_comparisons()
 {
     TEST_INT_LT(0,    compare_paths("file1.ext", "file2.ext"));
     TEST_INT_GT(0, compare_paths("file2.ext", "file1.ext"));

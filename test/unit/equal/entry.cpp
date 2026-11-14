@@ -48,34 +48,34 @@
 namespace
 {
 
-    static void test_1_0(void);
-    static void test_1_1(void);
-    static void test_1_2(void);
-    static void test_1_3(void);
-    static void test_1_4(void);
-    static void test_1_5(void);
-    static void test_1_6(void);
-    static void test_1_7(void);
-    static void test_1_8(void);
-    static void test_1_9(void);
-    static void test_1_10(void);
-    static void test_1_11(void);
+    static void test_1_0();
+    static void test_1_1();
+    static void test_1_2();
+    static void test_1_3();
+    static void test_1_4();
+    static void test_1_5();
+    static void test_1_6();
+    static void test_1_7();
+    static void test_1_8();
+    static void test_1_9();
+    static void test_1_10();
+    static void test_1_11();
 
-    static void test_1_20(void);
+    static void test_1_20();
 
-    static void test_1_30(void);
-    static void test_1_31(void);
-    static void test_1_32(void);
-    static void test_1_33(void);
+    static void test_1_30();
+    static void test_1_31();
+    static void test_1_32();
+    static void test_1_33();
 
-    static void test_1_40(void);
-    static void test_1_41(void);
-    static void test_1_42(void);
-    static void test_1_43(void);
-    static void test_1_44(void);
-    static void test_1_45(void);
+    static void test_1_40();
+    static void test_1_41();
+    static void test_1_42();
+    static void test_1_43();
+    static void test_1_44();
+    static void test_1_45();
 
-    static void test_1_50(void);
+    static void test_1_50();
 } // anonymous namespace
 
 
@@ -179,32 +179,32 @@ namespace
     }
 
 
-static void test_1_0(void)
+static void test_1_0()
 {
     TEST_BOOLEAN_FALSE(path_equals("", ""));
 }
 
-static void test_1_1(void)
+static void test_1_1()
 {
     TEST_BOOLEAN_FALSE(path_equals("", "a"));
     TEST_BOOLEAN_FALSE(path_equals("a", ""));
 }
 
-static void test_1_2(void)
+static void test_1_2()
 {
     TEST_BOOLEAN_TRUE(path_equals("file", "file"));
 
     TEST_BOOLEAN_FALSE(path_equals("fil1", "fil2"));
 }
 
-static void test_1_3(void)
+static void test_1_3()
 {
     TEST_BOOLEAN_TRUE(path_equals("file.ext", "file.ext"));
 
     TEST_BOOLEAN_FALSE(path_equals("file.ex1", "file.ex2"));
 }
 
-static void test_1_4(void)
+static void test_1_4()
 {
     TEST_BOOLEAN_TRUE(path_equals("dir1/file.ext", "dir1/file.ext"));
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -214,7 +214,7 @@ static void test_1_4(void)
 #endif
 }
 
-static void test_1_5(void)
+static void test_1_5()
 {
     TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "dir2/file.ext"));
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -224,7 +224,7 @@ static void test_1_5(void)
 #endif
 }
 
-static void test_1_6(void)
+static void test_1_6()
 {
     TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/dir2/../file.ext"));
     TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/../file.ext", "dir1/dir3/../file.ext"));
@@ -240,7 +240,7 @@ static void test_1_6(void)
     TEST_BOOLEAN_TRUE(path_equals("../dir1/dir2/../file.ext", "../dir1/dir2/../file.ext"));
 }
 
-static void test_1_7(void)
+static void test_1_7()
 {
     TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/dir2/../file.ext"));
     TEST_BOOLEAN_FALSE(path_equals("dir1/dir2/../file.ext", "dir9/dir3/../file.ext"));
@@ -256,14 +256,14 @@ static void test_1_7(void)
     TEST_BOOLEAN_FALSE(path_equals("../dir1/dir2/../file.ext", "../dir9/dir2/../file.ext"));
 }
 
-static void test_1_8(void)
+static void test_1_8()
 {
     TEST_BOOLEAN_FALSE(path_equals("dir1/../../file.ext", "dir1/file.ext"));
 
     TEST_BOOLEAN_FALSE(path_equals("dir1/file.ext", "../dir1/file.ext"));
 }
 
-static void test_1_9(void)
+static void test_1_9()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext"));
@@ -272,7 +272,7 @@ static void test_1_9(void)
 #endif
 }
 
-static void test_1_10(void)
+static void test_1_10()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     TEST_BOOLEAN_TRUE(path_equals("\\\\server1\\share1\\dir1\\file.ext", "\\\\server1\\share1\\dir1\\file.ext"));
@@ -284,7 +284,7 @@ static void test_1_10(void)
 #endif
 }
 
-static void test_1_11(void)
+static void test_1_11()
 {
     TEST_BOOLEAN_TRUE(path_equals("dir1/dir2/file.ext", "dir1/dir2/file.ext"));
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -310,7 +310,7 @@ static void test_1_11(void)
 #endif
 }
 
-static void test_1_20(void)
+static void test_1_20()
 {
     // Trailing slashes
 
@@ -330,7 +330,7 @@ static void test_1_20(void)
 
 }
 
-static void test_1_30(void)
+static void test_1_30()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/file.ext", "dir3/file.ext", LIBPATH_LF_nullptr));
 
@@ -346,7 +346,7 @@ static void test_1_30(void)
     TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/dir4/dir5/file.ext", "file.ext", "/dir1/dir2/dir3/dir4/dir5"));
 }
 
-static void test_1_31(void)
+static void test_1_31()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "dir3", LIBPATH_LF_nullptr));
 
@@ -354,7 +354,7 @@ static void test_1_31(void)
     TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "dir3/", "/dir1/dir2"));
 }
 
-static void test_1_32(void)
+static void test_1_32()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/file.ext", "dir1/file.ext"));
 
@@ -363,7 +363,7 @@ static void test_1_32(void)
 #endif
 }
 
-static void test_1_33(void)
+static void test_1_33()
 {
     TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "dir1/file.ext", "/"));
 
@@ -373,7 +373,7 @@ static void test_1_33(void)
 #endif
 }
 
-static void test_1_40(void)
+static void test_1_40()
 {
     TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "/dir1/file.ext"));
 #ifdef LIBPATH_OS_IS_WINDOWS
@@ -383,7 +383,7 @@ static void test_1_40(void)
 #endif
 }
 
-static void test_1_41(void)
+static void test_1_41()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     TEST_BOOLEAN_TRUE(path_equals("C:\\dir1\\file.ext", "C:\\dir1\\file.ext"));
@@ -417,7 +417,7 @@ static void test_1_41(void)
 #endif
 }
 
-static void test_1_42(void)
+static void test_1_42()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/file.ext", "dir1/file.ext"));
     TEST_BOOLEAN_TRUE(path_equals("/dir1/file.ext", "dir1/file.ext", "/"));
@@ -431,7 +431,7 @@ static void test_1_42(void)
 #endif
 }
 
-static void test_1_43(void)
+static void test_1_43()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/file.ext"));
     TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "dir2/file.ext", "/dir1"));
@@ -445,7 +445,7 @@ static void test_1_43(void)
 #endif
 }
 
-static void test_1_44(void)
+static void test_1_44()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/file.ext"));
     TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "dir2/file.ext", "/dir1/dir2/dir3/./../.."));
@@ -459,7 +459,7 @@ static void test_1_44(void)
 #endif
 }
 
-static void test_1_45(void)
+static void test_1_45()
 {
     TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/file.ext", "dir1/dir2/dir3/./../../dir2/file.ext"));
     TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/file.ext", "./../../dir2/file.ext", "/dir1/dir2/dir3/"));
@@ -473,7 +473,7 @@ static void test_1_45(void)
 #endif
 }
 
-static void test_1_50(void)
+static void test_1_50()
 {
     TEST_BOOLEAN_TRUE(path_equals("/dir1/dir2/dir3/", "/dir1/dir2/dir3/"));
     TEST_BOOLEAN_FALSE(path_equals("/dir1/dir2/dir3/", "/dir1/dir2/dir3"));

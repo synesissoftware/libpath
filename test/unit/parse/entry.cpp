@@ -40,63 +40,63 @@
  * forward declarations
  */
 
-static void test_1_0(void);
-static void test_1_1(void);
-static void test_1_2(void);
-static void test_1_3(void);
-static void test_1_4(void);
+static void test_1_0();
+static void test_1_1();
+static void test_1_2();
+static void test_1_3();
+static void test_1_4();
 
-static void test_1_6(void);
-static void test_1_7(void);
-static void test_1_8(void);
+static void test_1_6();
+static void test_1_7();
+static void test_1_8();
 
-static void test_1_10(void);
-static void test_1_11(void);
-static void test_1_12(void);
+static void test_1_10();
+static void test_1_11();
+static void test_1_12();
 
-static void test_1_14(void);
-static void test_1_15(void);
-static void test_1_16(void);
-static void test_1_17(void);
-static void test_1_18(void);
-static void test_1_19(void);
-static void test_1_20(void);
-static void test_1_21(void);
-static void test_1_22(void);
+static void test_1_14();
+static void test_1_15();
+static void test_1_16();
+static void test_1_17();
+static void test_1_18();
+static void test_1_19();
+static void test_1_20();
+static void test_1_21();
+static void test_1_22();
 
-static void test_1_30(void);
-static void test_1_31(void);
-static void test_1_32(void);
-static void test_1_33(void);
-static void test_1_34(void);
-static void test_1_35(void);
-static void test_1_36(void);
-static void test_1_37(void);
+static void test_1_30();
+static void test_1_31();
+static void test_1_32();
+static void test_1_33();
+static void test_1_34();
+static void test_1_35();
+static void test_1_36();
+static void test_1_37();
 
-static void test_1_40(void);
-static void test_1_41(void);
-static void test_1_42(void);
-static void test_1_43(void);
-static void test_1_44(void);
+static void test_1_40();
+static void test_1_41();
+static void test_1_42();
+static void test_1_43();
+static void test_1_44();
 
-static void test_1_50(void);
-static void test_1_51(void);
-static void test_1_52(void);
-static void test_1_53(void);
-static void test_1_54(void);
-static void test_1_55(void);
+static void test_1_50();
+static void test_1_51();
+static void test_1_52();
+static void test_1_53();
+static void test_1_54();
+static void test_1_55();
 
-static void test_1_60(void);
-static void test_1_61(void);
+static void test_1_60();
+static void test_1_61();
 
-static void test_1_70(void);
-static void test_1_71(void);
-static void test_1_72(void);
-static void test_1_73(void);
+static void test_1_70();
+static void test_1_71();
+static void test_1_72();
+static void test_1_73();
 
-static void test_1_80(void);
-static void test_1_81(void);
-static void test_1_82(void);
+static void test_1_80();
+static void test_1_81();
+static void test_1_82();
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -203,7 +203,7 @@ using ::libpath::parsing::is_rooted;
 #endif /* __cplusplus */
 
 
-static void test_1_0(void)
+static void test_1_0()
 {
     char const input[] = "";
 
@@ -244,7 +244,7 @@ static void test_1_0(void)
     TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
-static void test_1_1(void)
+static void test_1_1()
 {
     char const input[] = ".";
 
@@ -272,7 +272,7 @@ static void test_1_1(void)
     TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_2(void)
+static void test_1_2()
 {
     char const input[] = "..";
 
@@ -300,7 +300,7 @@ static void test_1_2(void)
     TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_3(void)
+static void test_1_3()
 {
     char const input[] = "/.";
 
@@ -346,7 +346,7 @@ static void test_1_3(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_4(void)
+static void test_1_4()
 {
     char const input[] = "/..";
 
@@ -391,7 +391,7 @@ static void test_1_4(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_6(void)
+static void test_1_6()
 {
     char const input[] = "...";
 
@@ -416,7 +416,7 @@ static void test_1_6(void)
     TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
-static void test_1_7(void)
+static void test_1_7()
 {
     char const input[] = ".....";
 
@@ -440,7 +440,7 @@ static void test_1_7(void)
     TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
-static void test_1_8(void)
+static void test_1_8()
 {
     char const input[] = "..abc.def..";
 
@@ -464,7 +464,7 @@ static void test_1_8(void)
     TEST_INT_EQ(0u, r.entryExtensionPart.len);
 }
 
-static void test_1_10(void)
+static void test_1_10()
 {
     char const input[] = "abc";
 
@@ -505,7 +505,7 @@ static void test_1_10(void)
     TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_11(void)
+static void test_1_11()
 {
     char const input[] = "a.c";
 
@@ -534,7 +534,7 @@ static void test_1_11(void)
     TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_12(void)
+static void test_1_12()
 {
     char const input[] = ".bc";
 
@@ -575,7 +575,7 @@ static void test_1_12(void)
     TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_14(void)
+static void test_1_14()
 {
     char const input[] = "/abc";
 
@@ -623,7 +623,7 @@ static void test_1_14(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_15(void)
+static void test_1_15()
 {
     char const input[] = "/dir/abc";
 
@@ -672,7 +672,7 @@ static void test_1_15(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_16(void)
+static void test_1_16()
 {
     char const input[] = "/dir/";
 
@@ -720,7 +720,7 @@ static void test_1_16(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_17(void)
+static void test_1_17()
 {
     char const input[] = "/dir/dir2/";
 
@@ -804,7 +804,7 @@ static void test_1_17(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_18(void)
+static void test_1_18()
 {
     char const input[] = "/directory1/directory2/dir3/dir4/d5/d6/";
 
@@ -862,7 +862,7 @@ static void test_1_18(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_19(void)
+static void test_1_19()
 {
     char const input[] = "/directory1/directory2/dir3/dir4/d5/d6/file.ext";
 
@@ -922,7 +922,7 @@ static void test_1_19(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_20(void)
+static void test_1_20()
 {
     char const input[] = "/1/2/3/4/5/6/f";
 
@@ -979,7 +979,7 @@ static void test_1_20(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_21(void)
+static void test_1_21()
 {
     char const input[] = "/";
 
@@ -1024,7 +1024,7 @@ static void test_1_21(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_22(void)
+static void test_1_22()
 {
     char const input[] = "this.is.a.more.complex.file.ext";
 
@@ -1065,7 +1065,7 @@ static void test_1_22(void)
     TEST_BOOLEAN_FALSE(is_absolute(r));
 }
 
-static void test_1_30(void)
+static void test_1_30()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\";
@@ -1106,7 +1106,7 @@ static void test_1_30(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_31(void)
+static void test_1_31()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\abc";
@@ -1147,7 +1147,7 @@ static void test_1_31(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_32(void)
+static void test_1_32()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:\\";
@@ -1188,7 +1188,7 @@ static void test_1_32(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_33(void)
+static void test_1_33()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:\\abc";
@@ -1229,7 +1229,7 @@ static void test_1_33(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_34(void)
+static void test_1_34()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:\\directory1\\directory2\\dir3\\dir4\\d5\\d6\\file.ext";
@@ -1282,7 +1282,7 @@ static void test_1_34(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_35(void)
+static void test_1_35()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:/";
@@ -1323,7 +1323,7 @@ static void test_1_35(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_36(void)
+static void test_1_36()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:/abc";
@@ -1364,7 +1364,7 @@ static void test_1_36(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_37(void)
+static void test_1_37()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:/directory1\\directory2\\dir3\\dir4\\d5\\d6\\file.ext";
@@ -1417,7 +1417,7 @@ static void test_1_37(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_40(void)
+static void test_1_40()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share\\";
@@ -1458,7 +1458,7 @@ static void test_1_40(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_41(void)
+static void test_1_41()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share\\abc";
@@ -1499,7 +1499,7 @@ static void test_1_41(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_42(void)
+static void test_1_42()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share\\directory1\\directory2\\dir3\\dir4\\d5\\d6\\file.ext";
@@ -1552,7 +1552,7 @@ static void test_1_42(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_43(void)
+static void test_1_43()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share\\directory1/directory2\\dir3/dir4\\d5/d6\\file.ext";
@@ -1605,7 +1605,7 @@ static void test_1_43(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_44(void)
+static void test_1_44()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share/directory1\\directory2/dir3\\dir4/d5\\d6/file.ext";
@@ -1658,7 +1658,7 @@ static void test_1_44(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_50(void)
+static void test_1_50()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:abc";
@@ -1699,7 +1699,7 @@ static void test_1_50(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_51(void)
+static void test_1_51()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:directory1\\directory2\\dir3\\dir4\\d5\\d6\\file.ext";
@@ -1752,7 +1752,7 @@ static void test_1_51(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_52(void)
+static void test_1_52()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:directory1/directory2\\dir3/dir4\\d5/d6\\file.ext";
@@ -1805,7 +1805,7 @@ static void test_1_52(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_53(void)
+static void test_1_53()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "C:directory1/directory2\\dir3/dir4\\d5/d6\\.";
@@ -1858,7 +1858,7 @@ static void test_1_53(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_54(void)
+static void test_1_54()
 {
     char const input[] = "/dir//abc";
 
@@ -1905,7 +1905,7 @@ static void test_1_54(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_55(void)
+static void test_1_55()
 {
     char const input[] = "dir/abc";
 
@@ -1952,7 +1952,7 @@ static void test_1_55(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_60(void)
+static void test_1_60()
 {
     static char const bad_chars[] =
     {
@@ -2006,7 +2006,7 @@ static void test_1_60(void)
     }}
 }
 
-static void test_1_61(void)
+static void test_1_61()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     ParseResult_t   r;
@@ -2065,7 +2065,7 @@ static void test_1_61(void)
 #endif
 }
 
-static void test_1_70(void)
+static void test_1_70()
 {
     ParseResult_t   r;
     LIBPATH_RC      rc;
@@ -2132,7 +2132,7 @@ static void test_1_70(void)
 
 }
 
-static void test_1_71(void)
+static void test_1_71()
 {
     ParseResult_t   r;
     LIBPATH_RC      rc;
@@ -2207,7 +2207,7 @@ static void test_1_71(void)
 
 }
 
-static void test_1_72(void)
+static void test_1_72()
 {
     ParseResult_t   r;
     LIBPATH_RC      rc;
@@ -2284,7 +2284,7 @@ static void test_1_72(void)
 
 }
 
-static void test_1_73(void)
+static void test_1_73()
 {
     ParseResult_t   r;
     LIBPATH_RC      rc;
@@ -2361,7 +2361,7 @@ static void test_1_73(void)
 
 }
 
-static void test_1_80(void)
+static void test_1_80()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share\\";
@@ -2402,7 +2402,7 @@ static void test_1_80(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_81(void)
+static void test_1_81()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const input[] = "\\\\192.168.0.1\\share/";
@@ -2443,7 +2443,7 @@ static void test_1_81(void)
 #endif /* LIBPATH_OS_IS_WINDOWS */
 }
 
-static void test_1_82(void)
+static void test_1_82()
 {
 #ifdef LIBPATH_OS_IS_WINDOWS
     char const              input[] =   "\\\\192.168.0.1\\share\\";

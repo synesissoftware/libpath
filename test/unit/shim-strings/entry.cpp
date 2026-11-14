@@ -41,7 +41,7 @@
  * forward declarations
  */
 
-static void test_rc_known_values(void);
+static void test_rc_known_values();
 
 
 /* /////////////////////////////////////////////////////////////////////////
